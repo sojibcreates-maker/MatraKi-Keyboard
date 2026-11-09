@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="inputmethod">
+    <id>io.github.matraki.keyboard</id>
+    <metadata_license>FSFAP</metadata_license>
+    <name>MatraKi</name>
+    <summary>An OpenSource, Unicode compliant Bengali Input Method</summary>
+    <description>
+        <p>
+            MatraKi is an OpenSource, Unicode compliant Bengali Input Method for GNU/Linux systems.
+            It's a full fledged Bengali input method with typing automation tools, includes many famous
+            typing methods such as Avro Phonetic, Probhat, Munir Optima, National (Jatiya) etc.
+        </p>
+        <p>
+            Most of the features of Avro Keyboard are present in MatraKi.
+            So Avro Keyboard users will feel at home with MatraKi in Linux.
+        </p>
+    </description>
+    <project_license>GPL-3.0+</project_license>
+    <url type="homepage">http://matraki.github.io/</url>
+    <url type="bugtracker">https://github.com/MatraKi/MatraKi-Keyboard/issues</url>
+    <icon type="remote" width="48" height="48">https://github.com/MatraKi/MatraKi-Keyboard/raw/master/data/48.png</icon>
+</component>

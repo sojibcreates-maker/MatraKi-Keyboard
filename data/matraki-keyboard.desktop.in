@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=MatraKi
+Comment=An OpenSource, Unicode compliant Bengali Input Method.
+Exec=@PROJECT_DATADIR@/matraki-gui %f
+Icon=matraki-keyboard
+Type=Application
+Categories=Utility;Application;

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=MatraKi
+GenericName=Bangla Keyboard
+Comment=MatraKi Bangla Keyboard - Type Smarter. Write Better.
+Exec=/usr/share/matraki-keyboard/matraki-gui %f
+Icon=matraki
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+StartupNotify=true
+Keywords=Bangla;Keyboard;MatraKi;Avro;IME;

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Got any questions?
+    url: https://github.com/MatraKi/MatraKi-Keyboard/discussions/categories/q-a
+    about: General inquiries or help with MatraKi Keyboard.
+  - name: Share your ideas!
+    url: https://github.com/MatraKi/MatraKi-Keyboard/discussions/categories/ideas
+    about: Suggest new features or improvements for the project.

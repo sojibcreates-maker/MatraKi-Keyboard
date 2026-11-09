@@ -1,0 +1,95 @@
+name: DEPLOY
+
+on:
+  push:
+    branches: [ '**' ]
+    tags-ignore: [ '**' ]
+
+jobs:
+  build:
+    if: contains(github.event.head_commit.message, 'deploy+') || contains(github.event.head_commit.message, 'pkg+')
+    strategy:
+      matrix:
+        container: [ "ubuntu:20.04", "ubuntu:22.04", "ubuntu:24.04", "ubuntu:25.04", "debian:12", "debian:13", "fedora:40", "fedora:41", "fedora:42", "archlinux:latest" ]
+        # this list should be updated from time to time by consulting these pages:
+        # https://releases.ubuntu.com/
+        # https://wiki.debian.org/DebianReleases#Production_Releases
+        # https://en.wikipedia.org/wiki/Fedora_Linux_release_history#Release_history
+    runs-on: "ubuntu-latest"
+    container:
+      image: ${{ matrix.container }}
+      env:
+        DIST: ${{ matrix.container }}
+        DEBIAN_FRONTEND: noninteractive
+    steps:
+      - name: install-git
+        run: |
+          # Install Git based on distro
+          if command -v apt-get >/dev/null; then
+            apt-get update -y
+            apt-get install -y git
+          elif command -v dnf >/dev/null; then
+            dnf install -y git
+          elif command -v zypper >/dev/null; then
+            zypper install -y git
+          elif command -v pacman >/dev/null; then
+            pacman -Sy git --noconfirm
+          fi
+      
+      - name: checkout-source
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: run-builder
+        shell: bash
+        run: ./tools/build.sh
+
+      - name: Sanitize container name
+        id: sanitizer
+        shell: bash
+        run: |
+          # Replace colons and slashes with dashes
+          SANITIZED_CONTAINER=$(echo "${{ matrix.container }}" | sed 's/[:\\/]/-/g')
+          echo "sanitized_container=$SANITIZED_CONTAINER" >> $GITHUB_OUTPUT
+
+      - name: upload-artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg-${{ steps.sanitizer.outputs.sanitized_container }}
+          path: artifact
+
+  release:
+    if: contains(github.event.head_commit.message, 'deploy+')
+    needs: build
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: checkout-source
+        uses: actions/checkout@v4
+
+      - name: get-version
+        id: get_version
+        shell: bash
+        run: |
+          RELEASE_VERSION=$(cat version.txt | head -n1)
+          echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_OUTPUT
+    
+      - name: download-artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      
+      - name: create-release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.get_version.outputs.RELEASE_VERSION }}
+          name: ${{ steps.get_version.outputs.RELEASE_VERSION }}
+          artifacts: "artifacts/*/*"
+          allowUpdates: true
+          draft: true
+          body: |
+            [![Github Releases (by Release)](https://img.shields.io/github/downloads/${{ github.repository }}/${{ steps.get_version.outputs.RELEASE_VERSION }}/total.svg)]()
+            ### Changes in this release:
+            - ...

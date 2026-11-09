@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>700</width>
+    <height>720</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>About MatraKi</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="images.qrc">
+    <normaloff>:/images/MatraKi.png</normaloff>:/images/MatraKi.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#AboutDialog {
+    background-color: #0b1120;
+    color: #f8fafc;
+    font-family: &quot;Noto Sans&quot;, sans-serif;
+}
+QFrame#frameHeader {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0f172a, stop:0.5 #172554, stop:1 #0f172a);
+    border: 1.5px solid #38bdf8;
+    border-radius: 14px;
+}
+QFrame#frameFeatures {
+    background-color: #131c31;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+}
+QFrame#frameShortcuts {
+    background-color: #0f172a;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 10px;
+}
+QFrame#frameDev {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(29, 78, 216, 0.20), stop:1 rgba(14, 165, 233, 0.16));
+    border: 1px solid rgba(56, 189, 248, 0.45);
+    border-radius: 12px;
+}
+QFrame#frameDonation {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 rgba(225, 29, 72, 0.22), stop:1 rgba(244, 63, 94, 0.18));
+    border: 1px solid rgba(244, 63, 94, 0.55);
+    border-radius: 12px;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>9</number>
+   </property>
+   <property name="leftMargin">
+    <number>18</number>
+   </property>
+   <property name="topMargin">
+    <number>14</number>
+   </property>
+   <property name="rightMargin">
+    <number>18</number>
+   </property>
+   <property name="bottomMargin">
+    <number>12</number>
+   </property>
+   <item>
+    <widget class="QFrame" name="frameHeader">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>98</height>
+      </size>
+     </property>
+     <layout class="QHBoxLayout" name="layoutHeader">
+      <property name="spacing">
+       <number>16</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelImage">
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>74</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="pixmap">
+         <pixmap resource="images.qrc">:/images/MatraKi.png</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="layoutTitleCol">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="labelTitle">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:19pt; font-weight:800; color:#ffffff;&quot;&gt;MatraKi&lt;/span&gt;&lt;span style=&quot;font-size:12.5pt; font-weight:700; color:#38bdf8;&quot;&gt;  •  AI Smart Bangla Keyboard&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelTagline">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:10.5pt; font-weight:700; color:#f43f5e;&quot;&gt;Type Smarter. Write Better.&lt;/span&gt;&lt;span style=&quot;font-size:9.5pt; color:#cbd5e1;&quot;&gt; — Next-Gen Phonetic &amp;amp; Fixed Layout Input Suite&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelVer">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;margin:2px 0 0 0;&quot;&gt;&lt;span style=&quot;color:#34d399; font-size:9pt; font-weight:700;&quot;&gt;✨ v1.0.0 (AI Smart Edition)  •  15,580+ Trained Words  •  20,535 Auto-Correct Rules  •  Fcitx5 &amp;amp; Riti Engine&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frameFeatures">
+     <layout class="QVBoxLayout" name="layoutFeatures">
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>12</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>12</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="labelDesc">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;
+&lt;p style=&quot;margin:0 0 6px 0;&quot;&gt;&lt;span style=&quot;font-size:9.2pt; color:#e2e8f0;&quot;&gt;&lt;b style=&quot;color:#38bdf8;&quot;&gt;MatraKi&lt;/b&gt; is an advanced, high-performance Bangla input method engineered for Linux desktops. Combining a blazingly fast Rust phonetic core with an intelligent C++ AI language layer, MatraKi makes writing Bengali faster, smarter, and completely effortless.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin:4px 0 2px 0;&quot;&gt;&lt;span style=&quot;font-size:9.5pt; font-weight:700; color:#38bdf8;&quot;&gt;🧠 AI Phonetic &amp;amp; Language Intelligence:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin:0 0 6px 8px;&quot;&gt;&lt;span style=&quot;font-size:8.8pt; color:#cbd5e1;&quot;&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Massive Trained Vocabulary:&lt;/b&gt; Pre-trained with &lt;b style=&quot;color:#34d399;&quot;&gt;15,580+&lt;/b&gt; high-frequency Bengali words, &lt;b style=&quot;color:#34d399;&quot;&gt;20,535&lt;/b&gt; auto-correct patterns, and smart agglutinative suffix stemming (&lt;i&gt;-গুলো, -দের, -টা, -টি, -কে, -তে&lt;/i&gt;).&lt;br/&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Context-Aware Next-Word Prediction:&lt;/b&gt; Suggests natural follow-up words right after pressing Space (&lt;b style=&quot;color:#38bdf8;&quot;&gt;130+&lt;/b&gt; conversational bigram contexts) and ranks verbs by subject pronoun concordance (&lt;i&gt;আমি করব, তুমি করবে, আপনি করবেন&lt;/i&gt;).&lt;br/&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Bangla Academy Spelling &amp;amp; Grammar Engine:&lt;/b&gt; Automatically corrects common Nattvabidhi, Shattvabidhi, and vowel-length errors (&lt;i&gt;সান্ত্বনা, ইতোমধ্যে, উপর্যুক্ত, শ্রদ্ধাঞ্জলি, শারীরিক, সমীচীন, মরীচিকা&lt;/i&gt;).
+&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin:4px 0 2px 0;&quot;&gt;&lt;span style=&quot;font-size:9.5pt; font-weight:700; color:#f43f5e;&quot;&gt;⚡ Smart Productivity &amp;amp; Instant Conversion Tools:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin:0 0 2px 8px;&quot;&gt;&lt;span style=&quot;font-size:8.8pt; color:#cbd5e1;&quot;&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Live Calculator &amp;amp; Unit Converter (&lt;span style=&quot;color:#34d399;&quot;&gt;=&lt;/span&gt;):&lt;/b&gt; Evaluate math expressions (&lt;code style=&quot;color:#38bdf8;&quot;&gt;=500*15%&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=2^10&lt;/code&gt;) and convert units instantly (&lt;code style=&quot;color:#38bdf8;&quot;&gt;=10km&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=5kg&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=100c&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=98.6f&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=5ft&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=1bigha&lt;/code&gt;, &lt;code style=&quot;color:#38bdf8;&quot;&gt;=5katha&lt;/code&gt;).&lt;br/&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Instant Chat &amp;amp; Islamic Snippets (&lt;span style=&quot;color:#fde047;&quot;&gt;!&lt;/span&gt;):&lt;/b&gt; Type &lt;code style=&quot;color:#fde047;&quot;&gt;!salam&lt;/code&gt;, &lt;code style=&quot;color:#fde047;&quot;&gt;!olikum&lt;/code&gt;, &lt;code style=&quot;color:#fde047;&quot;&gt;!bismillah&lt;/code&gt;, &lt;code style=&quot;color:#fde047;&quot;&gt;!alhamdulillah&lt;/code&gt;, &lt;code style=&quot;color:#fde047;&quot;&gt;!inshaallah&lt;/code&gt;, or &lt;code style=&quot;color:#fde047;&quot;&gt;!shuvo&lt;/code&gt; for full Bangla &amp;amp; Arabic greetings with smart prefix matching.&lt;br/&gt;
+• &lt;b style=&quot;color:#f8fafc;&quot;&gt;Smart Dates, Ordinals, Currency &amp;amp; Emojis:&lt;/b&gt; Type &lt;code style=&quot;color:#fb7185;&quot;&gt;1la&lt;/code&gt; (১লা/পহেলা), &lt;code style=&quot;color:#fb7185;&quot;&gt;21she&lt;/code&gt; (২১শে), &lt;code style=&quot;color:#fb7185;&quot;&gt;1m&lt;/code&gt; (১ম/প্রথম), &lt;code style=&quot;color:#fb7185;&quot;&gt;500tk&lt;/code&gt; (৫০০ টাকা / ৳৫০০ / পাঁচ শত টাকা), &lt;code style=&quot;color:#fb7185;&quot;&gt;@today&lt;/code&gt;, or &lt;code style=&quot;color:#fb7185;&quot;&gt;:smile&lt;/code&gt;.
+&lt;/span&gt;&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frameShortcuts">
+     <layout class="QHBoxLayout" name="layoutShortcuts">
+      <property name="leftMargin">
+       <number>12</number>
+      </property>
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="rightMargin">
+       <number>12</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="lblShortcuts">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:8.5pt; color:#94a3b8;&quot;&gt;⌨️ &lt;b style=&quot;color:#38bdf8;&quot;&gt;Shortcuts:&lt;/b&gt;  &lt;b style=&quot;color:#f8fafc;&quot;&gt;Ctrl+Space&lt;/b&gt; Toggle Bangla/English  •  &lt;b style=&quot;color:#f8fafc;&quot;&gt;Double Space&lt;/b&gt; Dari (। )  •  &lt;b style=&quot;color:#f8fafc;&quot;&gt;Tab / Arrows&lt;/b&gt; Select  •  &lt;b style=&quot;color:#f8fafc;&quot;&gt;1–9&lt;/b&gt; Pick Snippet&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frameDev">
+     <layout class="QHBoxLayout" name="layoutDev">
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="lblDeveloper">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:9.5pt; color:#94a3b8;&quot;&gt;👨‍💻 Developer: &lt;/span&gt;&lt;span style=&quot;font-size:10pt; font-weight:700; color:#ffffff;&quot;&gt;Md Sojib Hossain&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblFacebook">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot; style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:9.5pt; color:#94a3b8;&quot;&gt;🌐 Facebook: &lt;/span&gt;&lt;a href=&quot;https://facebook.com/hossain.sojibs&quot;&gt;&lt;span style=&quot;font-size:9.5pt; font-weight:700; color:#38bdf8; text-decoration:none;&quot;&gt;facebook.com/hossain.sojibs&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frameDonation">
+     <layout class="QHBoxLayout" name="layoutDonation">
+      <property name="leftMargin">
+       <number>16</number>
+      </property>
+      <property name="topMargin">
+       <number>8</number>
+      </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
+      <property name="bottomMargin">
+       <number>8</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="lblDonation">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin:0;&quot;&gt;&lt;a href=&quot;https://www.supportkori.com/sojib&quot;&gt;&lt;span style=&quot;font-size:10pt; font-weight:700; color:#fb7185; text-decoration:none;&quot;&gt;💖 Support &amp;amp; Donate to MatraKi:  https://www.supportkori.com/sojib  (Click to Contribute)&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="openExternalLinks">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="lblLicense">
+     <property name="text">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin:0;&quot;&gt;&lt;span style=&quot;font-size:8.5pt; color:#64748b;&quot;&gt;Open-Source Software licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html&quot;&gt;&lt;span style=&quot;color:#94a3b8; text-decoration:underline;&quot;&gt;GNU General Public License v3.0&lt;/span&gt;&lt;/a&gt;  •  Crafted with passion for Bangla Computing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,20 @@
+# Maintainer: MatraKi Team <matrakiteam@gmail.com>
+# THIS IS A *PARTIAL* PKGBUILD TEMPLATE FOR CUSTOM AUTOBUILD PROCESS ONLY
+pkgname="matraki-keyboard"
+pkgrel=1
+pkgdesc="An OpenSource, Unicode compliant Bengali Input Method"
+arch=('x86_64')
+url="https://matraki.github.io"
+license=('GPL3')
+depends=('ibus' 'qt5-base' 'zstd')
+build() {
+    cd "$srcdir"
+    mkdir build && cd build
+    cmake ..
+    make
+}
+package() {
+    cd "$srcdir"
+    make -C build DESTDIR="$pkgdir" install
+}
+
