@@ -180,41 +180,153 @@
     .section-title { font-size: clamp(1.85rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
     .section-desc { color: var(--text-muted); font-size: 1.04rem; }
 
-    /* Interactive Live AI Demo Box */
+    /* Interactive Live AI Web Keyboard Studio */
     .demo-box {
-      background: linear-gradient(180deg, rgba(19, 28, 49, 0.92), rgba(11, 17, 32, 0.96));
-      border: 1.5px solid rgba(56, 189, 248, 0.45);
-      border-radius: 20px; padding: 28px;
-      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(14, 165, 233, 0.14);
-      max-width: 920px; margin: 0 auto;
+      background: linear-gradient(180deg, rgba(16, 24, 44, 0.96), rgba(9, 14, 26, 0.98));
+      border: 1.5px solid rgba(56, 189, 248, 0.5);
+      border-radius: 22px; padding: 26px;
+      box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.8), 0 0 45px rgba(14, 165, 233, 0.16);
+      max-width: 1060px; margin: 0 auto;
     }
-    .demo-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
-    .demo-chip {
-      font-size: 0.82rem; font-weight: 600; padding: 6px 12px;
-      border-radius: 8px; background: rgba(30, 41, 59, 0.9);
-      border: 1px solid rgba(56, 189, 248, 0.3); color: #e2e8f0;
-      cursor: pointer; transition: all 0.15s;
+    .studio-topbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 10px; background: #0b1324; border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 14px; padding: 10px 14px; margin-bottom: 16px;
     }
-    .demo-chip:hover { background: #1d4ed8; border-color: #38bdf8; color: #fff; }
-    .demo-input {
-      width: 100%; padding: 16px 18px; border-radius: 12px;
-      background: #090e1a; border: 1.5px solid #38bdf8;
-      color: #fff; font-size: 1.15rem; font-family: 'Inter', 'Hind Siliguri', sans-serif;
-      outline: none; margin-bottom: 14px;
+    .topbar-left, .topbar-right { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .tb-brand {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 800; font-size: 0.92rem; color: #f8fafc;
+      padding-right: 10px; border-right: 1px solid rgba(56, 189, 248, 0.25);
     }
-    .candidate-bar {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 12px; padding: 12px 16px; min-height: 54px; align-items: center;
+    .tb-brand img { width: 24px; height: 24px; border-radius: 6px; }
+    .tb-btn {
+      padding: 6px 12px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
+      background: #16223b; color: #e2e8f0; border: 1px solid rgba(56, 189, 248, 0.3);
+      cursor: pointer; transition: all 0.16s; display: inline-flex; align-items: center; gap: 6px;
     }
-    .cand-item {
-      padding: 6px 14px; border-radius: 8px; font-size: 1.02rem; font-weight: 600;
-      background: #1e293b; color: #e2e8f0; border: 1px solid transparent;
-    }
-    .cand-item.active {
+    .tb-btn:hover { background: #1e3a8a; border-color: #38bdf8; color: #fff; }
+    .tb-btn.mode-bn {
       background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
       color: #fff; border-color: #38bdf8;
+      box-shadow: 0 0 14px rgba(14, 165, 233, 0.35);
     }
+    .tb-btn.mode-en {
+      background: #334155; color: #f8fafc; border-color: #64748b;
+    }
+    .tb-select {
+      padding: 6px 11px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
+      background: #16223b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);
+      outline: none; cursor: pointer;
+    }
+    .trainer-drawer {
+      display: none; background: #0d172a; border: 1px dashed rgba(56, 189, 248, 0.45);
+      border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;
+      align-items: center; flex-wrap: wrap; gap: 10px;
+    }
+    .trainer-drawer.open { display: flex; }
+    .trainer-inp {
+      padding: 7px 12px; border-radius: 8px; background: #070b14;
+      border: 1px solid rgba(56, 189, 248, 0.35); color: #fff; font-size: 0.86rem;
+    }
+    .demo-cat-tabs {
+      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;
+    }
+    .cat-tab {
+      font-size: 0.76rem; font-weight: 700; padding: 5px 11px;
+      border-radius: 999px; background: #111c33; color: #94a3b8;
+      border: 1px solid rgba(56, 189, 248, 0.2); cursor: pointer; transition: all 0.15s;
+    }
+    .cat-tab.active, .cat-tab:hover {
+      background: rgba(14, 165, 233, 0.2); color: #38bdf8; border-color: #38bdf8;
+    }
+    .demo-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; align-items: center; }
+    .demo-chip {
+      font-size: 0.8rem; font-weight: 600; padding: 5px 11px;
+      border-radius: 8px; background: rgba(30, 41, 59, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.28); color: #e2e8f0;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .demo-chip:hover { background: #1d4ed8; border-color: #38bdf8; color: #fff; transform: translateY(-1px); }
+    .editor-wrap { position: relative; margin-bottom: 12px; }
+    .demo-textarea {
+      width: 100%; min-height: 135px; padding: 16px 18px; border-radius: 14px;
+      background: #070c17; border: 1.5px solid #38bdf8;
+      color: #f8fafc; font-size: 1.18rem; line-height: 1.65;
+      font-family: 'Hind Siliguri', 'Inter', sans-serif;
+      outline: none; resize: vertical;
+      box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+    .demo-textarea:focus {
+      border-color: #7dd3fc;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2), inset 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+    .preedit-strip {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+      gap: 10px; margin-bottom: 10px; padding: 8px 14px;
+      background: #0d1629; border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 10px;
+    }
+    .preedit-buffer {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.92rem; color: #cbd5e1;
+    }
+    .preedit-pill {
+      padding: 3px 10px; border-radius: 6px; background: rgba(14, 165, 233, 0.2);
+      border: 1px solid #38bdf8; color: #38bdf8; font-weight: 800; font-family: monospace;
+      font-size: 0.95rem;
+    }
+    .editor-stats { font-size: 0.78rem; color: #94a3b8; font-weight: 600; }
+    .candidate-bar {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      background: #0b1324; border: 1px solid rgba(56, 189, 248, 0.38);
+      border-radius: 12px; padding: 11px 14px; min-height: 54px; align-items: center;
+      margin-bottom: 14px;
+    }
+    .cand-item {
+      padding: 6px 12px; border-radius: 9px; font-size: 0.98rem; font-weight: 600;
+      background: #16223b; color: #e2e8f0; border: 1px solid rgba(56, 189, 248, 0.2);
+      cursor: pointer; display: inline-flex; align-items: center; gap: 7px;
+      transition: all 0.14s; user-select: none;
+    }
+    .cand-item:hover { border-color: #38bdf8; background: #1e3a8a; }
+    .cand-item.active {
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      color: #fff; border-color: #7dd3fc;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+    }
+    .cand-num {
+      font-size: 0.72rem; font-weight: 800; padding: 1px 6px; border-radius: 4px;
+      background: rgba(0, 0, 0, 0.35); color: #bae6fd;
+    }
+    .cand-badge {
+      font-size: 0.68rem; font-weight: 800; padding: 2px 6px; border-radius: 4px;
+      background: rgba(15, 23, 42, 0.65); color: #7dd3fc; letter-spacing: 0.02em;
+    }
+    /* Virtual On-Screen Keyboard */
+    .vkbd-wrap {
+      background: #080d1a; border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 14px; padding: 12px; margin-top: 6px; user-select: none;
+    }
+    .vkbd-wrap.hidden { display: none; }
+    .vkbd-row {
+      display: flex; justify-content: center; gap: 5px; margin-bottom: 5px;
+    }
+    .vkbd-row:last-child { margin-bottom: 0; }
+    .vkbd-key {
+      flex: 1; min-width: 34px; max-width: 64px; height: 46px;
+      background: #131e36; border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 8px; color: #f8fafc; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: all 0.1s; position: relative; padding: 2px 4px;
+    }
+    .vkbd-key:hover, .vkbd-key.pressed {
+      background: #1d4ed8; border-color: #38bdf8; transform: translateY(-1px);
+    }
+    .vkbd-key.wide { flex: 1.65; max-width: 105px; font-size: 0.76rem; font-weight: 700; }
+    .vkbd-key.space { flex: 4.5; max-width: 340px; font-size: 0.8rem; font-weight: 700; color: #38bdf8; }
+    .vkbd-en { font-size: 0.66rem; color: #94a3b8; line-height: 1; }
+    .vkbd-bn { font-size: 0.96rem; font-weight: 700; color: #38bdf8; line-height: 1.15; }
+    .vkbd-key:hover .vkbd-bn, .vkbd-key.pressed .vkbd-bn { color: #fff; }
 
     /* Download Center */
     .dl-grid {
@@ -423,30 +535,94 @@
     </div>
   </section>
 
-  <!-- Interactive In-Browser AI Simulator -->
+  <!-- Full Interactive In-Browser MatraKi v1.0.0 Live Web Keyboard Studio -->
   <section id="demo" style="padding-top: 20px;">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Interactive Sandbox</span>
-        <h2 class="section-title">Try MatraKi’s AI Smart Engine Live</h2>
-        <p class="section-desc">Click any smart shortcut below or type in the box to see how MatraKi’s candidate window responds in real time.</p>
+        <span class="section-tag">Full Live Web Keyboard Studio (v1.0.0)</span>
+        <h2 class="section-title">Experience Every Feature of MatraKi Live in Your Browser</h2>
+        <p class="section-desc">Powered by MatraKi’s complete 20,535+ word AI dictionary, suffix stemmer, subject-verb concordance, live math calculator, 16 unit converters, 42+ snippets, 31 date ordinals, 45+ emojis, and 6 keyboard layouts.</p>
       </div>
 
       <div class="demo-box">
-        <div class="demo-chips">
-          <span style="font-size:0.82rem; color:#94a3b8; font-weight:700;">Try clicking:</span>
-          <button class="demo-chip" onclick="setDemo('bhalobashi')">bhalobashi</button>
-          <button class="demo-chip" onclick="setDemo('bishwobidyaloygulo')">bishwobidyaloygulo</button>
-          <button class="demo-chip" onclick="setDemo('=500*15%')">=500*15%</button>
-          <button class="demo-chip" onclick="setDemo('=10km')">=10km</button>
-          <button class="demo-chip" onclick="setDemo('=1bigha')">=1bigha</button>
-          <button class="demo-chip" onclick="setDemo('!salam')">!salam</button>
-          <button class="demo-chip" onclick="setDemo('21she')">21she</button>
-          <button class="demo-chip" onclick="setDemo('500tk')">500tk</button>
-          <button class="demo-chip" onclick="setDemo(':smile')">:smile</button>
+        <!-- Simulated MatraKi Floating TopBar -->
+        <div class="studio-topbar">
+          <div class="topbar-left">
+            <span class="tb-brand">
+              <img src="logo.png" alt="MatraKi" />
+              MatraKi v1.0.0
+            </span>
+            <button type="button" id="btnModeToggle" class="tb-btn mode-bn" onclick="toggleKbdMode()" title="Shortcut: Ctrl+Space or Alt+Space">
+              🟢 বাংলা (AI)
+            </button>
+            <select id="layoutSelect" class="tb-select" onchange="changeKbdLayout(this.value)" title="Select Keyboard Layout">
+              <option value="avro">Avro Phonetic (AI Smart)</option>
+              <option value="probhat">Probhat (প্রভাত)</option>
+              <option value="national">National / Jatiya (জাতীয়)</option>
+              <option value="munir">Munir Optima (মুনীর)</option>
+              <option value="borno">Borno (বর্ণ)</option>
+              <option value="avro_easy">Avro Easy (অভ্র ইজি)</option>
+            </select>
+            <button type="button" class="tb-btn" onclick="toggleVirtualKbd()" id="btnVkbdToggle">
+              ⌨️ Hide Keyboard
+            </button>
+            <button type="button" class="tb-btn" onclick="toggleTrainerDrawer()">
+              📚 + Train Word
+            </button>
+          </div>
+          <div class="topbar-right">
+            <button type="button" class="tb-btn" onclick="copyEditorText()" id="btnCopyEditor">📋 Copy</button>
+            <button type="button" class="tb-btn" onclick="downloadEditorText()">💾 Save .txt</button>
+            <button type="button" class="tb-btn" onclick="clearEditorText()">🗑️ Clear</button>
+          </div>
         </div>
-        <input type="text" id="demoInput" class="demo-input" value="bhalobashi" oninput="updateDemo(this.value)" placeholder="Type phonetic Bangla, =math, =10km, !salam, 21she, 500tk, :smile..." />
+
+        <!-- Live Custom Dictionary Trainer Drawer -->
+        <div class="trainer-drawer" id="trainerDrawer">
+          <span style="font-size:0.84rem; font-weight:700; color:#38bdf8;">📚 Train Custom Word Live:</span>
+          <input type="text" id="trainPhonetic" class="trainer-inp" placeholder="Phonetic (e.g. sojib)" />
+          <input type="text" id="trainBangla" class="trainer-inp" placeholder="Bangla (e.g. সজীব)" />
+          <button type="button" class="tb-btn mode-bn" onclick="saveTrainedWord()">✓ Add to AI Dictionary</button>
+          <span id="trainStatus" style="font-size:0.8rem; color:#34d399; font-weight:700;"></span>
+        </div>
+
+        <!-- Categorized 1-Click Feature Test Tabs -->
+        <div class="demo-cat-tabs" id="demoCatTabs">
+          <button type="button" class="cat-tab active" onclick="selectChipCategory('highlights', this)">✨ All Highlights</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('stemmer', this)">🧠 AI Phonetic &amp; Stemmer</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('grammar', this)">📖 প্রমিত বানান (Auto-Fix)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('math', this)">🧮 Live Math (=)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('units', this)">📏 16 Unit Converters (=)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('snippets', this)">⚡ 42+ Snippets (! &amp; @)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('ordinals', this)">📅 31 Date Ordinals &amp; ৳ Taka</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('emojis', this)">😊 45+ Emojis (:)</button>
+        </div>
+
+        <!-- Dynamic 1-Click Test Chips -->
+        <div class="demo-chips" id="demoChipsBar"></div>
+
+        <!-- Active Phonetic Pre-edit Strip -->
+        <div class="preedit-strip">
+          <div class="preedit-buffer">
+            <span>Active Buffer:</span>
+            <span class="preedit-pill" id="preeditRaw">bhalobashi</span>
+            <span style="color:#64748b;">➔</span>
+            <span id="preeditPreview" style="color:#38bdf8; font-weight:700; font-size:1.02rem;">ভালোবাসি</span>
+            <span style="font-size:0.76rem; color:#64748b; margin-left:6px;">(Space/Enter = Commit, Tab = Next Word/Cycle, 1-9 = Pick, Double-Space = ।)</span>
+          </div>
+          <div class="editor-stats" id="editorStats">Words: 2 | Chars: 11 | Dict: 19,974+ keys</div>
+        </div>
+
+        <!-- Floating Candidate Bar (Numbered 1..9 with AI Badges) -->
         <div class="candidate-bar" id="demoCandidates"></div>
+
+        <!-- Full Multi-Word Bangla Text Editor -->
+        <div class="editor-wrap">
+          <textarea id="demoEditor" class="demo-textarea" placeholder="এখানে সরাসরি বাংলায় টাইপ করুন... (Type phonetic Bangla like 'ami banglay gan gai', '=500*15%', '=10km', '!salam', '21she', '500tk', ':smile')">আমি বাংলায় </textarea>
+        </div>
+
+        <!-- Interactive On-Screen Virtual Bangla Keyboard -->
+        <div class="vkbd-wrap" id="virtualKbd"></div>
       </div>
     </div>
   </section>
@@ -915,41 +1091,562 @@ chmod +x install.sh
     </div>
   </footer>
 
+  <script src="matraki-data.js"></script>
+  <script src="matraki-live-engine.js"></script>
   <script>
-    const demoMap = {
-      "bhalobashi": ["ভালোবাসি ✨", "ভালোবাসা", "ভালোবাসার"],
-      "bishwobidyaloygulo": ["বিশ্ববিদ্যালয়গুলো (Suffix Stemmer)", "বিশ্ববিদ্যালয়"],
-      "=500*15%": ["৭৫ (গণনা)", "75 (English)", "পঁচাত্তর"],
-      "=10km": ["১০ কিমি = ৬.২১ মাইল", "১০ কিমি = ১০০০০ মিটার", "১০ কিলোমিটার"],
-      "=1bigha": ["১ বিঘা = ৩৩ শতক (২০ কাঠা)", "৩৩ শতক"],
-      "!salam": ["১. আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু", "২. আসসালামু আলাইকুম", "৩. السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ"],
-      "21she": ["২১শে", "একুশে"],
-      "500tk": ["৫০০ টাকা", "৳৫০০", "পাঁচ শত টাকা"],
-      ":smile": ["😊 (হাসি)", "😂 (হাসি)", "🤣 (হাসি)"]
+    // =========================================================================
+    // MatraKi v1.0.0 Full Live Web Keyboard Studio Controller
+    // =========================================================================
+    const CHIP_CATEGORIES = {
+      highlights: [
+        "bhalobashi", "bishwobidyaloygulo", "=500*15%", "=10km", "=1bigha",
+        "!salam", "@today", "21she", "500tk", ":smile", "shantona", "GitHub"
+      ],
+      stemmer: [
+        "bangladesh", "bishwobidyaloygulo", "manushderke", "boita", "bondhuguloke",
+        "shikkharthider", "desher", "gramgulo", "korbo", "kemon", "achhen"
+      ],
+      grammar: [
+        "shantona", "itomoddhe", "puroshkar", "porishkar", "sharirik",
+        "shomichin", "morichika", "bhoutobiggan", "srishti", "ujjol"
+      ],
+      math: [
+        "=500*15%", "=(120+80)*3", "=2^10", "=1500-275", "=1024/16", "=99*99"
+      ],
+      units: [
+        "=10km", "=5mi", "=100m", "=25cm", "=12in", "=5.8ft", "=70kg",
+        "=500g", "=150lb", "=5l", "=37c", "=98.6f", "=1bigha", "=5katha", "=1acre", "=10shotok"
+      ],
+      snippets: [
+        "!salam", "!olikum", "!bismillah", "!alhamdulillah", "!inshaallah",
+        "!subhanallah", "!mashaallah", "!jazakallah", "!shokal", "!rat",
+        "!dhonnobad", "!welcome", "!kemon", "!jumma", "!eid", "!ramadan",
+        "!congrats", "!hbd", "!sorry", "@today", "@now"
+      ],
+      ordinals: [
+        "1la", "2ra", "3ra", "4tha", "5i", "10i", "16i", "19she", "21she",
+        "26she", "31she", "1m", "2yo", "3yo", "10m", "500tk", "12500taka", "2026"
+      ],
+      emojis: [
+        ":smile", ":hasi", ":love", ":heart", ":kanna", ":like", ":ok",
+        ":clap", ":100", ":fire", ":rocket", ":dua", ":bd", ":ful",
+        ":tea", ":coffee", ":cake", ":book", ":laptop", ":taka"
+      ]
     };
 
-    function setDemo(val) {
-      const inp = document.getElementById('demoInput');
-      inp.value = val;
-      updateDemo(val);
+    let kbdMode = "bn";          // "bn" or "en"
+    let kbdLayout = "avro";      // "avro", "probhat", "national", "munir", "borno", "avro_easy"
+    let vkbdShift = false;
+    let rawBuffer = "";
+    let currentCandidates = [];
+    let selectedCandIdx = 0;
+    let lastSpaceTime = 0;
+
+    // Load custom user-trained words from localStorage if present
+    try {
+      const savedCustom = JSON.parse(localStorage.getItem("matraki_custom_words") || "{}");
+      if (window.MATRAKI_DICT) {
+        Object.assign(window.MATRAKI_DICT, savedCustom);
+      }
+    } catch (e) {}
+
+    function selectChipCategory(cat, btnEl) {
+      document.querySelectorAll("#demoCatTabs .cat-tab").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      const bar = document.getElementById("demoChipsBar");
+      const list = CHIP_CATEGORIES[cat] || CHIP_CATEGORIES.highlights;
+      bar.innerHTML = `<span style="font-size:0.78rem; color:#94a3b8; font-weight:700;">1-Click Test:</span>` +
+        list.map(item => `<button type="button" class="demo-chip" onclick="setDemo('${item.replace(/'/g, "\\'")}')">${item}</button>`).join("");
     }
 
-    function updateDemo(val) {
-      const box = document.getElementById('demoCandidates');
-      const v = (val || '').trim();
-      let list = demoMap[v.toLowerCase()] || demoMap[v];
-      if (!list) {
-        if (!v) {
-          list = ["Type above or click a preset chip to test MatraKi AI suggestions..."];
-        } else {
-          list = [v + " → (Phonetic AI Candidate 1)", v + "টা (Suffix -টা)", v + "গুলো (Suffix -গুলো)"];
+    function getLastCommittedWord() {
+      const ed = document.getElementById("demoEditor");
+      if (!ed) return "";
+      const pos = ed.selectionStart || 0;
+      const before = ed.value.slice(0, pos).trim();
+      if (!before) return "";
+      const parts = before.split(/\s+/);
+      return parts[parts.length - 1].replace(/[।,.!?]/g, "");
+    }
+
+    function setDemo(val) {
+      kbdMode = "bn";
+      kbdLayout = "avro";
+      document.getElementById("layoutSelect").value = "avro";
+      updateModeButtonUI();
+      rawBuffer = val;
+      refreshStudioUI();
+      const ed = document.getElementById("demoEditor");
+      if (ed) ed.focus();
+    }
+
+    function toggleKbdMode() {
+      if (rawBuffer) commitCandidate(selectedCandIdx, true);
+      kbdMode = (kbdMode === "bn") ? "en" : "bn";
+      updateModeButtonUI();
+      renderVirtualKeyboard();
+      refreshStudioUI();
+    }
+
+    function updateModeButtonUI() {
+      const btn = document.getElementById("btnModeToggle");
+      if (!btn) return;
+      if (kbdMode === "bn") {
+        btn.className = "tb-btn mode-bn";
+        btn.innerText = "🟢 বাংলা (AI)";
+      } else {
+        btn.className = "tb-btn mode-en";
+        btn.innerText = "⚪ ENG (English)";
+      }
+    }
+
+    function changeKbdLayout(layout) {
+      if (rawBuffer) commitCandidate(selectedCandIdx, true);
+      kbdLayout = layout;
+      renderVirtualKeyboard();
+      refreshStudioUI();
+    }
+
+    function toggleVirtualKbd() {
+      const vkbd = document.getElementById("virtualKbd");
+      const btn = document.getElementById("btnVkbdToggle");
+      vkbd.classList.toggle("hidden");
+      btn.innerText = vkbd.classList.contains("hidden") ? "⌨️ Show Keyboard" : "⌨️ Hide Keyboard";
+    }
+
+    function toggleTrainerDrawer() {
+      document.getElementById("trainerDrawer").classList.toggle("open");
+    }
+
+    function saveTrainedWord() {
+      const p = (document.getElementById("trainPhonetic").value || "").trim().toLowerCase();
+      const b = (document.getElementById("trainBangla").value || "").trim();
+      const st = document.getElementById("trainStatus");
+      if (!p || !b) {
+        st.style.color = "#fb7185";
+        st.innerText = "Please enter both Phonetic & Bangla!";
+        return;
+      }
+      if (!window.MATRAKI_DICT) window.MATRAKI_DICT = {};
+      window.MATRAKI_DICT[p] = b;
+      try {
+        const saved = JSON.parse(localStorage.getItem("matraki_custom_words") || "{}");
+        saved[p] = b;
+        localStorage.setItem("matraki_custom_words", JSON.stringify(saved));
+      } catch (e) {}
+      st.style.color = "#34d399";
+      st.innerText = `✓ Trained: ${p} ➔ ${b}`;
+      document.getElementById("trainPhonetic").value = "";
+      document.getElementById("trainBangla").value = "";
+      rawBuffer = p;
+      refreshStudioUI();
+    }
+
+    function insertTextAtCursor(text) {
+      const ed = document.getElementById("demoEditor");
+      const start = ed.selectionStart || 0;
+      const end = ed.selectionEnd || 0;
+      const val = ed.value;
+      ed.value = val.slice(0, start) + text + val.slice(end);
+      const newPos = start + text.length;
+      ed.selectionStart = ed.selectionEnd = newPos;
+      ed.focus();
+      updateEditorStats();
+    }
+
+    function commitCandidate(index, appendSpace = true) {
+      if (!currentCandidates.length) {
+        if (rawBuffer) {
+          insertTextAtCursor(rawBuffer + (appendSpace ? " " : ""));
+          rawBuffer = "";
+        } else if (appendSpace) {
+          insertTextAtCursor(" ");
+        }
+        refreshStudioUI();
+        return;
+      }
+      const chosen = currentCandidates[index] || currentCandidates[0];
+      insertTextAtCursor(chosen.commitText + (appendSpace ? " " : ""));
+      rawBuffer = "";
+      selectedCandIdx = 0;
+      refreshStudioUI();
+    }
+
+    function refreshStudioUI() {
+      const engine = window.MatraKiLiveEngine;
+      const prevW = getLastCommittedWord();
+      const preRaw = document.getElementById("preeditRaw");
+      const prePrev = document.getElementById("preeditPreview");
+      const candBox = document.getElementById("demoCandidates");
+
+      if (!engine) return;
+
+      if (kbdMode === "en") {
+        preRaw.innerText = "(ENG Mode)";
+        prePrev.innerText = "Direct English typing active (Press Ctrl+Space for বাংলা)";
+        currentCandidates = [];
+        candBox.innerHTML = `<span style="color:#94a3b8; font-size:0.9rem;">English Mode active. Click <strong>🟢 বাংলা (AI)</strong> or press <code>Ctrl+Space</code> to switch back to Bangla AI mode.</span>`;
+        updateEditorStats();
+        return;
+      }
+
+      if (kbdLayout !== "avro") {
+        const layName = (engine.FIXED_LAYOUTS[kbdLayout] && engine.FIXED_LAYOUTS[kbdLayout].name) || kbdLayout;
+        preRaw.innerText = `[${layName}]`;
+        prePrev.innerText = "Direct Fixed-Layout Keymap Active";
+      }
+
+      currentCandidates = engine.getSmartCandidates(rawBuffer, prevW);
+      if (selectedCandIdx >= currentCandidates.length) selectedCandIdx = 0;
+
+      if (rawBuffer) {
+        preRaw.innerText = rawBuffer;
+        prePrev.innerText = currentCandidates.length ? currentCandidates[selectedCandIdx].commitText : rawBuffer;
+      } else if (kbdLayout === "avro") {
+        preRaw.innerText = "(empty)";
+        prePrev.innerText = prevW ? `After "${prevW}" — Next-Word AI Active` : "Type any word or click a preset chip above...";
+      }
+
+      if (!currentCandidates.length) {
+        candBox.innerHTML = `<span style="color:#94a3b8; font-size:0.9rem;">Start typing in the editor below or click any feature chip above to see live AI candidates...</span>`;
+      } else {
+        candBox.innerHTML = currentCandidates.slice(0, 9).map((c, idx) => {
+          const activeCls = idx === selectedCandIdx ? "active" : "";
+          const badgeHtml = c.badge ? `<span class="cand-badge">${c.badge}</span>` : "";
+          return `<span class="cand-item ${activeCls}" onclick="commitCandidate(${idx}, true)" title="Click or press ${idx + 1} to insert">
+            <span class="cand-num">${idx + 1}</span>
+            <span>${c.display}</span>
+            ${badgeHtml}
+          </span>`;
+        }).join("");
+      }
+      updateEditorStats();
+    }
+
+    function updateEditorStats() {
+      const ed = document.getElementById("demoEditor");
+      const stats = document.getElementById("editorStats");
+      if (!ed || !stats) return;
+      const txt = ed.value.trim();
+      const words = txt ? txt.split(/\s+/).length : 0;
+      const chars = ed.value.length;
+      const dictCount = window.MATRAKI_DICT ? Object.keys(window.MATRAKI_DICT).length : 19974;
+      stats.innerText = `Words: ${words} | Chars: ${chars} | Trained Keys: ${dictCount.toLocaleString()}`;
+    }
+
+    function copyEditorText() {
+      const ed = document.getElementById("demoEditor");
+      navigator.clipboard.writeText(ed.value);
+      const btn = document.getElementById("btnCopyEditor");
+      const old = btn.innerText;
+      btn.innerText = "✓ Copied!";
+      setTimeout(() => { btn.innerText = old; }, 1500);
+    }
+
+    function downloadEditorText() {
+      const ed = document.getElementById("demoEditor");
+      const blob = new Blob([ed.value], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "matraki-bangla-note.txt";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function clearEditorText() {
+      const ed = document.getElementById("demoEditor");
+      ed.value = "";
+      rawBuffer = "";
+      refreshStudioUI();
+      ed.focus();
+    }
+
+    // =========================================================================
+    // Virtual On-Screen Keyboard Renderer & Physical Keyboard Sync
+    // =========================================================================
+    const VKBD_ROWS = [
+      ["`","1","2","3","4","5","6","7","8","9","0","-","="],
+      ["q","w","e","r","t","y","u","i","o","p","[","]"],
+      ["a","s","d","f","g","h","j","k","l",";","'"],
+      ["z","x","c","v","b","n","m",",",".","/"]
+    ];
+    const SHIFT_MAP = {
+      "`":"~","1":"!","2":"@","3":"#","4":"$","5":"%","6":"^","7":"&","8":"*","9":"(","0":")","-":"_","=":"+",
+      "[":"{","]":"}",";":":","'":"\"",",":"<",".":">","/":"?"
+    };
+    const AVRO_KEY_PREVIEW = {
+      "1":"১","2":"২","3":"৩","4":"৪","5":"৫","6":"৬","7":"৭","8":"৮","9":"৯","0":"০",
+      "q":"ক","w":"ও","e":"ে/এ","r":"র","t":"ত/ট","y":"য়","u":"ু/উ","i":"ি/ই","o":"অ/ো","p":"প",
+      "a":"া/আ","s":"স/শ","d":"দ/ড","f":"ফ","g":"গ","h":"হ","j":"জ","k":"ক","l":"ল",
+      "z":"য","x":"ক্স","c":"চ","v":"ভ","b":"ব","n":"ন/ণ","m":"ম",".":"।"
+    };
+
+    function getKeyPreviewLabel(k) {
+      const ch = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
+      if (kbdMode === "en") return ch;
+      if (kbdLayout === "avro") {
+        return AVRO_KEY_PREVIEW[k] || ch;
+      }
+      const engine = window.MatraKiLiveEngine;
+      const lay = engine && engine.FIXED_LAYOUTS[kbdLayout];
+      if (!lay) return ch;
+      if (vkbdShift && lay.shift && lay.shift[ch]) return lay.shift[ch];
+      if (lay.normal && lay.normal[k]) return lay.normal[k];
+      return ch;
+    }
+
+    function renderVirtualKeyboard() {
+      const wrap = document.getElementById("virtualKbd");
+      if (!wrap) return;
+      let html = "";
+      VKBD_ROWS.forEach((row, rIdx) => {
+        html += `<div class="vkbd-row">`;
+        if (rIdx === 3) {
+          html += `<button type="button" class="vkbd-key wide ${vkbdShift ? 'pressed' : ''}" onclick="toggleVkbdShift()">⇧ Shift</button>`;
+        }
+        row.forEach(k => {
+          const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
+          const bnLbl = getKeyPreviewLabel(k);
+          html += `<button type="button" class="vkbd-key" data-key="${k}" onclick="pressVirtualKey('${enLbl.replace(/'/g, "\\'")}')">
+            <span class="vkbd-en">${enLbl}</span>
+            <span class="vkbd-bn">${bnLbl}</span>
+          </button>`;
+        });
+        if (rIdx === 0) {
+          html += `<button type="button" class="vkbd-key wide" onclick="pressVirtualBackspace()">⌫ Back</button>`;
+        }
+        if (rIdx === 3) {
+          html += `<button type="button" class="vkbd-key wide" onclick="commitCandidate(selectedCandIdx, true)">⏎ Enter</button>`;
+        }
+        html += `</div>`;
+      });
+      html += `<div class="vkbd-row">
+        <button type="button" class="vkbd-key wide" onclick="toggleKbdMode()">🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}</button>
+        <button type="button" class="vkbd-key wide" onclick="pressVirtualTab()">↹ Tab (AI)</button>
+        <button type="button" class="vkbd-key space" onclick="pressVirtualSpace()">Space (Commit / Double-Space = ।)</button>
+        <button type="button" class="vkbd-key wide" onclick="insertTextAtCursor('। ')">। (দাড়ি)</button>
+      </div>`;
+      wrap.innerHTML = html;
+    }
+
+    function toggleVkbdShift() {
+      vkbdShift = !vkbdShift;
+      renderVirtualKeyboard();
+    }
+
+    function pressVirtualKey(ch) {
+      handleCharacterInput(ch);
+      if (vkbdShift) {
+        vkbdShift = false;
+        renderVirtualKeyboard();
+      }
+      document.getElementById("demoEditor").focus();
+    }
+
+    function pressVirtualBackspace() {
+      const ed = document.getElementById("demoEditor");
+      if (rawBuffer.length > 0) {
+        rawBuffer = rawBuffer.slice(0, -1);
+        refreshStudioUI();
+      } else {
+        const start = ed.selectionStart || 0;
+        const end = ed.selectionEnd || 0;
+        if (start !== end) {
+          ed.value = ed.value.slice(0, start) + ed.value.slice(end);
+          ed.selectionStart = ed.selectionEnd = start;
+        } else if (start > 0) {
+          ed.value = ed.value.slice(0, start - 1) + ed.value.slice(start);
+          ed.selectionStart = ed.selectionEnd = start - 1;
+        }
+        refreshStudioUI();
+      }
+      ed.focus();
+    }
+
+    function pressVirtualSpace() {
+      handleSpacePress();
+      document.getElementById("demoEditor").focus();
+    }
+
+    function pressVirtualTab() {
+      if (!rawBuffer && currentCandidates.length > 0) {
+        commitCandidate(selectedCandIdx, true);
+      } else if (currentCandidates.length > 0) {
+        selectedCandIdx = (selectedCandIdx + 1) % Math.min(currentCandidates.length, 9);
+        refreshStudioUI();
+      }
+      document.getElementById("demoEditor").focus();
+    }
+
+    function handleSpacePress() {
+      const now = Date.now();
+      if (!rawBuffer && (now - lastSpaceTime < 360)) {
+        // Double-Space -> Bengali Dari (। )
+        const ed = document.getElementById("demoEditor");
+        const pos = ed.selectionStart || 0;
+        if (pos > 0 && ed.value[pos - 1] === " ") {
+          ed.value = ed.value.slice(0, pos - 1) + "। " + ed.value.slice(pos);
+          ed.selectionStart = ed.selectionEnd = pos + 1;
+          lastSpaceTime = 0;
+          refreshStudioUI();
+          return;
         }
       }
-      box.innerHTML = list.map((item, idx) =>
-        `<span class="cand-item ${idx === 0 ? 'active' : ''}">${item}</span>`
-      ).join('');
+      lastSpaceTime = now;
+      if (rawBuffer) {
+        commitCandidate(selectedCandIdx, true);
+      } else {
+        insertTextAtCursor(" ");
+        refreshStudioUI();
+      }
     }
-    updateDemo('bhalobashi');
+
+    function handleCharacterInput(ch) {
+      if (kbdMode === "en") {
+        insertTextAtCursor(ch);
+        return;
+      }
+      if (kbdLayout !== "avro") {
+        const engine = window.MatraKiLiveEngine;
+        const lay = engine && engine.FIXED_LAYOUTS[kbdLayout];
+        let out = ch;
+        if (lay) {
+          if (lay.shift && lay.shift[ch]) out = lay.shift[ch];
+          else if (lay.normal && lay.normal[ch.toLowerCase()]) out = lay.normal[ch.toLowerCase()];
+        }
+        insertTextAtCursor(out);
+        refreshStudioUI();
+        return;
+      }
+
+      // Avro Phonetic AI mode
+      // Sentence-ending punctuation commits current buffer immediately
+      if ([",", ";", "?", "।"].includes(ch) || (ch === "." && rawBuffer && !rawBuffer.startsWith("="))) {
+        if (rawBuffer) commitCandidate(selectedCandIdx, false);
+        insertTextAtCursor(ch === "." ? "। " : ch + " ");
+        refreshStudioUI();
+        return;
+      }
+
+      rawBuffer += ch;
+      selectedCandIdx = 0;
+      refreshStudioUI();
+    }
+
+    // Attach Physical Keyboard Listener to #demoEditor
+    document.addEventListener("DOMContentLoaded", () => {
+      selectChipCategory("highlights", document.querySelector("#demoCatTabs .cat-tab"));
+      renderVirtualKeyboard();
+      rawBuffer = "bhalobashi";
+      refreshStudioUI();
+
+      const ed = document.getElementById("demoEditor");
+      ed.addEventListener("keydown", (e) => {
+        // Ctrl+Space or Alt+Space toggles Bangla/English mode
+        if ((e.ctrlKey || e.altKey) && e.code === "Space") {
+          e.preventDefault();
+          toggleKbdMode();
+          return;
+        }
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+        // Highlight key on Virtual Keyboard
+        const baseKey = e.key.toLowerCase();
+        const keyBtn = document.querySelector(`.vkbd-key[data-key="${CSS.escape(baseKey)}"]`);
+        if (keyBtn) {
+          keyBtn.classList.add("pressed");
+          setTimeout(() => keyBtn.classList.remove("pressed"), 140);
+        }
+
+        if (kbdMode === "en") {
+          setTimeout(updateEditorStats, 10);
+          return;
+        }
+
+        if (e.key === "Backspace") {
+          if (rawBuffer.length > 0) {
+            e.preventDefault();
+            rawBuffer = rawBuffer.slice(0, -1);
+            refreshStudioUI();
+          } else {
+            setTimeout(refreshStudioUI, 10);
+          }
+          return;
+        }
+
+        if (e.key === "Escape") {
+          if (rawBuffer) {
+            e.preventDefault();
+            rawBuffer = "";
+            refreshStudioUI();
+          }
+          return;
+        }
+
+        if (e.key === " ") {
+          e.preventDefault();
+          handleSpacePress();
+          return;
+        }
+
+        if (e.key === "Enter") {
+          if (rawBuffer) {
+            e.preventDefault();
+            commitCandidate(selectedCandIdx, true);
+          }
+          return;
+        }
+
+        if (e.key === "Tab") {
+          if (rawBuffer || currentCandidates.length > 0) {
+            e.preventDefault();
+            pressVirtualTab();
+          }
+          return;
+        }
+
+        if (e.key === "ArrowRight" && (rawBuffer || currentCandidates.length > 0)) {
+          if (rawBuffer) {
+            e.preventDefault();
+            selectedCandIdx = (selectedCandIdx + 1) % Math.min(currentCandidates.length, 9);
+            refreshStudioUI();
+            return;
+          }
+        }
+
+        if (e.key === "ArrowLeft" && rawBuffer && currentCandidates.length > 0) {
+          e.preventDefault();
+          const maxC = Math.min(currentCandidates.length, 9);
+          selectedCandIdx = (selectedCandIdx - 1 + maxC) % maxC;
+          refreshStudioUI();
+          return;
+        }
+
+        // Number keys 1-9 select candidate when in snippet (!/@) or emoji (:) mode
+        if (rawBuffer && (rawBuffer[0] === "!" || rawBuffer[0] === "@" || rawBuffer[0] === ":") && e.key >= "1" && e.key <= "9") {
+          const idx = parseInt(e.key, 10) - 1;
+          if (idx < currentCandidates.length) {
+            e.preventDefault();
+            commitCandidate(idx, true);
+            return;
+          }
+        }
+
+        if (e.key.length === 1) {
+          e.preventDefault();
+          handleCharacterInput(e.key);
+        }
+      });
+
+      ed.addEventListener("click", () => {
+        if (rawBuffer) {
+          commitCandidate(selectedCandIdx, true);
+        } else {
+          refreshStudioUI();
+        }
+      });
+    });
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
