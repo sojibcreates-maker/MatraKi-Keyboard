@@ -116,6 +116,7 @@ private:
   QAction *iconMenuOnTray;
   QAction *iconMenuLayout;
   QAction *iconMenuAbout;
+  QAction *iconMenuWebsite;
   QAction *iconMenuDonate;
   QAction *iconMenuUpdate;
 
@@ -129,7 +130,8 @@ private:
 
   void SetupTrayIcon();
 
-  void checkForUpdate();
+  void checkForUpdate(bool silent = false);
+  void showUpdateDialog(bool updateAvailable, const QString &latestVer, const QString &releaseTitle, const QString &changelog, const QString &releaseUrl, bool silent);
 
   void RefreshLayouts();
 

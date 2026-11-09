@@ -19,12 +19,19 @@
 #include <QSystemTrayIcon>
 #include <QDesktopWidget>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QMouseEvent>
 #include <QFileDialog>
 #include <QMenu>
 #include <QDir>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QTimer>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include "TopBar.h"
 #include "Layout.h"
 #include "Settings.h"
@@ -37,7 +44,28 @@
 #include "QSimpleUpdater.h"
 #include "ui_TopBar.h"
 
-static const QString DEFS_URL = "https://facebook.com/hossain.sojibs";
+static const QString WEBSITE_URL = "https://sojibcreates-maker.github.io/MatraKi-Keyboard/";
+static const QString UPDATE_PAGE_URL = "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads";
+static const QString DEFS_URL = "https://sojibcreates-maker.github.io/MatraKi-Keyboard/updates.json";
+static const QString GITHUB_API_LATEST_URL = "https://api.github.com/repos/sojibcreates-maker/MatraKi-Keyboard/releases/latest";
+static const QString GITHUB_RELEASES_URL = "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest";
+
+static bool isRemoteVersionNewer(const QString &remoteVer, const QString &localVer) {
+  QString r = remoteVer.trimmed();
+  QString l = localVer.trimmed();
+  if (r.startsWith('v') || r.startsWith('V')) r = r.mid(1);
+  if (l.startsWith('v') || l.startsWith('V')) l = l.mid(1);
+  QStringList rParts = r.split('.');
+  QStringList lParts = l.split('.');
+  int count = qMax(rParts.size(), lParts.size());
+  for (int i = 0; i < count; ++i) {
+    int rv = (i < rParts.size()) ? rParts.at(i).toInt() : 0;
+    int lv = (i < lParts.size()) ? lParts.at(i).toInt() : 0;
+    if (rv > lv) return true;
+    if (rv < lv) return false;
+  }
+  return false;
+}
 
 TopBar::TopBar(QWidget *parent) :
     QMainWindow(parent),
@@ -59,6 +87,20 @@ TopBar::TopBar(QWidget *parent) :
   SetupPopupMenus();
   SetupTrayIcon();
   DataMigration();
+
+  // Automatic background update check linked with GitHub Releases & GitHub Pages
+  QTimer::singleShot(3500, this, [=]() {
+    if (gSettings->getUpdateCheck()) {
+      checkForUpdate(true);
+    }
+  });
+  QTimer *periodicUpdateTimer = new QTimer(this);
+  connect(periodicUpdateTimer, &QTimer::timeout, this, [=]() {
+    if (gSettings->getUpdateCheck()) {
+      checkForUpdate(true);
+    }
+  });
+  periodicUpdateTimer->start(4 * 60 * 60 * 1000); // Check every 4 hours
 }
 
 TopBar::~TopBar() {
@@ -98,20 +140,128 @@ void TopBar::SetupTopBar() {
   }
 }
 
-void TopBar::checkForUpdate() {
-  QMessageBox msgBox;
-  msgBox.setWindowTitle("MatraKi - Software Update");
+void TopBar::showUpdateDialog(bool updateAvailable, const QString &latestVer, const QString &releaseTitle, const QString &changelog, const QString &releaseUrl, bool silent) {
+  if (!updateAvailable && silent) {
+    return;
+  }
+
+  QMessageBox msgBox(this);
+  msgBox.setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+  msgBox.setWindowTitle(updateAvailable ? "MatraKi — New Update Available!" : "MatraKi — Software Update");
   msgBox.setWindowIcon(QIcon(":/images/MatraKi.png"));
   msgBox.setIcon(QMessageBox::Information);
-  msgBox.setText("<b>MatraKi v1.0.0 — AI Smart Edition</b>");
-  msgBox.setInformativeText("Your MatraKi Keyboard is up to date!\n(13,560+ Trained Words, 18,559 Auto-Correct Rules & AI Smart Engine Active)");
+  msgBox.setTextFormat(Qt::RichText);
+
+  if (updateAvailable) {
+    msgBox.setText(QString(
+      "<span style='font-size:14pt; font-weight:800; color:#38bdf8;'>🎉 নতুন আপডেট পাওয়া গেছে! (Update Available: v%1)</span><br/>"
+      "<span style='font-size:10pt; color:#cbd5e1;'>Current Installed: <b>v%2</b>  •  Latest Release: <b style='color:#34d399;'>v%1 (%3)</b></span>"
+    ).arg(latestVer, QStringLiteral(PROJECT_VERSION), releaseTitle));
+
+    QString summary = changelog.trimmed();
+    if (summary.length() > 360) summary = summary.left(360) + "...";
+    msgBox.setInformativeText(QString(
+      "<b>Release Highlights:</b><br/>%1<br/><br/>"
+      "Click below to download the latest installer from the official MatraKi web page or GitHub Releases."
+    ).arg(summary.toHtmlEscaped().replace("\n", "<br/>")));
+  } else {
+    msgBox.setText(QString(
+      "<span style='font-size:13.5pt; font-weight:800; color:#34d399;'>✅ MatraKi v%1 — AI Smart Edition is Up to Date!</span>"
+    ).arg(QStringLiteral(PROJECT_VERSION)));
+    msgBox.setInformativeText(
+      "You are running the latest version of MatraKi Keyboard.<br/>"
+      "• <b>20,535+</b> Pre-Trained Words &amp; Auto-Correct Rules<br/>"
+      "• <b>Smart Suffix Stemmer</b>, Next-Word AI, Live Math (<code>=</code>) &amp; 42+ Snippets (<code>!</code>)<br/>"
+      "• Connected to Official Update Page: <a style='color:#38bdf8;' href='https://sojibcreates-maker.github.io/MatraKi-Keyboard/'>sojibcreates-maker.github.io/MatraKi-Keyboard</a>"
+    );
+  }
+
+  QPushButton *btnWeb = msgBox.addButton(
+    updateAvailable ? "🌐 Download from Web Page" : "🌐 Official Web Page",
+    QMessageBox::AcceptRole
+  );
+  QPushButton *btnGitHub = msgBox.addButton("📦 GitHub Releases", QMessageBox::ActionRole);
+  msgBox.addButton(updateAvailable ? "Later" : "Close", QMessageBox::RejectRole);
+
   msgBox.setStyleSheet(
     "QMessageBox { background-color: #0b1120; color: #f8fafc; }"
     "QLabel { color: #e2e8f0; font-size: 13px; }"
-    "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 6px; padding: 6px 18px; font-weight: bold; }"
+    "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 7px; padding: 7px 16px; font-weight: bold; }"
     "QPushButton:hover { background-color: #1e40af; }"
   );
+
   msgBox.exec();
+  if (msgBox.clickedButton() == btnWeb) {
+    QDesktopServices::openUrl(QUrl(UPDATE_PAGE_URL));
+  } else if (msgBox.clickedButton() == btnGitHub) {
+    QDesktopServices::openUrl(QUrl(releaseUrl.isEmpty() ? GITHUB_RELEASES_URL : releaseUrl));
+  }
+}
+
+void TopBar::checkForUpdate(bool silent) {
+  // Also keep QSimpleUpdater synced with our GitHub Pages updates.json URL
+  if (updater) {
+    updater->setModuleVersion(DEFS_URL, PROJECT_VERSION);
+  }
+
+  QNetworkAccessManager *nam = new QNetworkAccessManager(this);
+
+  // Step 1: Check GitHub Releases API (detects any newly published GitHub release immediately)
+  QNetworkRequest apiReq{QUrl(GITHUB_API_LATEST_URL)};
+  apiReq.setRawHeader("User-Agent", "MatraKi-Keyboard-Updater");
+  apiReq.setRawHeader("Accept", "application/vnd.github+json");
+  QNetworkReply *apiReply = nam->get(apiReq);
+
+  connect(apiReply, &QNetworkReply::finished, this, [=]() {
+    apiReply->deleteLater();
+    if (apiReply->error() == QNetworkReply::NoError) {
+      QJsonDocument doc = QJsonDocument::fromJson(apiReply->readAll());
+      if (doc.isObject()) {
+        QJsonObject obj = doc.object();
+        QString tag = obj.value("tag_name").toString().trimmed();
+        if (tag.startsWith('v') || tag.startsWith('V')) tag = tag.mid(1);
+        QString title = obj.value("name").toString("MatraKi Release").trimmed();
+        QString body = obj.value("body").toString().trimmed();
+        QString htmlUrl = obj.value("html_url").toString(GITHUB_RELEASES_URL).trimmed();
+        if (!tag.isEmpty()) {
+          bool newer = isRemoteVersionNewer(tag, QStringLiteral(PROJECT_VERSION));
+          showUpdateDialog(newer, tag, title, body, htmlUrl, silent);
+          nam->deleteLater();
+          return;
+        }
+      }
+    }
+
+    // Step 2: Fallback to GitHub Pages updates.json feed
+    QNetworkRequest pageReq{QUrl(DEFS_URL)};
+    pageReq.setRawHeader("User-Agent", "MatraKi-Keyboard-Updater");
+    QNetworkReply *pageReply = nam->get(pageReq);
+    connect(pageReply, &QNetworkReply::finished, this, [=]() {
+      pageReply->deleteLater();
+      nam->deleteLater();
+      if (pageReply->error() == QNetworkReply::NoError) {
+        QJsonDocument doc = QJsonDocument::fromJson(pageReply->readAll());
+        if (doc.isObject()) {
+          QJsonObject obj = doc.object();
+          QString latestVer = obj.value("latest_version").toString().trimmed();
+          if (latestVer.isEmpty()) {
+            latestVer = obj.value("updates").toObject().value("linux").toObject().value("latest-version").toString().trimmed();
+          }
+          if (latestVer.startsWith('v') || latestVer.startsWith('V')) latestVer = latestVer.mid(1);
+          QString title = obj.value("release_title").toString("MatraKi Release");
+          QString changelog = obj.value("changelog").toString();
+          QString relUrl = obj.value("github_release_url").toString(GITHUB_RELEASES_URL);
+          if (!latestVer.isEmpty()) {
+            bool newer = isRemoteVersionNewer(latestVer, QStringLiteral(PROJECT_VERSION));
+            showUpdateDialog(newer, latestVer, title, changelog, relUrl, silent);
+            return;
+          }
+        }
+      }
+      // Offline or unreachable fallback (only show if user manually clicked Check for Updates)
+      showUpdateDialog(false, QStringLiteral(PROJECT_VERSION), "MatraKi v1.0.0 — AI Smart Edition", "", GITHUB_RELEASES_URL, silent);
+    });
+  });
 }
 
 void TopBar::SetupPopupMenus() {
@@ -153,12 +303,17 @@ void TopBar::SetupPopupMenus() {
   iconMenuAbout = new QAction("About MatraKi", this);
   connect(iconMenuAbout, SIGNAL(triggered()), this, SLOT(iconMenuAbout_clicked()));
 
+  iconMenuWebsite = new QAction("🌐 Official Website & Live Keyboard", this);
+  connect(iconMenuWebsite, &QAction::triggered, [=]() {
+    QDesktopServices::openUrl(QUrl(WEBSITE_URL));
+  });
+
   iconMenuDonate = new QAction("💖 Support & Donate", this);
   connect(iconMenuDonate, SIGNAL(triggered()), this, SLOT(iconMenuDonate_clicked()));
 
-  iconMenuUpdate = new QAction("Check for Updates", this);
+  iconMenuUpdate = new QAction("🔄 Check for Updates", this);
   connect(iconMenuUpdate, &QAction::triggered, [=]() {
-    checkForUpdate();
+    checkForUpdate(false);
   });
 
   iconMenu = new QMenu(this);
@@ -171,6 +326,7 @@ void TopBar::SetupPopupMenus() {
   //iconMenu->addAction(iconMenuOnTray);
   iconMenu->addAction(iconMenuLayout);
   iconMenu->addAction(iconMenuAbout);
+  iconMenu->addAction(iconMenuWebsite);
   iconMenu->addAction(iconMenuDonate);
   iconMenu->addAction(iconMenuUpdate);  
 }
