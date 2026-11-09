@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MatraKi (মাত্রা-কী) v1.0.0 — AI Smart Bangla Keyboard for Linux, Windows &amp; macOS</title>
+  <meta name="description" content="Download MatraKi v1.0.0 — The fastest, smartest open-source Bangla phonetic &amp; fixed layout keyboard for Linux (Ubuntu, Debian, Deepin, Fedora, Arch), Windows (.exe), and macOS (.dmg). Pre-trained with 20,535+ words, next-word prediction, live calculator, unit converter, and Bangla Academy grammar auto-fix." />
+  <meta name="keywords" content="MatraKi, মাত্রা-কী, Bangla Keyboard, Bengali Keyboard, Avro Keyboard for Linux, Avro Phonetic, Bangla Typing Software, Fcitx5 Bangla, IBus Bangla, Ubuntu Bangla Keyboard, Deepin Bangla Keyboard, Windows Bangla Keyboard, Open Source Bangla IME, Md Sojib Hossain" />
+  <meta name="author" content="Md Sojib Hossain" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sojibcreates-maker.github.io/MatraKi-Keyboard/" />
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/" />
+  <meta property="og:title" content="MatraKi (মাত্রা-কী) v1.0.0 — Type Smarter. Write Better." />
+  <meta property="og:description" content="Next-Generation AI Smart Bangla Phonetic &amp; Fixed Layout Keyboard for Linux, Windows &amp; macOS. 20,535+ trained words, next-word prediction, live math &amp; unit converter." />
+  <meta property="og:image" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/screenshots/settings.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MatraKi (মাত্রা-কী) v1.0.0 — AI Smart Bangla Keyboard" />
+  <meta name="twitter:description" content="Download MatraKi for Linux (.deb, .AppImage, .rpm), Windows (.exe), and macOS (.dmg). Pre-trained with 20,535+ Bangla words." />
+  <meta name="twitter:image" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/screenshots/settings.png" />
+
+  <!-- Structured Data (JSON-LD) for Google Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "MatraKi Keyboard",
+    "alternateName": "মাত্রা-কী কীবোর্ড",
+    "softwareVersion": "1.0.0",
+    "operatingSystem": "Linux, Windows, macOS",
+    "applicationCategory": "UtilitiesApplication",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/",
+    "downloadUrl": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.0.0",
+    "author": {
+      "@type": "Person",
+      "name": "Md Sojib Hossain",
+      "url": "https://facebook.com/hossain.sojibs"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "MatraKi is an AI-powered Bangla phonetic and fixed-layout input method suite featuring 20,535+ trained words, agglutinative suffix stemming, next-word prediction, Bangla Academy spelling auto-correction, and an in-keyboard math and unit converter."
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-deep: #060b16;
+      --bg-card: rgba(15, 23, 42, 0.78);
+      --bg-card-solid: #0f172a;
+      --bg-elevated: #131c31;
+      --border-subtle: rgba(56, 189, 248, 0.22);
+      --border-bright: #38bdf8;
+      --primary: #0ea5e9;
+      --primary-dark: #1d4ed8;
+      --accent-rose: #f43f5e;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(29, 78, 216, 0.22) 0%, transparent 40%),
+        radial-gradient(circle at 85% 18%, rgba(14, 165, 233, 0.18) 0%, transparent 38%),
+        radial-gradient(circle at 50% 65%, rgba(244, 63, 94, 0.08) 0%, transparent 45%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+
+    .container { max-width: 1220px; margin: 0 auto; padding: 0 24px; }
+
+    /* Navbar */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      background: rgba(6, 11, 22, 0.82);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.18);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 74px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; }
+    .brand img { width: 42px; height: 42px; border-radius: 10px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.35); }
+    .brand-badge {
+      font-size: 0.72rem; font-weight: 700; padding: 2px 9px;
+      border-radius: 99px; background: rgba(16, 185, 129, 0.16);
+      color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45);
+    }
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: 0.94rem; font-weight: 600; color: #cbd5e1; }
+    .nav-links a:hover { color: #38bdf8; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 22px; border-radius: 12px; font-weight: 700; font-size: 0.95rem;
+      transition: all 0.2s ease; cursor: pointer; border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+      color: #fff; border-color: #38bdf8;
+      box-shadow: 0 8px 25px -4px rgba(14, 165, 233, 0.45);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -4px rgba(14, 165, 233, 0.65); }
+    .btn-donate {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.22), rgba(244, 63, 94, 0.28));
+      color: #fda4af; border-color: rgba(244, 63, 94, 0.55);
+    }
+    .btn-donate:hover { background: linear-gradient(135deg, #e11d48, #f43f5e); color: #fff; transform: translateY(-2px); }
+    .btn-outline {
+      background: rgba(19, 28, 49, 0.75); color: #e2e8f0;
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+    .btn-outline:hover { border-color: #38bdf8; color: #fff; background: rgba(29, 78, 216, 0.25); }
+
+    /* Hero */
+    .hero { padding: 78px 0 60px; text-align: center; position: relative; }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 99px;
+      background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.38);
+      color: #38bdf8; font-size: 0.86rem; font-weight: 700; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+      font-weight: 900; line-height: 1.12; letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #fb7185 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      max-width: 780px; margin: 0 auto 32px;
+      font-size: 1.15rem; color: var(--text-muted);
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 44px; }
+
+    /* Stats bar */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px; margin-top: 20px;
+    }
+    .stat-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 22px 18px; text-align: center;
+      backdrop-filter: blur(12px);
+    }
+    .stat-num { font-size: 2rem; font-weight: 900; color: #38bdf8; line-height: 1.1; }
+    .stat-label { font-size: 0.88rem; color: var(--text-muted); margin-top: 6px; font-weight: 600; }
+
+    /* Section headers */
+    section { padding: 72px 0; }
+    .section-header { text-align: center; max-width: 760px; margin: 0 auto 48px; }
+    .section-tag {
+      display: inline-block; font-size: 0.8rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: #38bdf8; margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.85rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .section-desc { color: var(--text-muted); font-size: 1.04rem; }
+
+    /* Interactive Live AI Demo Box */
+    .demo-box {
+      background: linear-gradient(180deg, rgba(19, 28, 49, 0.92), rgba(11, 17, 32, 0.96));
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      border-radius: 20px; padding: 28px;
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(14, 165, 233, 0.14);
+      max-width: 920px; margin: 0 auto;
+    }
+    .demo-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; align-items: center; }
+    .demo-chip {
+      font-size: 0.82rem; font-weight: 600; padding: 6px 12px;
+      border-radius: 8px; background: rgba(30, 41, 59, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.3); color: #e2e8f0;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .demo-chip:hover { background: #1d4ed8; border-color: #38bdf8; color: #fff; }
+    .demo-input {
+      width: 100%; padding: 16px 18px; border-radius: 12px;
+      background: #090e1a; border: 1.5px solid #38bdf8;
+      color: #fff; font-size: 1.15rem; font-family: 'Inter', 'Hind Siliguri', sans-serif;
+      outline: none; margin-bottom: 14px;
+    }
+    .candidate-bar {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      background: #0f172a; border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 12px; padding: 12px 16px; min-height: 54px; align-items: center;
+    }
+    .cand-item {
+      padding: 6px 14px; border-radius: 8px; font-size: 1.02rem; font-weight: 600;
+      background: #1e293b; color: #e2e8f0; border: 1px solid transparent;
+    }
+    .cand-item.active {
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      color: #fff; border-color: #38bdf8;
+    }
+
+    /* Download Center */
+    .dl-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 22px;
+    }
+    .dl-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 18px; padding: 26px; display: flex; flex-direction: column;
+      justify-content: space-between; transition: all 0.22s ease;
+      position: relative; overflow: hidden;
+    }
+    .dl-card:hover {
+      border-color: #38bdf8; transform: translateY(-4px);
+      box-shadow: 0 18px 40px -12px rgba(14, 165, 233, 0.28);
+    }
+    .dl-card.featured {
+      border: 1.5px solid #38bdf8;
+      background: linear-gradient(160deg, rgba(23, 37, 84, 0.55) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+    .dl-os-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .dl-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(56, 189, 248, 0.35);
+      display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+    }
+    .dl-title { font-size: 1.2rem; font-weight: 800; }
+    .dl-sub { font-size: 0.83rem; color: var(--text-muted); }
+    .dl-links { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .dl-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 16px; border-radius: 10px;
+      background: #131c31; border: 1px solid rgba(56, 189, 248, 0.28);
+      font-size: 0.9rem; font-weight: 700; color: #f8fafc;
+      transition: all 0.18s;
+    }
+    .dl-btn:hover { background: #1d4ed8; border-color: #38bdf8; color: #fff; }
+    .dl-meta { font-size: 0.76rem; color: #94a3b8; font-weight: 500; }
+    .dl-btn:hover .dl-meta { color: #e0f2fe; }
+
+    /* Step-by-Step Installation Process */
+    .process-tabs {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 28px;
+    }
+    .tab-btn {
+      padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 0.92rem;
+      background: #131c31; color: #94a3b8; border: 1px solid rgba(56, 189, 248, 0.2);
+      cursor: pointer; transition: all 0.18s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      color: #fff; border-color: #38bdf8;
+    }
+    .tab-pane { display: none; max-width: 900px; margin: 0 auto; }
+    .tab-pane.active { display: block; }
+    .step-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 22px 24px; margin-bottom: 16px;
+    }
+    .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .step-num {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: #0ea5e9; color: #060b16; font-weight: 900; font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-title { font-weight: 700; font-size: 1.06rem; }
+    .code-wrap {
+      position: relative; background: #070b14; border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin-top: 8px;
+    }
+    .code-wrap pre { color: #38bdf8; font-size: 0.88rem; line-height: 1.6; }
+    .copy-btn {
+      position: absolute; top: 10px; right: 10px;
+      background: #1e293b; color: #cbd5e1; border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 6px; padding: 4px 10px; font-size: 0.75rem; font-weight: 700;
+      cursor: pointer;
+    }
+    .copy-btn:hover { background: #0ea5e9; color: #060b16; }
+
+    /* Features Grid */
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 22px;
+    }
+    .feat-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 26px;
+    }
+    .feat-icon { font-size: 1.9rem; margin-bottom: 12px; }
+    .feat-title { font-size: 1.18rem; font-weight: 800; margin-bottom: 8px; color: #f8fafc; }
+    .feat-desc { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Screenshots Gallery */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 24px;
+    }
+    .shot-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 16px; text-align: center;
+    }
+    .shot-card img {
+      width: 100%; height: auto; border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.25); margin-bottom: 12px;
+    }
+    .shot-caption { font-weight: 700; font-size: 0.95rem; color: #cbd5e1; }
+
+    /* Comparison Table */
+    .table-wrap {
+      overflow-x: auto; background: var(--bg-card);
+      border: 1px solid var(--border-subtle); border-radius: 16px;
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 15px 20px; border-bottom: 1px solid rgba(56, 189, 248, 0.14); font-size: 0.95rem; }
+    th { background: rgba(19, 28, 49, 0.95); color: #38bdf8; font-weight: 800; }
+    tr:last-child td { border-bottom: none; }
+    .yes { color: #34d399; font-weight: 700; }
+    .no { color: #64748b; }
+
+    /* FAQ */
+    .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+    details.faq-item {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: 14px; padding: 18px 22px;
+    }
+    details.faq-item summary {
+      font-weight: 700; font-size: 1.04rem; cursor: pointer; list-style: none;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    details.faq-item p { margin-top: 12px; color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(56, 189, 248, 0.18);
+      padding: 54px 0 40px; margin-top: 50px; background: rgba(6, 11, 22, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="logo.png" alt="MatraKi Icon" />
+        <span>MatraKi</span>
+        <span class="brand-badge">v1.0.0 AI</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#demo">Live AI Demo</a>
+        <a href="#downloads">Downloads</a>
+        <a href="#install">How to Install</a>
+        <a href="#features">AI Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate">💖 Donate</a>
+        <a href="#downloads" class="btn btn-primary">⬇ Download v1.0.0</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span>✨ MatraKi v1.0.0 (AI Smart Edition) — Open-Source Bangla Input Suite</span>
+      </div>
+      <h1>
+        Type Smarter. Write Better.<br />
+        <span class="gradient-text">The AI-Powered Bangla Keyboard</span>
+      </h1>
+      <p class="hero-sub">
+        Meet <strong>MatraKi (মাত্রা-কী)</strong> — a blazingly fast Rust &amp; C++17 Bangla Phonetic and Fixed-Layout keyboard for <strong>Linux, Windows, and macOS</strong>. Pre-trained with <strong>20,535+ words</strong>, smart suffix stemming, context-aware next-word prediction, Bangla Academy spelling correction, and live in-keyboard math &amp; unit conversion.
+      </p>
+      <div class="hero-cta">
+        <a href="#downloads" class="btn btn-primary" id="heroDownloadBtn">🚀 Download MatraKi v1.0.0 (Free)</a>
+        <a href="#install" class="btn btn-outline">📖 Step-by-Step Installation Guide</a>
+        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard" target="_blank" rel="noopener" class="btn btn-outline">⭐ Star on GitHub</a>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num">20,535+</div>
+          <div class="stat-label">Trained Dictionary &amp; Auto-Correct Rules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">225,000+</div>
+          <div class="stat-label">Inflected Bangla Words via Suffix Stemmer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1,021+</div>
+          <div class="stat-label">Pre-Trained Bangla Verb Conjugations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6 Layouts</div>
+          <div class="stat-label">Avro Phonetic, Probhat, Jatiya, Munir, Borno</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive In-Browser AI Simulator -->
+  <section id="demo" style="padding-top: 20px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Sandbox</span>
+        <h2 class="section-title">Try MatraKi’s AI Smart Engine Live</h2>
+        <p class="section-desc">Click any smart shortcut below or type in the box to see how MatraKi’s candidate window responds in real time.</p>
+      </div>
+
+      <div class="demo-box">
+        <div class="demo-chips">
+          <span style="font-size:0.82rem; color:#94a3b8; font-weight:700;">Try clicking:</span>
+          <button class="demo-chip" onclick="setDemo('bhalobashi')">bhalobashi</button>
+          <button class="demo-chip" onclick="setDemo('bishwobidyaloygulo')">bishwobidyaloygulo</button>
+          <button class="demo-chip" onclick="setDemo('=500*15%')">=500*15%</button>
+          <button class="demo-chip" onclick="setDemo('=10km')">=10km</button>
+          <button class="demo-chip" onclick="setDemo('=1bigha')">=1bigha</button>
+          <button class="demo-chip" onclick="setDemo('!salam')">!salam</button>
+          <button class="demo-chip" onclick="setDemo('21she')">21she</button>
+          <button class="demo-chip" onclick="setDemo('500tk')">500tk</button>
+          <button class="demo-chip" onclick="setDemo(':smile')">:smile</button>
+        </div>
+        <input type="text" id="demoInput" class="demo-input" value="bhalobashi" oninput="updateDemo(this.value)" placeholder="Type phonetic Bangla, =math, =10km, !salam, 21she, 500tk, :smile..." />
+        <div class="candidate-bar" id="demoCandidates"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Download Center -->
+  <section id="downloads">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Official Release v1.0.0</span>
+        <h2 class="section-title">Download MatraKi for Your Device</h2>
+        <p class="section-desc">All official 64-bit and 32-bit installers and portable packages are hosted directly on GitHub Releases.</p>
+      </div>
+
+      <div class="dl-grid">
+        <!-- Debian / Ubuntu / Deepin -->
+        <div class="dl-card featured">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">🐧</div>
+              <div>
+                <div class="dl-title">Ubuntu / Debian / Deepin / Mint</div>
+                <div class="dl-sub">Native .deb Installer (Fcitx5 &amp; Qt5 GUI)</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Recommended for Ubuntu, Debian, Deepin Linux, Linux Mint, Pop!_OS, Zorin OS, and Kali Linux.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb" class="dl-btn">
+              <span>⬇ Download .deb (64-bit amd64)</span>
+              <span class="dl-meta">6.8 MB</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_i386.deb" class="dl-btn">
+              <span>⬇ Download .deb (32-bit i386)</span>
+              <span class="dl-meta">6.8 MB</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Windows .exe -->
+        <div class="dl-card featured">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">🪟</div>
+              <div>
+                <div class="dl-title">Microsoft Windows 11 / 10 / 8 / 7</div>
+                <div class="dl-sub">Setup Installer (.exe) &amp; Portable (.zip)</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Includes both full system installer and no-admin portable mode for 64-bit and 32-bit Windows PCs.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-x86_64.exe" class="dl-btn">
+              <span>⬇ Download Setup .exe (64-bit x64)</span>
+              <span class="dl-meta">Installer</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-i386.exe" class="dl-btn">
+              <span>⬇ Download Setup .exe (32-bit x86)</span>
+              <span class="dl-meta">Installer</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Windows-x86_64.zip" class="dl-btn">
+              <span>📦 Portable .zip (64-bit / 32-bit)</span>
+              <span class="dl-meta">4.0 MB</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Universal Linux AppImage -->
+        <div class="dl-card">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">⚡</div>
+              <div>
+                <div class="dl-title">Universal Linux AppImage</div>
+                <div class="dl-sub">Run Anywhere — No Installation Required</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Single-file executable for any Linux distribution. Just mark executable (<code>chmod +x</code>) and run.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage" class="dl-btn">
+              <span>⬇ Download .AppImage (64-bit x86_64)</span>
+              <span class="dl-meta">4.4 MB</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-i386.AppImage" class="dl-btn">
+              <span>⬇ Download .AppImage (32-bit i386)</span>
+              <span class="dl-meta">4.4 MB</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Fedora / RedHat / openSUSE RPM -->
+        <div class="dl-card">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">🎩</div>
+              <div>
+                <div class="dl-title">Fedora / RHEL / openSUSE</div>
+                <div class="dl-sub">Native RPM Package (.rpm)</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Built for Fedora Workstation, Red Hat Enterprise Linux, CentOS Stream, AlmaLinux, Rocky, and openSUSE.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm" class="dl-btn">
+              <span>⬇ Download .rpm (64-bit x86_64)</span>
+              <span class="dl-meta">6.0 MB</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Apple macOS -->
+        <div class="dl-card">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">🍎</div>
+              <div>
+                <div class="dl-title">Apple macOS</div>
+                <div class="dl-sub">macOS Disk Image (.dmg)</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Disk image bundle containing MatraKi resources, trained dictionaries, and application bundle.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-macOS.dmg" class="dl-btn">
+              <span>⬇ Download macOS .dmg</span>
+              <span class="dl-meta">10.2 MB</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Tar.gz Portable & Source -->
+        <div class="dl-card">
+          <div>
+            <div class="dl-os-header">
+              <div class="dl-icon">📦</div>
+              <div>
+                <div class="dl-title">Portable Tarballs &amp; Source (`.tar.gz`)</div>
+                <div class="dl-sub">Arch Linux, Gentoo, NixOS &amp; Developers</div>
+              </div>
+            </div>
+            <p style="font-size:0.9rem; color:#cbd5e1;">Pre-compiled Linux binary tarballs (64-bit &amp; 32-bit) and full GPLv3 source tarball with <code>install.sh</code>.</p>
+          </div>
+          <div class="dl-links">
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz" class="dl-btn">
+              <span>⬇ Portable Linux 64-bit (.tar.gz)</span>
+              <span class="dl-meta">10.5 MB</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-i386.tar.gz" class="dl-btn">
+              <span>⬇ Portable Linux 32-bit (.tar.gz)</span>
+              <span class="dl-meta">10.5 MB</span>
+            </a>
+            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0.tar.gz" class="dl-btn">
+              <span>⬇ Full Source Code (.tar.gz)</span>
+              <span class="dl-meta">7.8 MB</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Step-by-Step Installation & Setup Guide -->
+  <section id="install" style="background: rgba(11, 17, 32, 0.65);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Complete Setup Process</span>
+        <h2 class="section-title">How to Install &amp; Use MatraKi (Step-by-Step)</h2>
+        <p class="section-desc">Select your operating system below to see the exact installation and activation steps.</p>
+      </div>
+
+      <div class="process-tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-deb', this)">🐧 Ubuntu / Debian / Deepin (.deb)</button>
+        <button class="tab-btn" onclick="switchTab('tab-appimage', this)">⚡ AppImage (Any Linux)</button>
+        <button class="tab-btn" onclick="switchTab('tab-rpm', this)">🎩 Fedora / RHEL (.rpm)</button>
+        <button class="tab-btn" onclick="switchTab('tab-win', this)">🪟 Windows (.exe)</button>
+        <button class="tab-btn" onclick="switchTab('tab-source', this)">🛠️ One-Command Source Build</button>
+      </div>
+
+      <!-- Tab 1: Debian/Ubuntu -->
+      <div id="tab-deb" class="tab-pane active">
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Download the Official <code>.deb</code> Package</div>
+          </div>
+          <p style="color:#94a3b8; font-size:0.93rem;">Run this command in your terminal (or download directly from the Download section above):</p>
+          <div class="code-wrap">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb</pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">2</div>
+            <div class="step-title">Install the Package via APT</div>
+          </div>
+          <p style="color:#94a3b8; font-size:0.93rem;">APT will automatically install <code>fcitx5</code> and required Qt5 libraries alongside MatraKi:</p>
+          <div class="code-wrap">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>sudo apt update &amp;&amp; sudo apt install -y ./matraki-keyboard_1.0.0_amd64.deb</pre>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">3</div>
+            <div class="step-title">Start MatraKi &amp; Toggle Bangla Typing</div>
+          </div>
+          <p style="color:#94a3b8; font-size:0.93rem;">Launch <strong>MatraKi</strong> from your Application Launcher (or run <code>/usr/share/matraki-keyboard/matraki-gui</code>). Press <strong><code>Ctrl + Space</code></strong> in any app to switch between English and Bangla!</p>
+        </div>
+      </div>
+
+      <!-- Tab 2: AppImage -->
+      <div id="tab-appimage" class="tab-pane">
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Download &amp; Make Executable</div>
+          </div>
+          <div class="code-wrap">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage
+chmod +x MatraKi-Keyboard-1.0.0-x86_64.AppImage
+./MatraKi-Keyboard-1.0.0-x86_64.AppImage</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: RPM -->
+      <div id="tab-rpm" class="tab-pane">
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Install directly on Fedora / RHEL / openSUSE</div>
+          </div>
+          <div class="code-wrap">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>sudo dnf install -y fcitx5 qt5-qtbase zstd
+sudo rpm -Uvh https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Windows -->
+      <div id="tab-win" class="tab-pane">
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Download &amp; Run the Windows Setup <code>.exe</code></div>
+          </div>
+          <p style="color:#94a3b8; font-size:0.93rem;">Download <strong><a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-x86_64.exe" style="color:#38bdf8;">MatraKi-Keyboard-1.0.0-Setup-x86_64.exe</a></strong> (or 32-bit <code>i386.exe</code>), double-click to open the setup wizard, and choose either <strong>Install MatraKi Keyboard Suite</strong> or <strong>Run Portable Mode</strong>.</p>
+        </div>
+      </div>
+
+      <!-- Tab 5: Source Build -->
+      <div id="tab-source" class="tab-pane">
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <div class="step-title">Clone &amp; Run the Automated <code>install.sh</code> Script</div>
+          </div>
+          <p style="color:#94a3b8; font-size:0.93rem;">Works on standard Linux distributions as well as immutable desktops like Deepin Linux:</p>
+          <div class="code-wrap">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>git clone https://github.com/sojibcreates-maker/MatraKi-Keyboard.git
+cd MatraKi-Keyboard
+chmod +x install.sh
+./install.sh</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deep-Dive AI Features -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engineered for Speed &amp; Accuracy</span>
+        <h2 class="section-title">What Makes MatraKi Smarter?</h2>
+        <p class="section-desc">Every component of MatraKi was crafted to eliminate repetitive keystrokes and make Bengali writing natural.</p>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">🧠</div>
+          <div class="feat-title">20,535+ Trained Words &amp; Suffix Stemmer</div>
+          <p class="feat-desc">Type complex words and inflected nouns effortlessly. MatraKi’s agglutinative stemmer automatically attaches <em>-গুলো, -দের, -টা, -টি, -কে, -তে, -ের</em> to any root noun in O(1) time.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🔮</div>
+          <div class="feat-title">Context-Aware Next-Word Prediction</div>
+          <p class="feat-desc">Right after pressing <code>Space</code>, MatraKi suggests natural follow-up words from 130+ conversational contexts and ranks verb endings based on the subject pronoun (<em>আমি করব, তুমি করবে, আপনি করবেন</em>).</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">✅</div>
+          <div class="feat-title">Bangla Academy Grammar &amp; Spelling Fix</div>
+          <p class="feat-desc">Automatically detects and fixes common Nattvabidhi (ণ-ত্ব), Shattvabidhi (ষ-ত্ব), and vowel-length mistakes (<em>সান্ত্বনা, ইতোমধ্যে, পুরস্কার, পরিষ্কার, শারীরিক, সমীচীন</em>).</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">🧮</div>
+          <div class="feat-title">In-Keyboard Calculator &amp; Unit Converter</div>
+          <p class="feat-desc">Type <code>=500*15%</code> for instant math results in Bangla digits and words, or convert units on the fly: <code>=10km</code>, <code>=5kg</code>, <code>=100c</code>, <code>=5ft</code>, <code>=1bigha</code>, <code>=5katha</code>.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">⚡</div>
+          <div class="feat-title">Instant Chat &amp; Islamic Snippets (<code>!</code>)</div>
+          <p class="feat-desc">Type <code>!salam</code>, <code>!olikum</code>, <code>!bismillah</code>, <code>!alham</code>, <code>!insha</code>, <code>!shokal</code>, <code>!eid</code>, or <code>!jumma</code> and press <code>1–9</code> to commit full greetings in Bangla or Arabic.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📅</div>
+          <div class="feat-title">All 31 Date Ordinals, Currency &amp; Emojis</div>
+          <p class="feat-desc">Type <code>1la</code> through <code>31she</code> (১লা, ২১শে, ২৬শে, ৩১শে), <code>500tk</code> (৫০০ টাকা / ৳৫০০ / পাঁচ শত টাকা), <code>@today</code>, or <code>:smile</code> without switching keyboards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Gallery -->
+  <section id="screenshots" style="background: rgba(11, 17, 32, 0.65);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Modern Royal-Blue Dark UI</span>
+        <h2 class="section-title">Designed for Modern Desktops</h2>
+        <p class="section-desc">A unified, crystal-clear English interface across the Floating TopBar, Settings, Dictionary, Layout Viewer, and About dialogs.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="shot-card">
+          <img src="screenshots/settings.png" alt="MatraKi Modern English Settings Dialog" loading="lazy" />
+          <div class="shot-caption">MatraKi v1.0.0 — Modern English Settings Dialog</div>
+        </div>
+        <div class="shot-card">
+          <img src="screenshots/about.png" alt="About MatraKi v1.0.0 Dialog" loading="lazy" />
+          <div class="shot-caption">About MatraKi v1.0.0 — AI Features &amp; Developer Info</div>
+        </div>
+        <div class="shot-card">
+          <img src="screenshots/layout_viewer.png" alt="MatraKi Layout Viewer" loading="lazy" />
+          <div class="shot-caption">Interactive Layout Viewer — Avro Phonetic Modern KeyMap</div>
+        </div>
+        <div class="shot-card">
+          <img src="screenshots/smart_guide.png" alt="MatraKi AI Smart Shortcuts Guide" loading="lazy" />
+          <div class="shot-caption">Built-in AI Smart Typing &amp; Shortcuts Visual Guide</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Side-by-Side Comparison</span>
+        <h2 class="section-title">How MatraKi Compares to Legacy Keyboards</h2>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature / Capability</th>
+              <th>Legacy Avro</th>
+              <th>Fixed-Only Keyboards</th>
+              <th>MatraKi v1.0.0 (AI Smart Edition)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Pre-Trained Bangla Dictionary</strong></td>
+              <td>~2,500 words</td>
+              <td class="no">None</td>
+              <td class="yes">✅ 20,535+ Words &amp; 1,021 Verb Forms</td>
+            </tr>
+            <tr>
+              <td><strong>Smart Agglutinative Suffix Stemmer</strong></td>
+              <td class="no">❌ No</td>
+              <td class="no">❌ No</td>
+              <td class="yes">✅ 225,000+ Inflections (-গুলো, -দের, -টা, -টি, -কে)</td>
+            </tr>
+            <tr>
+              <td><strong>Context-Aware Next-Word Prediction</strong></td>
+              <td class="no">❌ No</td>
+              <td class="no">❌ No</td>
+              <td class="yes">✅ 130+ Contexts + Subject-Verb Concordance</td>
+            </tr>
+            <tr>
+              <td><strong>Bangla Academy Spelling Auto-Fix</strong></td>
+              <td class="no">❌ No</td>
+              <td class="no">❌ No</td>
+              <td class="yes">✅ Automatic ণ-ত্ব, ষ-ত্ব &amp; Standard Spelling</td>
+            </tr>
+            <tr>
+              <td><strong>Live Math Calculator &amp; Unit Converter (<code>=</code>)</strong></td>
+              <td class="no">❌ No</td>
+              <td class="no">❌ No</td>
+              <td class="yes">✅ Built-in (<code>=500*15%</code>, <code>=10km</code>, <code>=1bigha</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>Instant Chat &amp; Arabic Snippets (<code>!</code>)</strong></td>
+              <td class="no">❌ No</td>
+              <td class="no">❌ No</td>
+              <td class="yes">✅ Built-in (<code>!salam</code>, <code>!bismillah</code>, <code>!eid</code>)</td>
+            </tr>
+            <tr>
+              <td><strong>Native Wayland &amp; X11 Fcitx5 Support</strong></td>
+              <td class="no">❌ IBus legacy only</td>
+              <td class="no">❌ Partial</td>
+              <td class="yes">✅ Full Native Fcitx5 &amp; IBus Support</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Human-Friendly SEO FAQ -->
+  <section id="faq" style="background: rgba(11, 17, 32, 0.65);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Got Questions?</span>
+        <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary><span>1. Which is the best Bangla phonetic keyboard for Linux (Ubuntu, Deepin, Mint, Fedora)?</span><span>＋</span></summary>
+          <p><strong>MatraKi v1.0.0</strong> is purpose-built for modern Linux desktops running Wayland or X11. Unlike older keyboards that lag or fail in modern apps, MatraKi integrates natively with <strong>Fcitx5</strong> and <strong>IBus</strong>, and comes pre-trained with 20,535+ Bengali words, next-word prediction, and 6 popular layouts (Avro Phonetic, Probhat, National/Jatiya, Munir Optima, Borno, and Avro Easy).</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>2. How do I switch between English and Bangla while typing?</span><span>＋</span></summary>
+          <p>Simply press <strong><code>Ctrl + Space</code></strong> on your keyboard at any time, or click the language button on the floating MatraKi TopBar pill on your desktop. In addition, if you type a capitalized tech or brand word like <code>Facebook</code>, <code>Google</code>, <code>GitHub</code>, or <code>Linux</code> while in Bangla mode, MatraKi’s Hybrid English detector offers the English word directly in your candidate list!</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>3. How do I type Bengali Dari (।) quickly?</span><span>＋</span></summary>
+          <p>Press the <strong><code>Spacebar</code> twice quickly (Double Space)</strong> after finishing a sentence—MatraKi automatically converts the double space into a Bengali Dari followed by a space (<code>। </code>), just like modern smartphone keyboards.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>4. How can I add my own custom words or phonetic replacements?</span><span>＋</span></summary>
+          <p>Open <strong>MatraKi Settings → Dictionary (Auto-Correct)</strong>. You can use the instant search bar to filter through all 20,535+ trained entries or add your own custom phonetic pattern with live Bangla preview.</p>
+        </details>
+        <details class="faq-item">
+          <summary><span>5. Is MatraKi completely free and open-source?</span><span>＋</span></summary>
+          <p>Yes! MatraKi is 100% free and open-source software licensed under the <strong>GNU General Public License v3.0 (GPL-3.0)</strong>. You can inspect the code, contribute, or support the developer via <a href="https://www.supportkori.com/sojib" style="color:#fb7185; font-weight:700;">SupportKori</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer & Donation Footer -->
+  <footer>
+    <div class="container" style="text-align: center;">
+      <img src="logo.png" alt="MatraKi Logo" style="width:58px; height:58px; border-radius:14px; margin-bottom:14px;" />
+      <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:6px;">MatraKi (মাত্রা-কী) — Type Smarter. Write Better.</h3>
+      <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:22px;">
+        Developed with passion for Bangla Computing by <strong style="color:#fff;">Md Sojib Hossain</strong>
+      </p>
+      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:28px;">
+        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard" target="_blank" rel="noopener" class="btn btn-outline">🌐 GitHub Repository</a>
+        <a href="https://facebook.com/hossain.sojibs" target="_blank" rel="noopener" class="btn btn-outline">👨‍💻 Developer on Facebook</a>
+        <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate">💖 Support &amp; Donate (SupportKori)</a>
+      </div>
+      <p style="color:#64748b; font-size:0.84rem;">
+        © 2026 Md Sojib Hossain. Open-Source Software released under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" style="color:#94a3b8; text-decoration:underline;">GNU General Public License v3.0</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const demoMap = {
+      "bhalobashi": ["ভালোবাসি ✨", "ভালোবাসা", "ভালোবাসার"],
+      "bishwobidyaloygulo": ["বিশ্ববিদ্যালয়গুলো (Suffix Stemmer)", "বিশ্ববিদ্যালয়"],
+      "=500*15%": ["৭৫ (গণনা)", "75 (English)", "পঁচাত্তর"],
+      "=10km": ["১০ কিমি = ৬.২১ মাইল", "১০ কিমি = ১০০০০ মিটার", "১০ কিলোমিটার"],
+      "=1bigha": ["১ বিঘা = ৩৩ শতক (২০ কাঠা)", "৩৩ শতক"],
+      "!salam": ["১. আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু", "২. আসসালামু আলাইকুম", "৩. السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّهِ وَبَرَكَاتُهُ"],
+      "21she": ["২১শে", "একুশে"],
+      "500tk": ["৫০০ টাকা", "৳৫০০", "পাঁচ শত টাকা"],
+      ":smile": ["😊 (হাসি)", "😂 (হাসি)", "🤣 (হাসি)"]
+    };
+
+    function setDemo(val) {
+      const inp = document.getElementById('demoInput');
+      inp.value = val;
+      updateDemo(val);
+    }
+
+    function updateDemo(val) {
+      const box = document.getElementById('demoCandidates');
+      const v = (val || '').trim();
+      let list = demoMap[v.toLowerCase()] || demoMap[v];
+      if (!list) {
+        if (!v) {
+          list = ["Type above or click a preset chip to test MatraKi AI suggestions..."];
+        } else {
+          list = [v + " → (Phonetic AI Candidate 1)", v + "টা (Suffix -টা)", v + "গুলো (Suffix -গুলো)"];
+        }
+      }
+      box.innerHTML = list.map((item, idx) =>
+        `<span class="cand-item ${idx === 0 ? 'active' : ''}">${item}</span>`
+      ).join('');
+    }
+    updateDemo('bhalobashi');
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function copyCode(btn) {
+      const pre = btn.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText);
+      const old = btn.innerText;
+      btn.innerText = '✓ Copied!';
+      setTimeout(() => { btn.innerText = old; }, 1600);
+    }
+  </script>
+</body>
+</html>
