@@ -650,6 +650,60 @@
         pushCand("আলহামদুলিল্লাহ, আমি ভালো আছি। (!alham)", "আলহামদুলিল্লাহ, আমি ভালো আছি।", "Snippet", true);
         return results;
       }
+      const SNIPPET_TITLES = {
+        "!en": "Professional English Email",
+        "!an": "চাকুরীর আবেদনপত্র (বাংলা)",
+        "!bn": "অফিসিয়াল ইমেইল (বাংলা)",
+        "!app": "চাকুরীর আবেদনপত্র",
+        "!job": "Job Application Letter",
+        "!applybn": "চাকুরীর আবেদনপত্র (বাংলা)",
+        "!jobapply": "চাকুরীর আবেদনপত্র (বাংলা)",
+        "!applyen": "Job Application & Cover Letter (English)",
+        "!coverletter": "Professional Cover Letter",
+        "!techapply": "Software Engineer Job Application",
+        "!internapply": "Internship Application (English)",
+        "!cvbn": "পূর্ণাঙ্গ বাংলা জীবনবৃত্তান্ত (CV)",
+        "!cv": "পূর্ণাঙ্গ জীবনবৃত্তান্ত (CV)",
+        "!cven": "Executive English CV / Resume",
+        "!resume": "Executive Resume (English)",
+        "!cvprofile": "CV: Professional Summary Block",
+        "!cvedu": "CV: Education Table",
+        "!cvexp": "CV: Work Experience Block",
+        "!cvskills": "CV: Technical & Core Skills",
+        "!cvref": "CV: References Block",
+        "!emailbn": "অফিসিয়াল ইমেইল (বাংলা)",
+        "!mailformal": "আনুষ্ঠানিক পত্র/ইমেইল (বাংলা)",
+        "!emailen": "Professional Business Email",
+        "!mailen": "Business Email (English)",
+        "!leavemail": "ছুটির আবেদনপত্র (বাংলা)",
+        "!leaveen": "Leave Application Email",
+        "!followup": "Follow-up Email (English)",
+        "!followupbn": "ফলো-আপ ইমেইল (বাংলা)",
+        "!resignation": "Resignation Notice Email",
+        "!resignbn": "পদত্যাগপত্র (বাংলা)",
+        "!clientmail": "Project Proposal Email",
+        "!meetingbn": "জরুরি মিটিং নোটিশ",
+        "!meeting": "জরুরি মিটিং নোটিশ",
+        "!agenda": "মিটিং আলোচ্যসূচি",
+        "!bangladesh": "গণপ্রজাতন্ত্রী বাংলাদেশ",
+        "!joybangla": "জয় বাংলা!",
+        "!amarshonar": "আমার সোনার বাংলা",
+        "!swadhinota": "মহান স্বাধীনতা ও জাতীয় দিবস",
+        "!bijoy": "মহান বিজয় দিবস",
+        "!ekushey": "আন্তর্জাতিক মাতৃভাষা দিবস",
+        "!bkash": "বিকাশ (Personal)",
+        "!nagad": "নগদ (Personal)",
+        "!rocket": "রকেট (Personal)",
+        "!cellfin": "সেলফিন / ব্যাংক",
+        "!bank": "ব্যাংক বিবরণী",
+        "!thikana": "ঠিকানা: ঢাকা, বাংলাদেশ",
+        "!lorem": "বাংলা ডেমো টেক্সট",
+        "!dev": "MatraKi Developer Info",
+        "!matraki": "মাত্রা-কী কীবোর্ড",
+        "!site": "MatraKi Website Link",
+        "!repo": "GitHub Repository"
+      };
+
       for (const [trig, list] of Object.entries(BUILTIN_SNIPPETS)) {
         if (trig.startsWith(lower)) {
           for (const [disp, com] of list) {
@@ -660,7 +714,18 @@
       const customSnips = window.MATRAKI_CUSTOM_SNIPPETS || {};
       for (const [trig, com] of Object.entries(customSnips)) {
         if (trig.startsWith(lower)) {
-          pushCand(`${com} (${trig})`, com, trig, true);
+          let disp = com;
+          if (SNIPPET_TITLES[trig]) {
+            disp = `${SNIPPET_TITLES[trig]} (${trig})`;
+          } else if (com.includes("\n")) {
+            const first = com.split("\n")[0].trim();
+            disp = `${first.slice(0, 34)}... (${trig})`;
+          } else if (com.length > 40) {
+            disp = `${com.slice(0, 36)}... (${trig})`;
+          } else {
+            disp = `${com} (${trig})`;
+          }
+          pushCand(disp, com, trig, true);
         }
       }
       if (results.length) return results;
@@ -717,6 +782,26 @@
       if (strictEn) {
         pushCand(`${TECH_WORDS[lower]} (English)`, TECH_WORDS[lower], "Hybrid EN", true);
       }
+    }
+
+    // 7. Instant Template Keywords without '!' (e.g. typing "en", "an", "email", "apply", "cv", "job")
+    const allSnips = window.MATRAKI_CUSTOM_SNIPPETS || {};
+    if (lower === "en" || lower === "emailen") {
+      if (allSnips["!emailen"]) pushCand("Professional Business Email (!emailen)", allSnips["!emailen"], "Template");
+      if (allSnips["!applyen"]) pushCand("Job Application Letter (!applyen)", allSnips["!applyen"], "Template");
+      if (allSnips["!cven"]) pushCand("Executive English CV (!cven)", allSnips["!cven"], "Template");
+    } else if (lower === "an" || lower === "apply" || lower === "job") {
+      if (allSnips["!applybn"]) pushCand("চাকুরীর আবেদনপত্র (বাংলা) (!applybn)", allSnips["!applybn"], "Template");
+      if (allSnips["!applyen"]) pushCand("Job Application Letter (!applyen)", allSnips["!applyen"], "Template");
+    } else if (lower === "bn" || lower === "emailbn") {
+      if (allSnips["!emailbn"]) pushCand("অফিসিয়াল ইমেইল (বাংলা) (!emailbn)", allSnips["!emailbn"], "Template");
+      if (allSnips["!applybn"]) pushCand("চাকুরীর আবেদনপত্র (বাংলা) (!applybn)", allSnips["!applybn"], "Template");
+    } else if (lower === "cv" || lower === "resume") {
+      if (allSnips["!cvbn"]) pushCand("পূর্ণাঙ্গ বাংলা জীবনবৃত্তান্ত (!cvbn)", allSnips["!cvbn"], "Template");
+      if (allSnips["!cven"]) pushCand("Executive English CV (!cven)", allSnips["!cven"], "Template");
+    } else if (lower === "email" || lower === "mail") {
+      if (allSnips["!emailbn"]) pushCand("অফিসিয়াল ইমেইল (বাংলা) (!emailbn)", allSnips["!emailbn"], "Template");
+      if (allSnips["!emailen"]) pushCand("Business Email (English) (!emailen)", allSnips["!emailen"], "Template");
     }
 
     // 8. Trained Dictionary + Smart Agglutinative Suffix Stemmer + Subject-Verb Concordance

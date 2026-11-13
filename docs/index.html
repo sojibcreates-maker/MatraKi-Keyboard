@@ -1924,7 +1924,7 @@ Sincerely,
         "=500*15%", "=(120+80)*3", "=2^10", "=1500-275", "=1024/16", "=99*99"
       ],
       templates: [
-        "!applybn", "!applyen", "!cvbn", "!cven", "!techapply", "!internapply",
+        "!en", "!an", "!bn", "!app", "!job", "!applybn", "!applyen", "!cvbn", "!cven", "!techapply", "!internapply",
         "!emailbn", "!emailen", "!leavemail", "!leaveen", "!followup", "!resignation",
         "!coverletter", "!jobapply", "!mailformal", "!cvprofile", "!cvedu", "!cvexp", "!cvskills"
       ],
@@ -2589,10 +2589,20 @@ Sincerely,
         demoSec.scrollIntoView({ behavior: "smooth", block: "start" });
       }
       setTimeout(() => {
-        setDemo(trigger);
+        const snips = window.MATRAKI_CUSTOM_SNIPPETS || {};
         const ed = document.getElementById("demoEditor");
-        if (ed) ed.focus();
-      }, 400);
+        if (snips[trigger]) {
+          ed.value = snips[trigger] + "\n\n";
+          rawBuffer = "";
+          updateEditorStats();
+          refreshStudioUI();
+          ed.focus();
+          showTemplateToast(`✓ "${trigger}" টেমপ্লেট লাইভ স্টুডিওতে টাইপ হয়েছে!`);
+        } else {
+          setDemo(trigger);
+          if (ed) ed.focus();
+        }
+      }, 350);
     }
 
     function showTemplateToast(msg) {
