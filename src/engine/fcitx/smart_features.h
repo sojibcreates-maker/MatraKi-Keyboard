@@ -607,6 +607,60 @@ public:
             {"!proud", {
                 {"আপনার অর্জনে আমরা অত্যন্ত গর্বিত!", "আপনার অর্জনে আমরা অত্যন্ত গর্বিত!"}
             }},
+            {"!emailbn", {
+                {"সুপ্রিয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\nআমার বার্তাটি হলো [এখানে আপনার মূল বার্তা লিখুন]।\nএ বিষয়ে আপনার সদয় মতামত ও পরবর্তী নির্দেশনা প্রত্যাশা করছি।\n\nধন্যবাদ ও শুভকামনাসহ,\n[আপনার নাম]", "সুপ্রিয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\nআমার বার্তাটি হলো [এখানে আপনার মূল বার্তা লিখুন]।\nএ বিষয়ে আপনার সদয় মতামত ও পরবর্তী নির্দেশনা প্রত্যাশা করছি।\n\nধন্যবাদ ও শুভকামনাসহ,\n[আপনার নাম]"}
+            }},
+            {"!mailformal", {
+                {"শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত নিবেদন এই যে, [এখানে বিষয়ের বিস্তারিত লিখুন]।\nবিষয়টি আপনার সদয় বিবেচনার জন্য বিনীত অনুরোধ জানাচ্ছি।\n\nবিনীত,\n[আপনার নাম]", "শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত নিবেদন এই যে, [এখানে বিষয়ের বিস্তারিত লিখুন]।\nবিষয়টি আপনার সদয় বিবেচনার জন্য বিনীত অনুরোধ জানাচ্ছি।\n\nবিনীত,\n[আপনার নাম]"}
+            }},
+            {"!emailen", {
+                {"Dear [Recipient],\n\nI hope this email finds you well.\nI am writing to discuss [State purpose].\nPlease let me know if you need any further information.\n\nBest regards,\n[Your Name]", "Dear [Recipient],\n\nI hope this email finds you well.\nI am writing to discuss [State purpose].\nPlease let me know if you need any further information.\n\nBest regards,\n[Your Name]"}
+            }},
+            {"!mailen", {
+                {"Dear [Recipient],\n\nI hope you are doing well.\nI would like to bring to your attention [mention topic].\nPlease let me know your availability for a brief discussion.\n\nKind regards,\n[Your Name]", "Dear [Recipient],\n\nI hope you are doing well.\nI would like to bring to your attention [mention topic].\nPlease let me know your availability for a brief discussion.\n\nKind regards,\n[Your Name]"}
+            }},
+            {"!leavemail", {
+                {"বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nআমার ব্যক্তিগত/পারিবারিক কারণে আগামী [শুরুর তারিখ] হতে [শেষের তারিখ] পর্যন্ত মোট [দিন] দিন কর্মস্থলে উপস্থিত থাকা সম্ভব হবে না।\nঅতএব, আমাকে উক্ত দিনসমূহের ছুটি মঞ্জুর করতে আপনার সদয় মর্জি হয়।\n\nবিনীত নিবেদক,\n[আপনার নাম]", "বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nআমার ব্যক্তিগত/পারিবারিক কারণে আগামী [শুরুর তারিখ] হতে [শেষের তারিখ] পর্যন্ত মোট [দিন] দিন কর্মস্থলে উপস্থিত থাকা সম্ভব হবে না।\nঅতএব, আমাকে উক্ত দিনসমূহের ছুটি মঞ্জুর করতে আপনার সদয় মর্জি হয়।\n\nবিনীত নিবেদক,\n[আপনার নাম]"}
+            }},
+            {"!leaveen", {
+                {"Subject: Leave Application - [Your Name]\n\nDear [Manager],\nI am writing to formally request leave from [Start Date] to [End Date] due to [reason]. All pending tasks are up to date.\n\nSincerely,\n[Your Name]", "Subject: Leave Application - [Your Name]\n\nDear [Manager],\nI am writing to formally request leave from [Start Date] to [End Date] due to [reason]. All pending tasks are up to date.\n\nSincerely,\n[Your Name]"}
+            }},
+            {"!followup", {
+                {"Subject: Following up on [Subject]\n\nDear [Recipient],\nI am following up on my previous email sent on [Date] regarding [Topic]. Please let me know if you require any additional details.\n\nBest regards,\n[Your Name]", "Subject: Following up on [Subject]\n\nDear [Recipient],\nI am following up on my previous email sent on [Date] regarding [Topic]. Please let me know if you require any additional details.\n\nBest regards,\n[Your Name]"}
+            }},
+            {"!followupbn", {
+                {"বিষয়: পূর্ববর্তী যোগাযোগের ফলো-আপ প্রসঙ্গে।\n\nসুপ্রিয় মহোদয়,\nগত [তারিখ]-এ প্রেরিত আমার ইমেইলের সূত্র ধরে আপনাকে বিনীতভাবে স্মরণ করিয়ে দিচ্ছি। বিষয়টি আপনার সদয় বিবেচনায় রয়েছে বলে আশা করি।\n\nধন্যবাদান্তে,\n[আপনার নাম]", "বিষয়: পূর্ববর্তী যোগাযোগের ফলো-আপ প্রসঙ্গে।\n\nসুপ্রিয় মহোদয়,\nগত [তারিখ]-এ প্রেরিত আমার ইমেইলের সূত্র ধরে আপনাকে বিনীতভাবে স্মরণ করিয়ে দিচ্ছি। বিষয়টি আপনার সদয় বিবেচনায় রয়েছে বলে আশা করি।\n\nধন্যবাদান্তে,\n[আপনার নাম]"}
+            }},
+            {"!resignation", {
+                {"Subject: Resignation Notice - [Your Name]\n\nDear [Manager],\nPlease accept this email as notification that I am resigning from my position as [Job Title]. My last working day will be [Last Date]. Thank you for the support.\n\nSincerely,\n[Your Name]", "Subject: Resignation Notice - [Your Name]\n\nDear [Manager],\nPlease accept this email as notification that I am resigning from my position as [Job Title]. My last working day will be [Last Date]. Thank you for the support.\n\nSincerely,\n[Your Name]"}
+            }},
+            {"!applybn", {
+                {"তারিখ: [তারিখ]\nবরাবর, ব্যবস্থাপনা পরিচালক\nবিষয়: [পদের নাম]-এর জন্য আবেদনপত্র।\n\nমহোদয়,\nআপনার স্বনামধন্য প্রতিষ্ঠানে [পদের নাম] পদে কিছুসংখ্যক দক্ষ কর্মী নিয়োগ করা হবে জেনে আমি উক্ত পদের জন্য আবেদন করছি। আমার জীবনবৃত্তান্ত সদয় বিবেচনার জন্য পেশ করলাম।\n\nবিনীত নিবেদক,\n[আপনার নাম]", "তারিখ: [তারিখ]\nবরাবর, ব্যবস্থাপনা পরিচালক\nবিষয়: [পদের নাম]-এর জন্য আবেদনপত্র।\n\nমহোদয়,\nআপনার স্বনামধন্য প্রতিষ্ঠানে [পদের নাম] পদে কিছুসংখ্যক দক্ষ কর্মী নিয়োগ করা হবে জেনে আমি উক্ত পদের জন্য আবেদন করছি। আমার জীবনবৃত্তান্ত সদয় বিবেচনার জন্য পেশ করলাম।\n\nবিনীত নিবেদক,\n[আপনার নাম]"}
+            }},
+            {"!jobapply", {
+                {"বিষয়: [পদের নাম] পদের জন্য আবেদনপত্র।\n\nমহোদয়,\nআপনার প্রতিষ্ঠানে [পদের নাম] পদে জনবল নিয়োগের নিমিত্তে আমি একজন আগ্রহী ও যোগ্য প্রার্থী হিসেবে আবেদন করছি। জীবনবৃত্তান্তে বিস্তারিত সংযুক্ত করা হলো।\n\nবিনীত,\n[আপনার নাম]", "বিষয়: [পদের নাম] পদের জন্য আবেদনপত্র।\n\nমহোদয়,\nআপনার প্রতিষ্ঠানে [পদের নাম] পদে জনবল নিয়োগের নিমিত্তে আমি একজন আগ্রহী ও যোগ্য প্রার্থী হিসেবে আবেদন করছি। জীবনবৃত্তান্তে বিস্তারিত সংযুক্ত করা হলো।\n\nবিনীত,\n[আপনার নাম]"}
+            }},
+            {"!applyen", {
+                {"Subject: Application for [Job Title] - [Your Name]\n\nDear Hiring Manager,\nI am writing to formally apply for the [Job Title] position currently open at [Company Name]. With my proven expertise in [Your Skills], I am confident in my ability to make a valuable contribution.\n\nSincerely,\n[Your Full Name]", "Subject: Application for [Job Title] - [Your Name]\n\nDear Hiring Manager,\nI am writing to formally apply for the [Job Title] position currently open at [Company Name]. With my proven expertise in [Your Skills], I am confident in my ability to make a valuable contribution.\n\nSincerely,\n[Your Full Name]"}
+            }},
+            {"!coverletter", {
+                {"Dear Hiring Manager,\n\nI am writing to express my enthusiastic interest in the [Job Title] role at [Company Name]. In my previous experience, I successfully [describe achievement]. I look forward to discussing how my skills align with your team's goals.\n\nWarm regards,\n[Your Full Name]", "Dear Hiring Manager,\n\nI am writing to express my enthusiastic interest in the [Job Title] role at [Company Name]. In my previous experience, I successfully [describe achievement]. I look forward to discussing how my skills align with your team's goals.\n\nWarm regards,\n[Your Full Name]"}
+            }},
+            {"!techapply", {
+                {"Subject: Application: [Job Title] - [Your Full Name] (Software Engineer)\n\nDear Tech Lead,\nI am excited to apply for the [Job Title] role at [Company Name]. With hands-on experience in [Your Tech Stack], clean code architecture, and API systems, I believe I can deliver immediate impact.\n\nBest regards,\n[Your Full Name]", "Subject: Application: [Job Title] - [Your Full Name] (Software Engineer)\n\nDear Tech Lead,\nI am excited to apply for the [Job Title] role at [Company Name]. With hands-on experience in [Your Tech Stack], clean code architecture, and API systems, I believe I can deliver immediate impact.\n\nBest regards,\n[Your Full Name]"}
+            }},
+            {"!internapply", {
+                {"Subject: Internship Application - [Position] - [Your Name]\n\nDear Hiring Team,\nI am currently a student pursuing [Degree] at [University]. I am eager to apply for the [Internship Role] opportunity to learn from industry leaders and contribute proactively.\n\nSincerely,\n[Your Name]", "Subject: Internship Application - [Position] - [Your Name]\n\nDear Hiring Team,\nI am currently a student pursuing [Degree] at [University]. I am eager to apply for the [Internship Role] opportunity to learn from industry leaders and contribute proactively.\n\nSincerely,\n[Your Name]"}
+            }},
+            {"!cvbn", {
+                {"জীবনবৃত্তান্ত (Curriculum Vitae)\n১. ব্যক্তিগত তথ্যাবলি: নাম, পিতা, মাতা, বর্তমান ও স্থায়ী ঠিকানা, মোবাইল, ইমেইল।\n২. ক্যারিয়ার অবজেক্টিভ: ...\n৩. শিক্ষাগত যোগ্যতা: স্নাতক, এইচএসসি, এসএসসি।\n৪. কর্মঅভিজ্ঞতা ও দক্ষতা।", "জীবনবৃত্তান্ত (Curriculum Vitae)\n১. ব্যক্তিগত তথ্যাবলি: নাম, পিতা, মাতা, বর্তমান ও স্থায়ী ঠিকানা, মোবাইল, ইমেইল।\n২. ক্যারিয়ার অবজেক্টিভ: ...\n৩. শিক্ষাগত যোগ্যতা: স্নাতক, এইচএসসি, এসএসসি।\n৪. কর্মঅভিজ্ঞতা ও দক্ষতা।"}
+            }},
+            {"!cven", {
+                {"CURRICULUM VITAE\n[FULL NAME] | Phone | Email | LinkedIn | GitHub\n1. Professional Summary\n2. Technical & Core Skills\n3. Work Experience\n4. Education & Certifications\n5. Projects & References", "CURRICULUM VITAE\n[FULL NAME] | Phone | Email | LinkedIn | GitHub\n1. Professional Summary\n2. Technical & Core Skills\n3. Work Experience\n4. Education & Certifications\n5. Projects & References"}
+            }},
+            {"!resume", {
+                {"[FULL NAME] - RESUME\nPhone | Email | LinkedIn | GitHub\nSummary | Experience | Education | Skills", "[FULL NAME] - RESUME\nPhone | Email | LinkedIn | GitHub\nSummary | Experience | Education | Skills"}
+            }},
             {"!mail", {
                 {"শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত,", "শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত,"}
             }},
@@ -623,13 +677,13 @@ public:
                 {"শ্রদ্ধেয়া ম্যাডাম,\nআসসালামু আলাইকুম।", "শ্রদ্ধেয়া ম্যাডাম,\nআসসালামু আলাইকুম।"}
             }},
             {"!apply", {
-                {"বিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়,\nযথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে,", "বিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়,\nযথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে,"}
+                {"তারিখ: [তারিখ]\nবরাবর, ব্যবস্থাপনা পরিচালক\nবিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়, বিনীত নিবেদন এই যে, আপনার প্রতিষ্ঠানে [পদের নাম] পদের জন্য আবেদন করছি।", "তারিখ: [তারিখ]\nবরাবর, ব্যবস্থাপনা পরিচালক\nবিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়, বিনীত নিবেদন এই যে, আপনার প্রতিষ্ঠানে [পদের নাম] পদের জন্য আবেদন করছি।"}
             }},
             {"!chuti", {
-                {"বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nবিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।", "বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nবিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।"}
+                {"বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়, বিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।", "বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়, বিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।"}
             }},
             {"!cv", {
-                {"জীবনবৃত্তান্ত (Curriculum Vitae)", "জীবনবৃত্তান্ত (Curriculum Vitae)"}
+                {"জীবনবৃত্তান্ত (Curriculum Vitae)\nব্যক্তিগত বিবরণ | শিক্ষা | অভিজ্ঞতা | দক্ষতা", "জীবনবৃত্তান্ত (Curriculum Vitae)\nব্যক্তিগত বিবরণ | শিক্ষা | অভিজ্ঞতা | দক্ষতা"}
             }},
             {"!intro", {
                 {"আমার নাম মো. সজীব হোসেন। আমি একজন প্রফেশনাল সফটওয়্যার ও ওয়েব ডেভেলপার।", "আমার নাম মো. সজীব হোসেন। আমি একজন প্রফেশনাল সফটওয়্যার ও ওয়েব ডেভেলপার।"}

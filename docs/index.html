@@ -775,6 +775,94 @@
       .feat-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
     }
+
+    /* Template Hub Section Styles */
+    .tpl-section {
+      background: linear-gradient(180deg, rgba(8, 14, 26, 0.95) 0%, rgba(13, 22, 42, 0.95) 100%);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .tpl-filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      margin-bottom: 30px;
+    }
+    .tpl-filter-btn {
+      padding: 9px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 700;
+      background: var(--bg-card); color: #cbd5e1; border: 1px solid var(--border-subtle);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .tpl-filter-btn:hover, .tpl-filter-btn.active {
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: #ffffff; border-color: #38bdf8;
+      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.35);
+    }
+    .tpl-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+      gap: 24px;
+    }
+    .tpl-card {
+      background: var(--bg-card); border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg); padding: 22px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      backdrop-filter: blur(14px); transition: all 0.22s ease;
+    }
+    .tpl-card:hover {
+      border-color: #38bdf8; transform: translateY(-3px);
+      box-shadow: 0 16px 40px -10px rgba(14, 165, 233, 0.3);
+    }
+    .tpl-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 12px; margin-bottom: 12px;
+    }
+    .tpl-badge-wrap {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .tpl-code-badge {
+      background: rgba(14, 165, 233, 0.16); color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 6px;
+      font-family: monospace; font-size: 0.8rem; font-weight: 700;
+      padding: 3px 8px;
+    }
+    .tpl-lang-badge {
+      background: rgba(168, 85, 247, 0.16); color: #c084fc;
+      border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 6px;
+      font-size: 0.75rem; font-weight: 700; padding: 3px 8px;
+    }
+    .tpl-title {
+      font-size: 1.12rem; font-weight: 800; color: #f8fafc; margin-bottom: 6px;
+    }
+    .tpl-desc {
+      font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin-bottom: 14px;
+    }
+    .tpl-preview-box {
+      background: rgba(4, 7, 15, 0.75); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px; padding: 14px; font-size: 0.82rem; line-height: 1.55;
+      color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      white-space: pre-wrap; word-break: break-word; max-height: 190px;
+      overflow-y: auto; margin-bottom: 16px; scrollbar-width: thin;
+    }
+    .tpl-actions {
+      display: flex; gap: 10px; margin-top: auto;
+    }
+    .tpl-btn {
+      flex: 1; padding: 9px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      cursor: pointer; transition: all 0.2s ease; border: none;
+    }
+    .tpl-btn-copy {
+      background: rgba(14, 165, 233, 0.15); color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .tpl-btn-copy:hover {
+      background: #0ea5e9; color: #060b16; border-color: #0ea5e9;
+    }
+    .tpl-btn-try {
+      background: rgba(34, 197, 94, 0.15); color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.35);
+    }
+    .tpl-btn-try:hover {
+      background: #22c55e; color: #060b16; border-color: #22c55e;
+    }
   </style>
 </head>
 <body>
@@ -792,6 +880,7 @@
         <a href="#demo">Live AI Demo</a>
         <a href="#downloads">Downloads</a>
         <a href="#install">How to Install</a>
+        <a href="#templates">Email &amp; CV</a>
         <a href="#features">AI Features</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#faq">FAQ</a>
@@ -816,6 +905,7 @@
     <a href="#demo" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⚡ Live AI Keyboard Studio</span><span>➔</span></a>
     <a href="#downloads" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⬇ Download Center</span><span>➔</span></a>
     <a href="#install" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📖 How to Install</span><span>➔</span></a>
+    <a href="#templates" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📄 Email, Job &amp; CV Templates</span><span>➔</span></a>
     <a href="#features" class="mobile-nav-link" onclick="closeMobileMenu()"><span>🧠 AI Features</span><span>➔</span></a>
     <a href="#screenshots" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📸 Screenshots</span><span>➔</span></a>
     <a href="#comparison" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⚖️ Comparison</span><span>➔</span></a>
@@ -929,9 +1019,10 @@
           <button type="button" class="cat-tab" onclick="selectChipCategory('grammar', this)">📖 প্রমিত বানান (Auto-Fix)</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('math', this)">🧮 Live Math (=)</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('units', this)">📏 16 Unit Converters (=)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('templates', this)">📄 Email, Job &amp; CV</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('snippets', this)">⚡ 100+ Snippets (! &amp; @)</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('ordinals', this)">📅 31 Date Ordinals &amp; ৳ Taka</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('emojis', this)">😊 45+ Emojis (:)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('emojis', this)">😊 80+ Emojis (:)</button>
         </div>
 
         <!-- Dynamic 1-Click Test Chips -->
@@ -1237,6 +1328,376 @@ chmod +x install.sh
   </section>
 
   <!-- Deep-Dive AI Features Bento Grid -->
+  <!-- Email, Job Application & CV Templates Section -->
+  <section id="templates" class="tpl-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Instant Productivity Hub</span>
+        <h2 class="section-title">Email, Job &amp; CV Templates (বাংলা ও English)</h2>
+        <p class="section-desc">Type any shortcut (e.g. <code>!applybn</code>, <code>!applyen</code>, <code>!cvbn</code>, <code>!cven</code>, <code>!emailbn</code>, <code>!emailen</code>) anywhere on your PC or in the live studio to instantly insert complete, professional templates.</p>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="tpl-filter-bar">
+        <button type="button" class="tpl-filter-btn active" onclick="filterTemplates('all', this)">✨ All Templates (সব)</button>
+        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('email', this)">✉️ Emails (ইমেইল)</button>
+        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('job', this)">💼 Job Applications (চাকুরীর আবেদন)</button>
+        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('cv', this)">📄 CV &amp; Resume (জীবনবৃত্তান্ত)</button>
+      </div>
+
+      <!-- Templates Grid -->
+      <div class="tpl-grid" id="templatesGrid">
+
+        <!-- 1. Bangla Job Application -->
+        <div class="tpl-card" data-cat="job">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">চাকুরীর আবেদনপত্র (বাংলা)</div>
+                <div class="tpl-desc">স্বনামধন্য প্রতিষ্ঠানে চাকুরীর আবেদনের জন্য বাংলা একাডেমির প্রমিত ও পেশাদার আবেদন ফরম্যাট।</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!applybn</span>
+                <span class="tpl-lang-badge">বাংলা</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_applybn">তারিখ: [তারিখ উল্লেখ করুন]
+বরাবর,
+ব্যবস্থাপনা পরিচালক / মানবসম্পদ বিভাগ
+[প্রতিষ্ঠানের নাম ও ঠিকানা]
+
+বিষয়: [পদের নাম]-এর জন্য আবেদনপত্র।
+
+মহোদয়,
+যথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে, গত [তারিখ]-এ প্রকাশিত বিজ্ঞপ্তির মাধ্যমে অবগত হলাম যে আপনার স্বনামধন্য প্রতিষ্ঠানে [পদের নাম] পদে দক্ষ কর্মী নিয়োগ করা হবে। আমি উক্ত পদের একজন আগ্রহী প্রার্থী হিসেবে আমার শিক্ষাগত যোগ্যতা ও জীবনবৃত্তান্ত আপনার সদয় বিবেচনার জন্য নিচে পেশ করছি:
+১. প্রার্থীর নাম: [আপনার পূর্ণ নাম]
+২. পিতার নাম: [পিতার নাম]
+৩. মাতার নাম: [মাতার নাম]
+৪. বর্তমান ঠিকানা: [বর্তমান ঠিকানা]
+৫. শিক্ষাগত যোগ্যতা: [সর্বোচ্চ ডিগ্রি, বিভাগ/সিজিপিএ]
+৬. অভিজ্ঞতা: [অভিজ্ঞতার বিবরণ]
+
+অতএব, বিনীত প্রার্থনা এই যে, আমার যোগ্যতা ও অভিজ্ঞতার বিষয়টি সহৃদয়তার সাথে বিবেচনা করে আমাকে উক্ত পদে নিয়োগ লাভের সুযোগ প্রদানে আপনার সদয় মর্জি হয়।
+
+বিনীত নিবেদক,
+[আপনার নাম] | মোবাইল: [মোবাইল নম্বর]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_applybn')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!applybn')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 2. English Job Application / Cover Letter -->
+        <div class="tpl-card" data-cat="job">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">Job Application &amp; Cover Letter</div>
+                <div class="tpl-desc">Formal job application letter for corporate, multinational, and remote companies.</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!applyen</span>
+                <span class="tpl-lang-badge">English</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_applyen">[Date]
+To,
+The Hiring Manager / HR Department,
+[Company Name], [Company Address]
+
+Subject: Application for the Position of [Job Title] - [Your Name]
+
+Dear Hiring Manager,
+
+I am writing to formally apply for the [Job Title] position currently open at [Company Name], as advertised on [Platform/LinkedIn]. With a strong background in [Your Field/Skills], I am eager to contribute effectively to your esteemed organization.
+
+Throughout my career, I have developed solid expertise in [mention 2-3 key skills, e.g., software engineering, analytical problem solving, project management]. I pride myself on collaborating smoothly across cross-functional teams and consistently delivering high-quality results.
+
+Enclosed is my Curriculum Vitae (CV) for your kind review. I welcome the opportunity to discuss my qualifications further in an interview.
+
+Thank you for your time and consideration.
+
+Sincerely,
+[Your Full Name] | Phone: [Phone Number] | Email: [Email Address]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_applyen')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!applyen')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 3. Software Engineer / Tech Application -->
+        <div class="tpl-card" data-cat="job">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">Tech &amp; Developer Job Application</div>
+                <div class="tpl-desc">Tailored for Software Engineers, Web Developers, and Tech Leads with GitHub and Stack info.</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!techapply</span>
+                <span class="tpl-lang-badge">English</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_techapply">Subject: Application: [Job Title] - [Your Full Name] (Software Engineer)
+
+Dear [Hiring Manager / Tech Lead],
+
+I am excited to apply for the [Job Title] role at [Company Name]. As a passionate developer with extensive hands-on experience building scalable applications using [Your Tech Stack, e.g., Flutter, React, Next.js, Node.js, Python, Rust], I believe I would make an immediate and impactful contribution to your engineering team.
+
+Key Highlights of My Experience:
+• Developed and deployed [1-2 highlight projects / architectures] with clean code and high reliability.
+• Strong foundation in system design, REST/GraphQL APIs, database optimization, and CI/CD pipelines.
+• Passionate about open-source software, clean documentation, and mentoring fellow developers.
+
+Portfolio & Links:
+• GitHub: [Your GitHub URL] | Live Projects: [Your Demo URL] | LinkedIn: [Your Profile]
+
+I have attached my resume detailing my full technical background. I look forward to speaking with you soon.
+
+Best regards,
+[Your Full Name] | Phone: [Your Phone] | Email: [Your Email]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_techapply')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!techapply')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 4. Complete Bangla CV (জীবনবৃত্তান্ত) -->
+        <div class="tpl-card" data-cat="cv">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">পূর্ণাঙ্গ বাংলা জীবনবৃত্তান্ত (CV)</div>
+                <div class="tpl-desc">ব্যক্তিগত তথ্য, শিক্ষাগত যোগ্যতা, অভিজ্ঞতা ও দক্ষতাসহ সম্পূর্ণ কাঠামোবদ্ধ বাংলা সিভি।</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!cvbn</span>
+                <span class="tpl-lang-badge">বাংলা</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_cvbn">জীবনবৃত্তান্ত (Curriculum Vitae)
+
+১. ব্যক্তিগত তথ্যাবলি (Personal Information):
+• পূর্ণ নাম: [আপনার নাম]
+• পিতার নাম: [পিতার নাম] | মাতার নাম: [মাতার নাম]
+• বর্তমান ঠিকানা: [গ্রাম/রোড, ডাকঘর, উপজেলা, জেলা]
+• স্থায়ী ঠিকানা: [গ্রাম/রোড, ডাকঘর, উপজেলা, জেলা]
+• জন্মতারিখ: [দিন/মাস/বছর] | জাতীয়তা: বাংলাদেশী | ধর্ম: [ধর্ম]
+• বৈবাহিক অবস্থা: [অবিবাহিত/বিবাহিত] | মোবাইল: [০১XXXXXXXXX]
+
+২. ক্যারিয়ারের লক্ষ্য (Career Objective):
+একটি গতিশীল প্রতিষ্ঠানে আমার মেধা, কর্মদক্ষতা ও শিক্ষাগত যোগ্যতাকে কাজে লাগিয়ে দায়িত্বশীল পদে অবদান রাখা।
+
+৩. শিক্ষাগত যোগ্যতা (Education):
+ক) স্নাতক/ডিগ্রি: [বিশ্ববিদ্যালয়ের নাম] | পাসের সন: [সাল] | ফলাফল: [সিজিপিএ]
+খ) এইচএসসি (HSC): [কলেজের নাম] | বোর্ড: [বোর্ড] | ফলাফল: [জিপিএ]
+গ) এসএসসি (SSC): [বিদ্যালয়ের নাম] | বোর্ড: [বোর্ড] | ফলাফল: [জিপিএ]
+
+৪. কর্মঅভিজ্ঞতা (Experience):
+• পদবি: [পদের নাম] | প্রতিষ্ঠান: [প্রতিষ্ঠানের নাম] | সময়কাল: [সাল হতে বর্তমান]
+
+৫. বিশেষ দক্ষতা (Skills):
+• কম্পিউটার ও প্রযুক্তি: এমএস অফিস, বাংলা ও ইংরেজি টাইপিং, ইন্টারনেট।
+• যোগাযোগ ও সমস্যা সমাধান দক্ষতা।
+
+৬. রেফারেন্স (Reference): [নাম, পদবি, প্রতিষ্ঠান, মোবাইল নম্বর]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_cvbn')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!cvbn')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 5. Executive English CV / Resume -->
+        <div class="tpl-card" data-cat="cv">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">Executive English CV / Resume</div>
+                <div class="tpl-desc">Modern single/multi-page executive resume format with ATS-optimized sections.</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!cven</span>
+                <span class="tpl-lang-badge">English</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_cven">========================================================================
+                         CURRICULUM VITAE
+========================================================================
+[YOUR FULL NAME]
+[Your Professional Title, e.g., Senior Software Engineer / Project Manager]
+Location: Dhaka, Bangladesh | Phone: +880 1XXXXXXXXX | Email: yourmail@example.com
+LinkedIn: linkedin.com/in/yourprofile | GitHub: github.com/yourprofile
+
+PROFESSIONAL SUMMARY
+Results-driven professional with [X] years of experience delivering high-impact solutions in [Your Field]. Proven track record of optimizing workflows, leading teams, and delivering scalable outcomes.
+
+CORE COMPETENCIES & TECHNICAL SKILLS
+• Technical Skills: [e.g., JavaScript, Python, C++, React, Flutter, SQL, Git]
+• Tools & Platforms: [e.g., Docker, Linux, AWS, Figma, VS Code]
+• Competencies: Team Leadership, Agile/Scrum, Problem Solving, Communication
+
+WORK EXPERIENCE
+[Job Title] | [Company Name] | [Location] | [Month, Year] – Present
+• Spearheaded [key project], resulting in [X]% improvement in efficiency.
+• Designed and maintained [system/process], collaborating with cross-functional teams.
+
+EDUCATION
+Bachelor of Science in [Your Major] — [University Name] | Passing Year: [Year]
+Higher Secondary Certificate (HSC) — [College Name] | GPA: [X.XX / 5.00]
+
+LANGUAGES: English (Professional), Bengali (Native)
+REFERENCES: Available upon request.</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_cven')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!cven')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 6. Formal Bangla Email -->
+        <div class="tpl-card" data-cat="email">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">অফিসিয়াল ইমেইল (বাংলা)</div>
+                <div class="tpl-desc">উচ্চপদস্থ কর্মকর্তা, ক্লায়েন্ট বা সহকর্মীদের সাথে দাপ্তরিক যোগাযোগের আদর্শ ফরম্যাট।</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!emailbn</span>
+                <span class="tpl-lang-badge">বাংলা</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_emailbn">সুপ্রিয় মহোদয়,
+আসসালামু আলাইকুম। আশা করি ভালো আছেন।
+
+আমার বার্তাটি হলো [এখানে আপনার মূল বার্তা ও প্রাসঙ্গিক বিষয় লিখুন]। 
+এ বিষয়ে আপনার সদয় মতামত ও পরবর্তী নির্দেশনা প্রত্যাশা করছি। কোনো বাড়তি তথ্যের প্রয়োজন হলে অনুগ্রহ করে জানাবেন।
+
+ধন্যবাদ ও শুভকামনাসহ,
+[আপনার নাম]
+[পদবি/পরিচয়]
+[প্রতিষ্ঠানের নাম]
+[মোবাইল নম্বর]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_emailbn')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!emailbn')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 7. Professional English Email -->
+        <div class="tpl-card" data-cat="email">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">Professional Business Email</div>
+                <div class="tpl-desc">Clean, courteous business email template suitable for clients, partners, and managers.</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!emailen</span>
+                <span class="tpl-lang-badge">English</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_emailen">Dear [Recipient Name],
+
+I hope this email finds you well.
+
+I am writing to discuss [State the primary purpose of your email]. 
+
+Please let me know if you need any further information from my end. I look forward to your valuable response.
+
+Best regards,
+[Your Name]
+[Your Title / Designation]
+[Company Name]
+[Phone Number] | [LinkedIn/Website]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_emailen')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!emailen')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 8. Leave Application (বাংলা ও English) -->
+        <div class="tpl-card" data-cat="email">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">ছুটির আবেদনপত্র (Leave Application)</div>
+                <div class="tpl-desc">জরুরি ব্যক্তিগত বা পারিবারিক কারণে ছুটির আবেদন ফরম্যাট (বাংলা ও ইংরেজি উভয় ভাষায়)।</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!leavemail</span>
+                <span class="tpl-code-badge">!leaveen</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_leavemail">বিষয়: ছুটির জন্য আবেদনপত্র।
+
+মহোদয়,
+যথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে, আমার জরুরি ব্যক্তিগত/পারিবারিক কারণে আগামী [শুরুর তারিখ] হতে [শেষের তারিখ] পর্যন্ত মোট [দিন সংখ্যা] দিন কর্মস্থলে উপস্থিত থাকা সম্ভব হবে না।
+
+অতএব, বিনীত প্রার্থনা এই যে, উপর্যুক্ত বিষয়টি বিবেচনা করে আমাকে উক্ত দিনসমূহের ছুটি মঞ্জুর করতে আপনার সদয় মর্জি হয়।
+
+বিনীত নিবেদক,
+[আপনার নাম] | [পদবি ও বিভাগ] | [এমপ্লয়ি আইডি / মোবাইল]
+
+--- ENGLISH VERSION (!leaveen) ---
+Subject: Leave Application - [Your Name] - [Job Title]
+Dear [Manager Name],
+I am writing to formally request leave from [Start Date] to [End Date] due to [reason]. All pending tasks are up to date. Thank you for your understanding.
+Sincerely, [Your Name]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_leavemail')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!leavemail')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+        <!-- 9. Resignation Letter (পদত্যাগপত্র) -->
+        <div class="tpl-card" data-cat="email">
+          <div>
+            <div class="tpl-header">
+              <div>
+                <div class="tpl-title">পদত্যাগপত্র (Resignation Notice)</div>
+                <div class="tpl-desc">সম্মানজনক ও পেশাদার উপায়ে বর্তমান কর্মস্থল থেকে পদত্যাগের অফিশিয়াল চিঠি।</div>
+              </div>
+              <div class="tpl-badge-wrap">
+                <span class="tpl-code-badge">!resignation</span>
+                <span class="tpl-code-badge">!resignbn</span>
+              </div>
+            </div>
+            <div class="tpl-preview-box" id="tpl_resignation">Subject: Resignation Notice - [Your Name]
+
+Dear [Manager's Name],
+
+Please accept this email as formal notification that I am resigning from my position as [Job Title] at [Company Name]. My last working day will be [Last Date], in accordance with my notice period.
+
+I am sincerely grateful for the opportunities and professional growth I have experienced during my time here. I will do everything possible to ensure a smooth handover of my responsibilities.
+
+I wish the team and the company continued success in the future.
+
+Sincerely,
+[Your Name] | [Phone Number]
+
+--- বাংলা সংস্করণ (!resignbn) ---
+বিষয়: পদত্যাগপত্র।
+মহোদয়, বিনীত নিবেদন এই যে, একান্ত ব্যক্তিগত কারণে আগামী [তারিখ] থেকে আমি পদত্যাগ করতে চাচ্ছি। দায়িত্ব হস্তান্তরের জন্য আমি প্রস্তুত আছি।
+বিনীত, [আপনার নাম]</div>
+          </div>
+          <div class="tpl-actions">
+            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_resignation')">📋 Copy</button>
+            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!resignation')">⚡ Try in Studio</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <section id="features">
     <div class="container">
       <div class="section-header">
@@ -1461,6 +1922,11 @@ chmod +x install.sh
       ],
       math: [
         "=500*15%", "=(120+80)*3", "=2^10", "=1500-275", "=1024/16", "=99*99"
+      ],
+      templates: [
+        "!applybn", "!applyen", "!cvbn", "!cven", "!techapply", "!internapply",
+        "!emailbn", "!emailen", "!leavemail", "!leaveen", "!followup", "!resignation",
+        "!coverletter", "!jobapply", "!mailformal", "!cvprofile", "!cvedu", "!cvexp", "!cvskills"
       ],
       units: [
         "=10km", "=5mi", "=100m", "=25cm", "=12in", "=5.8ft", "=70kg",
@@ -2085,6 +2551,66 @@ chmod +x install.sh
       }
     });
 
+
+    // Template Hub Filters, Copy & Try in Studio
+    function filterTemplates(cat, btnEl) {
+      document.querySelectorAll(".tpl-filter-btn").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      const cards = document.querySelectorAll("#templatesGrid .tpl-card");
+      cards.forEach(c => {
+        if (cat === "all" || c.getAttribute("data-cat") === cat) {
+          c.style.display = "flex";
+        } else {
+          c.style.display = "none";
+        }
+      });
+    }
+
+    function copyTemplateText(elemId) {
+      const box = document.getElementById(elemId);
+      if (!box) return;
+      const text = box.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showTemplateToast("✓ টেমপ্লেট সফলভাবে ক্লিপবোর্ডে কপি হয়েছে!");
+      }).catch(() => {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showTemplateToast("✓ টেমপ্লেট কপি হয়েছে!");
+      });
+    }
+
+    function tryTemplateSnippet(trigger) {
+      const demoSec = document.getElementById("demo");
+      if (demoSec) {
+        demoSec.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      setTimeout(() => {
+        setDemo(trigger);
+        const ed = document.getElementById("demoEditor");
+        if (ed) ed.focus();
+      }, 400);
+    }
+
+    function showTemplateToast(msg) {
+      let toast = document.getElementById("tplToast");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "tplToast";
+        toast.style.cssText = "position:fixed; bottom:28px; right:28px; background:linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff; font-weight:700; font-size:0.9rem; padding:12px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(14,165,233,0.5); z-index:99999; transition:all 0.3s ease; opacity:0; transform:translateY(20px);";
+        document.body.appendChild(toast);
+      }
+      toast.innerText = msg;
+      toast.style.opacity = "1";
+      toast.style.transform = "translateY(0)";
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(20px)";
+      }, 2600);
+    }
   </script>
 </body>
 </html>
