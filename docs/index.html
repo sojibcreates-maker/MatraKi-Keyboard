@@ -511,6 +511,14 @@
     .vkbd-key:hover .vkbd-bn, .vkbd-key.pressed .vkbd-bn { color: #fff; }
 
     /* =========================================================================
+       High-Performance Rendering Optimizations (Skip offscreen layout & paint)
+       ========================================================================= */
+    #downloads, #install, #templates, #features, #screenshots, #comparison, #faq {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 700px;
+    }
+
+    /* =========================================================================
        Download Center Cards
        ========================================================================= */
     .dl-grid {
@@ -2269,19 +2277,42 @@ Sincerely,
       return ch;
     }
 
+    let vkbdInitialized = false;
+    const vkbdKeyElements = new Map();
+
     function renderVirtualKeyboard() {
       const wrap = document.getElementById("virtualKbd");
       if (!wrap) return;
+
+      // Fast update path if already rendered: zero DOM allocations & no layout thrashing!
+      if (vkbdInitialized) {
+        const shiftBtn = wrap.querySelector(".vkbd-shift-btn");
+        if (shiftBtn) {
+          if (vkbdShift) shiftBtn.classList.add("pressed");
+          else shiftBtn.classList.remove("pressed");
+        }
+        wrap.querySelectorAll(".vkbd-key[data-key]").forEach(btn => {
+          const k = btn.getAttribute("data-key");
+          const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
+          const bnLbl = getKeyPreviewLabel(k);
+          btn.querySelector(".vkbd-en").textContent = enLbl;
+          btn.querySelector(".vkbd-bn").textContent = bnLbl;
+        });
+        const modeBtn = wrap.querySelector(".vkbd-mode-btn");
+        if (modeBtn) modeBtn.textContent = `🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}`;
+        return;
+      }
+
       let html = "";
       VKBD_ROWS.forEach((row, rIdx) => {
         html += `<div class="vkbd-row">`;
         if (rIdx === 3) {
-          html += `<button type="button" class="vkbd-key wide ${vkbdShift ? 'pressed' : ''}" onclick="toggleVkbdShift()">⇧ Shift</button>`;
+          html += `<button type="button" class="vkbd-key wide vkbd-shift-btn ${vkbdShift ? 'pressed' : ''}" onclick="toggleVkbdShift()">⇧ Shift</button>`;
         }
         row.forEach(k => {
           const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
           const bnLbl = getKeyPreviewLabel(k);
-          html += `<button type="button" class="vkbd-key" data-key="${k}" onclick="pressVirtualKey('${enLbl.replace(/'/g, "\\'")}')">
+          html += `<button type="button" class="vkbd-key" data-key="${k}" onclick="pressVirtualKey('${k}')">
             <span class="vkbd-en">${enLbl}</span>
             <span class="vkbd-bn">${bnLbl}</span>
           </button>`;
@@ -2295,12 +2326,19 @@ Sincerely,
         html += `</div>`;
       });
       html += `<div class="vkbd-row">
-        <button type="button" class="vkbd-key wide" onclick="toggleKbdMode()">🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}</button>
+        <button type="button" class="vkbd-key wide vkbd-mode-btn" onclick="toggleKbdMode()">🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}</button>
         <button type="button" class="vkbd-key wide" onclick="pressVirtualTab()">↹ Tab (AI)</button>
         <button type="button" class="vkbd-key space" onclick="pressVirtualSpace()">Space (Commit / Double-Space = ।)</button>
         <button type="button" class="vkbd-key wide" onclick="insertTextAtCursor('। ')">। (দাড়ি)</button>
       </div>`;
       wrap.innerHTML = html;
+      vkbdInitialized = true;
+
+      // Index key buttons for instant O(1) physical-to-virtual key lookup
+      vkbdKeyElements.clear();
+      wrap.querySelectorAll(".vkbd-key[data-key]").forEach(btn => {
+        vkbdKeyElements.set(btn.getAttribute("data-key"), btn);
+      });
     }
 
     function toggleVkbdShift() {
@@ -2308,13 +2346,15 @@ Sincerely,
       renderVirtualKeyboard();
     }
 
-    function pressVirtualKey(ch) {
-      handleCharacterInput(ch);
+    function pressVirtualKey(k) {
+      const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
+      handleCharacterInput(enLbl);
       if (vkbdShift) {
         vkbdShift = false;
         renderVirtualKeyboard();
       }
-      document.getElementById("demoEditor").focus();
+      const ed = document.getElementById("demoEditor");
+      if (ed) ed.focus();
     }
 
     function pressVirtualBackspace() {
@@ -2424,9 +2464,9 @@ Sincerely,
         }
         if (e.ctrlKey || e.metaKey || e.altKey) return;
 
-        // Highlight key on Virtual Keyboard
+        // Instant O(1) highlight of physical key on Virtual Keyboard (no DOM query)
         const baseKey = e.key.toLowerCase();
-        const keyBtn = document.querySelector(`.vkbd-key[data-key="${CSS.escape(baseKey)}"]`);
+        const keyBtn = vkbdKeyElements.get(baseKey);
         if (keyBtn) {
           keyBtn.classList.add("pressed");
           setTimeout(() => keyBtn.classList.remove("pressed"), 140);
@@ -2595,7 +2635,7 @@ Sincerely,
       }
     }
 
-    // Back to Top Button scroll listener
+    // Back to Top Button scroll listener (Passive for 60/120fps smooth scrolling)
     window.addEventListener("scroll", () => {
       const btn = document.getElementById("backToTopBtn");
       if (btn) {
@@ -2605,7 +2645,7 @@ Sincerely,
           btn.classList.remove("visible");
         }
       }
-    });
+    }, { passive: true });
 
 
     // Template Hub Filters, Copy & Try in Studio

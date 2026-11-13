@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <string_view>
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
@@ -112,8 +113,8 @@ public:
         return 0;
     }
 
-    static std::string getGrammarRuleFix(const std::string &word) {
-        static const std::unordered_map<std::string, std::string> fixes = {
+    static std::string_view getGrammarRuleFix(std::string_view word) {
+        static const std::unordered_map<std::string_view, std::string_view> fixes = {
             // ণ-ত্ব ও ষ-ত্ব বিধান এবং প্রমিত বাংলা বানান
             {"বন্টন", "বণ্টন"},
             {"ঘন্টা", "ঘণ্টা"},

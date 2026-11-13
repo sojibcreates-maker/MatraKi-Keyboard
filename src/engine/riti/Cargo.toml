@@ -10,6 +10,10 @@ crate-type = ["staticlib"]
 
 [profile.release]
 codegen-units = 1
+lto = "fat"
+opt-level = 3
+panic = "abort"
+overflow-checks = false
 
 [dependencies]
 either = "1.6"

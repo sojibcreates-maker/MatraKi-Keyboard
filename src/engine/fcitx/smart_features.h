@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <string_view>
 #include <vector>
 #include <map>
 #include <unordered_map>
@@ -125,10 +126,10 @@ private:
 // Hybrid English mode detector
 class HybridEnglish {
 public:
-    static bool isEnglishWord(const std::string &raw, std::string &formatted) {
-        if (raw.empty()) return false;
+    static bool isEnglishWord(std::string_view raw, std::string &formatted) {
+        if (raw.empty() || raw.size() > 63) return false;
 
-        static const std::unordered_map<std::string, std::string> techWords = {
+        static const std::unordered_map<std::string_view, std::string_view> techWords = {
             {"facebook", "Facebook"}, {"youtube", "YouTube"}, {"google", "Google"},
             {"gmail", "Gmail"}, {"email", "Email"}, {"wifi", "WiFi"}, {"ai", "AI"},
             {"python", "Python"}, {"linux", "Linux"}, {"deepin", "Deepin"},
@@ -151,12 +152,16 @@ public:
             {"matraki", "MatraKi"}, {"ubuntu", "Ubuntu"}, {"debian", "Debian"}
         };
 
-        std::string lower = raw;
-        std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c){ return std::tolower(c); });
+        char lowerBuf[64];
+        for (size_t i = 0; i < raw.size(); i++) {
+            char c = raw[i];
+            lowerBuf[i] = (c >= 'A' && c <= 'Z') ? (c + ('a' - 'A')) : c;
+        }
+        std::string_view lower(lowerBuf, raw.size());
 
         auto it = techWords.find(lower);
         if (it != techWords.end()) {
-            formatted = it->second;
+            formatted = std::string(it->second);
             return true;
         }
 
@@ -167,8 +172,10 @@ public:
 // Typo tolerance and phonetic auto-corrections
 class TypoCorrector {
 public:
-    static std::string getCorrection(const std::string &raw) {
-        static const std::unordered_map<std::string, std::string> typos = {
+    static std::string_view getCorrection(std::string_view raw) {
+        if (raw.empty() || raw.size() > 63) return {};
+
+        static const std::unordered_map<std::string_view, std::string_view> typos = {
             {"bhalobada", "ভালোবাসা"},
             {"valobasa", "ভালোবাসা"},
             {"valobasha", "ভালোবাসা"},
@@ -246,14 +253,18 @@ public:
             {"srry", "দুঃখিত"}
         };
 
-        std::string lower = raw;
-        std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c){ return std::tolower(c); });
+        char lowerBuf[64];
+        for (size_t i = 0; i < raw.size(); i++) {
+            char c = raw[i];
+            lowerBuf[i] = (c >= 'A' && c <= 'Z') ? (c + ('a' - 'A')) : c;
+        }
+        std::string_view lower(lowerBuf, raw.size());
 
         auto it = typos.find(lower);
         if (it != typos.end()) {
             return it->second;
         }
-        return "";
+        return {};
     }
 };
 
@@ -1151,7 +1162,7 @@ public:
         }
 
         // 4. Smart Bangla Ordinals & Date Suffixes (all 31 days 1la..31she + ranks 1m..20m)
-        static const std::unordered_map<std::string, std::pair<std::string, std::string>> ordinals = {
+        static const std::unordered_map<std::string_view, std::pair<std::string_view, std::string_view>> ordinals = {
             {"1la", {"১লা", "পহেলা"}}, {"2ra", {"২রা", "দোসরা"}}, {"3ra", {"৩রা", "তেসরা"}}, {"4tha", {"৪ঠা", "চৌঠা"}},
             {"5i", {"৫ই", "পাঁচই"}}, {"6i", {"৬ই", "ছয়ই"}}, {"7i", {"৭ই", "সাতই"}}, {"8i", {"৮ই", "আটই"}},
             {"9i", {"৯ই", "নয়ই"}}, {"10i", {"১০ই", "দশই"}}, {"11i", {"১১ই", "এগারোই"}}, {"12i", {"১২ই", "বারোই"}},
@@ -1172,8 +1183,10 @@ public:
         };
         auto ordIt = ordinals.find(lower);
         if (ordIt != ordinals.end()) {
-            results.push_back({ordIt->second.first, ordIt->second.first, false});
-            results.push_back({ordIt->second.second, ordIt->second.second, false});
+            std::string o1(ordIt->second.first);
+            std::string o2(ordIt->second.second);
+            results.push_back({o1, o1, false});
+            results.push_back({o2, o2, false});
             return results;
         }
 
@@ -1188,9 +1201,10 @@ public:
         }
 
         // 6. Typo Auto-Fix (Fuzzy & Phonetic Correction)
-        std::string typoFix = TypoCorrector::getCorrection(raw);
+        std::string_view typoFix = TypoCorrector::getCorrection(raw);
         if (!typoFix.empty()) {
-            results.push_back({typoFix + " (সংশোধন)", typoFix, false});
+            std::string tf(typoFix);
+            results.push_back({tf + " (সংশোধন)", tf, false});
         }
 
         // 7. Currency / Taka conversion: e.g. "500tk", "500taka", or "tk"
