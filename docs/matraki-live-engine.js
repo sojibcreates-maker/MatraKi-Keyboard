@@ -176,6 +176,36 @@
     } else if (u === "shotok") {
       const sqft = toBnDigits(formatClean(val * 435.6));
       add(`${bnV} শতক = ${sqft} বর্গফুট`, `${sqft} বর্গফুট`);
+    } else if (u === "kmh" || u === "km/h") {
+      const mps = toBnDigits(formatClean(val / 3.6));
+      const mph = toBnDigits(formatClean(val * 0.621371));
+      add(`${bnV} কিমি/ঘণ্টা = ${mps} মি/সেকেন্ড (${mph} মাইল/ঘণ্টা)`, `${mps} মি/সেকেন্ড`);
+    } else if (u === "mps" || u === "m/s") {
+      const kmh = toBnDigits(formatClean(val * 3.6));
+      add(`${bnV} মি/সেকেন্ড = ${kmh} কিমি/ঘণ্টা`, `${kmh} কিমি/ঘণ্টা`);
+    } else if (u === "mb") {
+      const gb = toBnDigits(formatClean(val / 1024));
+      const kb = toBnDigits(formatClean(val * 1024));
+      add(`${bnV} MB = ${gb} GB (${kb} KB)`, `${gb} জিবি`);
+    } else if (u === "gb") {
+      const mb = toBnDigits(formatClean(val * 1024));
+      const tb = toBnDigits(formatClean(val / 1024));
+      add(`${bnV} GB = ${mb} MB (${tb} TB)`, `${mb} এমবি`);
+    } else if (u === "tb") {
+      const gb = toBnDigits(formatClean(val * 1024));
+      add(`${bnV} TB = ${gb} GB`, `${gb} জিবি`);
+    } else if (u === "usd" || u === "$") {
+      const bdt = toBnDigits(formatClean(val * 122));
+      add(`${bnV} USD = ৳${bdt} টাকা (আনুমানিক)`, `${bdt} টাকা`);
+    } else if (u === "eur" || u === "euro") {
+      const bdt = toBnDigits(formatClean(val * 132));
+      add(`${bnV} EUR = ৳${bdt} টাকা (আনুমানিক)`, `${bdt} টাকা`);
+    } else if (u === "sar" || u === "riyal") {
+      const bdt = toBnDigits(formatClean(val * 32.5));
+      add(`${bnV} SAR = ৳${bdt} টাকা (আনুমানিক)`, `${bdt} টাকা`);
+    } else if (u === "aed" || u === "dirham") {
+      const bdt = toBnDigits(formatClean(val * 33.2));
+      add(`${bnV} AED = ৳${bdt} টাকা (আনুমানিক)`, `${bdt} টাকা`);
     }
     return out.length ? out : null;
   }
@@ -294,7 +324,17 @@
     [":tea", "🍵", "চা"], [":cha", "🍵", "চা"], [":book", "📚", "বই"],
     [":laptop", "💻", "ল্যাপটপ"], [":gari", "🚗", "গাড়ি"], [":biman", "✈️", "বিমান"],
     [":bhalo", "👌", "ভালো"], [":raag", "😡", "রাগ"], [":angry", "😡", "রাগ"],
-    [":monkharap", "😞", "মনখারাপ"], [":taka", "৳", "টাকা"]
+    [":monkharap", "😞", "মনখারাপ"], [":salute", "🫡", "স্যালুট"], [":handheart", "🫶", "হাত-হৃদয়"],
+    [":mindblown", "🤯", "অবাক"], [":thinking", "🤔", "চিন্তা"], [":shrug", "🤷", "কী জানি"],
+    [":pleading", "🥺", "অনুরোধ"], [":sweat", "😅", "ঘাম"], [":hug", "🤗", "আলিঙ্গন"],
+    [":wink", "😉", "চোখ টেপা"], [":punch", "👊", "ঘুষি"], [":victory", "✌️", "বিজয়"],
+    [":point", "👉", "ইশারা"], [":muscle", "💪", "শক্তি"], [":trophy", "🏆", "ট্রফি"],
+    [":medal", "🥇", "পদক"], [":crown", "👑", "মুকুট"], [":bulb", "💡", "আইডিয়া"],
+    [":pin", "📌", "পিন"], [":bell", "🔔", "ঘণ্টা"], [":phone", "📱", "ফোন"],
+    [":mobile", "📱", "মোবাইল"], [":computer", "🖥️", "কম্পিউটার"], [":code", "💻", "কোডিং"],
+    [":rain", "🌧️", "বৃষ্টি"], [":tree", "🌳", "গাছ"], [":money", "💵", "টাকা"],
+    [":card", "💳", "কার্ড"], [":target", "🎯", "লক্ষ্য"], [":gem", "💎", "হীরা"],
+    [":taka", "৳", "টাকা"]
   ];
 
   // All 31 Date Ordinals (1la..31she) & 20 Ranks (1m..20sh)
@@ -326,9 +366,15 @@
     nvidia: "Nvidia", amd: "AMD", github: "GitHub", whatsapp: "WhatsApp",
     telegram: "Telegram", instagram: "Instagram", messenger: "Messenger",
     tiktok: "TikTok", linkedin: "LinkedIn", chatgpt: "ChatGPT", gemini: "Gemini",
-    claude: "Claude", android: "Android", iphone: "iPhone", bkash: "bKash",
-    nagad: "Nagad", daraz: "Daraz", pathao: "Pathao", matraki: "MatraKi",
-    ubuntu: "Ubuntu", debian: "Debian"
+    claude: "Claude", openai: "OpenAI", deepseek: "DeepSeek", copilot: "Copilot",
+    flutter: "Flutter", react: "React", nextjs: "Next.js", vue: "Vue",
+    angular: "Angular", svelte: "Svelte", docker: "Docker", kubernetes: "Kubernetes",
+    aws: "AWS", azure: "Azure", tailwind: "Tailwind", typescript: "TypeScript",
+    javascript: "JavaScript", nodejs: "Node.js", rust: "Rust", golang: "Go",
+    sqlite: "SQLite", mysql: "MySQL", postgres: "PostgreSQL", redis: "Redis",
+    figma: "Figma", upwork: "Upwork", fiverr: "Fiverr", zoom: "Zoom",
+    android: "Android", iphone: "iPhone", bkash: "bKash", nagad: "Nagad",
+    daraz: "Daraz", pathao: "Pathao", matraki: "MatraKi", ubuntu: "Ubuntu", debian: "Debian"
   };
 
   // Bangla Academy Grammar & Spelling Auto-Fix

@@ -137,6 +137,15 @@ public:
             {"whatsapp", "WhatsApp"}, {"telegram", "Telegram"}, {"instagram", "Instagram"},
             {"messenger", "Messenger"}, {"tiktok", "TikTok"}, {"linkedin", "LinkedIn"},
             {"chatgpt", "ChatGPT"}, {"gemini", "Gemini"}, {"claude", "Claude"},
+            {"openai", "OpenAI"}, {"deepseek", "DeepSeek"}, {"copilot", "Copilot"},
+            {"flutter", "Flutter"}, {"react", "React"}, {"nextjs", "Next.js"},
+            {"vue", "Vue"}, {"angular", "Angular"}, {"svelte", "Svelte"},
+            {"docker", "Docker"}, {"kubernetes", "Kubernetes"}, {"aws", "AWS"},
+            {"azure", "Azure"}, {"tailwind", "Tailwind"}, {"typescript", "TypeScript"},
+            {"javascript", "JavaScript"}, {"nodejs", "Node.js"}, {"rust", "Rust"},
+            {"golang", "Go"}, {"sqlite", "SQLite"}, {"mysql", "MySQL"},
+            {"postgres", "PostgreSQL"}, {"redis", "Redis"}, {"figma", "Figma"},
+            {"upwork", "Upwork"}, {"fiverr", "Fiverr"}, {"zoom", "Zoom"},
             {"android", "Android"}, {"iphone", "iPhone"}, {"bkash", "bKash"},
             {"nagad", "Nagad"}, {"daraz", "Daraz"}, {"pathao", "Pathao"},
             {"matraki", "MatraKi"}, {"ubuntu", "Ubuntu"}, {"debian", "Debian"}
@@ -214,6 +223,20 @@ public:
             {"hoise", "হয়েছে"},
             {"gechi", "গিয়েছি"},
             {"gese", "গিয়েছে"},
+            {"kire", "কিরে"},
+            {"kiree", "কিরে"},
+            {"thikase", "ঠিক আছে"},
+            {"thikache", "ঠিক আছে"},
+            {"ghumacchi", "ঘুমাচ্ছি"},
+            {"ghumaiteci", "ঘুমাচ্ছি"},
+            {"ghurtesi", "ঘুরছি"},
+            {"shokal", "সকাল"},
+            {"dupur", "দুপুর"},
+            {"bikal", "বিকেল"},
+            {"shondha", "সন্ধ্যা"},
+            {"sondha", "সন্ধ্যা"},
+            {"raat", "রাত"},
+            {"ratri", "রাত্রি"},
             {"pls", "দয়া করে"},
             {"plz", "দয়া করে"},
             {"thnx", "ধন্যবাদ"},
@@ -243,7 +266,7 @@ public:
 
         if (!loaded) {
             loaded = true;
-            dict.reserve(20480);
+            dict.reserve(65536);
             std::string home = std::getenv("HOME") ? std::getenv("HOME") : "";
             if (!home.empty()) {
                 std::string path = home + "/.local/share/matraki-keyboard/transliteration.json";
@@ -560,8 +583,107 @@ public:
             {"!hbd", {
                 {"শুভ জন্মদিন! আপনার আগামী দিনগুলো আনন্দময় হোক।", "শুভ জন্মদিন! আপনার আগামী দিনগুলো আনন্দময় হোক।"}
             }},
+            {"!dupur", {
+                {"শুভ দুপুর! কেমন আছেন?", "শুভ দুপুর! কেমন আছেন?"}
+            }},
+            {"!bikal", {
+                {"শুভ বিকেল! কেমন কাটছে দিনটি?", "শুভ বিকেল! কেমন কাটছে দিনটি?"}
+            }},
+            {"!shondha", {
+                {"শুভ সন্ধ্যা! আশা করি ভালো আছেন।", "শুভ সন্ধ্যা! আশা করি ভালো আছেন।"}
+            }},
+            {"!takecare", {
+                {"নিজের যত্ন নেবেন, ভালো থাকবেন।", "নিজের যত্ন নেবেন, ভালো থাকবেন।"}
+            }},
+            {"!tc", {
+                {"টেক কেয়ার!", "টেক কেয়ার!"}
+            }},
+            {"!best", {
+                {"আপনার উজ্জ্বল ভবিষ্যৎ ও সফলতার জন্য অনেক শুভকামনা!", "আপনার উজ্জ্বল ভবিষ্যৎ ও সফলতার জন্য অনেক শুভকামনা!"}
+            }},
+            {"!goodluck", {
+                {"শুভকামনা রইল!", "শুভকামনা রইল!"}
+            }},
+            {"!proud", {
+                {"আপনার অর্জনে আমরা অত্যন্ত গর্বিত!", "আপনার অর্জনে আমরা অত্যন্ত গর্বিত!"}
+            }},
+            {"!mail", {
+                {"শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত,", "শ্রদ্ধেয় মহোদয়,\nআসসালামু আলাইকুম। আশা করি ভালো আছেন।\n\nবিনীত,"}
+            }},
+            {"!email", {
+                {"সুপ্রিয় সুধী,\nশুভেচ্ছা গ্রহণ করবেন।", "সুপ্রিয় সুধী,\nশুভেচ্ছা গ্রহণ করবেন।"}
+            }},
+            {"!regards", {
+                {"ধন্যবাদ ও আন্তরিক শুভকামনাসহ,\nমো. সজীব হোসেন", "ধন্যবাদ ও আন্তরিক শুভকামনাসহ,\nমো. সজীব হোসেন"}
+            }},
+            {"!sir", {
+                {"শ্রদ্ধেয় স্যার,\nআসসালামু আলাইকুম।", "শ্রদ্ধেয় স্যার,\nআসসালামু আলাইকুম।"}
+            }},
+            {"!madam", {
+                {"শ্রদ্ধেয়া ম্যাডাম,\nআসসালামু আলাইকুম।", "শ্রদ্ধেয়া ম্যাডাম,\nআসসালামু আলাইকুম।"}
+            }},
+            {"!apply", {
+                {"বিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়,\nযথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে,", "বিষয়: চাকুরীর জন্য আবেদনপত্র।\n\nমহোদয়,\nযথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে,"}
+            }},
+            {"!chuti", {
+                {"বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nবিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।", "বিষয়: ছুটির জন্য আবেদনপত্র।\n\nমহোদয়,\nবিনীত নিবেদন এই যে, আমার ব্যক্তিগত কারণে ছুটির আবেদন করছি।"}
+            }},
+            {"!cv", {
+                {"জীবনবৃত্তান্ত (Curriculum Vitae)", "জীবনবৃত্তান্ত (Curriculum Vitae)"}
+            }},
+            {"!intro", {
+                {"আমার নাম মো. সজীব হোসেন। আমি একজন প্রফেশনাল সফটওয়্যার ও ওয়েব ডেভেলপার।", "আমার নাম মো. সজীব হোসেন। আমি একজন প্রফেশনাল সফটওয়্যার ও ওয়েব ডেভেলপার।"}
+            }},
+            {"!meeting", {
+                {"জরুরি মিটিং সংক্রান্ত বিজ্ঞপ্তি: অনুগ্রহ করে নির্ধারিত সময়ে উপস্থিত থাকবেন।", "জরুরি মিটিং সংক্রান্ত বিজ্ঞপ্তি: অনুগ্রহ করে নির্ধারিত সময়ে উপস্থিত থাকবেন।"}
+            }},
+            {"!agenda", {
+                {"আজকের মিটিংয়ের আলোচ্য বিষয়সূচি:", "আজকের মিটিংয়ের আলোচ্য বিষয়সূচি:"}
+            }},
+            {"!bangladesh", {
+                {"গণপ্রজাতন্ত্রী বাংলাদেশ", "গণপ্রজাতন্ত্রী বাংলাদেশ"}
+            }},
+            {"!joybangla", {
+                {"জয় বাংলা!", "জয় বাংলা!"}
+            }},
+            {"!amarshonar", {
+                {"আমার সোনার বাংলা, আমি তোমায় ভালোবাসি।", "আমার সোনার বাংলা, আমি তোমায় ভালোবাসি।"}
+            }},
+            {"!swadhinota", {
+                {"২৬শে মার্চ — মহান স্বাধীনতা ও জাতীয় দিবস। সকল শহীদদের প্রতি বিনম্র শ্রদ্ধা।", "২৬শে মার্চ — মহান স্বাধীনতা ও জাতীয় দিবস। সকল শহীদদের প্রতি বিনম্র শ্রদ্ধা।"}
+            }},
+            {"!bijoy", {
+                {"১৬ই ডিসেম্বর — মহান বিজয় দিবস। বিজয়ের শুভেচ্ছা!", "১৬ই ডিসেম্বর — মহান বিজয় দিবস। বিজয়ের শুভেচ্ছা!"}
+            }},
+            {"!ekushey", {
+                {"২১শে ফেব্রুয়ারি — মহান শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস।", "২১শে ফেব্রুয়ারি — মহান শহীদ দিবস ও আন্তর্জাতিক মাতৃভাষা দিবস।"}
+            }},
             {"!thikana", {
-                {"ঢাকা, বাংলাদেশ", "ঢাকা, বাংলাদেশ"}
+                {"ঠিকানা: ঢাকা, বাংলাদেশ।", "ঠিকানা: ঢাকা, বাংলাদেশ।"}
+            }},
+            {"!bkash", {
+                {"বিকাশ (Personal): 01XXXXXXXXX", "বিকাশ (Personal): 01XXXXXXXXX"}
+            }},
+            {"!nagad", {
+                {"নগদ (Personal): 01XXXXXXXXX", "নগদ (Personal): 01XXXXXXXXX"}
+            }},
+            {"!rocket", {
+                {"রকেট (Personal): 01XXXXXXXXX", "রকেট (Personal): 01XXXXXXXXX"}
+            }},
+            {"!lorem", {
+                {"বাংলা আমাদের অহংকার, আমাদের আবেগ ও মাতৃভাষা। বাংলা ভাষায় শুদ্ধ ও সাবলীলভাবে লেখার জন্য মাত্রা-কী কীবোর্ড একটি যুগান্তকারী সংযোজন।", "বাংলা আমাদের অহংকার, আমাদের আবেগ ও মাতৃভাষা। বাংলা ভাষায় শুদ্ধ ও সাবলীলভাবে লেখার জন্য মাত্রা-কী কীবোর্ড একটি যুগান্তকারী সংযোজন।"}
+            }},
+            {"!dev", {
+                {"MatraKi Keyboard — Developed by Md Sojib Hossain", "MatraKi Keyboard — Developed by Md Sojib Hossain"}
+            }},
+            {"!matraki", {
+                {"মাত্রা-কী কীবোর্ড: দ্রুতগতির, নির্ভুল ও আধুনিক বাংলা টাইপিং কিবোর্ড।", "মাত্রা-কী কীবোর্ড: দ্রুতগতির, নির্ভুল ও আধুনিক বাংলা টাইপিং কিবোর্ড।"}
+            }},
+            {"!site", {
+                {"https://sojibcreates-maker.github.io/MatraKi-Keyboard/", "https://sojibcreates-maker.github.io/MatraKi-Keyboard/"}
+            }},
+            {"!repo", {
+                {"https://github.com/sojibcreates-maker/MatraKi-Keyboard", "https://github.com/sojibcreates-maker/MatraKi-Keyboard"}
             }}
         };
         return builtin;
@@ -738,6 +860,57 @@ public:
             results.push_back({bnVal + " শতক = " + sqft + " বর্গফুট", sqft + " বর্গফুট", true});
             return true;
         }
+        // Speed conversion
+        if (unit == "kmh" || unit == "km/h") {
+            std::string mps = englishDigitsToBengali(formatDoubleClean(val / 3.6));
+            std::string mph = englishDigitsToBengali(formatDoubleClean(val * 0.621371));
+            results.push_back({bnVal + " কিমি/ঘণ্টা = " + mps + " মি/সেকেন্ড (" + mph + " মাইল/ঘণ্টা)", mps + " মি/সেকেন্ড", true});
+            return true;
+        }
+        if (unit == "mps" || unit == "m/s") {
+            std::string kmh = englishDigitsToBengali(formatDoubleClean(val * 3.6));
+            results.push_back({bnVal + " মি/সেকেন্ড = " + kmh + " কিমি/ঘণ্টা", kmh + " কিমি/ঘণ্টা", true});
+            return true;
+        }
+        // Digital Storage conversion
+        if (unit == "mb") {
+            std::string gb = englishDigitsToBengali(formatDoubleClean(val / 1024.0));
+            std::string kb = englishDigitsToBengali(formatDoubleClean(val * 1024.0));
+            results.push_back({bnVal + " MB = " + gb + " GB (" + kb + " KB)", gb + " জিবি", true});
+            return true;
+        }
+        if (unit == "gb") {
+            std::string mb = englishDigitsToBengali(formatDoubleClean(val * 1024.0));
+            std::string tb = englishDigitsToBengali(formatDoubleClean(val / 1024.0));
+            results.push_back({bnVal + " GB = " + mb + " MB (" + tb + " TB)", mb + " এমবি", true});
+            return true;
+        }
+        if (unit == "tb") {
+            std::string gb = englishDigitsToBengali(formatDoubleClean(val * 1024.0));
+            results.push_back({bnVal + " TB = " + gb + " GB", gb + " জিবি", true});
+            return true;
+        }
+        // Foreign Currency conversion (approximate BDT rates)
+        if (unit == "usd" || unit == "$") {
+            std::string bdt = englishDigitsToBengali(formatDoubleClean(val * 122.0));
+            results.push_back({bnVal + " USD = ৳" + bdt + " টাকা (আনুমানিক)", bdt + " টাকা", true});
+            return true;
+        }
+        if (unit == "eur" || unit == "euro") {
+            std::string bdt = englishDigitsToBengali(formatDoubleClean(val * 132.0));
+            results.push_back({bnVal + " EUR = ৳" + bdt + " টাকা (আনুমানিক)", bdt + " টাকা", true});
+            return true;
+        }
+        if (unit == "sar" || unit == "riyal") {
+            std::string bdt = englishDigitsToBengali(formatDoubleClean(val * 32.5));
+            results.push_back({bnVal + " SAR = ৳" + bdt + " টাকা (আনুমানিক)", bdt + " টাকা", true});
+            return true;
+        }
+        if (unit == "aed" || unit == "dirham") {
+            std::string bdt = englishDigitsToBengali(formatDoubleClean(val * 33.2));
+            results.push_back({bnVal + " AED = ৳" + bdt + " টাকা (আনুমানিক)", bdt + " টাকা", true});
+            return true;
+        }
         return false;
     }
 
@@ -858,6 +1031,35 @@ public:
                 {":raag", {"😡", "রাগ"}},
                 {":angry", {"😡", "রাগ"}},
                 {":monkharap", {"😞", "মনখারাপ"}},
+                {":salute", {"🫡", "স্যালুট"}},
+                {":handheart", {"🫶", "হাত-হৃদয়"}},
+                {":mindblown", {"🤯", "অবাক"}},
+                {":thinking", {"🤔", "চিন্তা"}},
+                {":shrug", {"🤷", "কী জানি"}},
+                {":pleading", {"🥺", "অনুরোধ"}},
+                {":sweat", {"😅", "ঘাম"}},
+                {":hug", {"🤗", "আলিঙ্গন"}},
+                {":wink", {"😉", "চোখ টেপা"}},
+                {":punch", {"👊", "ঘুষি"}},
+                {":victory", {"✌️", "বিজয়"}},
+                {":point", {"👉", "ইশারা"}},
+                {":muscle", {"💪", "শক্তি"}},
+                {":trophy", {"🏆", "ট্রফি"}},
+                {":medal", {"🥇", "পদক"}},
+                {":crown", {"👑", "মুকুট"}},
+                {":bulb", {"💡", "আইডিয়া"}},
+                {":pin", {"📌", "পিন"}},
+                {":bell", {"🔔", "ঘণ্টা"}},
+                {":phone", {"📱", "ফোন"}},
+                {":mobile", {"📱", "মোবাইল"}},
+                {":computer", {"🖥️", "কম্পিউটার"}},
+                {":code", {"💻", "কোডিং"}},
+                {":rain", {"🌧️", "বৃষ্টি"}},
+                {":tree", {"🌳", "গাছ"}},
+                {":money", {"💵", "টাকা"}},
+                {":card", {"💳", "কার্ড"}},
+                {":target", {"🎯", "লক্ষ্য"}},
+                {":gem", {"💎", "হীরা"}},
                 {":taka", {"৳", "টাকা"}}
             };
 
