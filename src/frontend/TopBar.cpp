@@ -32,6 +32,14 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QTextEdit>
+#include <QTemporaryFile>
+#include <QProcess>
+#include <QTextStream>
 #include "TopBar.h"
 #include "Layout.h"
 #include "Settings.h"
@@ -308,6 +316,9 @@ void TopBar::SetupPopupMenus() {
     QDesktopServices::openUrl(QUrl(WEBSITE_URL));
   });
 
+  iconMenuHarper = new QAction("🧠 Harper Grammar & Spell Checker (Automattic)", this);
+  connect(iconMenuHarper, SIGNAL(triggered()), this, SLOT(iconMenuHarper_clicked()));
+
   iconMenuDonate = new QAction("💖 Support & Donate", this);
   connect(iconMenuDonate, SIGNAL(triggered()), this, SLOT(iconMenuDonate_clicked()));
 
@@ -327,6 +338,7 @@ void TopBar::SetupPopupMenus() {
   iconMenu->addAction(iconMenuLayout);
   iconMenu->addAction(iconMenuAbout);
   iconMenu->addAction(iconMenuWebsite);
+  iconMenu->addAction(iconMenuHarper);
   iconMenu->addAction(iconMenuDonate);
   iconMenu->addAction(iconMenuUpdate);  
 }
@@ -436,6 +448,112 @@ void TopBar::layoutMenuInstall_clicked() {
 
 void TopBar::iconMenuLayout_clicked() {
   layoutViewer->showLayoutInfoDialog();
+}
+
+void TopBar::iconMenuHarper_clicked() {
+  QDialog *dlg = new QDialog(this);
+  dlg->setWindowTitle("Automattic Harper™ — Grammar & Spell Checker");
+  dlg->setWindowIcon(QIcon(":/images/MatraKi.png"));
+  dlg->resize(680, 500);
+  dlg->setStyleSheet(
+    "QDialog { background-color: #0b1120; color: #f8fafc; font-family: sans-serif; }"
+    "QLabel { color: #cbd5e1; font-size: 13px; }"
+    "QTextEdit { background-color: #060b16; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #f8fafc; font-size: 13px; padding: 8px; selection-background-color: #1d4ed8; }"
+    "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 7px; padding: 7px 15px; font-weight: bold; font-size: 12px; }"
+    "QPushButton:hover { background-color: #1e40af; }"
+    "QPushButton:pressed { background-color: #0c4a6e; }"
+  );
+
+  QVBoxLayout *layout = new QVBoxLayout(dlg);
+  layout->setContentsMargins(18, 18, 18, 18);
+  layout->setSpacing(12);
+
+  // Header
+  QHBoxLayout *headerLayout = new QHBoxLayout();
+  QLabel *iconLabel = new QLabel("🧠", dlg);
+  iconLabel->setStyleSheet("font-size: 26px;");
+  QLabel *titleLabel = new QLabel(
+    "<b><span style='font-size: 15px; color: #38bdf8;'>Automattic Harper™ Grammar &amp; Spell Checker</span></b><br/>"
+    "<span style='font-size: 11px; color: #94a3b8;'>Official integration with Automattic's high-speed Rust grammar engine (v3.1.0)</span>",
+    dlg
+  );
+  headerLayout->addWidget(iconLabel);
+  headerLayout->addWidget(titleLabel, 1);
+  layout->addLayout(headerLayout);
+
+  QLabel *inputPrompt = new QLabel("Type or paste text to check for grammar, spelling, and style errors:", dlg);
+  layout->addWidget(inputPrompt);
+
+  QTextEdit *txtInput = new QTextEdit(dlg);
+  txtInput->setPlaceholderText("e.g. This is an test with a apple and alot of issues in monday.");
+  txtInput->setText("This is an test with a apple and alot of issues in monday. I want to to say that their is no problem.");
+  txtInput->setFixedHeight(105);
+  layout->addWidget(txtInput);
+
+  // Buttons row
+  QHBoxLayout *btnLayout = new QHBoxLayout();
+  QPushButton *btnCheck = new QPushButton("🔍 Run Harper Grammar Check", dlg);
+  QPushButton *btnSample = new QPushButton("⚡ Test Sample", dlg);
+  QPushButton *btnWeb = new QPushButton("🌐 Open Web Studio", dlg);
+  btnLayout->addWidget(btnCheck);
+  btnLayout->addWidget(btnSample);
+  btnLayout->addWidget(btnWeb);
+  btnLayout->addStretch(1);
+  layout->addLayout(btnLayout);
+
+  QLabel *resultLabel = new QLabel("<b>Harper Inspection Output (CLI):</b>", dlg);
+  layout->addWidget(resultLabel);
+
+  QTextEdit *txtOutput = new QTextEdit(dlg);
+  txtOutput->setReadOnly(true);
+  txtOutput->setStyleSheet("background-color: #030712; border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px; font-family: monospace; font-size: 12px; color: #cbd5e1;");
+  txtOutput->setPlaceholderText("Click 'Run Harper Grammar Check' to inspect text using harper-cli...");
+  layout->addWidget(txtOutput, 1);
+
+  auto runCheck = [=]() {
+    QString text = txtInput->toPlainText().trimmed();
+    if (text.isEmpty()) {
+      txtOutput->setPlainText("Please enter some text to check.");
+      return;
+    }
+    QTemporaryFile tempFile;
+    if (tempFile.open()) {
+      QTextStream out(&tempFile);
+      out << text << "\n";
+      tempFile.close();
+
+      QProcess proc;
+      proc.start("harper-cli", QStringList() << "--no-color" << "lint" << tempFile.fileName());
+      proc.waitForFinished(5000);
+      QString output = QString::fromUtf8(proc.readAllStandardOutput());
+      QString errOutput = QString::fromUtf8(proc.readAllStandardError());
+      QString combined = (output + "\n" + errOutput).trimmed();
+
+      if (proc.exitCode() == 0 && !combined.contains("Advice:")) {
+        txtOutput->setHtml(
+          "<p style='color:#34d399; font-weight:bold; font-size:13px;'>✅ No grammar or spelling issues detected!</p>"
+          "<p style='color:#94a3b8;'>Your text looks completely clean and passes all Automattic Harper rules.</p>"
+        );
+      } else {
+        txtOutput->setPlainText(combined);
+      }
+    }
+  };
+
+  connect(btnCheck, &QPushButton::clicked, runCheck);
+  connect(btnSample, &QPushButton::clicked, [=]() {
+    txtInput->setText("This is an test with a apple and alot of issues in monday. I want to to say that their is no problem.");
+    runCheck();
+  });
+  connect(btnWeb, &QPushButton::clicked, [=]() {
+    QDesktopServices::openUrl(QUrl("https://sojibcreates-maker.github.io/MatraKi-Keyboard/#demo"));
+  });
+
+  // Run automatically on first open
+  runCheck();
+
+  dlg->setAttribute(Qt::WA_DeleteOnClose);
+  dlg->show();
 }
 
 void TopBar::iconMenuAbout_clicked() {

@@ -995,6 +995,9 @@
             <button type="button" class="tb-btn" onclick="toggleTrainerDrawer()">
               📚 + Train Word
             </button>
+            <button type="button" class="tb-btn" onclick="toggleHarperPanel()" id="btnHarperToggle" style="background: linear-gradient(135deg, #4338ca, #6366f1); color: #fff; border-color: #818cf8;" title="Automattic Harper Grammar &amp; Spell Checker">
+              🧠 Harper Grammar
+            </button>
           </div>
           <div class="topbar-right">
             <button type="button" class="tb-btn" onclick="copyEditorText()" id="btnCopyEditor">📋 Copy</button>
@@ -1021,6 +1024,7 @@
           <button type="button" class="cat-tab" onclick="selectChipCategory('units', this)">📏 16 Unit Converters (=)</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('templates', this)">📄 Email, Job &amp; CV</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('snippets', this)">⚡ 100+ Snippets (! &amp; @)</button>
+          <button type="button" class="cat-tab" onclick="selectChipCategory('harper', this)">🧠 Harper Grammar (Automattic)</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('ordinals', this)">📅 31 Date Ordinals &amp; ৳ Taka</button>
           <button type="button" class="cat-tab" onclick="selectChipCategory('emojis', this)">😊 80+ Emojis (:)</button>
         </div>
@@ -1046,6 +1050,27 @@
         <!-- Full Multi-Word Bangla Text Editor -->
         <div class="editor-wrap">
           <textarea id="demoEditor" class="demo-textarea" placeholder="এখানে সরাসরি বাংলায় টাইপ করুন... (Type phonetic Bangla like 'ami banglay gan gai', '=500*15%', '=10km', '!salam', '21she', '500tk', ':smile')">আমি বাংলায় </textarea>
+        </div>
+
+        <!-- Automattic Harper™ Grammar & Spell Inspection Panel -->
+        <div class="harper-panel" id="harperPanel" style="display:none; margin-bottom: 14px; background: rgba(15, 23, 42, 0.95); border: 1.5px solid #6366f1; border-radius: var(--radius-md); padding: 16px 18px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.25);">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <span style="font-size:1.4rem;">🧠</span>
+              <div>
+                <div style="font-weight:800; font-size:1.05rem; color:#c7d2fe;">Automattic Harper™ Grammar &amp; Spell Checker</div>
+                <div style="font-size:0.78rem; color:#94a3b8;">High-speed grammar, spelling, and style analysis powered by Automattic Harper (v3.1.0)</div>
+              </div>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="tb-btn" onclick="testHarperSample()" style="background:#1e1b4b; border-color:#818cf8; color:#c7d2fe; font-size:0.8rem;">⚡ Test Sample Errors</button>
+              <button type="button" class="tb-btn" onclick="runHarperGrammarCheck()" style="background:#4338ca; border-color:#a5b4fc; color:#fff; font-size:0.8rem;">🔄 Re-check</button>
+              <button type="button" class="tb-btn" onclick="fixAllHarperIssues()" id="btnFixAllHarper" style="display:none; background:linear-gradient(135deg, #16a34a, #059669); border-color:#4ade80; color:#fff; font-size:0.8rem; font-weight:800;">✨ Fix All Issues</button>
+              <button type="button" class="tb-btn" onclick="toggleHarperPanel()" style="background:transparent; border-color:#475569; color:#94a3b8; font-size:0.8rem;">✕ Close</button>
+            </div>
+          </div>
+          <div id="harperStatus" style="font-size:0.88rem; font-weight:600; color:#cbd5e1; margin-bottom:12px;"></div>
+          <div id="harperIssuesList" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
 
         <!-- Interactive On-Screen Virtual Bangla Keyboard -->
@@ -1727,6 +1752,11 @@ Sincerely,
           <div class="feat-title">In-Keyboard Calculator &amp; Unit Converter</div>
           <p class="feat-desc">Type <code>=500*15%</code> for instant math results in Bangla digits and words, or convert units on the fly: <code>=10km</code>, <code>=5kg</code>, <code>=100c</code>, <code>=5ft</code>, <code>=1bigha</code>, <code>=5katha</code>.</p>
         </div>
+        <div class="feat-card" style="border-color: rgba(99, 102, 241, 0.45); background: linear-gradient(165deg, rgba(30, 27, 75, 0.45) 0%, rgba(13, 21, 38, 0.9) 100%);">
+          <div class="feat-icon" style="background: rgba(99, 102, 241, 0.2); border-color: #818cf8;">🧠</div>
+          <div class="feat-title" style="color: #a5b4fc;">Automattic Harper™ Grammar &amp; Spell Checker</div>
+          <p class="feat-desc">Integrated with Automattic's high-speed Rust grammar engine (<code>harper-cli</code> &amp; <code>harper-ls</code>). Flags indefinite articles (<em>a vs an</em>), repeated words, spelling, spacing, and open compounds with 1-click auto-fix in the Live Studio and global system CLI.</p>
+        </div>
         <div class="feat-card">
           <div class="feat-icon">⚡</div>
           <div class="feat-title">Instant Chat &amp; Islamic Snippets (<code>!</code>)</div>
@@ -1903,6 +1933,7 @@ Sincerely,
 
 <script src="matraki-data.js"></script>
   <script src="matraki-live-engine.js"></script>
+  <script src="matraki-harper.js"></script>
   <script>
     // =========================================================================
     // MatraKi v1.0.0 Full Live Web Keyboard Studio Controller
@@ -1911,6 +1942,9 @@ Sincerely,
       highlights: [
         "bhalobashi", "bishwobidyaloygulo", "=500*15%", "=10km", "=1bigha",
         "!salam", "@today", "21she", "500tk", ":smile", "shantona", "GitHub"
+      ],
+      harper: [
+        "This is an test", "a apple", "alot of", "their is no problem", "in monday", "to to", "every day", "in order to"
       ],
       stemmer: [
         "bangladesh", "bishwobidyaloygulo", "manushderke", "boita", "bondhuguloke",
@@ -1987,6 +2021,19 @@ Sincerely,
     }
 
     function setDemo(val) {
+      const activeCat = document.querySelector("#demoCatTabs .cat-tab.active");
+      if (activeCat && activeCat.innerText.includes("Harper")) {
+        const ed = document.getElementById("demoEditor");
+        if (ed) {
+          ed.value = val;
+          rawBuffer = "";
+          updateEditorStats();
+          refreshStudioUI();
+          runHarperGrammarCheck();
+          showTemplateToast(`✓ Loaded Harper test: "${val}"`);
+        }
+        return;
+      }
       kbdMode = "bn";
       kbdLayout = "avro";
       document.getElementById("layoutSelect").value = "avro";
@@ -2620,6 +2667,108 @@ Sincerely,
         toast.style.opacity = "0";
         toast.style.transform = "translateY(20px)";
       }, 2600);
+    }
+    // =========================================================================
+    // Automattic Harper™ Grammar & Spell Checker Web Studio Controller
+    // =========================================================================
+    let currentHarperLints = [];
+
+    function toggleHarperPanel() {
+      const panel = document.getElementById("harperPanel");
+      if (!panel) return;
+      if (panel.style.display === "none" || !panel.style.display) {
+        panel.style.display = "block";
+        runHarperGrammarCheck();
+      } else {
+        panel.style.display = "none";
+      }
+    }
+
+    function testHarperSample() {
+      const ed = document.getElementById("demoEditor");
+      if (!ed) return;
+      ed.value = "This is an test with a apple and alot of issues in monday . I want to to say that their is no problem. In order to fix this , every day we try our best.";
+      rawBuffer = "";
+      updateEditorStats();
+      refreshStudioUI();
+      runHarperGrammarCheck();
+      showTemplateToast("✓ Loaded Harper sample error text!");
+    }
+
+    function escapeHarperHtml(str) {
+      if (!str) return "";
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function runHarperGrammarCheck() {
+      const panel = document.getElementById("harperPanel");
+      if (panel && panel.style.display === "none") {
+        panel.style.display = "block";
+      }
+      const ed = document.getElementById("demoEditor");
+      const status = document.getElementById("harperStatus");
+      const list = document.getElementById("harperIssuesList");
+      const btnFixAll = document.getElementById("btnFixAllHarper");
+      if (!ed || !window.MatraKiHarper || !status || !list) return;
+
+      const text = ed.value;
+      currentHarperLints = window.MatraKiHarper.lint(text);
+
+      list.innerHTML = "";
+      if (currentHarperLints.length === 0) {
+        status.innerHTML = `<span style="color:#34d399; font-weight:800;">✅ No grammar or spelling issues detected!</span> Your text looks clean according to Automattic Harper rules.`;
+        if (btnFixAll) btnFixAll.style.display = "none";
+        return;
+      }
+
+      status.innerHTML = `<span style="color:#f43f5e; font-weight:800;">⚠️ Automattic Harper found ${currentHarperLints.length} issue(s)</span> in your text:`;
+      if (btnFixAll) btnFixAll.style.display = "inline-flex";
+
+      currentHarperLints.forEach((lint, index) => {
+        const item = document.createElement("div");
+        item.style.cssText = "background:rgba(30, 41, 59, 0.75); border:1px solid rgba(99, 102, 241, 0.35); border-radius:9px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
+        
+        item.innerHTML = `
+          <div style="flex:1; min-width:240px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="background:rgba(239, 68, 68, 0.2); color:#f87171; border:1px solid rgba(239, 68, 68, 0.4); border-radius:5px; font-size:0.75rem; font-weight:800; padding:2px 6px;">${escapeHarperHtml(lint.rule)}</span>
+              <span style="color:#cbd5e1; font-size:0.86rem; font-weight:600;"><span style="text-decoration:line-through; color:#f87171;">"${escapeHarperHtml(lint.matchedText)}"</span> ➔ <b style="color:#34d399;">"${escapeHarperHtml(lint.suggestion)}"</b></span>
+            </div>
+            <div style="color:#94a3b8; font-size:0.82rem;">${escapeHarperHtml(lint.message)}</div>
+          </div>
+          <div>
+            <button type="button" class="tb-btn" onclick="applySingleHarperFix(${index})" style="background:linear-gradient(135deg, #2563eb, #0ea5e9); color:#fff; border-color:#38bdf8; font-size:0.8rem; padding:6px 12px;">⚡ Fix "${escapeHarperHtml(lint.suggestion)}"</button>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function applySingleHarperFix(index) {
+      if (!currentHarperLints[index]) return;
+      const lint = currentHarperLints[index];
+      const ed = document.getElementById("demoEditor");
+      if (!ed) return;
+      
+      const before = ed.value.substring(0, lint.span[0]);
+      const after = ed.value.substring(lint.span[1]);
+      ed.value = before + lint.suggestion + after;
+      
+      updateEditorStats();
+      refreshStudioUI();
+      runHarperGrammarCheck();
+      showTemplateToast(`✓ Fixed "${lint.matchedText}" ➔ "${lint.suggestion}"`);
+    }
+
+    function fixAllHarperIssues() {
+      const ed = document.getElementById("demoEditor");
+      if (!ed || !window.MatraKiHarper) return;
+      const fixed = window.MatraKiHarper.applyAll(ed.value);
+      ed.value = fixed;
+      updateEditorStats();
+      refreshStudioUI();
+      runHarperGrammarCheck();
+      showTemplateToast("✓ All Harper grammar & spelling issues fixed!");
     }
   </script>
 </body>

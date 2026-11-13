@@ -72,6 +72,8 @@ private slots:
 
   void iconMenuLayout_clicked();
 
+  void iconMenuHarper_clicked();
+
   void iconMenuAbout_clicked();
 
   void iconMenuDonate_clicked();
@@ -116,6 +118,7 @@ private:
   QAction *iconMenuOnTray;
   QAction *iconMenuLayout;
   QAction *iconMenuAbout;
+  QAction *iconMenuHarper;
   QAction *iconMenuWebsite;
   QAction *iconMenuDonate;
   QAction *iconMenuUpdate;
