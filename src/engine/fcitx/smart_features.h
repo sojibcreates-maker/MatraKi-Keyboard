@@ -332,6 +332,7 @@ public:
     static std::string englishDigitsToBengali(const std::string &input) {
         static const char* b_digits[] = {"০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"};
         std::string res;
+        res.reserve(input.size() * 3);
         for (char c : input) {
             if (c >= '0' && c <= '9') {
                 res += b_digits[c - '0'];
@@ -760,13 +761,22 @@ public:
 
     static bool matchSnippetsByPrefix(const std::string &trigger, std::vector<SnippetOption> &options) {
         const auto &all = getAllBuiltinSnippets();
-        // Exact match first
-        for (const auto &entry : all) {
-            if (entry.first == trigger) {
-                options = entry.second;
-                return true;
+        static const std::unordered_map<std::string, const std::vector<SnippetOption>*> exactMap = [&all]() {
+            std::unordered_map<std::string, const std::vector<SnippetOption>*> m;
+            m.reserve(all.size() * 2);
+            for (const auto &entry : all) {
+                m[entry.first] = &entry.second;
             }
+            return m;
+        }();
+
+        // Exact match in O(1)
+        auto it = exactMap.find(trigger);
+        if (it != exactMap.end()) {
+            options = *(it->second);
+            return true;
         }
+
         // Prefix match (e.g., "!sa" -> "!salam", "!ol" -> "!olikum", or "!" -> top snippets)
         if (trigger == "!") {
             options.push_back({"আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু (!salam)", "আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু"});

@@ -201,8 +201,9 @@ public:
     }
 
     // Load next-word predictions from ~/.local/share/matraki-keyboard/phonetic-next-word.json + built-in fallback
-    static std::vector<std::string> getNextWordPredictions(const std::string &prevWord) {
+    static const std::vector<std::string>& getNextWordPredictions(const std::string &prevWord) {
         static std::unordered_map<std::string, std::vector<std::string>> bigrams;
+        static const std::vector<std::string> emptyPredictions;
         static bool loaded = false;
 
         if (!loaded) {
@@ -285,7 +286,7 @@ public:
         if (it != bigrams.end()) {
             return it->second;
         }
-        return {};
+        return emptyPredictions;
     }
 };
 

@@ -2092,6 +2092,7 @@ Sincerely,
         return;
       }
       if (!window.MATRAKI_DICT) window.MATRAKI_DICT = {};
+      if (!window.MATRAKI_DICT[p]) cachedDictCount++;
       window.MATRAKI_DICT[p] = b;
       try {
         const saved = JSON.parse(localStorage.getItem("matraki_custom_words") || "{}");
@@ -2187,6 +2188,14 @@ Sincerely,
       updateEditorStats();
     }
 
+    let cachedDictCount = 0;
+    function getDictCount() {
+      if (!cachedDictCount && window.MATRAKI_DICT) {
+        cachedDictCount = Object.keys(window.MATRAKI_DICT).length;
+      }
+      return cachedDictCount || 20535;
+    }
+
     function updateEditorStats() {
       const ed = document.getElementById("demoEditor");
       const stats = document.getElementById("editorStats");
@@ -2194,7 +2203,7 @@ Sincerely,
       const txt = ed.value.trim();
       const words = txt ? txt.split(/\s+/).length : 0;
       const chars = ed.value.length;
-      const dictCount = window.MATRAKI_DICT ? Object.keys(window.MATRAKI_DICT).length : 19974;
+      const dictCount = getDictCount();
       stats.innerText = `Words: ${words} | Chars: ${chars} | Trained Keys: ${dictCount.toLocaleString()}`;
     }
 

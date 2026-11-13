@@ -403,7 +403,7 @@ public:
 
         // Next Word Prediction
         if (!lastCommittedWord_.empty()) {
-          auto predictions = LanguageEngine::getNextWordPredictions(lastCommittedWord_);
+          const auto &predictions = LanguageEngine::getNextWordPredictions(lastCommittedWord_);
           if (!predictions.empty()) {
             auto candidateList = std::make_unique<MatraKiCandidateList>();
             for (const auto &pred : predictions) {

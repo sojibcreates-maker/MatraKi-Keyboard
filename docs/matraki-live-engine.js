@@ -589,14 +589,59 @@
     return null;
   }
 
+  // High-performance candidate memoization cache (size up to 256)
+  const candidateCache = new Map();
+  const MAX_CACHE_SIZE = 256;
+
+  let cachedSortedKeys = null;
+  let cachedDictRef = null;
+
+  function getSortedDictKeys(dict) {
+    if (!dict) return [];
+    if (cachedDictRef !== dict || !cachedSortedKeys) {
+      cachedDictRef = dict;
+      cachedSortedKeys = Object.keys(dict).sort();
+    }
+    return cachedSortedKeys;
+  }
+
+  function findFirstPrefixIndex(keys, prefix) {
+    let low = 0, high = keys.length - 1;
+    let ans = keys.length;
+    while (low <= high) {
+      const mid = (low + high) >> 1;
+      if (keys[mid] >= prefix) {
+        ans = mid;
+        high = mid - 1;
+      } else {
+        low = mid + 1;
+      }
+    }
+    return ans;
+  }
+
   // Full Candidate Generator (mirrors MatraKiState::updateUI + SmartFeatures::processInput)
   function getSmartCandidates(raw, prevWord) {
+    const cacheKey = (raw || "") + "\0" + (prevWord || "");
+    if (candidateCache.has(cacheKey)) {
+      return candidateCache.get(cacheKey);
+    }
+
     const results = [];
     const seen = new Set();
     const pushCand = (display, commitText, badge = "", isExclusive = false) => {
       if (!commitText || seen.has(commitText)) return;
       seen.add(commitText);
       results.push({ display, commitText, badge, isExclusive });
+    };
+
+    const finishAndCache = () => {
+      if (candidateCache.size >= MAX_CACHE_SIZE) {
+        const firstKey = candidateCache.keys().next().value;
+        candidateCache.delete(firstKey);
+      }
+      candidateCache.set(cacheKey, results);
+      return results;
     };
 
     if (!raw) {
@@ -606,7 +651,7 @@
           pushCand(`${nextW} ➜`, nextW, "Next Word");
         }
       }
-      return results;
+      return finishAndCache();
     }
 
     const lower = raw.toLowerCase();
@@ -615,7 +660,14 @@
     if (raw.length > 1 && raw[0] === "=") {
       const expr = raw.slice(1);
       const unitRes = tryUnitConversion(expr);
-      if (unitRes) return unitRes;
+      if (unitRes) {
+        if (candidateCache.size >= MAX_CACHE_SIZE) {
+          const firstKey = candidateCache.keys().next().value;
+          candidateCache.delete(firstKey);
+        }
+        candidateCache.set(cacheKey, unitRes);
+        return unitRes;
+      }
 
       const mathVal = evaluateMath(expr);
       if (mathVal !== null) {
@@ -627,7 +679,7 @@
           const words = numberToBnWords(mathVal);
           if (words) pushCand(`${words} (কথায়)`, words, "Words", true);
         }
-        return results;
+        return finishAndCache();
       }
     }
 
@@ -840,13 +892,20 @@
     }
 
     // 10. Prefix suggestions from trained dictionary (up to 4 related words)
+    // OPTIMIZED: Binary search in pre-sorted key index (O(log N) instead of O(N) scan)
     const dict = window.MATRAKI_DICT || {};
     if (lower.length >= 3) {
-      let count = 0;
-      for (const k of Object.keys(dict)) {
-        if (k.length > lower.length && k.startsWith(lower)) {
-          pushCand(dict[k], dict[k], k);
-          if (++count >= 4) break;
+      const keys = getSortedDictKeys(dict);
+      if (keys.length > 0) {
+        const startIdx = findFirstPrefixIndex(keys, lower);
+        let count = 0;
+        for (let idx = startIdx; idx < keys.length; idx++) {
+          const k = keys[idx];
+          if (!k.startsWith(lower)) break; // Keys are sorted, so non-matching prefix terminates loop!
+          if (k.length > lower.length) {
+            pushCand(dict[k], dict[k], k);
+            if (++count >= 4) break;
+          }
         }
       }
     }
@@ -858,7 +917,7 @@
       pushCand(raw, raw, "EN");
     }
 
-    return results;
+    return finishAndCache();
   }
 
   // Expose API globally for the Interactive Live Keyboard Studio
