@@ -1,28 +1,18 @@
 {
   "latest_version": "1.0.0",
-  "release_title": "MatraKi v1.0.0 — AI Smart Edition",
+  "release_title": "MatraKi v1.0.0 — AI Smart Edition for Linux",
   "website_url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/",
   "download_page_url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
   "github_release_url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest",
-  "changelog": "20,535+ Trained Words, Smart Agglutinative Suffix Stemmer (-গুলো, -দের, -টা), Context-Aware Next-Word Prediction, Live Math Calculator (=) & 16 Unit Converters, 42+ Instant Snippets (!), 31 Date Ordinals, and 45+ Emojis.",
+  "changelog": "Native Linux Edition: 38,000+ Trained Words, Smart Suffix Stemmer, Harper Grammar Engine, Context-Aware Next-Word Prediction, Live Math Calculator (=) & 16 Unit Converters, Instant Email & Job & CV Snippets, 31 Date Ordinals, and Emojis.",
   "updates": {
     "linux": {
       "open-url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
       "latest-version": "1.0.0",
-      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest",
-      "changelog": "MatraKi v1.0.0 (AI Smart Edition) - 20,535+ Trained Words, Suffix Stemmer, Live Math & Unit Converter, 42+ Snippets"
-    },
-    "windows": {
-      "open-url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
-      "latest-version": "1.0.0",
-      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest",
-      "changelog": "MatraKi v1.0.0 (AI Smart Edition)"
-    },
-    "osx": {
-      "open-url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
-      "latest-version": "1.0.0",
-      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest",
-      "changelog": "MatraKi v1.0.0 (AI Smart Edition)"
+      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb",
+      "appimage-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage",
+      "rpm-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm",
+      "changelog": "MatraKi v1.0.0 (Native Linux AI Smart Edition) - High-performance Fcitx5 & standalone GUI, Harper grammar checker, 38,000+ words, instant templates"
     }
   }
 }

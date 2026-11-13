@@ -1,7 +1,7 @@
 <!--
   SEO Meta Tags & Discovery Data
-  Title: MatraKi Keyboard (মাত্রা-কী) — Best AI Smart Bangla Keyboard for Linux & Windows
-  Description: Fast, modern, intelligent Bengali input method suite. Features 20,535+ trained words, next-word prediction, live math calculator, unit converter, and Bangla Academy grammar auto-fix.
+  Title: MatraKi Keyboard (মাত্রা-কী) — Next-Generation AI Smart Bangla Keyboard for Linux Desktops
+  Description: Fast, modern, intelligent Bengali input method suite engineered for Linux (Ubuntu, Debian, Deepin, Fedora, Arch). Features 38,000+ trained words, Harper grammar engine, next-word prediction, live math calculator, unit converter, and template snippets.
   Keywords: bangla keyboard, avro keyboard linux, bengali keyboard, bangla phonetic keyboard, avro alternative, deepin bangla keyboard, ubuntu bangla keyboard, fcitx5 bangla, ibus bangla, bangla typing software, bangla spell checker, bangla ai keyboard
 -->
 
@@ -11,17 +11,18 @@
 
 # MatraKi (মাত্রা-কী)
 ### **Type Smarter. Write Better.**
-#### **The Next-Generation AI-Powered Bangla Phonetic & Fixed Layout Keyboard for Linux, Windows & macOS**
+#### **The Next-Generation AI-Powered Bangla Phonetic & Fixed Layout Keyboard for Linux (Ubuntu, Debian, Deepin, Fedora, Arch & Generic Linux)**
 
 [![Release](https://img.shields.io/github/v/release/sojibcreates-maker/MatraKi-Keyboard?label=Version&color=0ea5e9&style=for-the-badge)](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest)
-[![Trained Vocabulary](https://img.shields.io/badge/Trained%20Vocabulary-20,535%2B%20Words-10b981?style=for-the-badge)](data/autocorrect.json)
-[![Supported OS](https://img.shields.io/badge/Platform-Linux%20%7C%20Windows%20%7C%20macOS-8b5cf6?style=for-the-badge)](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases)
+[![Trained Vocabulary](https://img.shields.io/badge/Trained%20Vocabulary-38,000%2B%20Words-10b981?style=for-the-badge)](data/autocorrect.json)
+[![Supported OS](https://img.shields.io/badge/Platform-Linux%20(Debian%20%7C%20Ubuntu%20%7C%20Deepin%20%7C%20Fedora%20%7C%20Arch)-8b5cf6?style=for-the-badge)](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-3b82f6?style=for-the-badge)](LICENSE)
 [![Donate SupportKori](https://img.shields.io/badge/💖%20Support%20%26%20Donate-SupportKori-f43f5e?style=for-the-badge)](https://www.supportkori.com/sojib)
 
 <br/>
 
-[**📥 Download Latest Release**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest) •
+[**🌐 Visit Official Website & Download Center**](https://sojibcreates-maker.github.io/MatraKi-Keyboard/) •
+[**📥 Direct Downloads**](#-direct-downloads-v100) •
 [**✨ Features**](#-key-features) •
 [**⚡ Comparison**](#-why-matraki-comparison-table) •
 [**🚀 Installation**](#-installation-guide) •
@@ -34,26 +35,26 @@
 
 ## 🌟 Why MatraKi?
 
-**MatraKi** (মাত্রা-কী) is an ultra-fast, intelligent, open-source Bangla input method suite engineered to modernize Bengali typing across **Linux desktops** (Fcitx5 / IBus), **Windows**, and **macOS**. 
+**MatraKi** (মাত্রা-কী) is an ultra-fast, intelligent, open-source Bangla input method suite engineered natively for **Linux desktops** (Fcitx5, Wayland, and X11). 
 
-Built with a lightning-fast Rust phonetic engine (`riti`) and a high-performance C++17 AI language layer, MatraKi solves the age-old limitations of legacy keyboards by providing **automatic verb conjugation**, **smart suffix inflection**, **context-aware next-word prediction**, and **in-keyboard productivity tools** (like a live math calculator and unit converter).
+Built with a lightning-fast Rust phonetic engine (`riti`), high-performance zero-allocation C++17 AI language layer, and integrated Harper grammar checker, MatraKi solves the age-old limitations of legacy keyboards on Linux by providing **automatic verb conjugation**, **smart suffix inflection**, **context-aware next-word prediction**, and **in-keyboard productivity tools** (like a live math calculator, unit converter, and email/job/CV templates).
 
 ---
 
 ## 📥 Direct Downloads (`v1.0.0`)
 
-| Operating System | Package Type | Architecture | Download Link |
+| Linux Distribution | Package Format | Architecture | Download Link |
 | :--- | :--- | :--- | :--- |
-| **Microsoft Windows** | **Setup Installer (`.exe`)** | **64-bit** (x64) | [**MatraKi-Keyboard-1.0.0-Setup-x86_64.exe**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-x86_64.exe) |
-| **Microsoft Windows** | **Setup Installer (`.exe`)** | **32-bit** (x86) | [**MatraKi-Keyboard-1.0.0-Setup-i386.exe**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-i386.exe) |
-| **Microsoft Windows** | **Portable Zip (`.zip`)** | **64-bit / 32-bit** | [**Windows-x86_64.zip**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Windows-x86_64.zip) • [**Windows-i386.zip**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Windows-i386.zip) |
-| **Ubuntu / Debian / Deepin / Mint** | **Debian Package (`.deb`)** | **64-bit** (amd64) | [**matraki-keyboard_1.0.0_amd64.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb) |
-| **Ubuntu / Debian / Deepin / Mint** | **Debian Package (`.deb`)** | **32-bit** (i386) | [**matraki-keyboard_1.0.0_i386.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_i386.deb) |
-| **Any Linux (All Distros)** | **Standalone AppImage (`.AppImage`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.0.0-x86_64.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage) |
-| **Any Linux (All Distros)** | **Standalone AppImage (`.AppImage`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.0.0-i386.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-i386.AppImage) |
-| **Fedora / RHEL / openSUSE** | **RPM Package (`.rpm`)** | **64-bit** (x86_64) | [**matraki-keyboard-1.0.0-1.x86_64.rpm**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm) |
-| **Apple macOS** | **Apple Disk Image (`.dmg`)** | **macOS** | [**MatraKi-Keyboard-1.0.0-macOS.dmg**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-macOS.dmg) |
+| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **64-bit** (amd64) | [**matraki-keyboard_1.0.0_amd64.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb) |
+| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **32-bit** (i386) | [**matraki-keyboard_1.0.0_i386.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_i386.deb) |
+| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.0.0-x86_64.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage) |
+| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.0.0-i386.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-i386.AppImage) |
+| **Fedora / RHEL / openSUSE / CentOS** | **RPM Package (`.rpm`)** | **64-bit** (x86_64) | [**matraki-keyboard-1.0.0-1.x86_64.rpm**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm) |
+| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz) |
+| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.0.0-linux-i386.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-i386.tar.gz) |
 | **Universal Linux Source** | **Tarball (`.tar.gz`)** | **Source** | [**matraki-keyboard-1.0.0.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0.tar.gz) |
+| **Pre-compiled Standalone Binary** | **ELF Executable** | **x86_64** | [**matraki-gui**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-gui) |
+| **Pre-compiled Fcitx5 Shared Library** | **Shared Object (`.so`)** | **x86_64** | [**matraki.so**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki.so) |
 
 ---
 
@@ -84,7 +85,7 @@ Built with a lightning-fast Rust phonetic engine (`riti`) and a high-performance
 | **Instant Arabic & Bangla Snippets (`!`)** | ❌ | ❌ | **✅ Yes (`!salam`, `!bismillah`, `!shokal`, `!eid`)** |
 | **All 31 Bengali Date Ordinals (`1la`..`31she`)** | ❌ | ❌ | **✅ Yes (১লা, ২১শে, ২৬শে, ৩১শে)** |
 | **Double Space to Dari (`। `)** | ❌ | ❌ | **✅ Yes (Instant Smart Dari)** |
-| **Cross-Platform Release Options** | Windows only | Windows only | **✅ `.deb`, `.AppImage`, `.rpm`, `.dmg`, `.exe`** |
+| **Linux Packaging & Formats** | Limited | None | **✅ Native `.deb`, `.AppImage`, `.rpm`, `.tar.gz`, Standalone GUI** |
 
 ---
 
@@ -148,9 +149,14 @@ chmod +x MatraKi-Keyboard-1.0.0-x86_64.AppImage
 sudo rpm -i https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm
 ```
 
-### Option 4: Microsoft Windows (`.exe`)
-1. Download **[MatraKi-Keyboard-1.0.0-Setup-x86_64.exe](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-Setup-x86_64.exe)**.
-2. Run the installer and click **Install MatraKi Keyboard Suite** or choose **Portable Mode**.
+### Option 4: Arch Linux & Generic Portable Tarball (`.tar.gz`)
+1. Download **[MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz)**.
+2. Extract and run directly:
+```bash
+tar -xzf MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz
+cd MatraKi-Keyboard-1.0.0-linux-x86_64
+./matraki-gui
+```
 
 ### Option 5: Build from Source (Universal Linux)
 ```bash
