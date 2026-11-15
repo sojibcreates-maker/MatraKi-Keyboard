@@ -32,41 +32,6 @@
    <iconset resource="images.qrc">
     <normaloff>:/images/MatraKi.png</normaloff>:/images/MatraKi.png</iconset>
   </property>
-  <property name="styleSheet">
-   <string notr="true">
-#centralwidget {
-    background-color: rgba(15, 23, 42, 0.94);
-    border: 1.5px solid qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #00d2ff, stop:0.5 #818cf8, stop:1 #d946ef);
-    border-radius: 18px;
-}
-QPushButton {
-    background-color: transparent;
-    border: none;
-    border-radius: 13px;
-    padding: 2px;
-}
-QPushButton:hover {
-    background-color: rgba(255, 255, 255, 0.16);
-}
-QPushButton:pressed {
-    background-color: rgba(0, 210, 255, 0.35);
-}
-QPushButton:checked {
-    background-color: rgba(0, 210, 255, 0.25);
-}
-#buttonShutdown:hover {
-    background-color: rgba(239, 68, 68, 0.65);
-}
-QToolTip {
-    background-color: #0f172a;
-    color: #f8fafc;
-    border: 1px solid #38bdf8;
-    border-radius: 6px;
-    padding: 4px 8px;
-    font-size: 11px;
-}
-   </string>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">

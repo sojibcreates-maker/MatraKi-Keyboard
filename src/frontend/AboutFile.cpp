@@ -19,6 +19,7 @@
 
 #include "AboutFile.h"
 #include "ui_AboutFile.h"
+#include "ThemeManager.h"
 
 AboutFile::AboutFile(QWidget *parent) :
     QDialog(parent),
@@ -28,10 +29,17 @@ AboutFile::AboutFile(QWidget *parent) :
 
   this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
   this->setFixedSize(QSize(this->width(), this->height()));
+
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &AboutFile::applyTheme);
+  applyTheme();
 }
 
 AboutFile::~AboutFile() {
   delete ui;
+}
+
+void AboutFile::applyTheme() {
+  setStyleSheet(ThemeManager::instance().aboutFileStyle());
 }
 
 void AboutFile::setDialogType(DialogType type) {

@@ -1,10 +1,10 @@
 {
   "updates": {
     "linux": {
-      "open-url": "https://matraki.github.io/blog/releasing-2-0-0/",
-      "latest-version": "2.0.0",
-      "download-url": "https://github.com/MatraKi/MatraKi-Keyboard/releases/tag/2.0.0",
-      "changelog": "https://matraki.github.io/blog/releasing-2-0-0/"
+      "open-url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
+      "latest-version": "1.1.0",
+      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.1.0",
+      "changelog": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.1.0"
     }
   }
 }

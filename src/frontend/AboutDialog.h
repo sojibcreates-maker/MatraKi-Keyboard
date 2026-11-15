@@ -33,6 +33,12 @@ public:
 
   ~AboutDialog() override;
 
+public slots:
+  void applyTheme();
+
+protected:
+  void showEvent(QShowEvent *event) override;
+
 private slots:
   void on_lblFacebook_linkActivated(const QString &link);
   void on_lblDonation_linkActivated(const QString &link);

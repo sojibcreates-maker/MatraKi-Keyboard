@@ -42,8 +42,12 @@ public:
 
   void showLayoutInfoDialog();
 
+public slots:
+  void applyTheme();
+
 protected:
   void closeEvent(QCloseEvent *event) override;
+  void showEvent(QShowEvent *event) override;
 
 private slots:
 

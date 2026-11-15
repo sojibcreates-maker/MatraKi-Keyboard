@@ -92,6 +92,8 @@ private slots:
 
   void on_buttonSettings_clicked();
 
+  void applyTheme();
+
 private:
   Ui::TopBar *ui;
   bool canMoveTopbar = false;

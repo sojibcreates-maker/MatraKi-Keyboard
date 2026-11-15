@@ -7,6 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_subdirectory(3rdParty)
 
 set(SRC_GUI TopBar.cpp
+        ThemeManager.cpp
         AboutDialog.cpp
         AboutFile.cpp
         LayoutViewer.cpp

@@ -24,6 +24,7 @@
 #include "AboutFile.h"
 #include "base.hpp"
 #include "ui_LayoutViewer.h"
+#include "ThemeManager.h"
 
 LayoutViewer::LayoutViewer(QWidget *parent) :
     QDialog(parent),
@@ -37,11 +38,23 @@ LayoutViewer::LayoutViewer(QWidget *parent) :
   if (savedPos != QPoint(0, 0)) {
     this->move(savedPos);
   }
+
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &LayoutViewer::applyTheme);
+  applyTheme();
 }
 
 LayoutViewer::~LayoutViewer() {
   delete aboutDialog;
   delete ui;
+}
+
+void LayoutViewer::applyTheme() {
+  setStyleSheet(ThemeManager::instance().layoutViewerStyle());
+}
+
+void LayoutViewer::showEvent(QShowEvent *event) {
+  QDialog::showEvent(event);
+  applyTheme();
 }
 
 void LayoutViewer::refreshLayoutViewer() {

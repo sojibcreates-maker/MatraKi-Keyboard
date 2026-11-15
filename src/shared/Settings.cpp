@@ -191,3 +191,13 @@ bool Settings::getPreviousUserDataRemains() {
   setting->sync();
   return setting->value("settings/PreviousUserDataRemains", true).toBool();
 }
+
+void Settings::setThemeMode(const QString &mode) {
+  setting->setValue("ui/themeMode", mode);
+  setting->sync();
+}
+
+QString Settings::getThemeMode() {
+  setting->sync();
+  return setting->value("ui/themeMode", "auto").toString();
+}

@@ -22,6 +22,7 @@
 #include <QJsonDocument>
 #include "AutoCorrectDialog.h"
 #include "ui_AutoCorrectDialog.h"
+#include "ThemeManager.h"
 
 AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
     QDialog(parent),
@@ -29,22 +30,9 @@ AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
   ui->setupUi(this);
   this->setWindowIcon(QIcon(":/images/MatraKi.png"));
   this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
-  this->setStyleSheet(
-    "QDialog { background-color: #0b1120; color: #f8fafc; font-family: 'Noto Sans', sans-serif; }"
-    "QFrame#headerFrame { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0f172a, stop:0.5 #172554, stop:1 #0f172a); border: 1.5px solid #38bdf8; border-radius: 10px; }"
-    "QLabel#lblHeaderTitle { color: #ffffff; font-size: 16px; font-weight: bold; }"
-    "QLabel#lblHeaderSub { color: #94a3b8; font-size: 11px; }"
-    "QLabel { color: #e2e8f0; font-size: 12px; font-weight: bold; }"
-    "QLabel#lblEntries { color: #38bdf8; font-size: 12px; font-weight: bold; padding: 3px; }"
-    "QLineEdit { background-color: #131c31; color: #f8fafc; border: 1px solid #38bdf8; border-radius: 7px; padding: 6px 10px; font-size: 13px; }"
-    "QGroupBox { background-color: #131c31; border: 1px solid #1e293b; border-radius: 8px; margin-top: 10px; padding: 14px 10px 8px 10px; color: #38bdf8; font-weight: bold; }"
-    "QGroupBox::title { subcontrol-origin: margin; subcontrol-position: top left; left: 10px; padding: 1px 8px; background-color: #0f172a; border: 1px solid #38bdf8; border-radius: 5px; }"
-    "QTreeWidget { background-color: #131c31; color: #f1f5f9; border: 1px solid #1e293b; border-radius: 8px; alternate-background-color: #0f172a; font-size: 12.5px; }"
-    "QHeaderView::section { background-color: #1e293b; color: #38bdf8; padding: 6px; border: none; font-weight: bold; }"
-    "QPushButton { background-color: #1e293b; color: #e2e8f0; border: 1px solid #38bdf8; border-radius: 7px; padding: 6px 16px; font-weight: bold; }"
-    "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; }"
-    "QPushButton:disabled { background-color: #0f172a; color: #475569; border-color: #1e293b; }"
-  );
+
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &AutoCorrectDialog::applyTheme);
+  applyTheme();
 
   if (QPushButton *saveBtn = ui->buttonBox->button(QDialogButtonBox::Save)) {
     saveBtn->setText("✓ Save Changes");
@@ -64,6 +52,10 @@ AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
 
 AutoCorrectDialog::~AutoCorrectDialog() {
   delete ui;
+}
+
+void AutoCorrectDialog::applyTheme() {
+  setStyleSheet(ThemeManager::instance().autoCorrectDialogStyle());
 }
 
 void AutoCorrectDialog::showEvent(QShowEvent *event) {

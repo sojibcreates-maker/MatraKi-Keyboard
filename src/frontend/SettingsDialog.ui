@@ -25,140 +25,6 @@
   <property name="windowTitle">
    <string>MatraKi - Settings</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">QDialog#SettingsDialog {
-    background-color: #0b1120;
-    color: #f8fafc;
-    font-family: &quot;Noto Sans&quot;, sans-serif;
-}
-QFrame#headerFrame {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #0f172a, stop:0.5 #172554, stop:1 #0f172a);
-    border: 1.5px solid #38bdf8;
-    border-radius: 12px;
-}
-QLabel#lblHeaderTitle {
-    color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-}
-QLabel#lblHeaderSub {
-    color: #94a3b8;
-    font-size: 12px;
-}
-QLabel#lblBadge {
-    background-color: rgba(16, 185, 129, 0.16);
-    color: #34d399;
-    border: 1px solid #10b981;
-    border-radius: 12px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: bold;
-}
-QGroupBox {
-    background-color: #131c31;
-    border: 1px solid #1e293b;
-    border-radius: 12px;
-    margin-top: 12px;
-    padding: 16px 14px 10px 14px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #38bdf8;
-}
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    left: 14px;
-    padding: 2px 10px;
-    background-color: #0f172a;
-    border: 1px solid #38bdf8;
-    border-radius: 6px;
-    color: #38bdf8;
-}
-QGroupBox#FixedLayout {
-    color: #f43f5e;
-}
-QGroupBox#FixedLayout::title {
-    border: 1px solid #f43f5e;
-    color: #fb7185;
-}
-QLabel {
-    color: #e2e8f0;
-    font-size: 13px;
-}
-QPushButton {
-    background-color: #1e293b;
-    color: #94a3b8;
-    border: 1px solid #334155;
-    border-radius: 14px;
-    padding: 5px 12px;
-    min-width: 90px;
-    max-width: 105px;
-    min-height: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    outline: none;
-}
-QPushButton:hover {
-    border-color: #38bdf8;
-    color: #f8fafc;
-}
-QPushButton:checked {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9);
-    color: #ffffff;
-    border: 1px solid #38bdf8;
-}
-QPushButton:disabled {
-    background-color: #0f172a;
-    color: #475569;
-    border: 1px solid #1e293b;
-}
-QPushButton#btnACUpdate {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #2563eb, stop:1 #7c3aed);
-    color: #ffffff;
-    border: 1px solid #60a5fa;
-    border-radius: 8px;
-    padding: 5px 12px;
-}
-QPushButton#btnACUpdate:hover {
-    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #6d28d9);
-}
-QComboBox {
-    background-color: #1e293b;
-    color: #f8fafc;
-    border: 1px solid #38bdf8;
-    border-radius: 8px;
-    padding: 4px 10px;
-    min-width: 95px;
-    max-width: 110px;
-    font-size: 12px;
-    font-weight: bold;
-}
-QComboBox::drop-down {
-    border: none;
-    width: 20px;
-}
-QComboBox QAbstractItemView {
-    background-color: #0f172a;
-    color: #f8fafc;
-    selection-background-color: #1d4ed8;
-    selection-color: #ffffff;
-    border: 1px solid #38bdf8;
-}
-QDialogButtonBox QPushButton {
-    min-width: 115px;
-    max-width: 155px;
-    min-height: 26px;
-    border-radius: 8px;
-    background-color: #1e293b;
-    color: #e2e8f0;
-    border: 1px solid #475569;
-}
-QDialogButtonBox QPushButton:hover {
-    background-color: #1d4ed8;
-    color: #ffffff;
-    border-color: #38bdf8;
-}</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>12</number>
@@ -264,7 +130,7 @@ QDialogButtonBox QPushButton:hover {
       <item>
        <widget class="QLabel" name="lblBadge">
         <property name="text">
-         <string>✨ v1.0.0 • 20,535+ Words Trained</string>
+         <string>✨ v1.1.0 • Harper AI Edition • 38,000+ Words</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -413,6 +279,37 @@ QDialogButtonBox QPushButton:hover {
             </property>
             <property name="checkable">
              <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_theme">
+            <property name="text">
+             <string>Appearance Theme Mode:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="cmbThemeMode">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_detected">
+            <property name="text">
+             <string>Detected Computer Mode:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="lblThemeDetected">
+            <property name="text">
+             <string>Auto: Dark Mode</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>

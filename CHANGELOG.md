@@ -1,5 +1,18 @@
 # Change Log
-## 2.0.0
+
+## [1.1.0] - 2026-11-15 (Adaptive Theme & Harper AI Edition)
+* **Complete UI Redesign & Tech Aesthetic**: Full redesign across TopBar, SettingsDialog, AboutDialog, LayoutViewer, AutoCorrectDialog, and contextual menus with a modern, professional, minimalist classic tech theme.
+* **Adaptive Dark & Light Modes**: Added automatic computer OS theme detection (supporting FreeDesktop Portal, GNOME, Deepin, KDE, and Qt palettes) alongside manual options (`Auto (System Detect)`, `Dark Tech Mode`, `Light Classic Mode`) with instant live theme switching and contrast-adapted dual icons.
+* **Integrated Harper Grammar Checker**: Added real-time English and Bengali grammar verification engine with subject-verb concordance rules.
+* **Expanded Vocabulary**: Deep-learning trained dictionary expanded to 38,000+ words with zero-latency lookups.
+* **Instant Productivity Templates**: Added fast shortcodes for job applications (`!applybn`, `!applyen`), CV / resumes (`!cvbn`, `!cven`), and formal emails (`!emailbn`, `!emailen`).
+* **Live In-Keyboard Calculator & Unit Converters**: Real-time math evaluation with `=` and 16 unit / currency conversions.
+* **Pure Linux Dedicated Packaging**: Fully streamlined packaging for `.deb` (Ubuntu, Debian, Deepin, Mint), `.AppImage`, `.rpm` (Fedora, openSUSE), and portable tarballs (`.tar.gz`).
+* **Comprehensive Modern Screenshot Showcase**: Added full visual suite to official portal with high-DPI desktop, settings, templates, grammar, and layout viewer previews.
+
+## [1.0.0] - 2026-11-09
+* First public release of MatraKi Keyboard AI Smart Edition.
+
 * Complete re-implementation of input method functionalities in Rust. ([#107][107]) It is [~1.2x faster in searching][3] dictionary suggestions.
 * Dictionary suggestion is now available in Fixed Method Layouts(Provat, National etc.) ([#61][61], [#6][6])
 * Phonetic suggestion now includes the typed English word as the last item in the suggestion list. ([#121][121], [#124][124])

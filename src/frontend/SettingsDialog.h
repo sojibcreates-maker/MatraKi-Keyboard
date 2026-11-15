@@ -37,11 +37,19 @@ public:
 
   void updateSettings();
 
+public slots:
+  void applyTheme();
+
+protected:
+  void showEvent(QShowEvent *event) override;
+
 private slots:
 
   void on_buttonBox_accepted();
 
   void on_buttonBox_rejected();
+
+  void handleThemeModeChanged(int index);
 
 private:
   Ui::SettingsDialog *ui;

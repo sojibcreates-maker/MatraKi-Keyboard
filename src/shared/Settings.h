@@ -95,6 +95,10 @@ public:
   void setPreviousUserDataRemains(bool b);
 
   bool getPreviousUserDataRemains();
+
+  void setThemeMode(const QString &mode);
+
+  QString getThemeMode();
 };
 
 /* Global */

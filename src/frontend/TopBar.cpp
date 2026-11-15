@@ -50,6 +50,7 @@
 #include "LayoutConverter.h"
 #include "AutoCorrectDialog.h"
 #include "QSimpleUpdater.h"
+#include "ThemeManager.h"
 #include "ui_TopBar.h"
 
 static const QString WEBSITE_URL = "https://sojibcreates-maker.github.io/MatraKi-Keyboard/";
@@ -95,6 +96,9 @@ TopBar::TopBar(QWidget *parent) :
   SetupPopupMenus();
   SetupTrayIcon();
   DataMigration();
+
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &TopBar::applyTheme);
+  applyTheme();
 
   // Automatic background update check linked with GitHub Releases & GitHub Pages
   QTimer::singleShot(3500, this, [=]() {
@@ -267,21 +271,31 @@ void TopBar::checkForUpdate(bool silent) {
         }
       }
       // Offline or unreachable fallback (only show if user manually clicked Check for Updates)
-      showUpdateDialog(false, QStringLiteral(PROJECT_VERSION), "MatraKi v1.0.0 — AI Smart Edition", "", GITHUB_RELEASES_URL, silent);
+      showUpdateDialog(false, QStringLiteral(PROJECT_VERSION), "MatraKi v" PROJECT_VERSION " — Harper AI Edition", "", GITHUB_RELEASES_URL, silent);
     });
   });
+}
+
+void TopBar::applyTheme() {
+  this->setStyleSheet(ThemeManager::instance().topBarStyle());
+
+  ui->buttonSettings->setIcon(QIcon(ThemeManager::instance().iconSettings()));
+  ui->buttonViewLayout->setIcon(QIcon(ThemeManager::instance().iconKeyboard()));
+  ui->buttonSetLayout->setIcon(QIcon(ThemeManager::instance().iconKeyboardHide()));
+  ui->buttonShutdown->setIcon(QIcon(ThemeManager::instance().iconClose()));
+
+  if (layoutMenu) {
+    layoutMenu->setStyleSheet(ThemeManager::instance().popupMenuStyle());
+  }
+  if (iconMenu) {
+    iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
+  }
 }
 
 void TopBar::SetupPopupMenus() {
   // Layout Popup Menu
   layoutMenu = new QMenu("Select keyboard layout", this);
-  layoutMenu->setStyleSheet(
-    "QMenu { background-color: #0f172a; color: #f1f5f9; border: 1.5px solid #38bdf8; border-radius: 10px; padding: 6px; font-weight: 500; }"
-    "QMenu::item { padding: 6px 28px 6px 14px; border-radius: 6px; }"
-    "QMenu::item:selected { background-color: rgba(56, 189, 248, 0.25); color: #38bdf8; }"
-    "QMenu::item:checked { font-weight: bold; color: #00d2ff; }"
-    "QMenu::separator { height: 1px; background: rgba(255, 255, 255, 0.12); margin: 4px 6px; }"
-  );
+  layoutMenu->setStyleSheet(ThemeManager::instance().popupMenuStyle());
   layoutMenu->setIcon(QIcon(":/images/keyboard_layout.png"));
   connect(layoutMenu, &QMenu::aboutToHide, [=]() {
     ui->buttonSetLayout->setChecked(false);
@@ -328,12 +342,7 @@ void TopBar::SetupPopupMenus() {
   });
 
   iconMenu = new QMenu(this);
-  iconMenu->setStyleSheet(
-    "QMenu { background-color: #0f172a; color: #f1f5f9; border: 1.5px solid #d946ef; border-radius: 10px; padding: 6px; font-weight: 500; }"
-    "QMenu::item { padding: 6px 28px 6px 14px; border-radius: 6px; }"
-    "QMenu::item:selected { background-color: rgba(217, 70, 239, 0.25); color: #f472b6; }"
-    "QMenu::separator { height: 1px; background: rgba(255, 255, 255, 0.12); margin: 4px 6px; }"
-  );
+  iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
   //iconMenu->addAction(iconMenuOnTray);
   iconMenu->addAction(iconMenuLayout);
   iconMenu->addAction(iconMenuAbout);

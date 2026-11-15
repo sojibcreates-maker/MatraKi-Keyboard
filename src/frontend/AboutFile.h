@@ -40,6 +40,9 @@ public:
 
   void setDialogType(DialogType type);
 
+public slots:
+  void applyTheme();
+
 private slots:
 
   void on_buttonOK_clicked();

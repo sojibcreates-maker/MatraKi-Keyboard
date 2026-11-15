@@ -9,5 +9,10 @@
         <file>images/outline_settings_black_24dp.png</file>
         <file>images/outline_description_black_18dp.png</file>
         <file>images/outline_close_black_24dp.png</file>
+        <file>images/outline_keyboard_hide_darkicon_24dp.png</file>
+        <file>images/outline_keyboard_darkicon_24dp.png</file>
+        <file>images/outline_settings_darkicon_24dp.png</file>
+        <file>images/outline_description_darkicon_18dp.png</file>
+        <file>images/outline_close_darkicon_24dp.png</file>
     </qresource>
 </RCC>

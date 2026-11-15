@@ -22,6 +22,7 @@
 #include "ui_SettingsDialog.h"
 #include "Settings.h"
 #include "AutoCorrectDialog.h"
+#include "ThemeManager.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -35,27 +36,49 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
   autoCorrectDialog = new AutoCorrectDialog(this);
 
   ui->cmbOrientation->insertItems(0, {"Horizontal", "Vertical"});
+  ui->cmbThemeMode->insertItems(0, {
+    "Auto (System Detect)",
+    "Dark Tech Mode",
+    "Light Classic Mode"
+  });
 
   if (QPushButton *okBtn = ui->buttonBox->button(QDialogButtonBox::Ok)) {
     okBtn->setText("✓ Save Settings");
     okBtn->setCursor(Qt::PointingHandCursor);
-    okBtn->setStyleSheet(
-      "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 8px; padding: 6px 18px; font-weight: bold; }"
-      "QPushButton:hover { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1e40af, stop:1 #0284c7); }"
-    );
   }
   if (QPushButton *cancelBtn = ui->buttonBox->button(QDialogButtonBox::Cancel)) {
     cancelBtn->setText("✕ Cancel");
     cancelBtn->setCursor(Qt::PointingHandCursor);
   }
 
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &SettingsDialog::applyTheme);
+
   implementSignals();
   updateSettings();
+  applyTheme();
 }
 
 SettingsDialog::~SettingsDialog() {
   delete autoCorrectDialog;
   delete ui;
+}
+
+void SettingsDialog::applyTheme() {
+  this->setStyleSheet(ThemeManager::instance().settingsDialogStyle());
+  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+}
+
+void SettingsDialog::showEvent(QShowEvent *event) {
+  QDialog::showEvent(event);
+  applyTheme();
+}
+
+void SettingsDialog::handleThemeModeChanged(int index) {
+  QString mode = "auto";
+  if (index == 1) mode = "dark";
+  else if (index == 2) mode = "light";
+  ThemeManager::instance().setModeString(mode);
+  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
 }
 
 void SettingsDialog::implementSignals() {
@@ -104,6 +127,8 @@ void SettingsDialog::implementSignals() {
   connect(ui->btnCheckUpdate, &QPushButton::toggled, [=](bool checked) {
     setToggleText(ui->btnCheckUpdate, checked);
   });
+  connect(ui->cmbThemeMode, QOverload<int>::of(&QComboBox::currentIndexChanged),
+          this, &SettingsDialog::handleThemeModeChanged);
 }
 
 void SettingsDialog::updateSettings() {
@@ -127,6 +152,15 @@ void SettingsDialog::updateSettings() {
   syncToggle(ui->btnNumberpad, gSettings->getNumberPadFixed());
 
   syncToggle(ui->btnCheckUpdate, gSettings->getUpdateCheck());
+
+  ui->cmbThemeMode->blockSignals(true);
+  QString tMode = gSettings->getThemeMode().toLower();
+  if (tMode == "dark") ui->cmbThemeMode->setCurrentIndex(1);
+  else if (tMode == "light") ui->cmbThemeMode->setCurrentIndex(2);
+  else ui->cmbThemeMode->setCurrentIndex(0);
+  ui->cmbThemeMode->blockSignals(false);
+  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+  applyTheme();
 }
 
 void SettingsDialog::on_buttonBox_accepted() {
@@ -145,6 +179,11 @@ void SettingsDialog::on_buttonBox_accepted() {
   gSettings->setNumberPadFixed(ui->btnNumberpad->isChecked());
 
   gSettings->setUpdateCheck(ui->btnCheckUpdate->isChecked());
+
+  int tIndex = ui->cmbThemeMode->currentIndex();
+  QString mode = (tIndex == 1) ? "dark" : (tIndex == 2 ? "light" : "auto");
+  gSettings->setThemeMode(mode);
+  ThemeManager::instance().setModeString(mode);
 }
 
 void SettingsDialog::on_buttonBox_rejected() {

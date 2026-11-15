@@ -37,6 +37,9 @@ public:
 
   ~AutoCorrectDialog() override;
 
+public slots:
+  void applyTheme();
+
 protected:
   void showEvent(QShowEvent *event) override;
 

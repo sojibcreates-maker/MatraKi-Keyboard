@@ -41,38 +41,46 @@ Built with a lightning-fast Rust phonetic engine (`riti`), high-performance zero
 
 ---
 
-## 📥 Direct Downloads (`v1.0.0`)
+## 📥 Direct Downloads (`v1.1.0`)
 
 | Linux Distribution | Package Format | Architecture | Download Link |
 | :--- | :--- | :--- | :--- |
-| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **64-bit** (amd64) | [**matraki-keyboard_1.0.0_amd64.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb) |
-| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **32-bit** (i386) | [**matraki-keyboard_1.0.0_i386.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_i386.deb) |
-| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.0.0-x86_64.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage) |
-| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.0.0-i386.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-i386.AppImage) |
-| **Fedora / RHEL / openSUSE / CentOS** | **RPM Package (`.rpm`)** | **64-bit** (x86_64) | [**matraki-keyboard-1.0.0-1.x86_64.rpm**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm) |
-| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz) |
-| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.0.0-linux-i386.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-i386.tar.gz) |
-| **Universal Linux Source** | **Tarball (`.tar.gz`)** | **Source** | [**matraki-keyboard-1.0.0.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0.tar.gz) |
-| **Pre-compiled Standalone Binary** | **ELF Executable** | **x86_64** | [**matraki-gui**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-gui) |
-| **Pre-compiled Fcitx5 Shared Library** | **Shared Object (`.so`)** | **x86_64** | [**matraki.so**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki.so) |
+| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **64-bit** (amd64) | [**matraki-keyboard_1.1.0_amd64.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb) |
+| **Ubuntu / Debian / Deepin / Mint / Pop!_OS** | **Native Debian Package (`.deb`)** | **32-bit** (i386) | [**matraki-keyboard_1.1.0_i386.deb**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_i386.deb) |
+| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.1.0-x86_64.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage) |
+| **Universal Linux (Runs on Any Distro)** | **Standalone AppImage (`.AppImage`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.1.0-i386.AppImage**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-i386.AppImage) |
+| **Fedora / RHEL / openSUSE / CentOS** | **RPM Package (`.rpm`)** | **64-bit** (x86_64) | [**matraki-keyboard-1.1.0-1.x86_64.rpm**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm) |
+| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **64-bit** (x86_64) | [**MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz) |
+| **Arch Linux / Manjaro / Generic Portable** | **Portable Tarball (`.tar.gz`)** | **32-bit** (i386) | [**MatraKi-Keyboard-1.1.0-linux-i386.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-i386.tar.gz) |
+| **Universal Linux Source** | **Tarball (`.tar.gz`)** | **Source** | [**matraki-keyboard-1.1.0.tar.gz**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0.tar.gz) |
+| **Pre-compiled Standalone Binary** | **ELF Executable** | **x86_64** | [**matraki-gui**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-gui) |
+| **Pre-compiled Fcitx5 Shared Library** | **Shared Object (`.so`)** | **x86_64** | [**matraki.so**](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki.so) |
 
 ---
 
 ## 🖼️ User Interface Preview
 
-| Modern Floating TopBar & Tray | AI Smart Settings & Live Status |
+| Instant Productivity Templates (Email, Job, CV) | Harper Grammar & Concordance Engine |
 | :---: | :---: |
-| ![Floating TopBar](docs/screenshots/topbar.png) | ![Settings Dialog](docs/screenshots/settings.png) |
+| ![Templates Hub](docs/screenshots/templates_hub.png) | ![Harper Grammar Engine](docs/screenshots/harper_grammar.png) |
 
-| Avro Phonetic Dark KeyMap | About MatraKi (`v1.0.0`) |
+| Live Math Calculator & 16 Unit Converters | AI Smart Settings & Live Status |
 | :---: | :---: |
-| ![Avro KeyMap Modern](docs/screenshots/avro_keymap.png) | ![About Dialog](docs/screenshots/about.png) |
+| ![Calculator and Converter](docs/screenshots/calculator_converter.png) | ![Settings Dialog](docs/screenshots/settings.png) |
+
+| Linux Desktop Workspace Integration | System Tray Quick Actions & Switcher |
+| :---: | :---: |
+| ![Desktop Workspace](docs/screenshots/desktop_workspace.png) | ![Tray Menu](docs/screenshots/tray_menu.png) |
+
+| Avro Phonetic Dark KeyMap | Interactive Multi-Layout Viewer |
+| :---: | :---: |
+| ![Avro KeyMap Modern](docs/screenshots/avro_keymap.png) | ![Layout Viewer](docs/screenshots/layout_viewer.png) |
 
 ---
 
 ## ⚡ Why MatraKi? Comparison Table
 
-| Capability / Feature | Traditional Avro | Bijoy / Fixed Only | **MatraKi v1.0.0 (AI Smart Edition)** |
+| Capability / Feature | Traditional Avro | Bijoy / Fixed Only | **MatraKi v1.1.0 (Harper AI Edition)** |
 | :--- | :---: | :---: | :---: |
 | **Linux Wayland & X11 Native Support** | ❌ (Laggy / Emulated) | ❌ | **✅ Full Native Support via Fcitx5 & IBus** |
 | **Trained Vocabulary Size** | ~2,500 words | 0 words | **✅ 20,535+ Trained Words & Inflections** |
@@ -128,33 +136,33 @@ Built with a lightning-fast Rust phonetic engine (`riti`), high-performance zero
 ### Option 1: Debian / Ubuntu / Linux Mint / Deepin (`.deb`)
 ```bash
 # Download the .deb package
-wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard_1.0.0_amd64.deb
+wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb
 
 # Install with dpkg or apt
-sudo apt install -y ./matraki-keyboard_1.0.0_amd64.deb
+sudo apt install -y ./matraki-keyboard_1.1.0_amd64.deb
 ```
 
 ### Option 2: Standalone Portable AppImage (All Linux Distros)
 ```bash
 # Download AppImage
-wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-x86_64.AppImage
+wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage
 
 # Make executable and run
-chmod +x MatraKi-Keyboard-1.0.0-x86_64.AppImage
-./MatraKi-Keyboard-1.0.0-x86_64.AppImage
+chmod +x MatraKi-Keyboard-1.1.0-x86_64.AppImage
+./MatraKi-Keyboard-1.1.0-x86_64.AppImage
 ```
 
 ### Option 3: Fedora / RHEL / CentOS / openSUSE (`.rpm`)
 ```bash
-sudo rpm -i https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/matraki-keyboard-1.0.0-1.x86_64.rpm
+sudo rpm -i https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm
 ```
 
 ### Option 4: Arch Linux & Generic Portable Tarball (`.tar.gz`)
-1. Download **[MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.0.0/MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz)**.
+1. Download **[MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz](https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz)**.
 2. Extract and run directly:
 ```bash
-tar -xzf MatraKi-Keyboard-1.0.0-linux-x86_64.tar.gz
-cd MatraKi-Keyboard-1.0.0-linux-x86_64
+tar -xzf MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz
+cd MatraKi-Keyboard-1.1.0-linux-x86_64
 ./matraki-gui
 ```
 
