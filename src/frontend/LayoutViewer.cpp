@@ -62,6 +62,14 @@ void LayoutViewer::applyTheme() {
   ui->viewAltGr->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Sparkles, p.accent, 16)));
   ui->buttonAboutLayout->setObjectName("primary");
   ui->buttonAboutLayout->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Info, p.onBrand, 16)));
+
+  if (desc.name == "Avro Phonetic") {
+    if (ui->viewAltGr->isChecked()) {
+      on_viewAltGr_clicked();
+    } else {
+      on_viewNormal_clicked();
+    }
+  }
 }
 
 void LayoutViewer::showEvent(QShowEvent *event) {
@@ -123,7 +131,10 @@ void LayoutViewer::on_buttonAboutLayout_clicked() {
 
 void LayoutViewer::on_viewNormal_clicked() {
   if (desc.name == "Avro Phonetic") {
-    QPixmap pix(":/images/avro_keymap_modern.png");
+    const bool dark = ThemeManager::instance().isDark();
+    const QString imgPath = dark ? QStringLiteral(":/images/avro_keymap_dark.png")
+                                 : QStringLiteral(":/images/avro_keymap_light.png");
+    QPixmap pix(imgPath);
     ui->labelImage->setPixmap(pix);
     ui->labelImage->adjustSize();
     this->resize(pix.width() + 36, pix.height() + 98);
@@ -138,7 +149,10 @@ void LayoutViewer::on_viewNormal_clicked() {
 
 void LayoutViewer::on_viewAltGr_clicked() {
   if (desc.name == "Avro Phonetic") {
-    QPixmap pix(":/images/avro_smart_guide.png");
+    const bool dark = ThemeManager::instance().isDark();
+    const QString imgPath = dark ? QStringLiteral(":/images/avro_smart_guide_dark.png")
+                                 : QStringLiteral(":/images/avro_smart_guide_light.png");
+    QPixmap pix(imgPath);
     ui->labelImage->setPixmap(pix);
     ui->labelImage->adjustSize();
     this->resize(pix.width() + 36, pix.height() + 98);
