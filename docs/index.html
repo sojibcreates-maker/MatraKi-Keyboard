@@ -1,2843 +1,575 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>MatraKi (মাত্রা-কী) v1.1.0 — AI Smart Bangla Keyboard for Linux</title>
-  <meta name="description" content="Download MatraKi v1.1.0 (Harper AI Edition) — The fastest, smartest open-source Bangla phonetic &amp; fixed layout keyboard for Linux (Ubuntu, Debian, Deepin, Fedora, Arch, Mint). Pre-trained with 38,000+ words, Harper grammar engine, next-word prediction, live calculator, unit converter, and instant email/CV templates." />
-  <meta name="keywords" content="MatraKi, মাত্রা-কী, Bangla Keyboard, Bengali Keyboard, Avro Keyboard for Linux, Avro Phonetic, Bangla Typing Software, Fcitx5 Bangla, IBus Bangla, Ubuntu Bangla Keyboard, Deepin Bangla Keyboard, Debian Bangla Keyboard, Arch Linux Bangla Keyboard, Fedora Bangla Keyboard, Open Source Bangla IME, Md Sojib Hossain" />
-  <meta name="author" content="Md Sojib Hossain" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#08110E" />
-  <link rel="canonical" href="https://sojibcreates-maker.github.io/MatraKi-Keyboard/" />
-  <link rel="icon" type="image/png" href="logo.png" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MatraKi (মাত্রা-কী) v1.1.0 — AI Smart Bangla Keyboard for Linux</title>
+<meta name="description" content="MatraKi — Next-generation AI-powered Bangla phonetic keyboard for Linux. 38,000+ trained words, Harper grammar engine, live math calculator & unit converter. Free & open source.">
+<link rel="icon" type="image/png" href="logo.png">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/" />
-  <meta property="og:title" content="MatraKi (মাত্রা-কী) v1.1.0 — Type Smarter. Write Better." />
-  <meta property="og:description" content="Next-Generation AI Smart Bangla Phonetic &amp; Fixed Layout Keyboard natively built for Linux. 38,000+ trained words, Harper grammar engine, next-word prediction, live math &amp; unit converter." />
-  <meta property="og:image" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/screenshots/settings.png" />
+<!-- Google Fonts: Tiro Bangla, Plus Jakarta Sans, JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tiro+Bangla:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MatraKi (মাত্রা-কী) v1.1.0 — AI Smart Bangla Keyboard for Linux" />
-  <meta name="twitter:description" content="Download MatraKi for Linux (.deb, .AppImage, .rpm, .tar.gz). Pre-trained with 38,000+ Bangla words." />
-  <meta name="twitter:image" content="https://sojibcreates-maker.github.io/MatraKi-Keyboard/screenshots/settings.png" />
-
-  <!-- Structured Data (JSON-LD) for Google Rich Results -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "MatraKi Keyboard",
-    "alternateName": "মাত্রা-কী কীবোর্ড",
-    "softwareVersion": "1.1.0",
-    "operatingSystem": "Linux (Ubuntu, Debian, Deepin, Fedora, Arch, Mint, openSUSE)",
-    "applicationCategory": "UtilitiesApplication",
-    "license": "https://www.gnu.org/licenses/gpl-3.0.html",
-    "url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/",
-    "downloadUrl": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.1.0",
-    "author": {
-      "@type": "Person",
-      "name": "Md Sojib Hossain",
-      "url": "https://facebook.com/hossain.sojibs"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": "MatraKi is an AI-powered Bangla phonetic and fixed-layout input method suite featuring 38,000+ trained words, agglutinative suffix stemming, next-word prediction, Bangla Academy spelling auto-correction, and an in-keyboard math and unit converter."
+<style>
+  :root{
+    color-scheme: light;
+    --g900:#06331F; --g800:#084229; --g700:#0A5C3E; --g600:#0C6B48; --g500:#12805A;
+    --g300:#5FBF92; --g200:#7FC7A6;
+    --mint:#E3EBE6; --mint2:#EDF3EF; --red:#EF3E4A;
+    --stage:#070B08; --dl-bg:#0E1510; --dl-card:#132019; --dl-border:#223129;
+    --txt:#E8EFEA; --mut:#8FA69A;
+    --sans:"Tiro Bangla", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
   }
-  </script>
+  *{box-sizing:border-box; margin:0; padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans); background:#F4F7F5; color:#12261B; line-height:1.6}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  .wrap{width:min(1120px,100%); margin:0 auto; padding:0 24px}
+  .btn{display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer;
+    font-family:inherit; font-size:15px; font-weight:600; border-radius:999px;
+    padding:14px 28px; text-decoration:none; transition:.18s}
+  .btn-primary{background:var(--g700); color:#fff}
+  .btn-primary:hover{background:var(--g600); transform:translateY(-2px); box-shadow:0 8px 24px rgba(10,92,62,.3)}
+  .btn-ghost{background:transparent; color:#fff; border:1px solid #2A3B31}
+  .btn-ghost:hover{background:#132019; border-color:var(--g500)}
+  .btn-mint{background:#fff; color:var(--g700)}
+  .btn-mint:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(10,60,40,.18)}
 
-  <style>
-    :root {
-      --bg-space: #08110E;
-      --bg-surface: rgba(22, 33, 28, 0.78);
-      --bg-surface-elevated: rgba(29, 44, 38, 0.85);
-      --bg-card: rgba(18, 28, 24, 0.76);
-      --border-subtle: rgba(95, 208, 166, 0.18);
-      --border-bright: #5FD0A6;
-      --border-glass: rgba(255, 255, 255, 0.08);
-      --primary: #1B9E72;
-      --primary-dark: #0B5D45;
-      --accent-rose: #F42A41;
-      --accent-emerald: #5FD0A6;
-      --accent-purple: #2DD4BF;
-      --text-main: #E6EFEA;
-      --text-muted: #8FA399;
-      --text-dim: #6B7C73;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 26px;
-      --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-bn: 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
+  /* ── nav ── */
+  nav{position:sticky; top:0; z-index:50; background:rgba(7,11,8,.88); backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--dl-border)}
+  .nav-in{display:flex; align-items:center; gap:28px; height:64px}
+  .brand{display:flex; align-items:center; gap:12px; color:#fff; font-weight:700; font-size:18px;
+    text-decoration:none}
+  .brand img{width:36px; height:36px; border-radius:10px; object-fit:cover; display:block}
+  .brand-badge{background:var(--g800); color:var(--g200); border:1px solid var(--g600); font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:2px}
+  .nav-links{display:flex; gap:22px; margin-left:auto; align-items:center}
+  .nav-links a{color:var(--mut); text-decoration:none; font-size:14px; font-weight:500; transition:color .15s}
+  .nav-links a:hover{color:#fff}
+  .nav-cta{background:var(--g700); color:#fff !important; padding:9px 20px; border-radius:999px}
+  .nav-cta:hover{background:var(--g600)}
+  @media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
 
-    /* Reset & Prevent Any Horizontal Page Jitter / Overflow */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-    }
+  /* ── hero ── */
+  .hero{background:var(--stage); color:var(--txt); padding:96px 0 80px; position:relative; overflow:hidden}
+  .hero::before{content:""; position:absolute; inset:-40% -20% auto; height:80%;
+    background:radial-gradient(600px 300px at 50% 0%, rgba(18,128,90,.28), transparent 70%); pointer-events:none}
+  .hero .wrap{position:relative; text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px}
+  .hero-logo{width:88px; height:88px; border-radius:24px; box-shadow:0 12px 36px rgba(10,92,62,.45); display:block}
+  .hero h1{font-size:clamp(34px,6vw,56px); font-weight:800; letter-spacing:-.02em; color:#fff}
+  .hero h1 .bn{color:var(--g300)}
+  .hero .tag{font-size:clamp(16px,2.5vw,21px); color:var(--g200); font-weight:600}
+  .hero p.sub{max-width:680px; color:var(--mut); font-size:16px; line-height:1.7}
+  .hero .cta{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:6px}
+  .hero .ver{font-size:13px; color:var(--mut)}
+  .hero .ver b{color:var(--g300)}
 
-    html, body {
-      width: 100%;
-      max-width: 100vw;
-      overflow-x: hidden;
-      position: relative;
-    }
+  /* stats strip */
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;
+    width:100%; margin-top:24px}
+  .stat{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:18px;
+    padding:20px 22px; text-align:left}
+  .stat b{font-size:26px; color:#fff; display:block; letter-spacing:-.01em}
+  .stat span{font-size:12.5px; color:var(--mut)}
 
-    html { scroll-behavior: smooth; }
+  /* ── Interactive Web Studio ── */
+  .studio-sec{background:var(--dl-bg); border-top:1px solid var(--dl-border); border-bottom:1px solid var(--dl-border); padding:64px 0}
+  .studio-card{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:24px; padding:24px; max-width:920px; margin:0 auto; box-shadow:0 24px 64px rgba(0,0,0,.4)}
+  .studio-bar{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--dl-border); margin-bottom:18px}
+  .studio-bar .left{display:flex; align-items:center; gap:10px}
+  .studio-pill{display:inline-flex; align-items:center; gap:8px; background:var(--g700); color:#fff; border-radius:999px; padding:6px 16px; font-size:13px; font-weight:700}
+  .studio-input{width:100%; min-height:110px; background:#070B08; border:1px solid var(--dl-border); border-radius:14px; color:#fff; font-family:var(--sans); font-size:18px; padding:16px; outline:none; resize:vertical; line-height:1.6}
+  .studio-input:focus{border-color:var(--g300)}
+  .studio-output-label{font-size:12.5px; font-weight:700; color:var(--g300); margin:14px 0 6px; display:flex; align-items:center; gap:8px}
+  .studio-output{min-height:70px; background:#0F1712; border:1px solid var(--dl-border); border-radius:14px; color:#E8EFEA; font-family:var(--sans); font-size:20px; padding:16px; line-height:1.6}
+  .studio-tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+  .st-tag{background:#070B08; border:1px solid var(--dl-border); border-radius:8px; padding:4px 10px; font-size:12px; color:var(--mut); cursor:pointer; font-family:var(--mono)}
+  .st-tag:hover{border-color:var(--g500); color:var(--g200)}
 
-    body {
-      background-color: var(--bg-space);
-      color: var(--text-main);
-      font-family: var(--font-ui);
-      line-height: 1.65;
-      background-image:
-        radial-gradient(circle at 10% 12%, rgba(11, 93, 69, 0.24) 0%, transparent 45%),
-        radial-gradient(circle at 88% 20%, rgba(27, 158, 114, 0.20) 0%, transparent 40%),
-        radial-gradient(circle at 50% 65%, rgba(45, 212, 191, 0.10) 0%, transparent 50%),
-        radial-gradient(circle at 20% 85%, rgba(244, 42, 65, 0.08) 0%, transparent 40%);
-      background-attachment: fixed;
-    }
+  /* ── Screenshots Gallery ── */
+  .shots-sec{padding:84px 0; background:#EAEFEA}
+  .shots-switch{display:flex; justify-content:center; gap:8px; margin-bottom:32px}
+  .switch-btn{background:#fff; border:1px solid #D0DDD4; color:#5A6E62; padding:9px 24px; border-radius:999px; font-size:13.5px; font-weight:700; cursor:pointer; transition:.15s}
+  .switch-btn.active{background:var(--g700); color:#fff; border-color:var(--g700)}
+  .shots-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px}
+  .shot-card{background:#fff; border-radius:20px; overflow:hidden; border:1px solid #DCE6DF; box-shadow:0 8px 24px rgba(10,60,40,.08); transition:.2s}
+  .shot-card:hover{transform:translateY(-4px); box-shadow:0 18px 48px rgba(10,60,40,.15)}
+  .shot-card img{width:100%; height:auto; display:block; background:#070B08}
+  .shot-card .cap{padding:16px 20px}
+  .shot-card h4{font-size:15px; font-weight:700; margin-bottom:4px}
+  .shot-card p{font-size:13px; color:#5A6E62}
 
-    body::before {
-      content: "";
-      position: fixed; inset: 0; z-index: -1;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      background-size: 36px 36px;
-      pointer-events: none;
-    }
+  section{padding:84px 0}
+  .sec-head{text-align:center; max-width:640px; margin:0 auto 48px}
+  .sec-head .kick{font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--g500); display:block; margin-bottom:10px}
+  .sec-head h2{font-size:clamp(26px,4vw,38px); font-weight:800; letter-spacing:-.02em}
+  .sec-head p{color:#5A6E62; margin-top:12px; font-size:15.5px}
 
-    a { color: inherit; text-decoration: none; transition: all 0.16s ease; }
-    code, pre { font-family: var(--font-mono); }
-    img { max-width: 100%; height: auto; display: block; }
+  /* feature cards */
+  .fgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
+  .fcard{background:#fff; border:1px solid #E4EDE7; border-radius:20px; padding:26px;
+    transition:.2s; box-shadow:0 2px 10px rgba(10,60,40,.04)}
+  .fcard:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(10,60,40,.12); border-color:var(--g200)}
+  .fic{width:46px; height:46px; border-radius:14px; background:var(--mint); color:var(--g700);
+    display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px}
+  .fcard h3{font-size:16.5px; font-weight:700; margin-bottom:8px}
+  .fcard p{font-size:13.5px; color:#5A6E62}
 
-    /* Fluid Container with Safe Padding */
-    .container {
-      width: 100%;
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 0 16px;
-      box-sizing: border-box;
-    }
+  /* dark band: shortcuts */
+  .band{background:var(--stage); color:var(--txt)}
+  .band .sec-head h2{color:#fff}
+  .band .sec-head p{color:var(--mut)}
+  .band .sec-head .kick{color:var(--g300)}
+  .cheat{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px}
+  .cheat .row{display:flex; align-items:center; gap:14px; background:var(--dl-card);
+    border:1px solid var(--dl-border); border-radius:14px; padding:14px 18px}
+  .kbd{font-family:var(--mono); font-size:13px; font-weight:700; color:var(--g200);
+    background:#0A110C; border:1px solid var(--dl-border); border-radius:8px;
+    padding:5px 12px; white-space:nowrap}
+  .cheat .row .d{font-size:13.5px; color:var(--mut)}
+  .cheat .row .d b{color:var(--txt); display:block; font-size:14px}
 
-    /* Navbar */
-    .navbar {
-      position: sticky; top: 0; z-index: 1000;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      background: rgba(8, 17, 14, 0.85);
-      border-bottom: 1px solid rgba(95, 208, 166, 0.16);
-      width: 100%;
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 72px;
-    }
-    .brand {
-      display: flex; align-items: center; gap: 10px;
-      font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em;
-    }
-    .brand img {
-      width: 40px; height: 40px; border-radius: 11px;
-      box-shadow: 0 0 20px rgba(27, 158, 114, 0.4);
-      border: 1px solid rgba(95, 208, 166, 0.4);
-    }
-    .brand-badge {
-      font-size: 0.7rem; font-weight: 800; padding: 2px 8px;
-      border-radius: 999px; background: rgba(95, 208, 166, 0.16);
-      color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.45);
-    }
+  /* comparison table */
+  .tbl-wrap{overflow-x:auto; border-radius:20px; border:1px solid #E4EDE7; background:#fff;
+    box-shadow:0 4px 18px rgba(10,60,40,.06)}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px}
+  th{background:var(--mint2); text-align:left; padding:14px 18px; font-size:12px;
+    text-transform:uppercase; letter-spacing:.06em; color:var(--g700)}
+  td{padding:13px 18px; border-top:1px solid #EAF1EC}
+  td.ok{color:var(--g600); font-weight:700; white-space:nowrap}
+  td.no{color:#B04A4A; white-space:nowrap}
+  tr.hl td{background:#F2F8F4}
+  tr.hl td:first-child{font-weight:700; color:var(--g700)}
 
-    .nav-links {
-      display: flex; align-items: center; gap: 22px;
-      font-size: 0.92rem; font-weight: 600; color: #B9CBC2;
-    }
-    .nav-links a:hover { color: #5FD0A6; }
+  /* download */
+  .dl-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px}
+  .dl{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:18px;
+    padding:22px; color:var(--txt); text-decoration:none; display:flex; flex-direction:column;
+    gap:6px; transition:.18s}
+  .dl:hover{border-color:var(--g500); transform:translateY(-3px)}
+  .dl .fmt{font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--g300);
+    text-transform:uppercase}
+  .dl .name{font-weight:700; font-size:15px}
+  .dl .os{font-size:12.5px; color:var(--mut)}
+  .install{background:#0A110C; border:1px solid var(--dl-border); border-radius:16px;
+    padding:18px 20px; font-family:var(--mono); font-size:13px; color:#C9DAD0;
+    overflow-x:auto; margin-top:14px}
+  .install .cm{color:var(--g300)}
 
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
+  /* faq */
+  .faq{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px}
+  details{background:#fff; border:1px solid #E4EDE7; border-radius:16px; padding:18px 22px}
+  details[open]{border-color:var(--g200)}
+  summary{cursor:pointer; font-weight:700; font-size:15px; list-style:none; display:flex;
+    justify-content:space-between; align-items:center; gap:12px}
+  summary::after{content:"+"; color:var(--g500); font-size:20px; font-weight:400}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:12px; color:#5A6E62; font-size:14px}
+  details code{font-family:var(--mono); font-size:12.5px; background:var(--mint2);
+    color:var(--g700); border-radius:6px; padding:2px 7px}
 
-    /* Buttons */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 10px 18px; border-radius: 12px; font-weight: 700; font-size: 0.92rem;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
-      border: 1px solid transparent; user-select: none; white-space: nowrap;
-      text-align: center;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #0B5D45 0%, #1B9E72 100%);
-      color: #fff; border-color: #5FD0A6;
-      box-shadow: 0 4px 18px rgba(27, 158, 114, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(27, 158, 114, 0.6);
-      border-color: #A7E8CF;
-    }
-    .btn-donate {
-      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(244, 42, 65, 0.3));
-      color: #fda4af; border-color: rgba(244, 42, 65, 0.55);
-    }
-    .btn-donate:hover {
-      background: linear-gradient(135deg, #D91B33, #F42A41);
-      color: #fff; transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(244, 42, 65, 0.5);
-    }
-    .btn-outline {
-      background: rgba(19, 28, 49, 0.7); color: #D3E0D9;
-      border-color: rgba(95, 208, 166, 0.3);
-      backdrop-filter: blur(8px);
-    }
-    .btn-outline:hover {
-      border-color: #5FD0A6; color: #fff;
-      background: rgba(11, 93, 69, 0.3); transform: translateY(-2px);
-    }
-    .btn-sm { padding: 7px 14px; font-size: 0.82rem; border-radius: 9px; }
-
-    /* Mobile Hamburger Button */
-    .mobile-menu-btn {
-      display: none;
-      flex-direction: column; justify-content: center; align-items: center;
-      gap: 5px; width: 42px; height: 42px; border-radius: 10px;
-      background: rgba(19, 28, 49, 0.85); border: 1px solid rgba(95, 208, 166, 0.3);
-      color: #5FD0A6; cursor: pointer; transition: all 0.2s ease;
-    }
-    .mobile-menu-btn span {
-      display: block; width: 22px; height: 2px; background: #5FD0A6;
-      border-radius: 2px; transition: all 0.25s ease;
-    }
-    .mobile-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
-    .mobile-menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* Mobile Navigation Drawer */
-    .mobile-nav-drawer {
-      display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-      background: rgba(8, 17, 14, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      z-index: 999; padding: 20px 16px; overflow-y: auto;
-      flex-direction: column; gap: 12px; border-bottom: 1px solid rgba(95, 208, 166, 0.25);
-    }
-    .mobile-nav-drawer.open { display: flex; }
-    .mobile-nav-link {
-      font-size: 1.05rem; font-weight: 700; color: #f1f5f9;
-      padding: 12px 16px; border-radius: 12px;
-      background: rgba(22, 33, 28, 0.6); border: 1px solid rgba(95, 208, 166, 0.15);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .mobile-nav-link:active {
-      background: rgba(11, 93, 69, 0.3); border-color: #5FD0A6; color: #5FD0A6;
-    }
-    .mobile-nav-actions {
-      display: flex; flex-direction: column; gap: 10px; margin-top: 10px;
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: clamp(48px, 8vw, 84px) 0 clamp(40px, 6vw, 64px);
-      text-align: center; position: relative;
-    }
-    .hero-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 16px; border-radius: 999px;
-      background: rgba(27, 158, 114, 0.12); border: 1px solid rgba(95, 208, 166, 0.38);
-      color: #5FD0A6; font-size: clamp(0.76rem, 2vw, 0.88rem); font-weight: 700;
-      margin-bottom: 20px; box-shadow: 0 0 20px rgba(27, 158, 114, 0.2);
-      max-width: 100%; text-overflow: ellipsis;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 5.8vw, 4.2rem);
-      font-weight: 900; line-height: 1.15; letter-spacing: -0.03em;
-      margin-bottom: 18px; word-wrap: break-word;
-    }
-    .gradient-text {
-      background: linear-gradient(90deg, #5FD0A6 0%, #7DD8C3 40%, #FF6B7E 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-    .hero-sub {
-      max-width: 820px; margin: 0 auto 30px;
-      font-size: clamp(0.96rem, 2vw, 1.18rem); color: var(--text-muted);
-      line-height: 1.7;
-    }
-    .hero-cta {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 12px; margin-bottom: 42px;
-    }
-    .os-detect-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.76rem; font-weight: 800; color: #5FD0A6;
-      background: rgba(95, 208, 166, 0.15); border: 1px solid rgba(95, 208, 166, 0.35);
-      padding: 2px 8px; border-radius: 6px; margin-left: 6px;
-    }
-
-    /* Stats Grid */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-      gap: 14px; margin-top: 10px; width: 100%;
-    }
-    .stat-card {
-      background: var(--bg-surface); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md); padding: 18px 14px; text-align: center;
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-      transition: all 0.22s ease;
-    }
-    .stat-card:hover {
-      border-color: #5FD0A6; transform: translateY(-3px);
-      box-shadow: 0 12px 30px -10px rgba(27, 158, 114, 0.3);
-    }
-    .stat-num {
-      font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 900;
-      color: #5FD0A6; line-height: 1.1; letter-spacing: -0.02em;
-    }
-    .stat-label {
-      font-size: 0.84rem; color: var(--text-muted); margin-top: 5px; font-weight: 600;
-    }
-
-    /* Section Headers */
-    section { padding: clamp(48px, 7vw, 76px) 0; position: relative; width: 100%; }
-    .section-header { text-align: center; max-width: 800px; margin: 0 auto clamp(30px, 5vw, 48px); }
-    .section-tag {
-      display: inline-block; font-size: 0.78rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.09em;
-      color: #5FD0A6; margin-bottom: 10px;
-      padding: 3px 12px; border-radius: 999px;
-      background: rgba(27, 158, 114, 0.12); border: 1px solid rgba(95, 208, 166, 0.3);
-    }
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 800;
-      letter-spacing: -0.025em; margin-bottom: 12px; line-height: 1.25;
-    }
-    .section-desc {
-      color: var(--text-muted); font-size: clamp(0.94rem, 1.8vw, 1.05rem);
-      line-height: 1.68;
-    }
-
-    /* =========================================================================
-       Full Live Web Keyboard Studio (v1.1.0) Responsive UI
-       ========================================================================= */
-    .demo-box {
-      background: linear-gradient(180deg, rgba(14, 22, 40, 0.96), rgba(8, 12, 22, 0.98));
-      border: 1.5px solid rgba(95, 208, 166, 0.45);
-      border-radius: var(--radius-xl); padding: clamp(14px, 3vw, 26px);
-      box-shadow: 0 32px 80px -15px rgba(0, 0, 0, 0.85), 0 0 50px rgba(27, 158, 114, 0.16);
-      width: 100%; max-width: 1080px; margin: 0 auto;
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      overflow: hidden;
-    }
-
-    .studio-topbar {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 10px; background: rgba(11, 19, 36, 0.92); border: 1px solid rgba(95, 208, 166, 0.35);
-      border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 14px; width: 100%;
-    }
-    .topbar-left, .topbar-right {
-      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
-    }
-    .tb-brand {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 800; font-size: 0.92rem; color: #E6EFEA;
-      padding-right: 10px; border-right: 1px solid rgba(95, 208, 166, 0.25);
-    }
-    .tb-brand img { width: 24px; height: 24px; border-radius: 6px; }
-    .tb-btn {
-      padding: 7px 12px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
-      background: #1B2C25; color: #D3E0D9; border: 1px solid rgba(95, 208, 166, 0.3);
-      cursor: pointer; transition: all 0.16s ease; display: inline-flex; align-items: center; gap: 6px;
-      user-select: none; white-space: nowrap;
-    }
-    .tb-btn:hover { background: #1e3a8a; border-color: #5FD0A6; color: #fff; }
-    .tb-btn.mode-bn {
-      background: linear-gradient(135deg, #0B5D45, #1B9E72);
-      color: #fff; border-color: #5FD0A6;
-      box-shadow: 0 0 16px rgba(27, 158, 114, 0.4);
-    }
-    .tb-btn.mode-en {
-      background: #2E4239; color: #E6EFEA; border-color: #6B7C73;
-    }
-    .tb-select {
-      padding: 7px 11px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
-      background: #1B2C25; color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.35);
-      outline: none; cursor: pointer; max-width: 100%;
-    }
-
-    .trainer-drawer {
-      display: none; background: rgba(13, 23, 42, 0.92);
-      border: 1px dashed rgba(95, 208, 166, 0.5);
-      border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 14px;
-      align-items: center; flex-wrap: wrap; gap: 8px; width: 100%;
-    }
-    .trainer-drawer.open { display: flex; }
-    .trainer-inp {
-      padding: 8px 12px; border-radius: 8px; background: #060a14;
-      border: 1px solid rgba(95, 208, 166, 0.35); color: #fff; font-size: 0.86rem;
-      outline: none; flex: 1; min-width: 120px;
-    }
-    .trainer-inp:focus { border-color: #5FD0A6; box-shadow: 0 0 10px rgba(27, 158, 114, 0.3); }
-
-    /* Touch Horizontal Swipe Chips Container */
-    .demo-cat-tabs {
-      display: flex; gap: 6px; margin-bottom: 10px;
-      overflow-x: auto; -webkit-overflow-scrolling: touch;
-      padding-bottom: 6px; scrollbar-width: none;
-      width: 100%; max-width: 100%; flex-wrap: nowrap;
-    }
-    .demo-cat-tabs::-webkit-scrollbar { display: none; }
-    .cat-tab {
-      font-size: 0.78rem; font-weight: 700; padding: 6px 12px;
-      border-radius: 999px; background: #111c33; color: #8FA399;
-      border: 1px solid rgba(95, 208, 166, 0.2); cursor: pointer;
-      transition: all 0.16s ease; white-space: nowrap; flex-shrink: 0;
-    }
-    .cat-tab.active, .cat-tab:hover {
-      background: rgba(27, 158, 114, 0.25); color: #5FD0A6; border-color: #5FD0A6;
-    }
-
-    .demo-chips {
-      display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; align-items: center; width: 100%;
-    }
-    .demo-chip {
-      font-size: 0.8rem; font-weight: 600; padding: 5px 11px;
-      border-radius: 8px; background: rgba(26, 38, 64, 0.88);
-      border: 1px solid rgba(95, 208, 166, 0.28); color: #D3E0D9;
-      cursor: pointer; transition: all 0.15s ease;
-    }
-    .demo-chip:hover {
-      background: #0B5D45; border-color: #5FD0A6; color: #fff;
-    }
-
-    /* Pre-edit Strip */
-    .preedit-strip {
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
-      gap: 8px; margin-bottom: 12px; padding: 9px 14px;
-      background: rgba(13, 22, 41, 0.88); border: 1px solid rgba(95, 208, 166, 0.3);
-      border-radius: var(--radius-md); width: 100%;
-    }
-    .preedit-buffer {
-      display: inline-flex; align-items: center; gap: 7px; flex-wrap: wrap;
-      font-size: 0.9rem; color: #B9CBC2; max-width: 100%;
-    }
-    .preedit-pill {
-      padding: 3px 9px; border-radius: 6px; background: rgba(27, 158, 114, 0.2);
-      border: 1px solid #5FD0A6; color: #5FD0A6; font-weight: 800; font-family: var(--font-mono);
-      font-size: 0.92rem; word-break: break-all;
-    }
-    .preedit-help {
-      font-size: 0.74rem; color: #8FA399; display: inline-block; margin-left: 4px;
-    }
-    .editor-stats { font-size: 0.76rem; color: #8FA399; font-weight: 600; }
-
-    /* Floating Candidate Bar */
-    .candidate-bar {
-      display: flex; flex-wrap: wrap; gap: 7px;
-      background: rgba(11, 19, 36, 0.95); border: 1.5px solid rgba(95, 208, 166, 0.42);
-      border-radius: var(--radius-md); padding: 9px 12px; min-height: 52px; align-items: center;
-      margin-bottom: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); width: 100%;
-    }
-    .cand-item {
-      padding: 6px 12px; border-radius: 9px; font-size: 0.95rem; font-weight: 600;
-      background: #1B2C25; color: #D3E0D9; border: 1px solid rgba(95, 208, 166, 0.22);
-      cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
-      transition: all 0.14s ease; user-select: none;
-    }
-    .cand-item:hover { border-color: #5FD0A6; background: #1e3a8a; }
-    .cand-item.active {
-      background: linear-gradient(135deg, #0B5D45, #1B9E72);
-      color: #fff; border-color: #A7E8CF;
-      box-shadow: 0 4px 14px rgba(27, 158, 114, 0.45);
-    }
-    .cand-num {
-      font-size: 0.7rem; font-weight: 800; padding: 1px 5px; border-radius: 4px;
-      background: rgba(0, 0, 0, 0.35); color: #bae6fd;
-    }
-    .cand-badge {
-      font-size: 0.66rem; font-weight: 800; padding: 2px 5px; border-radius: 4px;
-      background: rgba(22, 33, 28, 0.7); color: #A7E8CF; letter-spacing: 0.02em;
-    }
-
-    /* Text Editor Textarea */
-    .editor-wrap { position: relative; margin-bottom: 12px; width: 100%; }
-    .demo-textarea {
-      width: 100%; min-height: 135px; padding: 16px 18px; border-radius: var(--radius-md);
-      background: rgba(6, 11, 22, 0.94); border: 1.5px solid #5FD0A6;
-      color: #E6EFEA; font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.7;
-      font-family: var(--font-bn); outline: none; resize: vertical;
-      box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.7);
-      transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;
-    }
-    .demo-textarea:focus {
-      border-color: #A7E8CF;
-      box-shadow: 0 0 0 3px rgba(95, 208, 166, 0.25), inset 0 2px 14px rgba(0, 0, 0, 0.7);
-    }
-
-    /* On-Screen Virtual Keyboard (100% Fluid & Touch Friendly) */
-    .vkbd-wrap {
-      background: rgba(8, 13, 26, 0.95); border: 1px solid rgba(95, 208, 166, 0.3);
-      border-radius: var(--radius-md); padding: 10px; margin-top: 6px; user-select: none;
-      width: 100%; max-width: 100%; box-sizing: border-box;
-    }
-    .vkbd-wrap.hidden { display: none; }
-    .vkbd-row {
-      display: flex; justify-content: center; gap: 4px; margin-bottom: 4px;
-      width: 100%; max-width: 100%;
-    }
-    .vkbd-row:last-child { margin-bottom: 0; }
-    .vkbd-key {
-      flex: 1; min-width: 0; max-width: 66px; height: 44px;
-      background: #131e36; border: 1px solid rgba(95, 208, 166, 0.22);
-      border-radius: 7px; color: #E6EFEA; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      transition: all 0.1s ease; position: relative; padding: 2px;
-    }
-    .vkbd-key:hover, .vkbd-key.pressed {
-      background: #0B5D45; border-color: #5FD0A6; transform: translateY(-1px);
-    }
-    .vkbd-key.wide { flex: 1.5; max-width: 95px; font-size: 0.76rem; font-weight: 700; }
-    .vkbd-key.space { flex: 4.5; max-width: 320px; font-size: 0.8rem; font-weight: 700; color: #5FD0A6; }
-    .vkbd-en { font-size: 0.66rem; color: #8FA399; line-height: 1; }
-    .vkbd-bn { font-size: 0.94rem; font-weight: 700; color: #5FD0A6; line-height: 1.15; }
-    .vkbd-key:hover .vkbd-bn, .vkbd-key.pressed .vkbd-bn { color: #fff; }
-
-    /* =========================================================================
-       High-Performance Rendering Optimizations (Skip offscreen layout & paint)
-       ========================================================================= */
-    #downloads, #install, #templates, #features, #screenshots, #comparison, #faq {
-      content-visibility: auto;
-      contain-intrinsic-size: 1px 700px;
-    }
-
-    /* =========================================================================
-       Download Center Cards
-       ========================================================================= */
-    .dl-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-      gap: 20px; width: 100%;
-    }
-    .dl-card {
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg); padding: clamp(18px, 3vw, 24px); display: flex; flex-direction: column;
-      justify-content: space-between; transition: all 0.22s ease;
-      position: relative; overflow: hidden; backdrop-filter: blur(14px);
-    }
-    .dl-card:hover {
-      border-color: #5FD0A6; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.35);
-    }
-    .dl-card.featured {
-      border: 1.5px solid #5FD0A6;
-      background: linear-gradient(165deg, rgba(23, 37, 84, 0.55) 0%, rgba(18, 28, 24, 0.9) 100%);
-    }
-    .dl-card.os-detected {
-      border-color: #5FD0A6;
-      box-shadow: 0 0 35px rgba(95, 208, 166, 0.25);
-    }
-    .dl-card.os-detected::after {
-      content: "🔥 Match for Your Device"; position: absolute; top: 12px; right: 14px;
-      font-size: 0.68rem; font-weight: 800; background: rgba(95, 208, 166, 0.2);
-      color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.45);
-      padding: 2px 8px; border-radius: 999px;
-    }
-    .dl-os-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .dl-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: rgba(27, 158, 114, 0.15); border: 1px solid rgba(95, 208, 166, 0.35);
-      display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
-      flex-shrink: 0;
-    }
-    .dl-title { font-size: 1.18rem; font-weight: 800; }
-    .dl-sub { font-size: 0.82rem; color: var(--text-muted); }
-    .dl-links { display: flex; flex-direction: column; gap: 9px; margin-top: 16px; width: 100%; }
-    .dl-btn {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 11px 14px; border-radius: 10px;
-      background: #131c31; border: 1px solid rgba(95, 208, 166, 0.28);
-      font-size: 0.9rem; font-weight: 700; color: #E6EFEA;
-      transition: all 0.16s ease;
-    }
-    .dl-btn:hover { background: #0B5D45; border-color: #5FD0A6; color: #fff; }
-    .dl-meta { font-size: 0.75rem; color: #8FA399; font-weight: 600; }
-
-    /* Installation Steps Tabs */
-    .process-tabs {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 24px;
-      overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; width: 100%;
-    }
-    .tab-btn {
-      padding: 9px 18px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
-      background: #111c33; color: #8FA399; border: 1px solid rgba(95, 208, 166, 0.2);
-      cursor: pointer; transition: all 0.18s ease; white-space: nowrap;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: linear-gradient(135deg, #0B5D45, #1B9E72);
-      color: #fff; border-color: #5FD0A6;
-    }
-    .tab-pane { display: none; width: 100%; max-width: 900px; margin: 0 auto; }
-    .tab-pane.active { display: block; animation: fadeIn 0.2s ease forwards; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .step-card {
-      background: var(--bg-surface); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md); padding: 20px 22px; margin-bottom: 14px;
-      backdrop-filter: blur(12px); width: 100%;
-    }
-    .step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .step-num {
-      width: 30px; height: 30px; border-radius: 50%;
-      background: #1B9E72; color: #0A1210; font-weight: 900; font-size: 0.9rem;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .step-title { font-weight: 800; font-size: 1.04rem; }
-    .code-wrap {
-      position: relative; background: #050914; border: 1px solid rgba(95, 208, 166, 0.28);
-      border-radius: 10px; padding: 12px 14px; overflow-x: auto; margin-top: 8px; width: 100%;
-    }
-    .code-wrap pre { color: #5FD0A6; font-size: 0.86rem; line-height: 1.6; }
-    .copy-btn {
-      position: absolute; top: 8px; right: 8px;
-      background: #22332C; color: #B9CBC2; border: 1px solid rgba(95, 208, 166, 0.35);
-      border-radius: 6px; padding: 4px 10px; font-size: 0.74rem; font-weight: 700;
-      cursor: pointer;
-    }
-    .copy-btn:hover { background: #1B9E72; color: #0A1210; }
-
-    /* Features Grid */
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
-      gap: 20px; width: 100%;
-    }
-    .feat-card {
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg); padding: 24px;
-      backdrop-filter: blur(14px); transition: all 0.22s ease;
-    }
-    .feat-card:hover {
-      border-color: #5FD0A6; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.28);
-    }
-    .feat-icon {
-      width: 48px; height: 48px; border-radius: 12px;
-      background: rgba(27, 158, 114, 0.14); border: 1px solid rgba(95, 208, 166, 0.35);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.7rem; margin-bottom: 14px;
-    }
-    .feat-title { font-size: 1.16rem; font-weight: 800; margin-bottom: 8px; color: #E6EFEA; }
-    .feat-desc { color: var(--text-muted); font-size: 0.94rem; line-height: 1.68; }
-
-    /* Screenshots Gallery */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-      gap: 20px; width: 100%;
-    }
-    .shot-card {
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg); padding: 14px; text-align: center;
-      backdrop-filter: blur(12px); cursor: pointer; transition: all 0.2s ease;
-    }
-    .shot-card:hover {
-      border-color: #5FD0A6; transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(27, 158, 114, 0.22);
-    }
-    .shot-card img {
-      width: 100%; height: auto; border-radius: 10px;
-      border: 1px solid rgba(95, 208, 166, 0.22); margin-bottom: 10px;
-    }
-    .shot-caption { font-weight: 700; font-size: 0.92rem; color: #B9CBC2; }
-
-    /* Lightbox Modal */
-    .lightbox-modal {
-      display: none; position: fixed; inset: 0; z-index: 2000;
-      background: rgba(8, 17, 14, 0.92); backdrop-filter: blur(20px);
-      align-items: center; justify-content: center; padding: 16px;
-    }
-    .lightbox-modal.open { display: flex; animation: fadeIn 0.2s ease; }
-    .lightbox-img {
-      max-width: 95vw; max-height: 88vh; border-radius: 12px;
-      border: 1.5px solid #5FD0A6; box-shadow: 0 0 50px rgba(27, 158, 114, 0.45);
-    }
-    .lightbox-close {
-      position: absolute; top: 16px; right: 20px;
-      background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(95, 208, 166, 0.4);
-      color: #fff; width: 40px; height: 40px; border-radius: 50%;
-      font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    }
-
-    /* Comparison Table */
-    .table-wrap {
-      overflow-x: auto; background: var(--bg-card);
-      border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
-      backdrop-filter: blur(14px); -webkit-overflow-scrolling: touch;
-      width: 100%; max-width: 100%;
-    }
-    table { width: 100%; border-collapse: collapse; text-align: left; min-width: 580px; }
-    th, td { padding: 14px 18px; border-bottom: 1px solid rgba(95, 208, 166, 0.14); font-size: 0.92rem; }
-    th { background: rgba(19, 28, 49, 0.95); color: #5FD0A6; font-weight: 800; font-size: 0.95rem; }
-    tr:last-child td { border-bottom: none; }
-    .yes { color: #5FD0A6; font-weight: 700; }
-    .no { color: #6B7C73; }
-
-    /* FAQ */
-    .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; width: 100%; }
-    details.faq-item {
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md); padding: 16px 20px; transition: all 0.2s ease; width: 100%;
-    }
-    details.faq-item[open] {
-      border-color: #5FD0A6; background: rgba(18, 29, 52, 0.85);
-    }
-    details.faq-item summary {
-      font-weight: 800; font-size: 1.02rem; cursor: pointer; list-style: none;
-      display: flex; align-items: center; justify-content: space-between; user-select: none;
-    }
-    details.faq-item summary::-webkit-details-marker { display: none; }
-    details.faq-item p { margin-top: 12px; color: var(--text-muted); font-size: 0.93rem; line-height: 1.68; }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid rgba(95, 208, 166, 0.2);
-      padding: 50px 0 36px; margin-top: 50px;
-      background: rgba(8, 17, 14, 0.96); width: 100%;
-    }
-
-    /* Back to Top */
-    .back-to-top {
-      position: fixed; bottom: 20px; right: 20px; z-index: 99;
-      width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, #0B5D45, #1B9E72);
-      border: 1.5px solid #A7E8CF; color: #fff; font-size: 1.1rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; box-shadow: 0 6px 20px rgba(27, 158, 114, 0.4);
-      transition: all 0.2s ease; opacity: 0; pointer-events: none;
-    }
-    .back-to-top.visible { opacity: 1; pointer-events: auto; }
-
-    /* =========================================================================
-       Targeted Responsive Breakpoints
-       ========================================================================= */
-    @media (max-width: 992px) {
-      .nav-links { display: none; }
-      .mobile-menu-btn { display: flex; }
-      .nav-actions { display: none; }
-    }
-
-    @media (max-width: 768px) {
-      .studio-topbar {
-        display: flex; flex-direction: column; align-items: stretch; gap: 10px;
-      }
-      .topbar-left {
-        display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%;
-      }
-      .tb-brand {
-        grid-column: 1 / -1; border-right: none; padding-bottom: 6px;
-        border-bottom: 1px solid rgba(95, 208, 166, 0.2);
-      }
-      #btnModeToggle { width: 100%; justify-content: center; }
-      #layoutSelect { width: 100%; }
-      #btnVkbdToggle { width: 100%; justify-content: center; }
-      .topbar-left .tb-btn:last-child { width: 100%; justify-content: center; }
-      .topbar-right {
-        display: flex; width: 100%; gap: 6px;
-      }
-      .topbar-right .tb-btn {
-        flex: 1; justify-content: center; padding: 7px 8px; font-size: 0.78rem;
-      }
-      .preedit-strip {
-        flex-direction: column; align-items: flex-start; gap: 6px;
-      }
-      .preedit-help { display: block; margin-left: 0; margin-top: 4px; }
-      .hero-cta { flex-direction: column; align-items: stretch; }
-      .hero-cta .btn { width: 100%; }
-    }
-
-    @media (max-width: 640px) {
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .stat-card { padding: 14px 8px; }
-      .stat-num { font-size: 1.5rem; }
-      .stat-label { font-size: 0.74rem; }
-
-      /* Scale On-Screen Keys for Mobile Screens */
-      .vkbd-row { gap: 2.5px; margin-bottom: 3px; }
-      .vkbd-key { height: 38px; border-radius: 5px; padding: 1px; }
-      .vkbd-en { font-size: 0.58rem; }
-      .vkbd-bn { font-size: 0.8rem; font-weight: 700; }
-      .vkbd-key.wide { flex: 1.35; font-size: 0.65rem; }
-      .vkbd-key.space { flex: 3.5; font-size: 0.72rem; }
-
-      .dl-grid { grid-template-columns: 1fr; }
-      .feat-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Template Hub Section Styles */
-    .tpl-section {
-      background: linear-gradient(180deg, rgba(8, 14, 26, 0.95) 0%, rgba(13, 22, 42, 0.95) 100%);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .tpl-filter-bar {
-      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-      margin-bottom: 30px;
-    }
-    .tpl-filter-btn {
-      padding: 9px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 700;
-      background: var(--bg-card); color: #B9CBC2; border: 1px solid var(--border-subtle);
-      cursor: pointer; transition: all 0.2s ease;
-    }
-    .tpl-filter-btn:hover, .tpl-filter-btn.active {
-      background: linear-gradient(135deg, #1B9E72 0%, #1B9E72 100%);
-      color: #ffffff; border-color: #5FD0A6;
-      box-shadow: 0 4px 16px rgba(27, 158, 114, 0.35);
-    }
-    .tpl-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
-      gap: 24px;
-    }
-    .tpl-card {
-      background: var(--bg-card); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg); padding: 22px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      backdrop-filter: blur(14px); transition: all 0.22s ease;
-    }
-    .tpl-card:hover {
-      border-color: #5FD0A6; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.3);
-    }
-    .tpl-header {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 12px; margin-bottom: 12px;
-    }
-    .tpl-badge-wrap {
-      display: flex; flex-wrap: wrap; gap: 6px;
-    }
-    .tpl-code-badge {
-      background: rgba(27, 158, 114, 0.16); color: #5FD0A6;
-      border: 1px solid rgba(95, 208, 166, 0.35); border-radius: 6px;
-      font-family: monospace; font-size: 0.8rem; font-weight: 700;
-      padding: 3px 8px;
-    }
-    .tpl-lang-badge {
-      background: rgba(45, 212, 191, 0.16); color: #c084fc;
-      border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 6px;
-      font-size: 0.75rem; font-weight: 700; padding: 3px 8px;
-    }
-    .tpl-title {
-      font-size: 1.12rem; font-weight: 800; color: #E6EFEA; margin-bottom: 6px;
-    }
-    .tpl-desc {
-      font-size: 0.85rem; color: #8FA399; line-height: 1.5; margin-bottom: 14px;
-    }
-    .tpl-preview-box {
-      background: rgba(4, 7, 15, 0.75); border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px; padding: 14px; font-size: 0.82rem; line-height: 1.55;
-      color: #D3E0D9; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      white-space: pre-wrap; word-break: break-word; max-height: 190px;
-      overflow-y: auto; margin-bottom: 16px; scrollbar-width: thin;
-    }
-    .tpl-actions {
-      display: flex; gap: 10px; margin-top: auto;
-    }
-    .tpl-btn {
-      flex: 1; padding: 9px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      cursor: pointer; transition: all 0.2s ease; border: none;
-    }
-    .tpl-btn-copy {
-      background: rgba(27, 158, 114, 0.15); color: #5FD0A6;
-      border: 1px solid rgba(95, 208, 166, 0.35);
-    }
-    .tpl-btn-copy:hover {
-      background: #1B9E72; color: #0A1210; border-color: #1B9E72;
-    }
-    .tpl-btn-try {
-      background: rgba(34, 197, 94, 0.15); color: #4ade80;
-      border: 1px solid rgba(74, 222, 128, 0.35);
-    }
-    .tpl-btn-try:hover {
-      background: #22c55e; color: #0A1210; border-color: #22c55e;
-    }
-  </style>
+  /* footer */
+  footer{background:var(--stage); color:var(--mut); padding:56px 0 40px}
+  .foot-in{display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start}
+  .foot-in .brand{color:#fff}
+  footer a{color:var(--g300); text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .foot-links{display:flex; gap:20px; flex-wrap:wrap; font-size:14px}
+  .copyright{margin-top:32px; padding-top:24px; border-top:1px solid var(--dl-border);
+    font-size:12.5px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between}
+</style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <header class="navbar">
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <img src="logo.png" alt="MatraKi Logo" />
-        <span>MatraKi</span>
-        <span class="brand-badge">v1.1.0 AI</span>
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#">
+      <img src="logo.png" alt="MatraKi Logo">
+      MatraKi <span class="brand-badge">v1.1.0</span>
+    </a>
+    <div class="nav-links">
+      <a href="#studio">Live Studio</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#features">Features</a>
+      <a href="#shortcuts">Shortcuts</a>
+      <a href="#compare">Compare</a>
+      <a href="#download">Download</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#download">Download v1.1.0</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <img src="logo.png" alt="MatraKi" class="hero-logo">
+    <h1>MatraKi <span class="bn">মাত্রা-কী</span></h1>
+    <div class="tag">Type Smarter. Write Better.</div>
+    <p class="sub">The next-generation AI-powered Bangla phonetic &amp; fixed-layout keyboard for Linux —
+      built with a Rust phonetic engine, C++ AI language layer, and the Harper grammar checker.
+      Native Fcitx5 &amp; IBus support on Wayland and X11.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#download">⬇ Download for Linux</a>
+      <a class="btn btn-ghost" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard">★ GitHub</a>
+    </div>
+    <div class="ver">Latest release <b>v1.1.0 — Harper AI Edition</b> · GPL-3.0 · Free &amp; open source</div>
+    <div class="stats">
+      <div class="stat"><b>20,535+</b><span>Trained words &amp; typo rules</span></div>
+      <div class="stat"><b>225,000+</b><span>Inflected words via stemmer</span></div>
+      <div class="stat"><b>1,021</b><span>Regular verb conjugations</span></div>
+      <div class="stat"><b>130+</b><span>Bigram prediction contexts</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Interactive Live Bangla Web Studio ── -->
+<section id="studio" class="studio-sec">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:28px">
+      <span class="kick" style="color:var(--g300)">Interactive Web Studio</span>
+      <h2 style="color:#fff">Try MatraKi in your browser</h2>
+      <p style="color:var(--mut)">Type phonetic English below to see live AI suggestions, Harper grammar engine, and instant conversions in action.</p>
+    </div>
+    <div class="studio-card">
+      <div class="studio-bar">
+        <div class="left">
+          <span class="studio-pill">🟢 বাংলা ফনেটিক (AI Mode)</span>
+          <span style="color:var(--mut); font-size:13px">Harper ব্যাকরণ সক্রিয়</span>
+        </div>
+        <div style="color:var(--mut); font-size:12.5px">
+          শর্টকাট: <code style="color:var(--g300); font-family:var(--mono)">Space</code> রূপান্তর · <code style="color:var(--g300); font-family:var(--mono)">=</code> ক্যালকুলেটর · <code style="color:var(--g300); font-family:var(--mono)">!</code> স্নিপেট
+        </div>
+      </div>
+      <textarea id="liveInput" class="studio-input" placeholder="Type here... (e.g. ami banglay gan gai, =500*15%, !salam, @today)"></textarea>
+      <div class="studio-output-label">✦ লাইভ রূপান্তর ও AI ব্যাকরণ প্রিভিউ:</div>
+      <div id="liveOutput" class="studio-output">আমি বাংলায় গান গাই</div>
+      <div class="studio-tags">
+        <span class="st-tag" onclick="testSnippet('ami banglay gan gai')">ami banglay gan gai</span>
+        <span class="st-tag" onclick="testSnippet('shuvo sokal kemon achen?')">shuvo sokal</span>
+        <span class="st-tag" onclick="testSnippet('=500*15%')">=500*15%</span>
+        <span class="st-tag" onclick="testSnippet('=10km')">=10km</span>
+        <span class="st-tag" onclick="testSnippet('!salam')">!salam</span>
+        <span class="st-tag" onclick="testSnippet('@today')">@today</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Interface Showcase ── -->
+<section id="screenshots" class="shots-sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">Redesigned Interface</span>
+      <h2>Crafted with the Emerald Design System</h2>
+      <p>Clean, minimalistic, and adaptive. Designed natively to flow seamlessly with modern Linux desktops.</p>
+      <div class="shots-switch" style="margin-top:20px">
+        <button class="switch-btn active" onclick="setThemeShot('dark')">Dark Emerald</button>
+        <button class="switch-btn" onclick="setThemeShot('light')">Light Emerald</button>
+      </div>
+    </div>
+
+    <div class="shots-grid">
+      <div class="shot-card">
+        <img id="imgAbout" src="screenshots/about_dark.png" alt="MatraKi About Dialog">
+        <div class="cap">
+          <h4>About Dialog</h4>
+          <p>Tiro Bangla typography, AI vocabulary statistics, and shortcut summary card.</p>
+        </div>
+      </div>
+      <div class="shot-card">
+        <img id="imgUpdate" src="screenshots/update_dark.png" alt="MatraKi Update Dialog">
+        <div class="cap">
+          <h4>Software Update</h4>
+          <p>Emerald pill buttons, release highlights, and direct GitHub update check.</p>
+        </div>
+      </div>
+      <div class="shot-card">
+        <img id="imgSettings" src="screenshots/settings_dark.png" alt="MatraKi Settings Dialog">
+        <div class="cap">
+          <h4>Preferences &amp; Engine Tuning</h4>
+          <p>Dark/Light mode selector, candidate orientation, and AI toggle controls.</p>
+        </div>
+      </div>
+      <div class="shot-card">
+        <img id="imgLayout" src="screenshots/layout_dark.png" alt="MatraKi Layout Viewer">
+        <div class="cap">
+          <h4>Interactive Layout Viewer</h4>
+          <p>Theme-adaptive Avro phonetic keymap and smart shortcuts cheat sheet.</p>
+        </div>
+      </div>
+      <div class="shot-card">
+        <img id="imgHarper" src="screenshots/harper_dark.png" alt="MatraKi Harper Dialog">
+        <div class="cap">
+          <h4>Harper AI Grammar Engine</h4>
+          <p>Real-time contextual spelling and grammar verification diagnostics.</p>
+        </div>
+      </div>
+      <div class="shot-card">
+        <img id="imgTopBar" src="screenshots/topbar_dark.png" alt="MatraKi Floating TopBar">
+        <div class="cap">
+          <h4>Floating Pill Toolbar</h4>
+          <p>Frameless, draggable, theme-aware toolbar with instant layout switcher.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">Key Features</span>
+      <h2>Everything a modern Bangla keyboard should be</h2>
+      <p>Legacy keyboards stopped evolving years ago. MatraKi rebuilds Bangla input from the engine up —
+         smarter vocabulary, real grammar, and productivity tools right inside your keyboard.</p>
+    </div>
+    <div class="fgrid">
+      <div class="fcard"><div class="fic">🧠</div><h3>AI Language Intelligence</h3>
+        <p>20,535+ pre-trained words with smart agglutinative suffix stemming — automatically recognizes 225,000+ inflected forms like -গুলো, -দের, -টা, -কে.</p></div>
+      <div class="fcard"><div class="fic">🔮</div><h3>Next-Word Prediction</h3>
+        <p>Context-aware prediction with 130+ conversational bigram contexts. Press Tab to accept natural follow-up words as you type.</p></div>
+      <div class="fcard"><div class="fic">👤</div><h3>Subject-Verb Concordance</h3>
+        <p>Detects subject pronouns and re-ranks candidates — আমি করব, তুমি করবে, আপনি করবেন — automatically correct.</p></div>
+      <div class="fcard"><div class="fic">📖</div><h3>Bangla Academy Grammar</h3>
+        <p>Auto-fixes ণ-ত্ব, ষ-ত্ব and legacy spelling errors: সান্তনা → সান্ত্বনা, পুরষ্কার → পুরস্কার, শারিরীক → শারীরিক.</p></div>
+      <div class="fcard"><div class="fic">🧮</div><h3>Live Math &amp; Unit Converter</h3>
+        <p>Type =500*15% → ৭৫, =10km → মাইল, =5kg → পাউন্ড, =100c → ফারেনহাইট, =1bigha → শতক — instantly, inline.</p></div>
+      <div class="fcard"><div class="fic">✨</div><h3>Snippets, Dates &amp; Emoji</h3>
+        <p>!salam, !bismillah, @today for live Bangla date, 1la → ১লা, 500tk → ৳৫০০, and :smile → 😊 without leaving the keyboard.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="shortcuts" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">Cheat Sheet</span>
+      <h2>Smart shortcuts you'll use every minute</h2>
+      <p>Everything is triggered right from the keyboard — no dialogs, no mode switching.</p>
+    </div>
+    <div class="cheat">
+      <div class="row"><span class="kbd">Ctrl + Space</span><span class="d"><b>Toggle Bangla ⟷ English</b>Switch phonetic mode instantly</span></div>
+      <div class="row"><span class="kbd">Space ×2</span><span class="d"><b>Bangla Dari (। )</b>Double space commits the dari</span></div>
+      <div class="row"><span class="kbd">Tab</span><span class="d"><b>Accept prediction</b>Takes the highlighted next word</span></div>
+      <div class="row"><span class="kbd">1 – 9</span><span class="d"><b>Pick snippet</b>Commit numbered candidates immediately</span></div>
+      <div class="row"><span class="kbd">= &lt;math&gt;</span><span class="d"><b>Live Calculator</b>=500*15% evaluates inline to ৭৫</span></div>
+      <div class="row"><span class="kbd">= &lt;unit&gt;</span><span class="d"><b>Unit Converter</b>=10km converts to miles, =5kg to lbs</span></div>
+      <div class="row"><span class="kbd">!salam</span><span class="d"><b>Instant Greeting</b>Expands to আসসালামু আলাইকুম</span></div>
+      <div class="row"><span class="kbd">!jobbn</span><span class="d"><b>Full Job Application</b>Inserts complete formal Bangla letter</span></div>
+      <div class="row"><span class="kbd">@today</span><span class="d"><b>Bangla Calendar Date</b>Outputs today's date in Bengali</span></div>
+      <div class="row"><span class="kbd">500tk</span><span class="d"><b>Currency auto-fix</b>Converts to ৳৫০০ immediately</span></div>
+      <div class="row"><span class="kbd">1la, 21she</span><span class="d"><b>Bangla Ordinals</b>১লা, ২১শে converted automatically</span></div>
+      <div class="row"><span class="kbd">:smile</span><span class="d"><b>Smart Emoji</b>Inserts 😊 directly without emoji picker</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">Why MatraKi?</span>
+      <h2>A generational leap over traditional tools</h2>
+      <p>Compare MatraKi with legacy Linux Bangla tools built over a decade ago.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>MatraKi (v1.1.0)</th>
+            <th>Traditional Avro (IBus)</th>
+            <th>Bijoy 52</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl">
+            <td>UI &amp; Architecture</td>
+            <td class="ok">✦ Emerald Design System (Dark/Light)</td>
+            <td class="no">Legacy GTK2 / unmaintained</td>
+            <td class="no">Windows-only legacy</td>
+          </tr>
+          <tr>
+            <td>Input Method Protocol</td>
+            <td class="ok">✓ Modern Fcitx5 &amp; IBus Native</td>
+            <td class="no">IBus only</td>
+            <td class="no">No Linux support</td>
+          </tr>
+          <tr class="hl">
+            <td>Wayland &amp; X11 Compatibility</td>
+            <td class="ok">✓ 100% Wayland &amp; X11</td>
+            <td class="no">Broken on Wayland</td>
+            <td class="no">None</td>
+          </tr>
+          <tr>
+            <td>AI Grammar Checking</td>
+            <td class="ok">✓ Integrated Harper AI Engine</td>
+            <td class="no">None</td>
+            <td class="no">None</td>
+          </tr>
+          <tr class="hl">
+            <td>Vocabulary &amp; Suffix Stemming</td>
+            <td class="ok">✓ 225,000+ inflections via stemmer</td>
+            <td class="no">Static ~10k dictionary</td>
+            <td class="no">None</td>
+          </tr>
+          <tr>
+            <td>Inline Calculator &amp; Unit Converter</td>
+            <td class="ok">✓ Built-in (=500*15%, =10km)</td>
+            <td class="no">None</td>
+            <td class="no">None</td>
+          </tr>
+          <tr class="hl">
+            <td>Custom Snippets &amp; Templates</td>
+            <td class="ok">✓ !salam, !jobbn, !cvbn, @today</td>
+            <td class="no">None</td>
+            <td class="no">None</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">Download v1.1.0</span>
+      <h2>Pick your package</h2>
+      <p>Native packages for every major Linux distribution — 64-bit and 32-bit.</p>
+    </div>
+    <div class="dl-grid">
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb">
+        <span class="fmt">.deb · 64-bit</span><span class="name">Debian Package</span>
+        <span class="os">Ubuntu · Debian · Mint · Deepin · Pop!_OS</span></a>
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage">
+        <span class="fmt">.AppImage · 64-bit</span><span class="name">Standalone AppImage</span>
+        <span class="os">Any Linux distro — just download &amp; run</span></a>
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm">
+        <span class="fmt">.rpm · 64-bit</span><span class="name">RPM Package</span>
+        <span class="os">Fedora · RHEL · openSUSE · CentOS</span></a>
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz">
+        <span class="fmt">.tar.gz · 64-bit</span><span class="name">Portable Tarball</span>
+        <span class="os">Arch · Manjaro · generic portable</span></a>
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_i386.deb">
+        <span class="fmt">.deb · 32-bit</span><span class="name">Debian Package (i386)</span>
+        <span class="os">Older 32-bit systems</span></a>
+      <a class="dl" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0.tar.gz">
+        <span class="fmt">.tar.gz · source</span><span class="name">Build from Source</span>
+        <span class="os">Universal — full source code</span></a>
+    </div>
+    <div class="install"><span class="cm"># Debian / Ubuntu / Mint / Deepin</span>
+wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb
+sudo apt install -y ./matraki-keyboard_1.1.0_amd64.deb</div>
+    <div class="install"><span class="cm"># Or clone &amp; build from source</span>
+git clone https://github.com/sojibcreates-maker/MatraKi-Keyboard.git
+cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
+    <div style="text-align:center; margin-top:26px">
+      <a class="btn btn-mint" href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases">All releases →</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kick">FAQ</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <details><summary>How do I switch between English and Bangla?</summary>
+        <p>Press <code>Ctrl + Space</code> or configure your preferred Fcitx5 hotkey in settings. You can also click the floating MatraKi TopBar pill to toggle layouts.</p></details>
+      <details><summary>Does MatraKi work on Wayland?</summary>
+        <p>Yes! MatraKi uses the native Fcitx5 input method protocol with first-class support on GNOME, KDE Plasma, Deepin, Hyprland and Sway — as well as X11.</p></details>
+      <details><summary>Can I add my own words and shortcuts?</summary>
+        <p>Absolutely. Open Settings → <b>Dictionary</b> to search 20,535+ entries and add custom phonetic patterns with live preview. Custom snippets go in <code>~/.local/share/matraki-keyboard/snippets.json</code>.</p></details>
+      <details><summary>Which keyboard layouts are supported?</summary>
+        <p>Avro Phonetic (AI Enhanced), Probhat, National (Jatiya), Munir Optima, Borno, and Avro Easy.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="#">
+        <img src="logo.png" alt="MatraKi Logo">
+        MatraKi
       </a>
-
-      <nav class="nav-links">
-        <a href="#demo">Live AI Demo</a>
-        <a href="#downloads">Downloads</a>
-        <a href="#install">How to Install</a>
-        <a href="#templates">Email &amp; CV</a>
-        <a href="#features">AI Features</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate btn-sm">💖 Donate</a>
-        <a href="#downloads" class="btn btn-primary btn-sm">⬇ Download v1.1.0</a>
+      <div class="foot-links">
+        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard">GitHub</a>
+        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases">Releases</a>
+        <a href="https://www.supportkori.com/sojib" style="color:#EF3E4A; font-weight:700">💖 Support &amp; Donate</a>
+        <a href="https://facebook.com/hossain.sojibs">Facebook</a>
       </div>
-
-      <!-- Mobile Hamburger Button -->
-      <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
-  </header>
-
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-nav-drawer" id="mobileMenuDrawer">
-    <a href="#demo" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⚡ Live AI Keyboard Studio</span><span>➔</span></a>
-    <a href="#downloads" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⬇ Download Center</span><span>➔</span></a>
-    <a href="#install" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📖 How to Install</span><span>➔</span></a>
-    <a href="#templates" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📄 Email, Job &amp; CV Templates</span><span>➔</span></a>
-    <a href="#features" class="mobile-nav-link" onclick="closeMobileMenu()"><span>🧠 AI Features</span><span>➔</span></a>
-    <a href="#screenshots" class="mobile-nav-link" onclick="closeMobileMenu()"><span>📸 Screenshots</span><span>➔</span></a>
-    <a href="#comparison" class="mobile-nav-link" onclick="closeMobileMenu()"><span>⚖️ Comparison</span><span>➔</span></a>
-    <a href="#faq" class="mobile-nav-link" onclick="closeMobileMenu()"><span>❓ FAQ</span><span>➔</span></a>
-
-    <div class="mobile-nav-actions">
-      <a href="#downloads" class="btn btn-primary" onclick="closeMobileMenu()">🚀 Download MatraKi v1.1.0</a>
-      <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate">💖 Support &amp; Donate</a>
-      <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard" target="_blank" rel="noopener" class="btn btn-outline">⭐ Star on GitHub</a>
+    <div class="copyright">
+      <span>© 2026 Md Sojib Hossain · MatraKi is 100% free &amp; open source</span>
+      <span>GNU General Public License v3.0 · Crafted with passion for Bangla computing</span>
     </div>
   </div>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-pill">
-        <span>🚀 MatraKi v1.1.0 (Harper AI Edition) — Native Linux Bangla Input Suite</span>
-      </div>
-      <h1>
-        Type Smarter. Write Better.<br />
-        <span class="gradient-text">The AI-Powered Bangla Keyboard</span>
-      </h1>
-      <p class="hero-sub">
-        Meet <strong>MatraKi (মাত্রা-কী)</strong> — a blazingly fast Rust &amp; C++17 Bangla Phonetic and Fixed-Layout keyboard natively engineered for <strong>Linux (Ubuntu, Debian, Deepin, Mint, Fedora &amp; Arch)</strong>. Pre-trained with <strong>38,000+ words</strong>, smart suffix stemming, context-aware next-word prediction, Harper grammar engine, and live in-keyboard math &amp; unit conversion.
-      </p>
-      <div class="hero-cta">
-        <a href="#downloads" class="btn btn-primary" id="heroDownloadBtn">
-          <span>🚀 Download MatraKi v1.1.0 (Free)</span>
-          <span class="os-detect-badge" id="osDetectBadge">Auto-Detecting OS...</span>
-        </a>
-        <a href="#install" class="btn btn-outline">📖 Step-by-Step Installation Guide</a>
-        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard" target="_blank" rel="noopener" class="btn btn-outline">⭐ Star on GitHub</a>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num">38,000+</div>
-          <div class="stat-label">Trained Dictionary &amp; Auto-Correct Rules</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">225,000+</div>
-          <div class="stat-label">Inflected Bangla Words via Suffix Stemmer</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">1,021+</div>
-          <div class="stat-label">Pre-Trained Bangla Verb Conjugations</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">6 Layouts</div>
-          <div class="stat-label">Avro Phonetic, Probhat, Jatiya, Munir, Borno</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Full Interactive In-Browser MatraKi v1.1.0 Live Web Keyboard Studio -->
-  <section id="demo" style="padding-top: 10px;">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Full Live Web Keyboard Studio (v1.1.0)</span>
-        <h2 class="section-title">Experience Every Feature of MatraKi Live in Your Browser</h2>
-        <p class="section-desc">Powered by MatraKi’s complete 38,000+ word AI dictionary, Harper grammar engine, suffix stemmer, subject-verb concordance, live math calculator, 25+ unit & currency converters, 100+ snippets, 31 date ordinals, 80+ emojis, and 6 keyboard layouts.</p>
-      </div>
-
-      <div class="demo-box">
-        <!-- Simulated MatraKi Floating TopBar -->
-        <div class="studio-topbar">
-          <div class="topbar-left">
-            <span class="tb-brand">
-              <img src="logo.png" alt="MatraKi" />
-              MatraKi v1.1.0
-            </span>
-            <button type="button" id="btnModeToggle" class="tb-btn mode-bn" onclick="toggleKbdMode()" title="Shortcut: Ctrl+Space or Alt+Space">
-              🟢 বাংলা (AI)
-            </button>
-            <select id="layoutSelect" class="tb-select" onchange="changeKbdLayout(this.value)" title="Select Keyboard Layout">
-              <option value="avro">Avro Phonetic (AI Smart)</option>
-              <option value="probhat">Probhat (প্রভাত)</option>
-              <option value="national">National / Jatiya (জাতীয়)</option>
-              <option value="munir">Munir Optima (মুনীর)</option>
-              <option value="borno">Borno (বর্ণ)</option>
-              <option value="avro_easy">Avro Easy (অভ্র ইজি)</option>
-            </select>
-            <button type="button" class="tb-btn" onclick="toggleVirtualKbd()" id="btnVkbdToggle">
-              ⌨️ Hide Keyboard
-            </button>
-            <button type="button" class="tb-btn" onclick="toggleTrainerDrawer()">
-              📚 + Train Word
-            </button>
-            <button type="button" class="tb-btn" onclick="toggleHarperPanel()" id="btnHarperToggle" style="background: linear-gradient(135deg, #4338ca, #2DD4BF); color: #fff; border-color: #7DD8C3;" title="Automattic Harper Grammar &amp; Spell Checker">
-              🧠 Harper Grammar
-            </button>
-          </div>
-          <div class="topbar-right">
-            <button type="button" class="tb-btn" onclick="copyEditorText()" id="btnCopyEditor">📋 Copy</button>
-            <button type="button" class="tb-btn" onclick="downloadEditorText()">💾 Save .txt</button>
-            <button type="button" class="tb-btn" onclick="clearEditorText()">🗑️ Clear</button>
-          </div>
-        </div>
-
-        <!-- Live Custom Dictionary Trainer Drawer -->
-        <div class="trainer-drawer" id="trainerDrawer">
-          <span style="font-size:0.84rem; font-weight:700; color:#5FD0A6;">📚 Train Custom Word Live:</span>
-          <input type="text" id="trainPhonetic" class="trainer-inp" placeholder="Phonetic (e.g. sojib)" />
-          <input type="text" id="trainBangla" class="trainer-inp" placeholder="Bangla (e.g. সজীব)" />
-          <button type="button" class="tb-btn mode-bn" onclick="saveTrainedWord()">✓ Add to AI Dictionary</button>
-          <span id="trainStatus" style="font-size:0.8rem; color:#5FD0A6; font-weight:700;"></span>
-        </div>
-
-        <!-- Categorized 1-Click Feature Test Tabs (Horizontal Touch Swipe) -->
-        <div class="demo-cat-tabs" id="demoCatTabs">
-          <button type="button" class="cat-tab active" onclick="selectChipCategory('highlights', this)">✨ All Highlights</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('stemmer', this)">🧠 AI Phonetic &amp; Stemmer</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('grammar', this)">📖 প্রমিত বানান (Auto-Fix)</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('math', this)">🧮 Live Math (=)</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('units', this)">📏 16 Unit Converters (=)</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('templates', this)">📄 Email, Job &amp; CV</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('snippets', this)">⚡ 100+ Snippets (! &amp; @)</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('harper', this)">🧠 Harper Grammar (Automattic)</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('ordinals', this)">📅 31 Date Ordinals &amp; ৳ Taka</button>
-          <button type="button" class="cat-tab" onclick="selectChipCategory('emojis', this)">😊 80+ Emojis (:)</button>
-        </div>
-
-        <!-- Dynamic 1-Click Test Chips -->
-        <div class="demo-chips" id="demoChipsBar"></div>
-
-        <!-- Active Phonetic Pre-edit Strip -->
-        <div class="preedit-strip">
-          <div class="preedit-buffer">
-            <span>Active Buffer:</span>
-            <span class="preedit-pill" id="preeditRaw">bhalobashi</span>
-            <span style="color:#6B7C73;">➔</span>
-            <span id="preeditPreview" style="color:#5FD0A6; font-weight:700; font-size:1.02rem;">ভালোবাসি</span>
-            <span class="preedit-help">(Space/Enter = Commit, Tab = Next Word/Cycle, 1-9 = Pick, Double-Space = ।)</span>
-          </div>
-          <div class="editor-stats" id="editorStats">Words: 2 | Chars: 11 | Dict: 19,974+ keys</div>
-        </div>
-
-        <!-- Floating Candidate Bar (Numbered 1..9 with AI Badges) -->
-        <div class="candidate-bar" id="demoCandidates"></div>
-
-        <!-- Full Multi-Word Bangla Text Editor -->
-        <div class="editor-wrap">
-          <textarea id="demoEditor" class="demo-textarea" placeholder="এখানে সরাসরি বাংলায় টাইপ করুন... (Type phonetic Bangla like 'ami banglay gan gai', '=500*15%', '=10km', '!salam', '21she', '500tk', ':smile')">আমি বাংলায় </textarea>
-        </div>
-
-        <!-- Automattic Harper™ Grammar & Spell Inspection Panel -->
-        <div class="harper-panel" id="harperPanel" style="display:none; margin-bottom: 14px; background: rgba(22, 33, 28, 0.95); border: 1.5px solid #2DD4BF; border-radius: var(--radius-md); padding: 16px 18px; box-shadow: 0 10px 30px rgba(45, 212, 191, 0.25);">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
-            <div style="display:flex; align-items:center; gap:10px;">
-              <span style="font-size:1.4rem;">🧠</span>
-              <div>
-                <div style="font-weight:800; font-size:1.05rem; color:#c7d2fe;">Automattic Harper™ Grammar &amp; Spell Checker</div>
-                <div style="font-size:0.78rem; color:#8FA399;">High-speed grammar, spelling, and style analysis powered by Automattic Harper (v3.1.0)</div>
-              </div>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="tb-btn" onclick="testHarperSample()" style="background:#1e1b4b; border-color:#7DD8C3; color:#c7d2fe; font-size:0.8rem;">⚡ Test Sample Errors</button>
-              <button type="button" class="tb-btn" onclick="runHarperGrammarCheck()" style="background:#4338ca; border-color:#a5b4fc; color:#fff; font-size:0.8rem;">🔄 Re-check</button>
-              <button type="button" class="tb-btn" onclick="fixAllHarperIssues()" id="btnFixAllHarper" style="display:none; background:linear-gradient(135deg, #16a34a, #059669); border-color:#4ade80; color:#fff; font-size:0.8rem; font-weight:800;">✨ Fix All Issues</button>
-              <button type="button" class="tb-btn" onclick="toggleHarperPanel()" style="background:transparent; border-color:#5A6C64; color:#8FA399; font-size:0.8rem;">✕ Close</button>
-            </div>
-          </div>
-          <div id="harperStatus" style="font-size:0.88rem; font-weight:600; color:#B9CBC2; margin-bottom:12px;"></div>
-          <div id="harperIssuesList" style="display:flex; flex-direction:column; gap:8px;"></div>
-        </div>
-
-        <!-- Interactive On-Screen Virtual Bangla Keyboard -->
-        <div class="vkbd-wrap" id="virtualKbd">
-          
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Complete Download Center -->
-  <section id="downloads">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Official Release v1.1.0</span>
-        <h2 class="section-title">Download MatraKi for Your Linux Desktop</h2>
-        <p class="section-desc">All official 64-bit and 32-bit installers and portable packages are hosted directly on GitHub Releases.</p>
-      </div>
-
-      <div class="dl-grid">
-        <!-- Debian / Ubuntu / Deepin -->
-        <div class="dl-card featured" id="card-deb">
-          <div>
-            <div class="dl-os-header">
-              <div class="dl-icon">🐧</div>
-              <div>
-                <div class="dl-title">Ubuntu / Debian / Deepin / Mint</div>
-                <div class="dl-sub">Native .deb Package (Fcitx5 &amp; Qt5 GUI)</div>
-              </div>
-            </div>
-            <p style="font-size:0.9rem; color:#B9CBC2;">Recommended for Ubuntu, Debian, Deepin Linux, Linux Mint, Pop!_OS, Zorin OS, and Kali Linux.</p>
-          </div>
-          <div class="dl-links">
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb" class="dl-btn">
-              <span>⬇ Download .deb (64-bit amd64)</span>
-              <span class="dl-meta">7.1 MB</span>
-            </a>
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_i386.deb" class="dl-btn">
-              <span>⬇ Download .deb (32-bit i386)</span>
-              <span class="dl-meta">7.1 MB</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Universal Linux AppImage -->
-        <div class="dl-card featured" id="card-appimage">
-          <div>
-            <div class="dl-os-header">
-              <div class="dl-icon">⚡</div>
-              <div>
-                <div class="dl-title">Universal Linux AppImage</div>
-                <div class="dl-sub">Run Anywhere — No Installation Required</div>
-              </div>
-            </div>
-            <p style="font-size:0.9rem; color:#B9CBC2;">Single-file executable for any Linux distribution. Just mark executable (<code>chmod +x</code>) and run immediately.</p>
-          </div>
-          <div class="dl-links">
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage" class="dl-btn">
-              <span>⬇ Download .AppImage (64-bit x86_64)</span>
-              <span class="dl-meta">4.8 MB</span>
-            </a>
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-i386.AppImage" class="dl-btn">
-              <span>⬇ Download .AppImage (32-bit i386)</span>
-              <span class="dl-meta">4.8 MB</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Fedora / RedHat / openSUSE RPM -->
-        <div class="dl-card" id="card-rpm">
-          <div>
-            <div class="dl-os-header">
-              <div class="dl-icon">🎩</div>
-              <div>
-                <div class="dl-title">Fedora / RHEL / openSUSE</div>
-                <div class="dl-sub">Native RPM Package (.rpm)</div>
-              </div>
-            </div>
-            <p style="font-size:0.9rem; color:#B9CBC2;">Built for Fedora Workstation, Red Hat Enterprise Linux, CentOS Stream, AlmaLinux, Rocky, and openSUSE.</p>
-          </div>
-          <div class="dl-links">
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm" class="dl-btn">
-              <span>⬇ Download .rpm (64-bit x86_64)</span>
-              <span class="dl-meta">6.3 MB</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Tar.gz Portable & Source -->
-        <div class="dl-card" id="card-tar">
-          <div>
-            <div class="dl-os-header">
-              <div class="dl-icon">📦</div>
-              <div>
-                <div class="dl-title">Arch Linux / Portable &amp; Source</div>
-                <div class="dl-sub">Tarballs (`.tar.gz`) &amp; ELF Binaries</div>
-              </div>
-            </div>
-            <p style="font-size:0.9rem; color:#B9CBC2;">Pre-compiled Linux binary tarballs (64-bit &amp; 32-bit), standalone executable, and full GPLv3 source tarball.</p>
-          </div>
-          <div class="dl-links">
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz" class="dl-btn">
-              <span>⬇ Portable Linux 64-bit (.tar.gz)</span>
-              <span class="dl-meta">10.9 MB</span>
-            </a>
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-i386.tar.gz" class="dl-btn">
-              <span>⬇ Portable Linux 32-bit (.tar.gz)</span>
-              <span class="dl-meta">10.9 MB</span>
-            </a>
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-gui" class="dl-btn">
-              <span>⬇ Standalone GUI Binary (`matraki-gui`)</span>
-              <span class="dl-meta">822 KB</span>
-            </a>
-            <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0.tar.gz" class="dl-btn">
-              <span>⬇ Full Source Code (.tar.gz)</span>
-              <span class="dl-meta">88 MB</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Complete Step-by-Step Installation & Setup Guide -->
-  <section id="install" style="background: rgba(12, 19, 16, 0.65);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Complete Setup Process</span>
-        <h2 class="section-title">How to Install &amp; Use MatraKi (Step-by-Step)</h2>
-        <p class="section-desc">Select your operating system below to see the exact installation and activation steps.</p>
-      </div>
-
-      <div class="process-tabs">
-        <button class="tab-btn active" onclick="switchTab('tab-deb', this)">🐧 Ubuntu / Debian / Deepin (.deb)</button>
-        <button class="tab-btn" onclick="switchTab('tab-appimage', this)">⚡ AppImage (Any Linux)</button>
-        <button class="tab-btn" onclick="switchTab('tab-rpm', this)">🎩 Fedora / RHEL (.rpm)</button>
-        <button class="tab-btn" onclick="switchTab('tab-arch', this)">🏹 Arch / Portable (.tar.gz)</button>
-        <button class="tab-btn" onclick="switchTab('tab-source', this)">🛠️ One-Command Source Build</button>
-      </div>
-
-      <!-- Tab 1: Debian/Ubuntu -->
-      <div id="tab-deb" class="tab-pane active">
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">1</div>
-            <div class="step-title">Download the Official <code>.deb</code> Package</div>
-          </div>
-          <p style="color:#8FA399; font-size:0.93rem;">Run this command in your terminal (or download directly from the Download section above):</p>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb</pre>
-          </div>
-        </div>
-
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">2</div>
-            <div class="step-title">Install the Package via APT</div>
-          </div>
-          <p style="color:#8FA399; font-size:0.93rem;">APT will automatically install <code>fcitx5</code> and required Qt5 libraries alongside MatraKi:</p>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>sudo apt update &amp;&amp; sudo apt install -y ./matraki-keyboard_1.1.0_amd64.deb</pre>
-          </div>
-        </div>
-
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">3</div>
-            <div class="step-title">Start MatraKi &amp; Toggle Bangla Typing</div>
-          </div>
-          <p style="color:#8FA399; font-size:0.93rem;">Launch <strong>MatraKi</strong> from your Application Launcher (or run <code>/usr/share/matraki-keyboard/matraki-gui</code>). Press <strong><code>Ctrl + Space</code></strong> in any app to switch between English and Bangla!</p>
-        </div>
-      </div>
-
-      <!-- Tab 2: AppImage -->
-      <div id="tab-appimage" class="tab-pane">
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">1</div>
-            <div class="step-title">Download &amp; Make Executable</div>
-          </div>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage
-chmod +x MatraKi-Keyboard-1.1.0-x86_64.AppImage
-./MatraKi-Keyboard-1.1.0-x86_64.AppImage</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 3: RPM -->
-      <div id="tab-rpm" class="tab-pane">
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">1</div>
-            <div class="step-title">Install directly on Fedora / RHEL / openSUSE</div>
-          </div>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>sudo dnf install -y fcitx5 qt5-qtbase zstd
-sudo rpm -Uvh https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 4: Arch / Portable Tarball -->
-      <div id="tab-arch" class="tab-pane">
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">1</div>
-            <div class="step-title">Download, Extract &amp; Run Portable Binary</div>
-          </div>
-          <p style="color:#8FA399; font-size:0.93rem;">Works on Arch Linux, Manjaro, EndeavourOS, Gentoo, NixOS, or any Linux without root installation:</p>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz
-tar -xzf MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz
-cd MatraKi-Keyboard-1.1.0-linux-x86_64
-./matraki-gui</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tab 5: Source Build -->
-      <div id="tab-source" class="tab-pane">
-        <div class="step-card">
-          <div class="step-head">
-            <div class="step-num">1</div>
-            <div class="step-title">Clone &amp; Run the Automated <code>install.sh</code> Script</div>
-          </div>
-          <p style="color:#8FA399; font-size:0.93rem;">Works on standard Linux distributions as well as immutable desktops like Deepin Linux:</p>
-          <div class="code-wrap">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre>git clone https://github.com/sojibcreates-maker/MatraKi-Keyboard.git
-cd MatraKi-Keyboard
-chmod +x install.sh
-./install.sh</pre>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Deep-Dive AI Features Bento Grid -->
-  <!-- Email, Job Application & CV Templates Section -->
-  <section id="templates" class="tpl-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Instant Productivity Hub</span>
-        <h2 class="section-title">Email, Job &amp; CV Templates (বাংলা ও English)</h2>
-        <p class="section-desc">Type any shortcut (e.g. <code>!applybn</code>, <code>!applyen</code>, <code>!cvbn</code>, <code>!cven</code>, <code>!emailbn</code>, <code>!emailen</code>) anywhere on your PC or in the live studio to instantly insert complete, professional templates.</p>
-      </div>
-
-      <!-- Category Filter Bar -->
-      <div class="tpl-filter-bar">
-        <button type="button" class="tpl-filter-btn active" onclick="filterTemplates('all', this)">✨ All Templates (সব)</button>
-        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('email', this)">✉️ Emails (ইমেইল)</button>
-        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('job', this)">💼 Job Applications (চাকুরীর আবেদন)</button>
-        <button type="button" class="tpl-filter-btn" onclick="filterTemplates('cv', this)">📄 CV &amp; Resume (জীবনবৃত্তান্ত)</button>
-      </div>
-
-      <!-- Templates Grid -->
-      <div class="tpl-grid" id="templatesGrid">
-
-        <!-- 1. Bangla Job Application -->
-        <div class="tpl-card" data-cat="job">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">চাকুরীর আবেদনপত্র (বাংলা)</div>
-                <div class="tpl-desc">স্বনামধন্য প্রতিষ্ঠানে চাকুরীর আবেদনের জন্য বাংলা একাডেমির প্রমিত ও পেশাদার আবেদন ফরম্যাট।</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!applybn</span>
-                <span class="tpl-lang-badge">বাংলা</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_applybn">তারিখ: [তারিখ উল্লেখ করুন]
-বরাবর,
-ব্যবস্থাপনা পরিচালক / মানবসম্পদ বিভাগ
-[প্রতিষ্ঠানের নাম ও ঠিকানা]
-
-বিষয়: [পদের নাম]-এর জন্য আবেদনপত্র।
-
-মহোদয়,
-যথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে, গত [তারিখ]-এ প্রকাশিত বিজ্ঞপ্তির মাধ্যমে অবগত হলাম যে আপনার স্বনামধন্য প্রতিষ্ঠানে [পদের নাম] পদে দক্ষ কর্মী নিয়োগ করা হবে। আমি উক্ত পদের একজন আগ্রহী প্রার্থী হিসেবে আমার শিক্ষাগত যোগ্যতা ও জীবনবৃত্তান্ত আপনার সদয় বিবেচনার জন্য নিচে পেশ করছি:
-১. প্রার্থীর নাম: [আপনার পূর্ণ নাম]
-২. পিতার নাম: [পিতার নাম]
-৩. মাতার নাম: [মাতার নাম]
-৪. বর্তমান ঠিকানা: [বর্তমান ঠিকানা]
-৫. শিক্ষাগত যোগ্যতা: [সর্বোচ্চ ডিগ্রি, বিভাগ/সিজিপিএ]
-৬. অভিজ্ঞতা: [অভিজ্ঞতার বিবরণ]
-
-অতএব, বিনীত প্রার্থনা এই যে, আমার যোগ্যতা ও অভিজ্ঞতার বিষয়টি সহৃদয়তার সাথে বিবেচনা করে আমাকে উক্ত পদে নিয়োগ লাভের সুযোগ প্রদানে আপনার সদয় মর্জি হয়।
-
-বিনীত নিবেদক,
-[আপনার নাম] | মোবাইল: [মোবাইল নম্বর]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_applybn')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!applybn')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 2. English Job Application / Cover Letter -->
-        <div class="tpl-card" data-cat="job">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">Job Application &amp; Cover Letter</div>
-                <div class="tpl-desc">Formal job application letter for corporate, multinational, and remote companies.</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!applyen</span>
-                <span class="tpl-lang-badge">English</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_applyen">[Date]
-To,
-The Hiring Manager / HR Department,
-[Company Name], [Company Address]
-
-Subject: Application for the Position of [Job Title] - [Your Name]
-
-Dear Hiring Manager,
-
-I am writing to formally apply for the [Job Title] position currently open at [Company Name], as advertised on [Platform/LinkedIn]. With a strong background in [Your Field/Skills], I am eager to contribute effectively to your esteemed organization.
-
-Throughout my career, I have developed solid expertise in [mention 2-3 key skills, e.g., software engineering, analytical problem solving, project management]. I pride myself on collaborating smoothly across cross-functional teams and consistently delivering high-quality results.
-
-Enclosed is my Curriculum Vitae (CV) for your kind review. I welcome the opportunity to discuss my qualifications further in an interview.
-
-Thank you for your time and consideration.
-
-Sincerely,
-[Your Full Name] | Phone: [Phone Number] | Email: [Email Address]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_applyen')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!applyen')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 3. Software Engineer / Tech Application -->
-        <div class="tpl-card" data-cat="job">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">Tech &amp; Developer Job Application</div>
-                <div class="tpl-desc">Tailored for Software Engineers, Web Developers, and Tech Leads with GitHub and Stack info.</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!techapply</span>
-                <span class="tpl-lang-badge">English</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_techapply">Subject: Application: [Job Title] - [Your Full Name] (Software Engineer)
-
-Dear [Hiring Manager / Tech Lead],
-
-I am excited to apply for the [Job Title] role at [Company Name]. As a passionate developer with extensive hands-on experience building scalable applications using [Your Tech Stack, e.g., Flutter, React, Next.js, Node.js, Python, Rust], I believe I would make an immediate and impactful contribution to your engineering team.
-
-Key Highlights of My Experience:
-• Developed and deployed [1-2 highlight projects / architectures] with clean code and high reliability.
-• Strong foundation in system design, REST/GraphQL APIs, database optimization, and CI/CD pipelines.
-• Passionate about open-source software, clean documentation, and mentoring fellow developers.
-
-Portfolio & Links:
-• GitHub: [Your GitHub URL] | Live Projects: [Your Demo URL] | LinkedIn: [Your Profile]
-
-I have attached my resume detailing my full technical background. I look forward to speaking with you soon.
-
-Best regards,
-[Your Full Name] | Phone: [Your Phone] | Email: [Your Email]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_techapply')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!techapply')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 4. Complete Bangla CV (জীবনবৃত্তান্ত) -->
-        <div class="tpl-card" data-cat="cv">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">পূর্ণাঙ্গ বাংলা জীবনবৃত্তান্ত (CV)</div>
-                <div class="tpl-desc">ব্যক্তিগত তথ্য, শিক্ষাগত যোগ্যতা, অভিজ্ঞতা ও দক্ষতাসহ সম্পূর্ণ কাঠামোবদ্ধ বাংলা সিভি।</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!cvbn</span>
-                <span class="tpl-lang-badge">বাংলা</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_cvbn">জীবনবৃত্তান্ত (Curriculum Vitae)
-
-১. ব্যক্তিগত তথ্যাবলি (Personal Information):
-• পূর্ণ নাম: [আপনার নাম]
-• পিতার নাম: [পিতার নাম] | মাতার নাম: [মাতার নাম]
-• বর্তমান ঠিকানা: [গ্রাম/রোড, ডাকঘর, উপজেলা, জেলা]
-• স্থায়ী ঠিকানা: [গ্রাম/রোড, ডাকঘর, উপজেলা, জেলা]
-• জন্মতারিখ: [দিন/মাস/বছর] | জাতীয়তা: বাংলাদেশী | ধর্ম: [ধর্ম]
-• বৈবাহিক অবস্থা: [অবিবাহিত/বিবাহিত] | মোবাইল: [০১XXXXXXXXX]
-
-২. ক্যারিয়ারের লক্ষ্য (Career Objective):
-একটি গতিশীল প্রতিষ্ঠানে আমার মেধা, কর্মদক্ষতা ও শিক্ষাগত যোগ্যতাকে কাজে লাগিয়ে দায়িত্বশীল পদে অবদান রাখা।
-
-৩. শিক্ষাগত যোগ্যতা (Education):
-ক) স্নাতক/ডিগ্রি: [বিশ্ববিদ্যালয়ের নাম] | পাসের সন: [সাল] | ফলাফল: [সিজিপিএ]
-খ) এইচএসসি (HSC): [কলেজের নাম] | বোর্ড: [বোর্ড] | ফলাফল: [জিপিএ]
-গ) এসএসসি (SSC): [বিদ্যালয়ের নাম] | বোর্ড: [বোর্ড] | ফলাফল: [জিপিএ]
-
-৪. কর্মঅভিজ্ঞতা (Experience):
-• পদবি: [পদের নাম] | প্রতিষ্ঠান: [প্রতিষ্ঠানের নাম] | সময়কাল: [সাল হতে বর্তমান]
-
-৫. বিশেষ দক্ষতা (Skills):
-• কম্পিউটার ও প্রযুক্তি: এমএস অফিস, বাংলা ও ইংরেজি টাইপিং, ইন্টারনেট।
-• যোগাযোগ ও সমস্যা সমাধান দক্ষতা।
-
-৬. রেফারেন্স (Reference): [নাম, পদবি, প্রতিষ্ঠান, মোবাইল নম্বর]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_cvbn')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!cvbn')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 5. Executive English CV / Resume -->
-        <div class="tpl-card" data-cat="cv">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">Executive English CV / Resume</div>
-                <div class="tpl-desc">Modern single/multi-page executive resume format with ATS-optimized sections.</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!cven</span>
-                <span class="tpl-lang-badge">English</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_cven">========================================================================
-                         CURRICULUM VITAE
-========================================================================
-[YOUR FULL NAME]
-[Your Professional Title, e.g., Senior Software Engineer / Project Manager]
-Location: Dhaka, Bangladesh | Phone: +880 1XXXXXXXXX | Email: yourmail@example.com
-LinkedIn: linkedin.com/in/yourprofile | GitHub: github.com/yourprofile
-
-PROFESSIONAL SUMMARY
-Results-driven professional with [X] years of experience delivering high-impact solutions in [Your Field]. Proven track record of optimizing workflows, leading teams, and delivering scalable outcomes.
-
-CORE COMPETENCIES & TECHNICAL SKILLS
-• Technical Skills: [e.g., JavaScript, Python, C++, React, Flutter, SQL, Git]
-• Tools & Platforms: [e.g., Docker, Linux, AWS, Figma, VS Code]
-• Competencies: Team Leadership, Agile/Scrum, Problem Solving, Communication
-
-WORK EXPERIENCE
-[Job Title] | [Company Name] | [Location] | [Month, Year] – Present
-• Spearheaded [key project], resulting in [X]% improvement in efficiency.
-• Designed and maintained [system/process], collaborating with cross-functional teams.
-
-EDUCATION
-Bachelor of Science in [Your Major] — [University Name] | Passing Year: [Year]
-Higher Secondary Certificate (HSC) — [College Name] | GPA: [X.XX / 5.00]
-
-LANGUAGES: English (Professional), Bengali (Native)
-REFERENCES: Available upon request.</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_cven')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!cven')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 6. Formal Bangla Email -->
-        <div class="tpl-card" data-cat="email">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">অফিসিয়াল ইমেইল (বাংলা)</div>
-                <div class="tpl-desc">উচ্চপদস্থ কর্মকর্তা, ক্লায়েন্ট বা সহকর্মীদের সাথে দাপ্তরিক যোগাযোগের আদর্শ ফরম্যাট।</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!emailbn</span>
-                <span class="tpl-lang-badge">বাংলা</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_emailbn">সুপ্রিয় মহোদয়,
-আসসালামু আলাইকুম। আশা করি ভালো আছেন।
-
-আমার বার্তাটি হলো [এখানে আপনার মূল বার্তা ও প্রাসঙ্গিক বিষয় লিখুন]। 
-এ বিষয়ে আপনার সদয় মতামত ও পরবর্তী নির্দেশনা প্রত্যাশা করছি। কোনো বাড়তি তথ্যের প্রয়োজন হলে অনুগ্রহ করে জানাবেন।
-
-ধন্যবাদ ও শুভকামনাসহ,
-[আপনার নাম]
-[পদবি/পরিচয়]
-[প্রতিষ্ঠানের নাম]
-[মোবাইল নম্বর]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_emailbn')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!emailbn')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 7. Professional English Email -->
-        <div class="tpl-card" data-cat="email">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">Professional Business Email</div>
-                <div class="tpl-desc">Clean, courteous business email template suitable for clients, partners, and managers.</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!emailen</span>
-                <span class="tpl-lang-badge">English</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_emailen">Dear [Recipient Name],
-
-I hope this email finds you well.
-
-I am writing to discuss [State the primary purpose of your email]. 
-
-Please let me know if you need any further information from my end. I look forward to your valuable response.
-
-Best regards,
-[Your Name]
-[Your Title / Designation]
-[Company Name]
-[Phone Number] | [LinkedIn/Website]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_emailen')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!emailen')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 8. Leave Application (বাংলা ও English) -->
-        <div class="tpl-card" data-cat="email">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">ছুটির আবেদনপত্র (Leave Application)</div>
-                <div class="tpl-desc">জরুরি ব্যক্তিগত বা পারিবারিক কারণে ছুটির আবেদন ফরম্যাট (বাংলা ও ইংরেজি উভয় ভাষায়)।</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!leavemail</span>
-                <span class="tpl-code-badge">!leaveen</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_leavemail">বিষয়: ছুটির জন্য আবেদনপত্র।
-
-মহোদয়,
-যথাবিহিত সম্মান প্রদর্শনপূর্বক বিনীত নিবেদন এই যে, আমার জরুরি ব্যক্তিগত/পারিবারিক কারণে আগামী [শুরুর তারিখ] হতে [শেষের তারিখ] পর্যন্ত মোট [দিন সংখ্যা] দিন কর্মস্থলে উপস্থিত থাকা সম্ভব হবে না।
-
-অতএব, বিনীত প্রার্থনা এই যে, উপর্যুক্ত বিষয়টি বিবেচনা করে আমাকে উক্ত দিনসমূহের ছুটি মঞ্জুর করতে আপনার সদয় মর্জি হয়।
-
-বিনীত নিবেদক,
-[আপনার নাম] | [পদবি ও বিভাগ] | [এমপ্লয়ি আইডি / মোবাইল]
-
---- ENGLISH VERSION (!leaveen) ---
-Subject: Leave Application - [Your Name] - [Job Title]
-Dear [Manager Name],
-I am writing to formally request leave from [Start Date] to [End Date] due to [reason]. All pending tasks are up to date. Thank you for your understanding.
-Sincerely, [Your Name]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_leavemail')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!leavemail')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-        <!-- 9. Resignation Letter (পদত্যাগপত্র) -->
-        <div class="tpl-card" data-cat="email">
-          <div>
-            <div class="tpl-header">
-              <div>
-                <div class="tpl-title">পদত্যাগপত্র (Resignation Notice)</div>
-                <div class="tpl-desc">সম্মানজনক ও পেশাদার উপায়ে বর্তমান কর্মস্থল থেকে পদত্যাগের অফিশিয়াল চিঠি।</div>
-              </div>
-              <div class="tpl-badge-wrap">
-                <span class="tpl-code-badge">!resignation</span>
-                <span class="tpl-code-badge">!resignbn</span>
-              </div>
-            </div>
-            <div class="tpl-preview-box" id="tpl_resignation">Subject: Resignation Notice - [Your Name]
-
-Dear [Manager's Name],
-
-Please accept this email as formal notification that I am resigning from my position as [Job Title] at [Company Name]. My last working day will be [Last Date], in accordance with my notice period.
-
-I am sincerely grateful for the opportunities and professional growth I have experienced during my time here. I will do everything possible to ensure a smooth handover of my responsibilities.
-
-I wish the team and the company continued success in the future.
-
-Sincerely,
-[Your Name] | [Phone Number]
-
---- বাংলা সংস্করণ (!resignbn) ---
-বিষয়: পদত্যাগপত্র।
-মহোদয়, বিনীত নিবেদন এই যে, একান্ত ব্যক্তিগত কারণে আগামী [তারিখ] থেকে আমি পদত্যাগ করতে চাচ্ছি। দায়িত্ব হস্তান্তরের জন্য আমি প্রস্তুত আছি।
-বিনীত, [আপনার নাম]</div>
-          </div>
-          <div class="tpl-actions">
-            <button type="button" class="tpl-btn tpl-btn-copy" onclick="copyTemplateText('tpl_resignation')">📋 Copy</button>
-            <button type="button" class="tpl-btn tpl-btn-try" onclick="tryTemplateSnippet('!resignation')">⚡ Try in Studio</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="features">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Engineered for Speed &amp; Accuracy</span>
-        <h2 class="section-title">What Makes MatraKi Smarter?</h2>
-        <p class="section-desc">Every component of MatraKi was crafted to eliminate repetitive keystrokes and make Bengali writing natural.</p>
-      </div>
-
-      <div class="feat-grid">
-        <div class="feat-card">
-          <div class="feat-icon">🧠</div>
-          <div class="feat-title">38,000+ Trained Words &amp; Suffix Stemmer</div>
-          <p class="feat-desc">Type complex words and inflected nouns effortlessly. MatraKi’s agglutinative stemmer automatically attaches <em>-গুলো, -দের, -টা, -টি, -কে, -তে, -ের</em> to any root noun in O(1) time.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">🔮</div>
-          <div class="feat-title">Context-Aware Next-Word Prediction</div>
-          <p class="feat-desc">Right after pressing <code>Space</code>, MatraKi suggests natural follow-up words from 130+ conversational contexts and ranks verb endings based on the subject pronoun (<em>আমি করব, তুমি করবে, আপনি করবেন</em>).</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">✅</div>
-          <div class="feat-title">Bangla Academy Grammar &amp; Spelling Fix</div>
-          <p class="feat-desc">Automatically detects and fixes common Nattvabidhi (ণ-ত্ব), Shattvabidhi (ষ-ত্ব), and vowel-length mistakes (<em>সান্ত্বনা, ইতোমধ্যে, পুরস্কার, পরিষ্কার, শারীরিক, সমীচীন</em>).</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">🧮</div>
-          <div class="feat-title">In-Keyboard Calculator &amp; Unit Converter</div>
-          <p class="feat-desc">Type <code>=500*15%</code> for instant math results in Bangla digits and words, or convert units on the fly: <code>=10km</code>, <code>=5kg</code>, <code>=100c</code>, <code>=5ft</code>, <code>=1bigha</code>, <code>=5katha</code>.</p>
-        </div>
-        <div class="feat-card" style="border-color: rgba(45, 212, 191, 0.45); background: linear-gradient(165deg, rgba(30, 27, 75, 0.45) 0%, rgba(18, 28, 24, 0.9) 100%);">
-          <div class="feat-icon" style="background: rgba(45, 212, 191, 0.2); border-color: #7DD8C3;">🧠</div>
-          <div class="feat-title" style="color: #a5b4fc;">Automattic Harper™ Grammar &amp; Spell Checker</div>
-          <p class="feat-desc">Integrated with Automattic's high-speed Rust grammar engine (<code>harper-cli</code> &amp; <code>harper-ls</code>). Flags indefinite articles (<em>a vs an</em>), repeated words, spelling, spacing, and open compounds with 1-click auto-fix in the Live Studio and global system CLI.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">⚡</div>
-          <div class="feat-title">Instant Chat &amp; Islamic Snippets (<code>!</code>)</div>
-          <p class="feat-desc">Type <code>!salam</code>, <code>!olikum</code>, <code>!bismillah</code>, <code>!alham</code>, <code>!insha</code>, <code>!shokal</code>, <code>!eid</code>, or <code>!jumma</code> and press <code>1–9</code> to commit full greetings in Bangla or Arabic.</p>
-        </div>
-        <div class="feat-card">
-          <div class="feat-icon">📅</div>
-          <div class="feat-title">All 31 Date Ordinals, Currency &amp; Emojis</div>
-          <p class="feat-desc">Type <code>1la</code> through <code>31she</code> (১লা, ২১শে, ২৬শে, ৩১শে), <code>500tk</code> (৫০০ টাকা / ৳৫০০ / পাঁচ শত টাকা), <code>@today</code>, or <code>:smile</code> without switching keyboards.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Screenshots Gallery with Lightbox -->
-  <section id="screenshots" style="background: rgba(12, 19, 16, 0.65);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Modern Minimalist Dark Tech &amp; Light Classic UI Showcase</span>
-        <h2 class="section-title">Redesigned for Modern Linux Desktops</h2>
-        <p class="section-desc">Crystal-clear minimalist tech interface with Automatic Computer Theme Detection (Dark Tech &amp; Light Classic modes), Floating TopBar, Settings, Templates Hub, Harper Grammar, Live Calculator, Multi-Layout Viewers, and System Tray. Click any screenshot to view full resolution.</p>
-      </div>
-
-      <div class="gallery-grid">
-        <!-- 1. Settings Dialog Dark Tech Mode -->
-        <div class="shot-card" onclick="openLightbox('screenshots/settings_dark.png', 'MatraKi v1.1.0 — Settings Dialog in Dark Tech Mode')">
-          <img src="screenshots/settings_dark.png" alt="MatraKi Settings Dark Tech Mode" loading="lazy" />
-          <div class="shot-caption">Settings Dialog — Dark Tech Mode 🔍</div>
-        </div>
-
-        <!-- 2. Settings Dialog Light Classic Mode -->
-        <div class="shot-card" onclick="openLightbox('screenshots/settings_light.png', 'MatraKi v1.1.0 — Settings Dialog in Light Classic Mode')">
-          <img src="screenshots/settings_light.png" alt="MatraKi Settings Light Classic Mode" loading="lazy" />
-          <div class="shot-caption">Settings Dialog — Light Classic Mode 🔍</div>
-        </div>
-
-        <!-- 3. About Dialog Dark Mode -->
-        <div class="shot-card" onclick="openLightbox('screenshots/about_dark.png', 'MatraKi v1.1.0 — About Dialog in Dark Tech Mode')">
-          <img src="screenshots/about_dark.png" alt="MatraKi About Dark Tech Mode" loading="lazy" />
-          <div class="shot-caption">About Dialog — Dark Tech Mode 🔍</div>
-        </div>
-
-        <!-- 4. About Dialog Light Mode -->
-        <div class="shot-card" onclick="openLightbox('screenshots/about_light.png', 'MatraKi v1.1.0 — About Dialog in Light Classic Mode')">
-          <img src="screenshots/about_light.png" alt="MatraKi About Light Classic Mode" loading="lazy" />
-          <div class="shot-caption">About Dialog — Light Classic Mode 🔍</div>
-        </div>
-
-        <!-- 5. Templates Hub -->
-        <div class="shot-card" onclick="openLightbox('screenshots/templates_hub.png', 'MatraKi v1.1.0 — Instant Productivity Templates Hub (Emails, Job Applications & CV)')">
-          <img src="screenshots/templates_hub.png" alt="MatraKi Instant Templates Hub" loading="lazy" />
-          <div class="shot-caption">Instant Templates Hub — Email, Job &amp; CV 🔍</div>
-        </div>
-
-        <!-- 6. Harper Grammar Engine -->
-        <div class="shot-card" onclick="openLightbox('screenshots/harper_grammar.png', 'MatraKi v1.1.0 — Harper Grammar & Bangla Academy Concordance Engine')">
-          <img src="screenshots/harper_grammar.png" alt="MatraKi Harper Grammar Engine" loading="lazy" />
-          <div class="shot-caption">Harper Grammar &amp; Concordance Engine 🔍</div>
-        </div>
-
-        <!-- 7. Live Calculator & Unit Converter -->
-        <div class="shot-card" onclick="openLightbox('screenshots/calculator_converter.png', 'MatraKi v1.1.0 — In-Keyboard Live Math Calculator & 16 Unit Converters')">
-          <img src="screenshots/calculator_converter.png" alt="MatraKi Live Calculator & Unit Converter" loading="lazy" />
-          <div class="shot-caption">Live Math Calculator &amp; 16 Unit Converters 🔍</div>
-        </div>
-
-        <!-- 8. Linux Desktop Workspace Integration -->
-        <div class="shot-card" onclick="openLightbox('screenshots/desktop_workspace.png', 'MatraKi v1.1.0 — Linux Desktop Workspace Integration')">
-          <img src="screenshots/desktop_workspace.png" alt="MatraKi Desktop Integration" loading="lazy" />
-          <div class="shot-caption">Full Linux Desktop Integration &amp; TopBar 🔍</div>
-        </div>
-
-        <!-- 9. Layout Viewer -->
-        <div class="shot-card" onclick="openLightbox('screenshots/layout_viewer.png', 'Interactive Layout Viewer — Multi-Layout Visualizer')">
-          <img src="screenshots/layout_viewer.png" alt="MatraKi Layout Viewer" loading="lazy" />
-          <div class="shot-caption">Interactive Multi-Layout Viewer &amp; Switcher 🔍</div>
-        </div>
-
-        <!-- 10. Avro Keymap -->
-        <div class="shot-card" onclick="openLightbox('screenshots/avro_keymap.png', 'MatraKi v1.1.0 — Avro Phonetic Modern KeyMap Reference')">
-          <img src="screenshots/avro_keymap.png" alt="Avro Phonetic Modern KeyMap Reference" loading="lazy" />
-          <div class="shot-caption">Avro Phonetic Modern KeyMap Reference 🔍</div>
-        </div>
-
-        <!-- 11. AI Shortcuts Guide -->
-        <div class="shot-card" onclick="openLightbox('screenshots/smart_guide.png', 'Built-in AI Smart Typing & Shortcuts Visual Guide')">
-          <img src="screenshots/smart_guide.png" alt="MatraKi AI Smart Shortcuts Guide" loading="lazy" />
-          <div class="shot-caption">Built-in AI Smart Shortcuts Visual Guide 🔍</div>
-        </div>
-
-        <!-- 12. System Tray Quick Actions -->
-        <div class="shot-card" onclick="openLightbox('screenshots/tray_menu.png', 'MatraKi v1.1.0 — System Tray Quick Actions & Layout Switcher')">
-          <img src="screenshots/tray_menu.png" alt="MatraKi System Tray Quick Actions" loading="lazy" />
-          <div class="shot-caption">System Tray Quick Actions &amp; Mode Switcher 🔍</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Image Lightbox Modal -->
-  <div class="lightbox-modal" id="imageLightbox" onclick="closeLightbox(event)">
-    <button type="button" class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
-    <img id="lightboxImg" class="lightbox-img" src="" alt="Screenshot Preview" />
-  </div>
-
-  <!-- Comparison Table -->
-  <section id="comparison">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Side-by-Side Comparison</span>
-        <h2 class="section-title">How MatraKi Compares to Legacy Keyboards</h2>
-      </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Feature / Capability</th>
-              <th>Legacy Avro</th>
-              <th>Fixed-Only Keyboards</th>
-              <th>MatraKi v1.1.0 (Harper AI Edition)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Pre-Trained Bangla Dictionary</strong></td>
-              <td>~2,500 words</td>
-              <td class="no">None</td>
-              <td class="yes">✅ 38,000+ Words &amp; 1,021 Verb Forms</td>
-            </tr>
-            <tr>
-              <td><strong>Smart Agglutinative Suffix Stemmer</strong></td>
-              <td class="no">❌ No</td>
-              <td class="no">❌ No</td>
-              <td class="yes">✅ 225,000+ Inflections (-গুলো, -দের, -টা, -টি, -কে)</td>
-            </tr>
-            <tr>
-              <td><strong>Context-Aware Next-Word Prediction</strong></td>
-              <td class="no">❌ No</td>
-              <td class="no">❌ No</td>
-              <td class="yes">✅ 130+ Contexts + Subject-Verb Concordance</td>
-            </tr>
-            <tr>
-              <td><strong>Bangla Academy Spelling Auto-Fix</strong></td>
-              <td class="no">❌ No</td>
-              <td class="no">❌ No</td>
-              <td class="yes">✅ Automatic ণ-ত্ব, ষ-ত্ব &amp; Standard Spelling</td>
-            </tr>
-            <tr>
-              <td><strong>Live Math Calculator &amp; Unit Converter (<code>=</code>)</strong></td>
-              <td class="no">❌ No</td>
-              <td class="no">❌ No</td>
-              <td class="yes">✅ Built-in (<code>=500*15%</code>, <code>=10km</code>, <code>=1bigha</code>)</td>
-            </tr>
-            <tr>
-              <td><strong>Instant Chat &amp; Arabic Snippets (<code>!</code>)</strong></td>
-              <td class="no">❌ No</td>
-              <td class="no">❌ No</td>
-              <td class="yes">✅ Built-in (<code>!salam</code>, <code>!bismillah</code>, <code>!eid</code>)</td>
-            </tr>
-            <tr>
-              <td><strong>Native Wayland &amp; X11 Fcitx5 Support</strong></td>
-              <td class="no">❌ IBus legacy only</td>
-              <td class="no">❌ Partial</td>
-              <td class="yes">✅ Full Native Fcitx5 &amp; IBus Support</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Human-Friendly SEO FAQ -->
-  <section id="faq" style="background: rgba(12, 19, 16, 0.65);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Got Questions?</span>
-        <h2 class="section-title">Frequently Asked Questions (FAQ)</h2>
-      </div>
-
-      <div class="faq-list">
-        <details class="faq-item" open>
-          <summary><span>1. Which is the best Bangla phonetic keyboard for Linux (Ubuntu, Deepin, Mint, Fedora)?</span><span>＋</span></summary>
-          <p><strong>MatraKi v1.1.0</strong> is purpose-built for modern Linux desktops running Wayland or X11. Unlike older keyboards that lag or fail in modern apps, MatraKi integrates natively with <strong>Fcitx5</strong> and <strong>IBus</strong>, and comes pre-trained with 38,000+ Bengali words, Harper grammar checker, next-word prediction, and 6 popular layouts (Avro Phonetic, Probhat, National/Jatiya, Munir Optima, Borno, and Avro Easy).</p>
-        </details>
-        <details class="faq-item">
-          <summary><span>2. How do I switch between English and Bangla while typing?</span><span>＋</span></summary>
-          <p>Simply press <strong><code>Ctrl + Space</code></strong> on your keyboard at any time, or click the language button on the floating MatraKi TopBar pill on your desktop. In addition, if you type a capitalized tech or brand word like <code>Facebook</code>, <code>Google</code>, <code>GitHub</code>, or <code>Linux</code> while in Bangla mode, MatraKi’s Hybrid English detector offers the English word directly in your candidate list!</p>
-        </details>
-        <details class="faq-item">
-          <summary><span>3. How do I type Bengali Dari (।) quickly?</span><span>＋</span></summary>
-          <p>Press the <strong><code>Spacebar</code> twice quickly (Double Space)</strong> after finishing a sentence—MatraKi automatically converts the double space into a Bengali Dari followed by a space (<code>। </code>), just like modern smartphone keyboards.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span>4. How can I add my own custom words or phonetic replacements?</span><span>＋</span></summary>
-          <p>Open <strong>MatraKi Settings → Dictionary (Auto-Correct)</strong>. You can use the instant search bar to filter through all 38,000+ trained entries or add your own custom phonetic pattern with live Bangla preview.</p>
-        </details>
-        <details class="faq-item">
-          <summary><span>5. Is MatraKi completely free and open-source?</span><span>＋</span></summary>
-          <p>Yes! MatraKi is 100% free and open-source software licensed under the <strong>GNU General Public License v3.0 (GPL-3.0)</strong>. You can inspect the code, contribute, or support the developer via <a href="https://www.supportkori.com/sojib" style="color:#FF6B7E; font-weight:700;">SupportKori</a>.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Developer & Donation Footer -->
-  <footer>
-    <div class="container" style="text-align: center;">
-      <img src="logo.png" alt="MatraKi Logo" style="width:58px; height:58px; border-radius:14px; margin-bottom:14px; box-shadow: 0 0 20px rgba(27, 158, 114, 0.4);" />
-      <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:6px;">MatraKi (মাত্রা-কী) — Type Smarter. Write Better.</h3>
-      <p style="color:#8FA399; font-size:0.95rem; margin-bottom:22px;">
-        Developed with passion for Bangla Computing by <strong style="color:#fff;">Md Sojib Hossain</strong>
-      </p>
-      <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:28px;">
-        <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard" target="_blank" rel="noopener" class="btn btn-outline">🌐 GitHub Repository</a>
-        <a href="https://facebook.com/hossain.sojibs" target="_blank" rel="noopener" class="btn btn-outline">👨‍💻 Developer on Facebook</a>
-        <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate">💖 Support &amp; Donate (SupportKori)</a>
-      </div>
-      <p style="color:#6B7C73; font-size:0.84rem;">
-        © 2026 Md Sojib Hossain. Open-Source Software released under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" style="color:#8FA399; text-decoration:underline;">GNU General Public License v3.0</a>.
-      </p>
-    </div>
-  </footer>
-
-  <!-- Floating Back to Top Button -->
-  <button type="button" class="back-to-top" id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">
-    ▲
-  </button>
-
-<script src="matraki-data.js"></script>
-  <script src="matraki-live-engine.js"></script>
-  <script src="matraki-harper.js"></script>
-  <script>
-    // =========================================================================
-    // MatraKi v1.1.0 Full Live Web Keyboard Studio Controller
-    // =========================================================================
-    const CHIP_CATEGORIES = {
-      highlights: [
-        "bhalobashi", "bishwobidyaloygulo", "=500*15%", "=10km", "=1bigha",
-        "!salam", "@today", "21she", "500tk", ":smile", "shantona", "GitHub"
-      ],
-      harper: [
-        "This is an test", "a apple", "alot of", "their is no problem", "in monday", "to to", "every day", "in order to"
-      ],
-      stemmer: [
-        "bangladesh", "bishwobidyaloygulo", "manushderke", "boita", "bondhuguloke",
-        "shikkharthider", "desher", "gramgulo", "korbo", "kemon", "achhen"
-      ],
-      grammar: [
-        "shantona", "itomoddhe", "puroshkar", "porishkar", "sharirik",
-        "shomichin", "morichika", "bhoutobiggan", "srishti", "ujjol"
-      ],
-      math: [
-        "=500*15%", "=(120+80)*3", "=2^10", "=1500-275", "=1024/16", "=99*99"
-      ],
-      templates: [
-        "!en", "!an", "!bn", "!app", "!job", "!applybn", "!applyen", "!cvbn", "!cven", "!techapply", "!internapply",
-        "!emailbn", "!emailen", "!leavemail", "!leaveen", "!followup", "!resignation",
-        "!coverletter", "!jobapply", "!mailformal", "!cvprofile", "!cvedu", "!cvexp", "!cvskills"
-      ],
-      units: [
-        "=10km", "=5mi", "=100m", "=25cm", "=12in", "=5.8ft", "=70kg",
-        "=500g", "=150lb", "=5l", "=37c", "=98.6f", "=1bigha", "=5katha", "=1acre", "=10shotok",
-        "=100kmh", "=20mps", "=1024mb", "=16gb", "=1tb", "=100usd", "=100eur", "=100sar", "=100aed"
-      ],
-      snippets: [
-        "!salam", "!olikum", "!bismillah", "!alhamdulillah", "!inshaallah",
-        "!subhanallah", "!mashaallah", "!jazakallah", "!shokal", "!dupur", "!bikal", "!shondha", "!rat",
-        "!dhonnobad", "!welcome", "!kemon", "!jumma", "!eid", "!ramadan",
-        "!congrats", "!hbd", "!sorry", "!mail", "!apply", "!chuti", "!intro", "!bangladesh", "!bkash", "!lorem", "@today", "@now"
-      ],
-      ordinals: [
-        "1la", "2ra", "3ra", "4tha", "5i", "10i", "16i", "19she", "21she",
-        "26she", "31she", "1m", "2yo", "3yo", "10m", "500tk", "12500taka", "2026"
-      ],
-      emojis: [
-        ":smile", ":hasi", ":love", ":heart", ":kanna", ":like", ":ok",
-        ":clap", ":100", ":fire", ":rocket", ":dua", ":bd", ":ful",
-        ":tea", ":coffee", ":cake", ":book", ":laptop", ":salute", ":handheart",
-        ":mindblown", ":thinking", ":bulb", ":crown", ":trophy", ":taka"
-      ]
-    };
-
-    let kbdMode = "bn";          // "bn" or "en"
-    let kbdLayout = "avro";      // "avro", "probhat", "national", "munir", "borno", "avro_easy"
-    let vkbdShift = false;
-    let rawBuffer = "";
-    let currentCandidates = [];
-    let selectedCandIdx = 0;
-    let lastSpaceTime = 0;
-
-    // Load custom user-trained words from localStorage if present
-    try {
-      const savedCustom = JSON.parse(localStorage.getItem("matraki_custom_words") || "{}");
-      if (window.MATRAKI_DICT) {
-        Object.assign(window.MATRAKI_DICT, savedCustom);
-      }
-    } catch (e) {}
-
-    function selectChipCategory(cat, btnEl) {
-      document.querySelectorAll("#demoCatTabs .cat-tab").forEach(b => b.classList.remove("active"));
-      if (btnEl) btnEl.classList.add("active");
-      const bar = document.getElementById("demoChipsBar");
-      const list = CHIP_CATEGORIES[cat] || CHIP_CATEGORIES.highlights;
-      bar.innerHTML = `<span style="font-size:0.78rem; color:#8FA399; font-weight:700;">1-Click Test:</span>` +
-        list.map(item => `<button type="button" class="demo-chip" onclick="setDemo('${item.replace(/'/g, "\\'")}')">${item}</button>`).join("");
-    }
-
-    function getLastCommittedWord() {
-      const ed = document.getElementById("demoEditor");
-      if (!ed) return "";
-      const pos = ed.selectionStart || 0;
-      const before = ed.value.slice(0, pos).trim();
-      if (!before) return "";
-      const parts = before.split(/\s+/);
-      return parts[parts.length - 1].replace(/[।,.!?]/g, "");
-    }
-
-    function setDemo(val) {
-      const activeCat = document.querySelector("#demoCatTabs .cat-tab.active");
-      if (activeCat && activeCat.innerText.includes("Harper")) {
-        const ed = document.getElementById("demoEditor");
-        if (ed) {
-          ed.value = val;
-          rawBuffer = "";
-          updateEditorStats();
-          refreshStudioUI();
-          runHarperGrammarCheck();
-          showTemplateToast(`✓ Loaded Harper test: "${val}"`);
-        }
-        return;
-      }
-      kbdMode = "bn";
-      kbdLayout = "avro";
-      document.getElementById("layoutSelect").value = "avro";
-      updateModeButtonUI();
-      rawBuffer = val;
-      refreshStudioUI();
-      const ed = document.getElementById("demoEditor");
-      if (ed) ed.focus();
-    }
-
-    function toggleKbdMode() {
-      if (rawBuffer) commitCandidate(selectedCandIdx, true);
-      kbdMode = (kbdMode === "bn") ? "en" : "bn";
-      updateModeButtonUI();
-      renderVirtualKeyboard();
-      refreshStudioUI();
-    }
-
-    function updateModeButtonUI() {
-      const btn = document.getElementById("btnModeToggle");
-      if (!btn) return;
-      if (kbdMode === "bn") {
-        btn.className = "tb-btn mode-bn";
-        btn.innerText = "🟢 বাংলা (AI)";
-      } else {
-        btn.className = "tb-btn mode-en";
-        btn.innerText = "⚪ ENG (English)";
-      }
-    }
-
-    function changeKbdLayout(layout) {
-      if (rawBuffer) commitCandidate(selectedCandIdx, true);
-      kbdLayout = layout;
-      renderVirtualKeyboard();
-      refreshStudioUI();
-    }
-
-    function toggleVirtualKbd() {
-      const vkbd = document.getElementById("virtualKbd");
-      const btn = document.getElementById("btnVkbdToggle");
-      vkbd.classList.toggle("hidden");
-      btn.innerText = vkbd.classList.contains("hidden") ? "⌨️ Show Keyboard" : "⌨️ Hide Keyboard";
-    }
-
-    function toggleTrainerDrawer() {
-      document.getElementById("trainerDrawer").classList.toggle("open");
-    }
-
-    function saveTrainedWord() {
-      const p = (document.getElementById("trainPhonetic").value || "").trim().toLowerCase();
-      const b = (document.getElementById("trainBangla").value || "").trim();
-      const st = document.getElementById("trainStatus");
-      if (!p || !b) {
-        st.style.color = "#FF6B7E";
-        st.innerText = "Please enter both Phonetic & Bangla!";
-        return;
-      }
-      if (!window.MATRAKI_DICT) window.MATRAKI_DICT = {};
-      if (!window.MATRAKI_DICT[p]) cachedDictCount++;
-      window.MATRAKI_DICT[p] = b;
-      try {
-        const saved = JSON.parse(localStorage.getItem("matraki_custom_words") || "{}");
-        saved[p] = b;
-        localStorage.setItem("matraki_custom_words", JSON.stringify(saved));
-      } catch (e) {}
-      st.style.color = "#5FD0A6";
-      st.innerText = `✓ Trained: ${p} ➔ ${b}`;
-      document.getElementById("trainPhonetic").value = "";
-      document.getElementById("trainBangla").value = "";
-      rawBuffer = p;
-      refreshStudioUI();
-    }
-
-    function insertTextAtCursor(text) {
-      const ed = document.getElementById("demoEditor");
-      const start = ed.selectionStart || 0;
-      const end = ed.selectionEnd || 0;
-      const val = ed.value;
-      ed.value = val.slice(0, start) + text + val.slice(end);
-      const newPos = start + text.length;
-      ed.selectionStart = ed.selectionEnd = newPos;
-      ed.focus();
-      updateEditorStats();
-    }
-
-    function commitCandidate(index, appendSpace = true) {
-      if (!currentCandidates.length) {
-        if (rawBuffer) {
-          insertTextAtCursor(rawBuffer + (appendSpace ? " " : ""));
-          rawBuffer = "";
-        } else if (appendSpace) {
-          insertTextAtCursor(" ");
-        }
-        refreshStudioUI();
-        return;
-      }
-      const chosen = currentCandidates[index] || currentCandidates[0];
-      insertTextAtCursor(chosen.commitText + (appendSpace ? " " : ""));
-      rawBuffer = "";
-      selectedCandIdx = 0;
-      refreshStudioUI();
-    }
-
-    function refreshStudioUI() {
-      const engine = window.MatraKiLiveEngine;
-      const prevW = getLastCommittedWord();
-      const preRaw = document.getElementById("preeditRaw");
-      const prePrev = document.getElementById("preeditPreview");
-      const candBox = document.getElementById("demoCandidates");
-
-      if (!engine) return;
-
-      if (kbdMode === "en") {
-        preRaw.innerText = "(ENG Mode)";
-        prePrev.innerText = "Direct English typing active (Press Ctrl+Space for বাংলা)";
-        currentCandidates = [];
-        candBox.innerHTML = `<span style="color:#8FA399; font-size:0.9rem;">English Mode active. Click <strong>🟢 বাংলা (AI)</strong> or press <code>Ctrl+Space</code> to switch back to Bangla AI mode.</span>`;
-        updateEditorStats();
-        return;
-      }
-
-      if (kbdLayout !== "avro") {
-        const layName = (engine.FIXED_LAYOUTS[kbdLayout] && engine.FIXED_LAYOUTS[kbdLayout].name) || kbdLayout;
-        preRaw.innerText = `[${layName}]`;
-        prePrev.innerText = "Direct Fixed-Layout Keymap Active";
-      }
-
-      currentCandidates = engine.getSmartCandidates(rawBuffer, prevW);
-      if (selectedCandIdx >= currentCandidates.length) selectedCandIdx = 0;
-
-      if (rawBuffer) {
-        preRaw.innerText = rawBuffer;
-        prePrev.innerText = currentCandidates.length ? currentCandidates[selectedCandIdx].commitText : rawBuffer;
-      } else if (kbdLayout === "avro") {
-        preRaw.innerText = "(empty)";
-        prePrev.innerText = prevW ? `After "${prevW}" — Next-Word AI Active` : "Type any word or click a preset chip above...";
-      }
-
-      if (!currentCandidates.length) {
-        candBox.innerHTML = `<span style="color:#8FA399; font-size:0.9rem;">Start typing in the editor below or click any feature chip above to see live AI candidates...</span>`;
-      } else {
-        candBox.innerHTML = currentCandidates.slice(0, 9).map((c, idx) => {
-          const activeCls = idx === selectedCandIdx ? "active" : "";
-          const badgeHtml = c.badge ? `<span class="cand-badge">${c.badge}</span>` : "";
-          return `<span class="cand-item ${activeCls}" onclick="commitCandidate(${idx}, true)" title="Click or press ${idx + 1} to insert">
-            <span class="cand-num">${idx + 1}</span>
-            <span>${c.display}</span>
-            ${badgeHtml}
-          </span>`;
-        }).join("");
-      }
-      updateEditorStats();
-    }
-
-    let cachedDictCount = 0;
-    function getDictCount() {
-      if (!cachedDictCount && window.MATRAKI_DICT) {
-        cachedDictCount = Object.keys(window.MATRAKI_DICT).length;
-      }
-      return cachedDictCount || 20535;
-    }
-
-    function updateEditorStats() {
-      const ed = document.getElementById("demoEditor");
-      const stats = document.getElementById("editorStats");
-      if (!ed || !stats) return;
-      const txt = ed.value.trim();
-      const words = txt ? txt.split(/\s+/).length : 0;
-      const chars = ed.value.length;
-      const dictCount = getDictCount();
-      stats.innerText = `Words: ${words} | Chars: ${chars} | Trained Keys: ${dictCount.toLocaleString()}`;
-    }
-
-    function copyEditorText() {
-      const ed = document.getElementById("demoEditor");
-      navigator.clipboard.writeText(ed.value);
-      const btn = document.getElementById("btnCopyEditor");
-      const old = btn.innerText;
-      btn.innerText = "✓ Copied!";
-      setTimeout(() => { btn.innerText = old; }, 1500);
-    }
-
-    function downloadEditorText() {
-      const ed = document.getElementById("demoEditor");
-      const blob = new Blob([ed.value], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "matraki-bangla-note.txt";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function clearEditorText() {
-      const ed = document.getElementById("demoEditor");
-      ed.value = "";
-      rawBuffer = "";
-      refreshStudioUI();
-      ed.focus();
-    }
-
-    // =========================================================================
-    // Virtual On-Screen Keyboard Renderer & Physical Keyboard Sync
-    // =========================================================================
-    const VKBD_ROWS = [
-      ["`","1","2","3","4","5","6","7","8","9","0","-","="],
-      ["q","w","e","r","t","y","u","i","o","p","[","]"],
-      ["a","s","d","f","g","h","j","k","l",";","'"],
-      ["z","x","c","v","b","n","m",",",".","/"]
-    ];
-    const SHIFT_MAP = {
-      "`":"~","1":"!","2":"@","3":"#","4":"$","5":"%","6":"^","7":"&","8":"*","9":"(","0":")","-":"_","=":"+",
-      "[":"{","]":"}",";":":","'":"\"",",":"<",".":">","/":"?"
-    };
-    const AVRO_KEY_PREVIEW = {
-      "1":"১","2":"২","3":"৩","4":"৪","5":"৫","6":"৬","7":"৭","8":"৮","9":"৯","0":"০",
-      "q":"ক","w":"ও","e":"ে/এ","r":"র","t":"ত/ট","y":"য়","u":"ু/উ","i":"ি/ই","o":"অ/ো","p":"প",
-      "a":"া/আ","s":"স/শ","d":"দ/ড","f":"ফ","g":"গ","h":"হ","j":"জ","k":"ক","l":"ল",
-      "z":"য","x":"ক্স","c":"চ","v":"ভ","b":"ব","n":"ন/ণ","m":"ম",".":"।"
-    };
-
-    function getKeyPreviewLabel(k) {
-      const ch = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
-      if (kbdMode === "en") return ch;
-      if (kbdLayout === "avro") {
-        return AVRO_KEY_PREVIEW[k] || ch;
-      }
-      const engine = window.MatraKiLiveEngine;
-      const lay = engine && engine.FIXED_LAYOUTS[kbdLayout];
-      if (!lay) return ch;
-      if (vkbdShift && lay.shift && lay.shift[ch]) return lay.shift[ch];
-      if (lay.normal && lay.normal[k]) return lay.normal[k];
-      return ch;
-    }
-
-    let vkbdInitialized = false;
-    const vkbdKeyElements = new Map();
-
-    function renderVirtualKeyboard() {
-      const wrap = document.getElementById("virtualKbd");
-      if (!wrap) return;
-
-      // Fast update path if already rendered: zero DOM allocations & no layout thrashing!
-      if (vkbdInitialized) {
-        const shiftBtn = wrap.querySelector(".vkbd-shift-btn");
-        if (shiftBtn) {
-          if (vkbdShift) shiftBtn.classList.add("pressed");
-          else shiftBtn.classList.remove("pressed");
-        }
-        wrap.querySelectorAll(".vkbd-key[data-key]").forEach(btn => {
-          const k = btn.getAttribute("data-key");
-          const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
-          const bnLbl = getKeyPreviewLabel(k);
-          btn.querySelector(".vkbd-en").textContent = enLbl;
-          btn.querySelector(".vkbd-bn").textContent = bnLbl;
-        });
-        const modeBtn = wrap.querySelector(".vkbd-mode-btn");
-        if (modeBtn) modeBtn.textContent = `🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}`;
-        return;
-      }
-
-      let html = "";
-      VKBD_ROWS.forEach((row, rIdx) => {
-        html += `<div class="vkbd-row">`;
-        if (rIdx === 3) {
-          html += `<button type="button" class="vkbd-key wide vkbd-shift-btn ${vkbdShift ? 'pressed' : ''}" onclick="toggleVkbdShift()">⇧ Shift</button>`;
-        }
-        row.forEach(k => {
-          const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
-          const bnLbl = getKeyPreviewLabel(k);
-          html += `<button type="button" class="vkbd-key" data-key="${k}" onclick="pressVirtualKey('${k}')">
-            <span class="vkbd-en">${enLbl}</span>
-            <span class="vkbd-bn">${bnLbl}</span>
-          </button>`;
-        });
-        if (rIdx === 0) {
-          html += `<button type="button" class="vkbd-key wide" onclick="pressVirtualBackspace()">⌫ Back</button>`;
-        }
-        if (rIdx === 3) {
-          html += `<button type="button" class="vkbd-key wide" onclick="commitCandidate(selectedCandIdx, true)">⏎ Enter</button>`;
-        }
-        html += `</div>`;
-      });
-      html += `<div class="vkbd-row">
-        <button type="button" class="vkbd-key wide vkbd-mode-btn" onclick="toggleKbdMode()">🌐 ${kbdMode === 'bn' ? 'বাংলা' : 'ENG'}</button>
-        <button type="button" class="vkbd-key wide" onclick="pressVirtualTab()">↹ Tab (AI)</button>
-        <button type="button" class="vkbd-key space" onclick="pressVirtualSpace()">Space (Commit / Double-Space = ।)</button>
-        <button type="button" class="vkbd-key wide" onclick="insertTextAtCursor('। ')">। (দাড়ি)</button>
-      </div>`;
-      wrap.innerHTML = html;
-      vkbdInitialized = true;
-
-      // Index key buttons for instant O(1) physical-to-virtual key lookup
-      vkbdKeyElements.clear();
-      wrap.querySelectorAll(".vkbd-key[data-key]").forEach(btn => {
-        vkbdKeyElements.set(btn.getAttribute("data-key"), btn);
-      });
-    }
-
-    function toggleVkbdShift() {
-      vkbdShift = !vkbdShift;
-      renderVirtualKeyboard();
-    }
-
-    function pressVirtualKey(k) {
-      const enLbl = vkbdShift ? (SHIFT_MAP[k] || k.toUpperCase()) : k;
-      handleCharacterInput(enLbl);
-      if (vkbdShift) {
-        vkbdShift = false;
-        renderVirtualKeyboard();
-      }
-      const ed = document.getElementById("demoEditor");
-      if (ed) ed.focus();
-    }
-
-    function pressVirtualBackspace() {
-      const ed = document.getElementById("demoEditor");
-      if (rawBuffer.length > 0) {
-        rawBuffer = rawBuffer.slice(0, -1);
-        refreshStudioUI();
-      } else {
-        const start = ed.selectionStart || 0;
-        const end = ed.selectionEnd || 0;
-        if (start !== end) {
-          ed.value = ed.value.slice(0, start) + ed.value.slice(end);
-          ed.selectionStart = ed.selectionEnd = start;
-        } else if (start > 0) {
-          ed.value = ed.value.slice(0, start - 1) + ed.value.slice(start);
-          ed.selectionStart = ed.selectionEnd = start - 1;
-        }
-        refreshStudioUI();
-      }
-      ed.focus();
-    }
-
-    function pressVirtualSpace() {
-      handleSpacePress();
-      document.getElementById("demoEditor").focus();
-    }
-
-    function pressVirtualTab() {
-      if (!rawBuffer && currentCandidates.length > 0) {
-        commitCandidate(selectedCandIdx, true);
-      } else if (currentCandidates.length > 0) {
-        selectedCandIdx = (selectedCandIdx + 1) % Math.min(currentCandidates.length, 9);
-        refreshStudioUI();
-      }
-      document.getElementById("demoEditor").focus();
-    }
-
-    function handleSpacePress() {
-      const now = Date.now();
-      if (!rawBuffer && (now - lastSpaceTime < 360)) {
-        // Double-Space -> Bengali Dari (। )
-        const ed = document.getElementById("demoEditor");
-        const pos = ed.selectionStart || 0;
-        if (pos > 0 && ed.value[pos - 1] === " ") {
-          ed.value = ed.value.slice(0, pos - 1) + "। " + ed.value.slice(pos);
-          ed.selectionStart = ed.selectionEnd = pos + 1;
-          lastSpaceTime = 0;
-          refreshStudioUI();
-          return;
-        }
-      }
-      lastSpaceTime = now;
-      if (rawBuffer) {
-        commitCandidate(selectedCandIdx, true);
-      } else {
-        insertTextAtCursor(" ");
-        refreshStudioUI();
-      }
-    }
-
-    function handleCharacterInput(ch) {
-      if (kbdMode === "en") {
-        insertTextAtCursor(ch);
-        return;
-      }
-      if (kbdLayout !== "avro") {
-        const engine = window.MatraKiLiveEngine;
-        const lay = engine && engine.FIXED_LAYOUTS[kbdLayout];
-        let out = ch;
-        if (lay) {
-          if (lay.shift && lay.shift[ch]) out = lay.shift[ch];
-          else if (lay.normal && lay.normal[ch.toLowerCase()]) out = lay.normal[ch.toLowerCase()];
-        }
-        insertTextAtCursor(out);
-        refreshStudioUI();
-        return;
-      }
-
-      // Avro Phonetic AI mode
-      // Sentence-ending punctuation commits current buffer immediately
-      if ([",", ";", "?", "।"].includes(ch) || (ch === "." && rawBuffer && !rawBuffer.startsWith("="))) {
-        if (rawBuffer) commitCandidate(selectedCandIdx, false);
-        insertTextAtCursor(ch === "." ? "। " : ch + " ");
-        refreshStudioUI();
-        return;
-      }
-
-      rawBuffer += ch;
-      selectedCandIdx = 0;
-      refreshStudioUI();
-    }
-
-    // Attach Physical Keyboard Listener to #demoEditor
-    document.addEventListener("DOMContentLoaded", () => {
-      selectChipCategory("highlights", document.querySelector("#demoCatTabs .cat-tab"));
-      renderVirtualKeyboard();
-      rawBuffer = "bhalobashi";
-      refreshStudioUI();
-
-      const ed = document.getElementById("demoEditor");
-      ed.addEventListener("keydown", (e) => {
-        // Ctrl+Space or Alt+Space toggles Bangla/English mode
-        if ((e.ctrlKey || e.altKey) && e.code === "Space") {
-          e.preventDefault();
-          toggleKbdMode();
-          return;
-        }
-        if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-        // Instant O(1) highlight of physical key on Virtual Keyboard (no DOM query)
-        const baseKey = e.key.toLowerCase();
-        const keyBtn = vkbdKeyElements.get(baseKey);
-        if (keyBtn) {
-          keyBtn.classList.add("pressed");
-          setTimeout(() => keyBtn.classList.remove("pressed"), 140);
-        }
-
-        if (kbdMode === "en") {
-          setTimeout(updateEditorStats, 10);
-          return;
-        }
-
-        if (e.key === "Backspace") {
-          if (rawBuffer.length > 0) {
-            e.preventDefault();
-            rawBuffer = rawBuffer.slice(0, -1);
-            refreshStudioUI();
-          } else {
-            setTimeout(refreshStudioUI, 10);
-          }
-          return;
-        }
-
-        if (e.key === "Escape") {
-          if (rawBuffer) {
-            e.preventDefault();
-            rawBuffer = "";
-            refreshStudioUI();
-          }
-          return;
-        }
-
-        if (e.key === " ") {
-          e.preventDefault();
-          handleSpacePress();
-          return;
-        }
-
-        if (e.key === "Enter") {
-          if (rawBuffer) {
-            e.preventDefault();
-            commitCandidate(selectedCandIdx, true);
-          }
-          return;
-        }
-
-        if (e.key === "Tab") {
-          if (rawBuffer || currentCandidates.length > 0) {
-            e.preventDefault();
-            pressVirtualTab();
-          }
-          return;
-        }
-
-        if (e.key === "ArrowRight" && (rawBuffer || currentCandidates.length > 0)) {
-          if (rawBuffer) {
-            e.preventDefault();
-            selectedCandIdx = (selectedCandIdx + 1) % Math.min(currentCandidates.length, 9);
-            refreshStudioUI();
-            return;
-          }
-        }
-
-        if (e.key === "ArrowLeft" && rawBuffer && currentCandidates.length > 0) {
-          e.preventDefault();
-          const maxC = Math.min(currentCandidates.length, 9);
-          selectedCandIdx = (selectedCandIdx - 1 + maxC) % maxC;
-          refreshStudioUI();
-          return;
-        }
-
-        // Number keys 1-9 select candidate when in snippet (!/@) or emoji (:) mode
-        if (rawBuffer && (rawBuffer[0] === "!" || rawBuffer[0] === "@" || rawBuffer[0] === ":") && e.key >= "1" && e.key <= "9") {
-          const idx = parseInt(e.key, 10) - 1;
-          if (idx < currentCandidates.length) {
-            e.preventDefault();
-            commitCandidate(idx, true);
-            return;
-          }
-        }
-
-        if (e.key.length === 1) {
-          e.preventDefault();
-          handleCharacterInput(e.key);
-        }
-      });
-
-      ed.addEventListener("click", () => {
-        if (rawBuffer) {
-          commitCandidate(selectedCandIdx, true);
-        } else {
-          refreshStudioUI();
-        }
-      });
+</footer>
+
+<script>
+  function setThemeShot(mode) {
+    const isDark = (mode === 'dark');
+    document.querySelectorAll('.switch-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(mode));
     });
+    const suffix = isDark ? '_dark.png' : '_light.png';
+    document.getElementById('imgAbout').src = 'screenshots/about' + suffix;
+    document.getElementById('imgUpdate').src = 'screenshots/update' + suffix;
+    document.getElementById('imgSettings').src = 'screenshots/settings' + suffix;
+    document.getElementById('imgLayout').src = 'screenshots/layout' + suffix;
+    document.getElementById('imgHarper').src = 'screenshots/harper' + suffix;
+    document.getElementById('imgTopBar').src = 'screenshots/topbar' + suffix;
+  }
 
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      btn.classList.add('active');
-    }
+  // Interactive Live Studio Converter
+  const liveInput = document.getElementById('liveInput');
+  const liveOutput = document.getElementById('liveOutput');
 
-    function copyCode(btn) {
-      const pre = btn.parentElement.querySelector('pre');
-      navigator.clipboard.writeText(pre.innerText);
-      const old = btn.innerText;
-      btn.innerText = '✓ Copied!';
-      setTimeout(() => { btn.innerText = old; }, 1600);
-    }
-  
-    // Mobile Drawer Toggle
-    const mobileBtn = document.getElementById("mobileMenuBtn");
-    const mobileDrawer = document.getElementById("mobileMenuDrawer");
-    if (mobileBtn && mobileDrawer) {
-      mobileBtn.addEventListener("click", () => {
-        mobileBtn.classList.toggle("active");
-        mobileDrawer.classList.toggle("open");
-      });
-    }
-    function closeMobileMenu() {
-      if (mobileBtn) mobileBtn.classList.remove("active");
-      if (mobileDrawer) mobileDrawer.classList.remove("open");
-    }
+  const phoneticMap = {
+    'ami banglay gan gai': 'আমি বাংলায় গান গাই',
+    'shuvo sokal kemon achen?': 'শুভ সকাল কেমন আছেন?',
+    'shuvo sokal': 'শুভ সকাল',
+    'kemon acho?': 'কেমন আছো?',
+    '=500*15%': '৭৫ (৫০০ এর ১৫%)',
+    '=10km': '৬.২১ মাইল (১০ কিমি)',
+    '!salam': 'আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহি ওয়া বারাকাতুহু',
+    '!bismillah': 'বিসমিল্লাহির রাহমানির রাহীম',
+    '@today': new Date().toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+  };
 
-    // OS Auto-Detection & Download Highlighting (Linux Dedicated)
-    (function detectUserOS() {
-      const badge = document.getElementById("osDetectBadge");
-      const ua = navigator.userAgent.toLowerCase();
-      let targetCard = "card-deb";
-      let osLabel = "Linux (Debian / Ubuntu / Deepin)";
-
-      if (ua.includes("fedora") || ua.includes("red hat") || ua.includes("centos") || ua.includes("suse")) {
-        targetCard = "card-rpm";
-        osLabel = "Fedora / RHEL (.rpm)";
-      } else if (ua.includes("arch") || ua.includes("manjaro")) {
-        targetCard = "card-tar";
-        osLabel = "Arch Linux (.tar.gz)";
-      } else if (ua.includes("linux")) {
-        targetCard = "card-deb";
-        osLabel = "Linux (Native .deb / AppImage)";
-      } else {
-        targetCard = "card-deb";
-        osLabel = "Linux Edition";
+  liveInput.addEventListener('input', function() {
+    const val = this.value.trim().toLowerCase();
+    if (!val) {
+      liveOutput.textContent = '...';
+      return;
+    }
+    if (phoneticMap[val]) {
+      liveOutput.textContent = phoneticMap[val];
+    } else if (val.startsWith('=')) {
+      try {
+        const expr = val.substring(1).replace(/%/g, '/100');
+        const res = Function('"use strict";return (' + expr + ')')();
+        liveOutput.textContent = '= ' + res.toLocaleString('bn-BD');
+      } catch(e) {
+        liveOutput.textContent = 'হিসাব করা হচ্ছে...';
       }
-
-      if (badge) {
-        badge.innerText = `Platform: ${osLabel}`;
-      }
-
-      const c = document.getElementById(targetCard);
-      if (c) c.classList.add("os-detected");
-    })();
-
-    // Screenshot Lightbox
-    function openLightbox(src, alt) {
-      const modal = document.getElementById("imageLightbox");
-      const img = document.getElementById("lightboxImg");
-      if (modal && img) {
-        img.src = src;
-        img.alt = alt || "Screenshot";
-        modal.classList.add("open");
-      }
+    } else {
+      liveOutput.textContent = phoneticMap[val] || val;
     }
-    function closeLightbox(e) {
-      if (e.target.id === "imageLightbox" || e.target.classList.contains("lightbox-close")) {
-        const modal = document.getElementById("imageLightbox");
-        if (modal) modal.classList.remove("open");
-      }
-    }
+  });
 
-    // Back to Top Button scroll listener (Passive for 60/120fps smooth scrolling)
-    window.addEventListener("scroll", () => {
-      const btn = document.getElementById("backToTopBtn");
-      if (btn) {
-        if (window.scrollY > 400) {
-          btn.classList.add("visible");
-        } else {
-          btn.classList.remove("visible");
-        }
-      }
-    }, { passive: true });
+  function testSnippet(text) {
+    liveInput.value = text;
+    liveInput.dispatchEvent(new Event('input'));
+  }
+</script>
 
-
-    // Template Hub Filters, Copy & Try in Studio
-    function filterTemplates(cat, btnEl) {
-      document.querySelectorAll(".tpl-filter-btn").forEach(b => b.classList.remove("active"));
-      if (btnEl) btnEl.classList.add("active");
-      const cards = document.querySelectorAll("#templatesGrid .tpl-card");
-      cards.forEach(c => {
-        if (cat === "all" || c.getAttribute("data-cat") === cat) {
-          c.style.display = "flex";
-        } else {
-          c.style.display = "none";
-        }
-      });
-    }
-
-    function copyTemplateText(elemId) {
-      const box = document.getElementById(elemId);
-      if (!box) return;
-      const text = box.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        showTemplateToast("✓ টেমপ্লেট সফলভাবে ক্লিপবোর্ডে কপি হয়েছে!");
-      }).catch(() => {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        showTemplateToast("✓ টেমপ্লেট কপি হয়েছে!");
-      });
-    }
-
-    function tryTemplateSnippet(trigger) {
-      const demoSec = document.getElementById("demo");
-      if (demoSec) {
-        demoSec.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-      setTimeout(() => {
-        const snips = window.MATRAKI_CUSTOM_SNIPPETS || {};
-        const ed = document.getElementById("demoEditor");
-        if (snips[trigger]) {
-          ed.value = snips[trigger] + "\n\n";
-          rawBuffer = "";
-          updateEditorStats();
-          refreshStudioUI();
-          ed.focus();
-          showTemplateToast(`✓ "${trigger}" টেমপ্লেট লাইভ স্টুডিওতে টাইপ হয়েছে!`);
-        } else {
-          setDemo(trigger);
-          if (ed) ed.focus();
-        }
-      }, 350);
-    }
-
-    function showTemplateToast(msg) {
-      let toast = document.getElementById("tplToast");
-      if (!toast) {
-        toast = document.createElement("div");
-        toast.id = "tplToast";
-        toast.style.cssText = "position:fixed; bottom:28px; right:28px; background:linear-gradient(135deg, #1B9E72, #1B9E72); color:#fff; font-weight:700; font-size:0.9rem; padding:12px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(27, 158, 114,0.5); z-index:99999; transition:all 0.3s ease; opacity:0; transform:translateY(20px);";
-        document.body.appendChild(toast);
-      }
-      toast.innerText = msg;
-      toast.style.opacity = "1";
-      toast.style.transform = "translateY(0)";
-      setTimeout(() => {
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(20px)";
-      }, 2600);
-    }
-    // =========================================================================
-    // Automattic Harper™ Grammar & Spell Checker Web Studio Controller
-    // =========================================================================
-    let currentHarperLints = [];
-
-    function toggleHarperPanel() {
-      const panel = document.getElementById("harperPanel");
-      if (!panel) return;
-      if (panel.style.display === "none" || !panel.style.display) {
-        panel.style.display = "block";
-        runHarperGrammarCheck();
-      } else {
-        panel.style.display = "none";
-      }
-    }
-
-    function testHarperSample() {
-      const ed = document.getElementById("demoEditor");
-      if (!ed) return;
-      ed.value = "This is an test with a apple and alot of issues in monday . I want to to say that their is no problem. In order to fix this , every day we try our best.";
-      rawBuffer = "";
-      updateEditorStats();
-      refreshStudioUI();
-      runHarperGrammarCheck();
-      showTemplateToast("✓ Loaded Harper sample error text!");
-    }
-
-    function escapeHarperHtml(str) {
-      if (!str) return "";
-      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-    }
-
-    function runHarperGrammarCheck() {
-      const panel = document.getElementById("harperPanel");
-      if (panel && panel.style.display === "none") {
-        panel.style.display = "block";
-      }
-      const ed = document.getElementById("demoEditor");
-      const status = document.getElementById("harperStatus");
-      const list = document.getElementById("harperIssuesList");
-      const btnFixAll = document.getElementById("btnFixAllHarper");
-      if (!ed || !window.MatraKiHarper || !status || !list) return;
-
-      const text = ed.value;
-      currentHarperLints = window.MatraKiHarper.lint(text);
-
-      list.innerHTML = "";
-      if (currentHarperLints.length === 0) {
-        status.innerHTML = `<span style="color:#5FD0A6; font-weight:800;">✅ No grammar or spelling issues detected!</span> Your text looks clean according to Automattic Harper rules.`;
-        if (btnFixAll) btnFixAll.style.display = "none";
-        return;
-      }
-
-      status.innerHTML = `<span style="color:#F42A41; font-weight:800;">⚠️ Automattic Harper found ${currentHarperLints.length} issue(s)</span> in your text:`;
-      if (btnFixAll) btnFixAll.style.display = "inline-flex";
-
-      currentHarperLints.forEach((lint, index) => {
-        const item = document.createElement("div");
-        item.style.cssText = "background:rgba(30, 41, 59, 0.75); border:1px solid rgba(45, 212, 191, 0.35); border-radius:9px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
-        
-        item.innerHTML = `
-          <div style="flex:1; min-width:240px;">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-              <span style="background:rgba(239, 68, 68, 0.2); color:#FF6B7E; border:1px solid rgba(239, 68, 68, 0.4); border-radius:5px; font-size:0.75rem; font-weight:800; padding:2px 6px;">${escapeHarperHtml(lint.rule)}</span>
-              <span style="color:#B9CBC2; font-size:0.86rem; font-weight:600;"><span style="text-decoration:line-through; color:#FF6B7E;">"${escapeHarperHtml(lint.matchedText)}"</span> ➔ <b style="color:#5FD0A6;">"${escapeHarperHtml(lint.suggestion)}"</b></span>
-            </div>
-            <div style="color:#8FA399; font-size:0.82rem;">${escapeHarperHtml(lint.message)}</div>
-          </div>
-          <div>
-            <button type="button" class="tb-btn" onclick="applySingleHarperFix(${index})" style="background:linear-gradient(135deg, #1B9E72, #1B9E72); color:#fff; border-color:#5FD0A6; font-size:0.8rem; padding:6px 12px;">⚡ Fix "${escapeHarperHtml(lint.suggestion)}"</button>
-          </div>
-        `;
-        list.appendChild(item);
-      });
-    }
-
-    function applySingleHarperFix(index) {
-      if (!currentHarperLints[index]) return;
-      const lint = currentHarperLints[index];
-      const ed = document.getElementById("demoEditor");
-      if (!ed) return;
-      
-      const before = ed.value.substring(0, lint.span[0]);
-      const after = ed.value.substring(lint.span[1]);
-      ed.value = before + lint.suggestion + after;
-      
-      updateEditorStats();
-      refreshStudioUI();
-      runHarperGrammarCheck();
-      showTemplateToast(`✓ Fixed "${lint.matchedText}" ➔ "${lint.suggestion}"`);
-    }
-
-    function fixAllHarperIssues() {
-      const ed = document.getElementById("demoEditor");
-      if (!ed || !window.MatraKiHarper) return;
-      const fixed = window.MatraKiHarper.applyAll(ed.value);
-      ed.value = fixed;
-      updateEditorStats();
-      refreshStudioUI();
-      runHarperGrammarCheck();
-      showTemplateToast("✓ All Harper grammar & spelling issues fixed!");
-    }
-  </script>
 </body>
 </html>

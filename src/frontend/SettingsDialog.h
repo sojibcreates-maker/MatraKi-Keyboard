@@ -51,6 +51,7 @@ public slots:
 
 protected:
   void showEvent(QShowEvent *event) override;
+  bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
   void handleThemeModeChanged(int index);

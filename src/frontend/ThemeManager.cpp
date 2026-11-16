@@ -459,11 +459,23 @@ QComboBox QAbstractItemView {
     color: [@text];
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     selection-background-color: [@accentSoft];
     selection-color: [@accent];
     padding: 4px;
+    margin: 0px;
     outline: none;
+}
+QComboBox QAbstractItemView::item {
+    color: [@text];
+    background-color: [@surface];
+    padding: 6px 12px;
+    min-height: 24px;
+    border: none;
+}
+QComboBox QAbstractItemView::item:hover, QComboBox QAbstractItemView::item:selected {
+    color: [@accent];
+    background-color: [@accentSoft];
 }
 QTreeWidget, QTreeView, QListWidget, QTableWidget {
     color: [@text];
@@ -738,11 +750,23 @@ QComboBox QAbstractItemView {
     color: [@text];
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     selection-background-color: [@accentSoft];
     selection-color: [@accent];
     padding: 4px;
+    margin: 0px;
     outline: none;
+}
+QComboBox QAbstractItemView::item {
+    color: [@text];
+    background-color: [@surface];
+    padding: 6px 12px;
+    min-height: 24px;
+    border: none;
+}
+QComboBox QAbstractItemView::item:hover, QComboBox QAbstractItemView::item:selected {
+    color: [@accent];
+    background-color: [@accentSoft];
 }
 QToolTip {
     color: [@text];

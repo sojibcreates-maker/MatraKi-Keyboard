@@ -20,9 +20,12 @@
 
 #include <QComboBox>
 #include <QDesktopServices>
+#include <QEvent>
+#include <QListView>
 #include <QPushButton>
 #include <QShowEvent>
 #include <QSignalBlocker>
+#include <QStyledItemDelegate>
 #include <QUrl>
 
 #include "SettingsDialog.h"
@@ -54,6 +57,18 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
   ui->btnACUpdate->setObjectName("ghost");
 
   autoCorrectDialog = new AutoCorrectDialog(this);
+
+  auto setupCombo = [this](QComboBox *cb) {
+    if (!cb) return;
+    cb->setItemDelegate(new QStyledItemDelegate(cb));
+    QWidget *container = cb->view() ? cb->view()->window() : nullptr;
+    if (container) {
+      container->setAttribute(Qt::WA_TranslucentBackground, true);
+      container->installEventFilter(this);
+    }
+  };
+  setupCombo(ui->cmbOrientation);
+  setupCombo(ui->cmbThemeMode);
 
   ui->cmbOrientation->insertItems(0, {"Horizontal", "Vertical"});
   ui->cmbThemeMode->insertItems(0, {
@@ -148,11 +163,54 @@ void SettingsDialog::applyTheme() {
   }
 
   ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+
+  auto refreshCombo = [&p](QComboBox *cb) {
+    if (!cb) return;
+    QWidget *container = cb->view() ? cb->view()->window() : nullptr;
+    if (container) {
+      container->setAttribute(Qt::WA_TranslucentBackground, true);
+      container->setStyleSheet(QStringLiteral(
+        "QFrame { background-color: %1; border: 1px solid %2; border-radius: 8px; margin: 0; padding: 0; }"
+      ).arg(p.surface, p.border));
+      if (container->layout()) {
+        container->layout()->setContentsMargins(0, 0, 0, 0);
+        container->layout()->setSpacing(0);
+      }
+    }
+    if (cb->view()) {
+      QPalette vpal = cb->view()->palette();
+      vpal.setColor(QPalette::Text, QColor(p.text));
+      vpal.setColor(QPalette::WindowText, QColor(p.text));
+      vpal.setColor(QPalette::Base, QColor(p.surface));
+      vpal.setColor(QPalette::Window, QColor(p.surface));
+      cb->view()->setPalette(vpal);
+    }
+  };
+  refreshCombo(ui->cmbOrientation);
+  refreshCombo(ui->cmbThemeMode);
 }
 
 void SettingsDialog::showEvent(QShowEvent *event) {
   QDialog::showEvent(event);
   applyTheme();
+}
+
+bool SettingsDialog::eventFilter(QObject *watched, QEvent *event) {
+  if (event->type() == QEvent::Show) {
+    const MatraKiPalette p = ThemeManager::instance().palette();
+    QWidget *w = qobject_cast<QWidget *>(watched);
+    if (w && w->inherits("QFrame")) {
+      w->setAttribute(Qt::WA_TranslucentBackground, true);
+      w->setStyleSheet(QStringLiteral(
+        "QFrame { background-color: %1; border: 1px solid %2; border-radius: 8px; margin: 0; padding: 0; }"
+      ).arg(p.surface, p.border));
+      if (w->layout()) {
+        w->layout()->setContentsMargins(0, 0, 0, 0);
+        w->layout()->setSpacing(0);
+      }
+    }
+  }
+  return QDialog::eventFilter(watched, event);
 }
 
 void SettingsDialog::handleThemeModeChanged(int index) {
