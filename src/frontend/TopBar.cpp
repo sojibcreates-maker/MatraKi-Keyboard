@@ -1,6 +1,7 @@
 /*
  *  MatraKi
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
+ *  Copyright (C) 2026 Md Sojib Hossain — Emerald Design System
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,13 +34,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QDialog>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QTextEdit>
-#include <QTemporaryFile>
-#include <QProcess>
-#include <QTextStream>
+#include <QFrame>
 #include "TopBar.h"
 #include "Layout.h"
 #include "Settings.h"
@@ -49,6 +44,12 @@
 #include "SettingsDialog.h"
 #include "LayoutConverter.h"
 #include "AutoCorrectDialog.h"
+#include "HarperDialog.h"
+#include "MatraKiIcons.h"
+#include "MatraKiLogo.h"
+#include "MatraKiMenu.h"
+#include "MatraKiToggle.h"
+#include "MatraKiUpdater.h"
 #include "QSimpleUpdater.h"
 #include "ThemeManager.h"
 #include "ui_TopBar.h"
@@ -89,6 +90,13 @@ TopBar::TopBar(QWidget *parent) :
   aboutDialog = new AboutDialog(Q_NULLPTR);
   layoutViewer = new LayoutViewer(Q_NULLPTR);
   settingsDialog = new SettingsDialog(Q_NULLPTR);
+  harperDialog = new HarperDialog(Q_NULLPTR);
+
+  harperToggle = new MatraKiToggle(this);
+  harperToggle->setChecked(true);
+  connect(harperToggle, &MatraKiToggle::toggled, this, [this](bool on) {
+    harperDialog->setHarperEnabled(on);
+  });
 
   ui->buttonIcon->installEventFilter(this);
 
@@ -117,6 +125,7 @@ TopBar::TopBar(QWidget *parent) :
 
 TopBar::~TopBar() {
   /* Dialogs */
+  delete harperDialog;
   delete layoutViewer;
   delete settingsDialog;
   delete aboutDialog;
@@ -152,137 +161,42 @@ void TopBar::SetupTopBar() {
   }
 }
 
-void TopBar::showUpdateDialog(bool updateAvailable, const QString &latestVer, const QString &releaseTitle, const QString &changelog, const QString &releaseUrl, bool silent) {
-  if (!updateAvailable && silent) {
-    return;
-  }
-
-  QMessageBox msgBox(this);
-  msgBox.setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
-  msgBox.setWindowTitle(updateAvailable ? "MatraKi — New Update Available!" : "MatraKi — Software Update");
-  msgBox.setWindowIcon(QIcon(":/images/MatraKi.png"));
-  msgBox.setIcon(QMessageBox::Information);
-  msgBox.setTextFormat(Qt::RichText);
-
-  if (updateAvailable) {
-    msgBox.setText(QString(
-      "<span style='font-size:14pt; font-weight:800; color:#38bdf8;'>🎉 নতুন আপডেট পাওয়া গেছে! (Update Available: v%1)</span><br/>"
-      "<span style='font-size:10pt; color:#cbd5e1;'>Current Installed: <b>v%2</b>  •  Latest Release: <b style='color:#34d399;'>v%1 (%3)</b></span>"
-    ).arg(latestVer, QStringLiteral(PROJECT_VERSION), releaseTitle));
-
-    QString summary = changelog.trimmed();
-    if (summary.length() > 360) summary = summary.left(360) + "...";
-    msgBox.setInformativeText(QString(
-      "<b>Release Highlights:</b><br/>%1<br/><br/>"
-      "Click below to download the latest installer from the official MatraKi web page or GitHub Releases."
-    ).arg(summary.toHtmlEscaped().replace("\n", "<br/>")));
-  } else {
-    msgBox.setText(QString(
-      "<span style='font-size:13.5pt; font-weight:800; color:#34d399;'>✅ MatraKi v%1 — AI Smart Edition is Up to Date!</span>"
-    ).arg(QStringLiteral(PROJECT_VERSION)));
-    msgBox.setInformativeText(
-      "You are running the latest version of MatraKi Keyboard.<br/>"
-      "• <b>20,535+</b> Pre-Trained Words &amp; Auto-Correct Rules<br/>"
-      "• <b>Smart Suffix Stemmer</b>, Next-Word AI, Live Math (<code>=</code>) &amp; 42+ Snippets (<code>!</code>)<br/>"
-      "• Connected to Official Update Page: <a style='color:#38bdf8;' href='https://sojibcreates-maker.github.io/MatraKi-Keyboard/'>sojibcreates-maker.github.io/MatraKi-Keyboard</a>"
-    );
-  }
-
-  QPushButton *btnWeb = msgBox.addButton(
-    updateAvailable ? "🌐 Download from Web Page" : "🌐 Official Web Page",
-    QMessageBox::AcceptRole
-  );
-  QPushButton *btnGitHub = msgBox.addButton("📦 GitHub Releases", QMessageBox::ActionRole);
-  msgBox.addButton(updateAvailable ? "Later" : "Close", QMessageBox::RejectRole);
-
-  msgBox.setStyleSheet(
-    "QMessageBox { background-color: #0b1120; color: #f8fafc; }"
-    "QLabel { color: #e2e8f0; font-size: 13px; }"
-    "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 7px; padding: 7px 16px; font-weight: bold; }"
-    "QPushButton:hover { background-color: #1e40af; }"
-  );
-
-  msgBox.exec();
-  if (msgBox.clickedButton() == btnWeb) {
-    QDesktopServices::openUrl(QUrl(UPDATE_PAGE_URL));
-  } else if (msgBox.clickedButton() == btnGitHub) {
-    QDesktopServices::openUrl(QUrl(releaseUrl.isEmpty() ? GITHUB_RELEASES_URL : releaseUrl));
-  }
-}
+/* ------------------------------------------------------------------ */
+/*  Update dialog                                                     */
+/* ------------------------------------------------------------------ */
 
 void TopBar::checkForUpdate(bool silent) {
-  // Also keep QSimpleUpdater synced with our GitHub Pages updates.json URL
   if (updater) {
-    updater->setModuleVersion(DEFS_URL, PROJECT_VERSION);
+    updater->setModuleVersion(QStringLiteral("https://sojibcreates-maker.github.io/MatraKi-Keyboard/updates.json"),
+                              PROJECT_VERSION);
   }
-
-  QNetworkAccessManager *nam = new QNetworkAccessManager(this);
-
-  // Step 1: Check GitHub Releases API (detects any newly published GitHub release immediately)
-  QNetworkRequest apiReq{QUrl(GITHUB_API_LATEST_URL)};
-  apiReq.setRawHeader("User-Agent", "MatraKi-Keyboard-Updater");
-  apiReq.setRawHeader("Accept", "application/vnd.github+json");
-  QNetworkReply *apiReply = nam->get(apiReq);
-
-  connect(apiReply, &QNetworkReply::finished, this, [=]() {
-    apiReply->deleteLater();
-    if (apiReply->error() == QNetworkReply::NoError) {
-      QJsonDocument doc = QJsonDocument::fromJson(apiReply->readAll());
-      if (doc.isObject()) {
-        QJsonObject obj = doc.object();
-        QString tag = obj.value("tag_name").toString().trimmed();
-        if (tag.startsWith('v') || tag.startsWith('V')) tag = tag.mid(1);
-        QString title = obj.value("name").toString("MatraKi Release").trimmed();
-        QString body = obj.value("body").toString().trimmed();
-        QString htmlUrl = obj.value("html_url").toString(GITHUB_RELEASES_URL).trimmed();
-        if (!tag.isEmpty()) {
-          bool newer = isRemoteVersionNewer(tag, QStringLiteral(PROJECT_VERSION));
-          showUpdateDialog(newer, tag, title, body, htmlUrl, silent);
-          nam->deleteLater();
-          return;
-        }
-      }
-    }
-
-    // Step 2: Fallback to GitHub Pages updates.json feed
-    QNetworkRequest pageReq{QUrl(DEFS_URL)};
-    pageReq.setRawHeader("User-Agent", "MatraKi-Keyboard-Updater");
-    QNetworkReply *pageReply = nam->get(pageReq);
-    connect(pageReply, &QNetworkReply::finished, this, [=]() {
-      pageReply->deleteLater();
-      nam->deleteLater();
-      if (pageReply->error() == QNetworkReply::NoError) {
-        QJsonDocument doc = QJsonDocument::fromJson(pageReply->readAll());
-        if (doc.isObject()) {
-          QJsonObject obj = doc.object();
-          QString latestVer = obj.value("latest_version").toString().trimmed();
-          if (latestVer.isEmpty()) {
-            latestVer = obj.value("updates").toObject().value("linux").toObject().value("latest-version").toString().trimmed();
-          }
-          if (latestVer.startsWith('v') || latestVer.startsWith('V')) latestVer = latestVer.mid(1);
-          QString title = obj.value("release_title").toString("MatraKi Release");
-          QString changelog = obj.value("changelog").toString();
-          QString relUrl = obj.value("github_release_url").toString(GITHUB_RELEASES_URL);
-          if (!latestVer.isEmpty()) {
-            bool newer = isRemoteVersionNewer(latestVer, QStringLiteral(PROJECT_VERSION));
-            showUpdateDialog(newer, latestVer, title, changelog, relUrl, silent);
-            return;
-          }
-        }
-      }
-      // Offline or unreachable fallback (only show if user manually clicked Check for Updates)
-      showUpdateDialog(false, QStringLiteral(PROJECT_VERSION), "MatraKi v" PROJECT_VERSION " — Harper AI Edition", "", GITHUB_RELEASES_URL, silent);
-    });
-  });
+  MatraKiUpdater::check(this, silent);
 }
 
+/* ------------------------------------------------------------------ */
+/*  Theme                                                             */
+/* ------------------------------------------------------------------ */
+
 void TopBar::applyTheme() {
+  const MatraKiPalette p = ThemeManager::instance().palette();
+
   this->setStyleSheet(ThemeManager::instance().topBarStyle());
 
-  ui->buttonSettings->setIcon(QIcon(ThemeManager::instance().iconSettings()));
-  ui->buttonViewLayout->setIcon(QIcon(ThemeManager::instance().iconKeyboard()));
-  ui->buttonSetLayout->setIcon(QIcon(ThemeManager::instance().iconKeyboardHide()));
-  ui->buttonShutdown->setIcon(QIcon(ThemeManager::instance().iconClose()));
+  /* Brand mark on the leading button. */
+  ui->buttonIcon->setIcon(QIcon(MatraKiLogo::render(34, p.brand, p.danger)));
+
+  /* Toolbar icons. */
+  const QColor iconColor = p.icon;
+  ui->buttonSettings->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Settings, iconColor, 20)));
+  ui->buttonViewLayout->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::KeyboardShow, iconColor, 20)));
+  ui->buttonSetLayout->setIcon(QIcon(MatraKiIcons::combined(
+      {{MatraKiIcons::Keyboard, 18}, {MatraKiIcons::ChevronDown, 11}}, iconColor, 2)));
+  ui->buttonShutdown->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, iconColor, 18)));
+
+  /* Hairlines between the toolbar groups. */
+  const QString line = QStringLiteral("background-color: %1; border: none;").arg(p.border);
+  ui->separator1Line->setStyleSheet(line);
+  ui->separator2Line->setStyleSheet(line);
 
   if (layoutMenu) {
     layoutMenu->setStyleSheet(ThemeManager::instance().popupMenuStyle());
@@ -290,66 +204,81 @@ void TopBar::applyTheme() {
   if (iconMenu) {
     iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
   }
+  if (harperToggle) {
+    harperToggle->setOnColor(p.brand);
+    harperToggle->setOffColor(p.dark ? QColor("#2E4038") : QColor("#CBD7D1"));
+    harperToggle->setFocusColor(p.accent);
+  }
+
+  refreshMenuIcons();
 }
 
+void TopBar::refreshMenuIcons() {
+  const MatraKiPalette p = ThemeManager::instance().palette();
+  Q_UNUSED(p);
+  /* The menu rows paint their own icons, so only the toggle needs a
+     re-tint when the theme flips. */
+}
+
+/* ------------------------------------------------------------------ */
+/*  Popup menus                                                       */
+/* ------------------------------------------------------------------ */
+
 void TopBar::SetupPopupMenus() {
-  // Layout Popup Menu
-  layoutMenu = new QMenu("Select keyboard layout", this);
+  const MatraKiPalette p = ThemeManager::instance().palette();
+
+  /* ---- Layout picker ---- */
+  layoutMenu = new MatraKiMenu(QStringLiteral("কীবোর্ড লেআউট নির্বাচন করুন"), this);
+  layoutMenu->setRowWidth(268);
   layoutMenu->setStyleSheet(ThemeManager::instance().popupMenuStyle());
-  layoutMenu->setIcon(QIcon(":/images/keyboard_layout.png"));
-  connect(layoutMenu, &QMenu::aboutToHide, [=]() {
-    ui->buttonSetLayout->setChecked(false);
-  });
 
-  layoutMenuInstall = new QAction("Install a layout", this);
-  layoutMenuLayoutsGroup = new QActionGroup(this);
-  for (auto &layoutMenuLayout : layoutMenuLayouts) {
-    layoutMenuLayout = new QAction(this);
-    layoutMenuLayout->setVisible(false);
-    layoutMenuLayout->setCheckable(true);
-    layoutMenuLayoutsGroup->addAction(layoutMenuLayout);
-    connect(layoutMenuLayout, SIGNAL(triggered()), this, SLOT(layoutMenuLayouts_clicked()));
-  }
-  RefreshLayouts();
-  connect(layoutMenuInstall, SIGNAL(triggered()), this, SLOT(layoutMenuInstall_clicked()));
+  /* ---- Logo menu ---- */
+  iconMenu = new MatraKiMenu(QStringLiteral("মাত্রা-কী"), this);
+  iconMenu->setRowWidth(288);
+  iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
 
-  // Icon Button Popup Menu
-#if 0
-  iconMenuOnTray = new QAction("Jump to system tray", this);
-  connect(iconMenuOnTray, SIGNAL(triggered()), this, SLOT(iconMenuOnTray_clicked()));
-#endif
+  iconMenuLayout = iconMenu->addRow(
+      QStringLiteral("বর্তমান কীবোর্ড লেআউট সম্পর্কে"),
+      MatraKiIcons::pixmap(MatraKiIcons::Keyboard, p.icon, 18));
+  connect(iconMenuLayout, &QAction::triggered, this, &TopBar::iconMenuLayout_clicked);
 
-  iconMenuLayout = new QAction("About current keyboard layout", this);
-  connect(iconMenuLayout, SIGNAL(triggered()), this, SLOT(iconMenuLayout_clicked()));
+  iconMenuAbout = iconMenu->addRow(
+      QStringLiteral("মাত্রা-কী সম্পর্কে"),
+      MatraKiIcons::pixmap(MatraKiIcons::Info, p.icon, 18));
+  connect(iconMenuAbout, &QAction::triggered, this, &TopBar::iconMenuAbout_clicked);
 
-  iconMenuAbout = new QAction("About MatraKi", this);
-  connect(iconMenuAbout, SIGNAL(triggered()), this, SLOT(iconMenuAbout_clicked()));
+  iconMenu->addSeparatorRow();
 
-  iconMenuWebsite = new QAction("🌐 Official Website & Live Keyboard", this);
-  connect(iconMenuWebsite, &QAction::triggered, [=]() {
+  iconMenuWebsite = iconMenu->addRow(
+      QStringLiteral("অফিসিয়াল ওয়েবসাইট"),
+      MatraKiIcons::pixmap(MatraKiIcons::World, p.icon, 18),
+      QStringLiteral("লাইভ কীবোর্ড"));
+  connect(iconMenuWebsite, &QAction::triggered, this, [=]() {
     QDesktopServices::openUrl(QUrl(WEBSITE_URL));
   });
 
-  iconMenuHarper = new QAction("🧠 Harper Grammar & Spell Checker (Automattic)", this);
-  connect(iconMenuHarper, SIGNAL(triggered()), this, SLOT(iconMenuHarper_clicked()));
+  iconMenuHarper = iconMenu->addToggleRow(
+      QStringLiteral("হার্পার ব্যাকরণ ও বানান যাচাই"),
+      MatraKiIcons::pixmap(MatraKiIcons::SpellCheck, p.icon, 18), harperToggle);
+  connect(harperToggle, &MatraKiToggle::toggled, this, [this](bool on) {
+    harperDialog->setHarperEnabled(on);
+  });
 
-  iconMenuDonate = new QAction("💖 Support & Donate", this);
-  connect(iconMenuDonate, SIGNAL(triggered()), this, SLOT(iconMenuDonate_clicked()));
+  iconMenu->addSeparatorRow();
 
-  iconMenuUpdate = new QAction("🔄 Check for Updates", this);
-  connect(iconMenuUpdate, &QAction::triggered, [=]() {
+  iconMenuDonate = iconMenu->addRow(
+      QStringLiteral("সহায়তা ও ডোনেশন"),
+      MatraKiIcons::pixmap(MatraKiIcons::Heart, p.danger, 18));
+  connect(iconMenuDonate, &QAction::triggered, this, &TopBar::iconMenuDonate_clicked);
+
+  iconMenuUpdate = iconMenu->addRow(
+      QStringLiteral("আপডেট চেক করুন"),
+      MatraKiIcons::pixmap(MatraKiIcons::Refresh, p.icon, 18));
+  connect(iconMenuUpdate, &QAction::triggered, this, [=]() {
     checkForUpdate(false);
   });
 
-  iconMenu = new QMenu(this);
-  iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
-  //iconMenu->addAction(iconMenuOnTray);
-  iconMenu->addAction(iconMenuLayout);
-  iconMenu->addAction(iconMenuAbout);
-  iconMenu->addAction(iconMenuWebsite);
-  iconMenu->addAction(iconMenuHarper);
-  iconMenu->addAction(iconMenuDonate);
-  iconMenu->addAction(iconMenuUpdate);  
+  RefreshLayouts();
 }
 
 void TopBar::SetupTrayIcon() {
@@ -365,9 +294,6 @@ void TopBar::SetupTrayIcon() {
   trayMenu = new QMenu(this);
   trayMenu->addAction(trayMenuRestore);
   trayMenu->addMenu(layoutMenu); // Layout Menu
-  /*
-  trayMenu->addSeparator();
-  trayMenu->addAction(iconMenuAbout);*/
   trayMenu->addSeparator();
   trayMenu->addAction(iconMenuQuit);
 
@@ -376,53 +302,44 @@ void TopBar::SetupTrayIcon() {
 }
 
 void TopBar::RefreshLayouts() {
-  LayoutList list;
-  list = gLayout->searchLayouts();
+  LayoutList list = gLayout->searchLayouts();
 
   QString selectedLayout = gSettings->getLayoutName();
+  const MatraKiPalette p = ThemeManager::instance().palette();
 
-  // This loop need to be rewritten to use `for each` loop, which is unnecessary. Skipping.
+  /* Rebuild the layout picker from scratch so repeated refreshes never
+     duplicate entries. */
+  layoutMenu->clearRows();
 
+  QAction *install = layoutMenu->addRow(
+      QStringLiteral("নতুন লেআউট ইনস্টল করুন"),
+      MatraKiIcons::pixmap(MatraKiIcons::Download, p.icon, 18));
+  connect(install, &QAction::triggered, this, &TopBar::layoutMenuInstall_clicked);
 
-  for (int k = 0; k < MaxLayoutFiles; ++k) {
-    if (k < list.count()) {
-      QString name = list[k];
-      layoutMenuLayouts[k]->setText(name);
-      layoutMenuLayouts[k]->setVisible(true);
-      // Select previously selected layout
-      if (name == selectedLayout) {
-        layoutMenuLayouts[k]->setChecked(true);
-        gLayout->setLayout(name);
-      }
-    } else {
-      layoutMenuLayouts[k]->setVisible(false);
+  layoutMenu->addSeparatorRow();
+
+  for (int k = 0; k < list.count(); ++k) {
+    const QString name = list[k];
+    QAction *action = layoutMenu->addCheckableRow(
+        name, MatraKiIcons::pixmap(MatraKiIcons::Keyboard, p.icon, 18));
+    action->setChecked(name == selectedLayout);
+    if (name == selectedLayout) {
+      gLayout->setLayout(name);
     }
-    layoutMenu->addAction(layoutMenuLayouts[k]);
+    connect(action, &QAction::triggered, this, [this, action]() {
+      /**
+       * From Qt version 5.10, Qt automatically adds shortcuts to menu items.
+       * For that Qt includes a `&` character, so the raw text has to be
+       * cleaned before it is handed to the layout engine.
+       */
+      QString layoutName = action->text();
+      if (layoutName.contains("&")) layoutName.replace("&", "");
+
+      gLayout->setLayout(layoutName);
+      action->setChecked(true);
+      layoutViewer->refreshLayoutViewer();
+    });
   }
-  layoutMenu->addSeparator();
-  layoutMenu->addAction(layoutMenuInstall);
-}
-
-void TopBar::layoutMenuLayouts_clicked() {
-  /**
-   * From Qt version 5.10, Qt automatically adds shortcuts to
-   * menu items. For that Qt includes a `&` character. So when
-   * we use QAction::text() function, we get a string including
-   * a `&` character and we mess all things up.
-   *
-   * See issue #17
-   */
-
-  QAction *action = qobject_cast<QAction *>(sender());
-
-  QString layoutName = action->text();
-  if (layoutName.contains("&")) {
-    layoutName.replace("&", "");
-  }
-
-  gLayout->setLayout(layoutName);
-  action->setChecked(true);
-  layoutViewer->refreshLayoutViewer();
 }
 
 void TopBar::layoutMenuInstall_clicked() {
@@ -433,21 +350,21 @@ void TopBar::layoutMenuInstall_clicked() {
     ConversionResult res = conv.convertAvroLayout(fileName);
     switch (res) {
     case Ok:
-      QMessageBox::information(Q_NULLPTR, "MatraKi", "Layout Installed Successfully",
+      QMessageBox::information(Q_NULLPTR, "MatraKi", "লেআউট সফলভাবে ইনস্টল হয়েছে।",
                                QMessageBox::Ok);
       break;
     case UnsupportedLayout:
       QMessageBox::critical(Q_NULLPTR,
                             "MatraKi",
-                            "Unsupported Layout file!\nMatraKi only supports Avro Keyboard 5 layouts.",
+                            "অসমর্থিত লেআউট ফাইল!\nমাত্রা-কী শুধুমাত্র Avro Keyboard 5 লেআউট সমর্থন করে।",
                             QMessageBox::Ok);
       break;
     case OpenError:
       QMessageBox::critical(Q_NULLPTR, "MatraKi",
-                            "An error occurred while opening the layout file!", QMessageBox::Ok);
+                            "লেআউট ফাইল খোলার সময় একটি ত্রুটি হয়েছে!", QMessageBox::Ok);
       break;
     case SaveError:
-      QMessageBox::critical(Q_NULLPTR, "MatraKi", "Error occurred while saving the file!",
+      QMessageBox::critical(Q_NULLPTR, "MatraKi", "ফাইল সংরক্ষণের সময় ত্রুটি হয়েছে!",
                             QMessageBox::Ok);
       break;
     }
@@ -460,113 +377,15 @@ void TopBar::iconMenuLayout_clicked() {
 }
 
 void TopBar::iconMenuHarper_clicked() {
-  QDialog *dlg = new QDialog(this);
-  dlg->setWindowTitle("Automattic Harper™ — Grammar & Spell Checker");
-  dlg->setWindowIcon(QIcon(":/images/MatraKi.png"));
-  dlg->resize(680, 500);
-  dlg->setStyleSheet(
-    "QDialog { background-color: #0b1120; color: #f8fafc; font-family: sans-serif; }"
-    "QLabel { color: #cbd5e1; font-size: 13px; }"
-    "QTextEdit { background-color: #060b16; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; color: #f8fafc; font-size: 13px; padding: 8px; selection-background-color: #1d4ed8; }"
-    "QPushButton { background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #1d4ed8, stop:1 #0ea5e9); color: #ffffff; border: 1px solid #38bdf8; border-radius: 7px; padding: 7px 15px; font-weight: bold; font-size: 12px; }"
-    "QPushButton:hover { background-color: #1e40af; }"
-    "QPushButton:pressed { background-color: #0c4a6e; }"
-  );
-
-  QVBoxLayout *layout = new QVBoxLayout(dlg);
-  layout->setContentsMargins(18, 18, 18, 18);
-  layout->setSpacing(12);
-
-  // Header
-  QHBoxLayout *headerLayout = new QHBoxLayout();
-  QLabel *iconLabel = new QLabel("🧠", dlg);
-  iconLabel->setStyleSheet("font-size: 26px;");
-  QLabel *titleLabel = new QLabel(
-    "<b><span style='font-size: 15px; color: #38bdf8;'>Automattic Harper™ Grammar &amp; Spell Checker</span></b><br/>"
-    "<span style='font-size: 11px; color: #94a3b8;'>Official integration with Automattic's high-speed Rust grammar engine (v3.1.0)</span>",
-    dlg
-  );
-  headerLayout->addWidget(iconLabel);
-  headerLayout->addWidget(titleLabel, 1);
-  layout->addLayout(headerLayout);
-
-  QLabel *inputPrompt = new QLabel("Type or paste text to check for grammar, spelling, and style errors:", dlg);
-  layout->addWidget(inputPrompt);
-
-  QTextEdit *txtInput = new QTextEdit(dlg);
-  txtInput->setPlaceholderText("e.g. This is an test with a apple and alot of issues in monday.");
-  txtInput->setText("This is an test with a apple and alot of issues in monday. I want to to say that their is no problem.");
-  txtInput->setFixedHeight(105);
-  layout->addWidget(txtInput);
-
-  // Buttons row
-  QHBoxLayout *btnLayout = new QHBoxLayout();
-  QPushButton *btnCheck = new QPushButton("🔍 Run Harper Grammar Check", dlg);
-  QPushButton *btnSample = new QPushButton("⚡ Test Sample", dlg);
-  QPushButton *btnWeb = new QPushButton("🌐 Open Web Studio", dlg);
-  btnLayout->addWidget(btnCheck);
-  btnLayout->addWidget(btnSample);
-  btnLayout->addWidget(btnWeb);
-  btnLayout->addStretch(1);
-  layout->addLayout(btnLayout);
-
-  QLabel *resultLabel = new QLabel("<b>Harper Inspection Output (CLI):</b>", dlg);
-  layout->addWidget(resultLabel);
-
-  QTextEdit *txtOutput = new QTextEdit(dlg);
-  txtOutput->setReadOnly(true);
-  txtOutput->setStyleSheet("background-color: #030712; border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px; font-family: monospace; font-size: 12px; color: #cbd5e1;");
-  txtOutput->setPlaceholderText("Click 'Run Harper Grammar Check' to inspect text using harper-cli...");
-  layout->addWidget(txtOutput, 1);
-
-  auto runCheck = [=]() {
-    QString text = txtInput->toPlainText().trimmed();
-    if (text.isEmpty()) {
-      txtOutput->setPlainText("Please enter some text to check.");
-      return;
-    }
-    QTemporaryFile tempFile;
-    if (tempFile.open()) {
-      QTextStream out(&tempFile);
-      out << text << "\n";
-      tempFile.close();
-
-      QProcess proc;
-      proc.start("harper-cli", QStringList() << "--no-color" << "lint" << tempFile.fileName());
-      proc.waitForFinished(5000);
-      QString output = QString::fromUtf8(proc.readAllStandardOutput());
-      QString errOutput = QString::fromUtf8(proc.readAllStandardError());
-      QString combined = (output + "\n" + errOutput).trimmed();
-
-      if (proc.exitCode() == 0 && !combined.contains("Advice:")) {
-        txtOutput->setHtml(
-          "<p style='color:#34d399; font-weight:bold; font-size:13px;'>✅ No grammar or spelling issues detected!</p>"
-          "<p style='color:#94a3b8;'>Your text looks completely clean and passes all Automattic Harper rules.</p>"
-        );
-      } else {
-        txtOutput->setPlainText(combined);
-      }
-    }
-  };
-
-  connect(btnCheck, &QPushButton::clicked, runCheck);
-  connect(btnSample, &QPushButton::clicked, [=]() {
-    txtInput->setText("This is an test with a apple and alot of issues in monday. I want to to say that their is no problem.");
-    runCheck();
-  });
-  connect(btnWeb, &QPushButton::clicked, [=]() {
-    QDesktopServices::openUrl(QUrl("https://sojibcreates-maker.github.io/MatraKi-Keyboard/#demo"));
-  });
-
-  // Run automatically on first open
-  runCheck();
-
-  dlg->setAttribute(Qt::WA_DeleteOnClose);
-  dlg->show();
+  harperDialog->show();
+  harperDialog->raise();
+  harperDialog->activateWindow();
 }
 
 void TopBar::iconMenuAbout_clicked() {
   aboutDialog->show();
+  aboutDialog->raise();
+  aboutDialog->activateWindow();
 }
 
 void TopBar::iconMenuDonate_clicked() {
@@ -586,7 +405,7 @@ void TopBar::trayMenuRestore_clicked() {
 
 void TopBar::on_buttonIcon_clicked() {
   // Check if this is not a position change event. If it is, then ignore it.
-  if(!positionChanged) {
+  if (!positionChanged) {
     QPoint point = ui->buttonIcon->mapToGlobal(QPoint(0, ui->buttonIcon->height() + 4));
     iconMenu->exec(point);
   }
@@ -642,6 +461,10 @@ bool TopBar::eventFilter(QObject *object, QEvent *event) {
       canMoveTopbar = false;
       ui->buttonIcon->setCursor(Qt::ArrowCursor);
       event->accept();
+      /* A click (as opposed to a drag) opens the logo menu. */
+      if (!positionChanged) {
+        on_buttonIcon_clicked();
+      }
     }
   }
 
@@ -660,11 +483,15 @@ void TopBar::on_buttonShutdown_clicked() {
 void TopBar::on_buttonViewLayout_clicked() {
   layoutViewer->refreshLayoutViewer();
   layoutViewer->show();
+  layoutViewer->raise();
+  layoutViewer->activateWindow();
 }
 
 void TopBar::on_buttonSettings_clicked() {
   settingsDialog->updateSettings();
   settingsDialog->show();
+  settingsDialog->raise();
+  settingsDialog->activateWindow();
 }
 
 /**

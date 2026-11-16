@@ -19,9 +19,12 @@
 
 #include <QTreeWidget>
 #include <QPushButton>
+#include <QShowEvent>
 #include <QJsonDocument>
 #include "AutoCorrectDialog.h"
 #include "ui_AutoCorrectDialog.h"
+#include "MatraKiIcons.h"
+#include "MatraKiLogo.h"
 #include "ThemeManager.h"
 
 AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
@@ -29,19 +32,18 @@ AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
     ui(new Ui::AutoCorrectDialog) {
   ui->setupUi(this);
   this->setWindowIcon(QIcon(":/images/MatraKi.png"));
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+
+  ui->btnUpdate->setObjectName("primary");
+  ui->btnCancel->setObjectName("ghost");
+  ui->btnClear->setObjectName("ghost");
+
+  connect(ui->btnSave, &QPushButton::clicked, this, &AutoCorrectDialog::on_btnSave_clicked);
+  connect(ui->btnCancel, &QPushButton::clicked, this, &AutoCorrectDialog::on_btnCancel_clicked);
 
   connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &AutoCorrectDialog::applyTheme);
   applyTheme();
-
-  if (QPushButton *saveBtn = ui->buttonBox->button(QDialogButtonBox::Save)) {
-    saveBtn->setText("✓ Save Changes");
-    saveBtn->setCursor(Qt::PointingHandCursor);
-  }
-  if (QPushButton *cancelBtn = ui->buttonBox->button(QDialogButtonBox::Cancel)) {
-    cancelBtn->setText("✕ Cancel");
-    cancelBtn->setCursor(Qt::PointingHandCursor);
-  }
 
   ui->autoCorrect->setColumnCount(2);
   ui->autoCorrect->setHeaderLabels({"Replace (Phonetic Pattern)", "With (Bangla Output)"});
@@ -55,7 +57,14 @@ AutoCorrectDialog::~AutoCorrectDialog() {
 }
 
 void AutoCorrectDialog::applyTheme() {
+  const MatraKiPalette p = ThemeManager::instance().palette();
+
   setStyleSheet(ThemeManager::instance().autoCorrectDialogStyle());
+
+  ui->logoSlot->setPixmap(MatraKiLogo::render(34, p.brand, p.danger));
+  ui->btnUpdate->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Plus, p.onBrand, 16)));
+  ui->btnClear->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Trash, p.text, 16)));
+  ui->btnSave->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Check, p.onBrand, 16)));
 }
 
 void AutoCorrectDialog::showEvent(QShowEvent *event) {
@@ -133,7 +142,7 @@ void AutoCorrectDialog::addEntryInViewer(QString replace, QString with) {
   item->setText(1, with);
 }
 
-void AutoCorrectDialog::on_buttonBox_accepted() {
+void AutoCorrectDialog::on_btnSave_clicked() {
   QFile saveFile(folders.getUserAutoCorrectFile());
   if (!saveFile.open(QIODevice::WriteOnly)) {
     LOG_ERROR("[AutoCorrect:Save]: Error couldn't open save file.\n");
@@ -143,10 +152,11 @@ void AutoCorrectDialog::on_buttonBox_accepted() {
   QJsonDocument json(usrDict);
   saveFile.write(json.toJson());
   saveFile.close();
+  close();
 }
 
-void AutoCorrectDialog::on_buttonBox_rejected() {
-  AutoCorrectDialog::close();
+void AutoCorrectDialog::on_btnCancel_clicked() {
+  close();
 }
 
 void AutoCorrectDialog::on_btnUpdate_clicked() {

@@ -1,5 +1,6 @@
 /*
  *  MatraKi Keyboard
+ *  Settings — Emerald Design System
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
  *  Copyright (C) 2026 Md Sojib Hossain
  *
@@ -17,43 +18,71 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QComboBox>
+#include <QDesktopServices>
 #include <QPushButton>
+#include <QShowEvent>
+#include <QSignalBlocker>
+#include <QUrl>
+
 #include "SettingsDialog.h"
 #include "ui_SettingsDialog.h"
 #include "Settings.h"
 #include "AutoCorrectDialog.h"
+#include "MatraKiIcons.h"
+#include "MatraKiLogo.h"
+#include "MatraKiToggle.h"
+#include "MatraKiUpdater.h"
 #include "ThemeManager.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SettingsDialog) {
   ui->setupUi(this);
-  this->setWindowIcon(QIcon(":/images/MatraKi.png"));
-  this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+
+  setAttribute(Qt::WA_TranslucentBackground, true);
+  setWindowIcon(QIcon(":/images/MatraKi.png"));
+  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
+                 Qt::WindowStaysOnTopHint);
+
   ui->gridLayout->setColumnStretch(0, 1);
   ui->gridLayout_2->setColumnStretch(0, 1);
   ui->gridLayout_3->setColumnStretch(0, 1);
+
+  ui->btnSave->setObjectName("primary");
+  ui->btnCancel->setObjectName("ghost");
+  ui->btnACUpdate->setObjectName("ghost");
+
   autoCorrectDialog = new AutoCorrectDialog(this);
 
   ui->cmbOrientation->insertItems(0, {"Horizontal", "Vertical"});
   ui->cmbThemeMode->insertItems(0, {
     "Auto (System Detect)",
-    "Dark Tech Mode",
-    "Light Classic Mode"
+    "Dark Emerald Mode",
+    "Light Emerald Mode"
   });
 
-  if (QPushButton *okBtn = ui->buttonBox->button(QDialogButtonBox::Ok)) {
-    okBtn->setText("✓ Save Settings");
-    okBtn->setCursor(Qt::PointingHandCursor);
-  }
-  if (QPushButton *cancelBtn = ui->buttonBox->button(QDialogButtonBox::Cancel)) {
-    cancelBtn->setText("✕ Cancel");
-    cancelBtn->setCursor(Qt::PointingHandCursor);
-  }
+  buildToggles();
+
+  connect(ui->btnSave, &QPushButton::clicked, this, &SettingsDialog::saveSettings);
+  connect(ui->btnCancel, &QPushButton::clicked, this, [this]() {
+    updateSettings();
+    close();
+  });
+  connect(ui->btnACUpdate, &QPushButton::clicked, [=]() {
+    autoCorrectDialog->open();
+  });
+  connect(ui->btnWebsite, &QPushButton::clicked, [=]() {
+    QDesktopServices::openUrl(QUrl("https://sojibcreates-maker.github.io/MatraKi-Keyboard/"));
+  });
+  connect(ui->btnCheckUpdates, &QPushButton::clicked, [=]() {
+    MatraKiUpdater::check(this, false);
+  });
 
   connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &SettingsDialog::applyTheme);
+  connect(ui->cmbThemeMode, QOverload<int>::of(&QComboBox::currentIndexChanged),
+          this, &SettingsDialog::handleThemeModeChanged);
 
-  implementSignals();
   updateSettings();
   applyTheme();
 }
@@ -63,8 +92,61 @@ SettingsDialog::~SettingsDialog() {
   delete ui;
 }
 
+MatraKiToggle *SettingsDialog::installToggle(QWidget *slot, bool checked) {
+  MatraKiToggle *toggle = new MatraKiToggle(slot);
+  toggle->setChecked(checked);
+  if (slot && slot->layout()) {
+    slot->layout()->addWidget(toggle);
+    slot->layout()->setAlignment(toggle, Qt::AlignRight | Qt::AlignVCenter);
+  }
+  return toggle;
+}
+
+void SettingsDialog::buildToggles() {
+  m_suggestionPhonetic = installToggle(ui->toggleSlotSuggestion, gSettings->getShowCWPhonetic());
+  m_includeEnglish = installToggle(ui->toggleSlotEnglish, gSettings->getIncludeEnglishPrevWin());
+  m_enterClose = installToggle(ui->toggleSlotEnterClose, gSettings->getEnterKeyClosesPrevWin());
+  m_updateCheck = installToggle(ui->toggleSlotUpdateCheck, gSettings->getUpdateCheck());
+  m_suggestionFixed = installToggle(ui->toggleSlotSuggestionFixed, gSettings->getShowPrevWinFixed());
+  m_autoVowel = installToggle(ui->toggleSlotAutoVowel, gSettings->getAutoVowelFormFixed());
+  m_autoChandra = installToggle(ui->toggleSlotAutoChandra, gSettings->getAutoChandraPosFixed());
+  m_oldReph = installToggle(ui->toggleSlotOldReph, gSettings->getOldReph());
+  m_karJoining = installToggle(ui->toggleSlotKarJoining, gSettings->getTraditionalKarFixed());
+  m_numberpad = installToggle(ui->toggleSlotNumberpad, gSettings->getNumberPadFixed());
+
+  /* The English suggestion switch only makes sense while suggestions are
+     shown at all. */
+  connect(m_suggestionPhonetic, &MatraKiToggle::toggled, this, [this](bool checked) {
+    m_includeEnglish->setEnabled(checked);
+    ui->btnACUpdate->setEnabled(checked);
+  });
+}
+
 void SettingsDialog::applyTheme() {
+  const MatraKiPalette p = ThemeManager::instance().palette();
+
   this->setStyleSheet(ThemeManager::instance().settingsDialogStyle());
+
+  ui->logoSlot->setPixmap(MatraKiLogo::render(44, p.brand, p.danger));
+  ui->iconPhonetic->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Sparkles, p.accent, 18));
+  ui->iconGeneral->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Settings, p.accent, 18));
+  ui->iconFixed->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Grid, p.accent, 18));
+  ui->iconSupport->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Info, p.accent, 18));
+
+  ui->btnSave->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Check, p.onBrand, 16)));
+  ui->btnACUpdate->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Search, p.accent, 16)));
+  ui->btnWebsite->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::World, p.accent, 16)));
+  ui->btnCheckUpdates->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Refresh, p.accent, 16)));
+
+  ui->lblVersion->setText(QStringLiteral("v%1").arg(QStringLiteral(PROJECT_VERSION)));
+
+  const QList<MatraKiToggle *> toggles = findChildren<MatraKiToggle *>();
+  for (MatraKiToggle *toggle : toggles) {
+    toggle->setOnColor(p.brand);
+    toggle->setOffColor(p.dark ? QColor("#2E4038") : QColor("#CBD7D1"));
+    toggle->setFocusColor(p.accent);
+  }
+
   ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
 }
 
@@ -79,79 +161,33 @@ void SettingsDialog::handleThemeModeChanged(int index) {
   else if (index == 2) mode = "light";
   ThemeManager::instance().setModeString(mode);
   ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+  applyTheme();
 }
 
-void SettingsDialog::implementSignals() {
-  auto setToggleText = [](QPushButton *btn, bool checked) {
-    btn->setText(checked ? "✓ ON" : "OFF");
-  };
-
-  // Phonetic Keyboard Layout Group.
-  connect(ui->btnSuggestionPhonetic, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnSuggestionPhonetic, checked);
-    // Control other Preview window related settings.
-    ui->btnIncludeEnglishPrevWin->setEnabled(checked);
-    ui->btnACUpdate->setEnabled(checked);
-  });
-  connect(ui->btnEnterClosePW, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnEnterClosePW, checked);
-  });
-  connect(ui->btnIncludeEnglishPrevWin, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnIncludeEnglishPrevWin, checked);
-  });
-  connect(ui->btnACUpdate, &QPushButton::clicked, [=]() {
-    autoCorrectDialog->open();
-  });
-
-  // Fixed Keyboard Layout Group.
-  connect(ui->btnSuggestionFixed, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnSuggestionFixed, checked);
-  });
-  connect(ui->btnAutoVowel, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnAutoVowel, checked);
-  });
-  connect(ui->btnKarJoining, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnKarJoining, checked);
-  });
-  connect(ui->btnAutoChandra, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnAutoChandra, checked);
-  });
-  connect(ui->btnOldReph, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnOldReph, checked);
-  });
-  connect(ui->btnNumberpad, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnNumberpad, checked);
-  });
-
-  // General
-  connect(ui->btnCheckUpdate, &QPushButton::toggled, [=](bool checked) {
-    setToggleText(ui->btnCheckUpdate, checked);
-  });
-  connect(ui->cmbThemeMode, QOverload<int>::of(&QComboBox::currentIndexChanged),
-          this, &SettingsDialog::handleThemeModeChanged);
+void SettingsDialog::syncToggle(MatraKiToggle *toggle, bool value) {
+  const QSignalBlocker blocker(toggle);
+  toggle->setChecked(value);
 }
 
 void SettingsDialog::updateSettings() {
-  auto syncToggle = [](QPushButton *btn, bool val) {
-    btn->setChecked(val);
-    btn->setText(val ? "✓ ON" : "OFF");
-  };
-
-  // Phonetic Keyboard Layout Group.
-  syncToggle(ui->btnEnterClosePW, gSettings->getEnterKeyClosesPrevWin());
-  syncToggle(ui->btnSuggestionPhonetic, gSettings->getShowCWPhonetic());
+  /* Phonetic keyboard layout group. */
+  syncToggle(m_enterClose, gSettings->getEnterKeyClosesPrevWin());
+  syncToggle(m_suggestionPhonetic, gSettings->getShowCWPhonetic());
   ui->cmbOrientation->setCurrentIndex(gSettings->getCandidateWinHorizontal() ? 0 : 1);
-  syncToggle(ui->btnIncludeEnglishPrevWin, gSettings->getIncludeEnglishPrevWin());
+  syncToggle(m_includeEnglish, gSettings->getIncludeEnglishPrevWin());
 
-  // Fixed Keyboard Layout Group.
-  syncToggle(ui->btnSuggestionFixed, gSettings->getShowPrevWinFixed());
-  syncToggle(ui->btnAutoVowel, gSettings->getAutoVowelFormFixed());
-  syncToggle(ui->btnAutoChandra, gSettings->getAutoChandraPosFixed());
-  syncToggle(ui->btnOldReph, gSettings->getOldReph());
-  syncToggle(ui->btnKarJoining, gSettings->getTraditionalKarFixed());
-  syncToggle(ui->btnNumberpad, gSettings->getNumberPadFixed());
+  /* Fixed keyboard layout group. */
+  syncToggle(m_suggestionFixed, gSettings->getShowPrevWinFixed());
+  syncToggle(m_autoVowel, gSettings->getAutoVowelFormFixed());
+  syncToggle(m_autoChandra, gSettings->getAutoChandraPosFixed());
+  syncToggle(m_oldReph, gSettings->getOldReph());
+  syncToggle(m_karJoining, gSettings->getTraditionalKarFixed());
+  syncToggle(m_numberpad, gSettings->getNumberPadFixed());
 
-  syncToggle(ui->btnCheckUpdate, gSettings->getUpdateCheck());
+  syncToggle(m_updateCheck, gSettings->getUpdateCheck());
+
+  m_includeEnglish->setEnabled(m_suggestionPhonetic->isChecked());
+  ui->btnACUpdate->setEnabled(m_suggestionPhonetic->isChecked());
 
   ui->cmbThemeMode->blockSignals(true);
   QString tMode = gSettings->getThemeMode().toLower();
@@ -159,33 +195,32 @@ void SettingsDialog::updateSettings() {
   else if (tMode == "light") ui->cmbThemeMode->setCurrentIndex(2);
   else ui->cmbThemeMode->setCurrentIndex(0);
   ui->cmbThemeMode->blockSignals(false);
+
   ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
   applyTheme();
 }
 
-void SettingsDialog::on_buttonBox_accepted() {
-  // Phonetic Keyboard Layout Group.
-  gSettings->setEnterKeyClosesPrevWin(ui->btnEnterClosePW->isChecked());
-  gSettings->setShowCWPhonetic(ui->btnSuggestionPhonetic->isChecked());
+void SettingsDialog::saveSettings() {
+  /* Phonetic keyboard layout group. */
+  gSettings->setEnterKeyClosesPrevWin(m_enterClose->isChecked());
+  gSettings->setShowCWPhonetic(m_suggestionPhonetic->isChecked());
   gSettings->setCandidateWinHorizontal((ui->cmbOrientation->currentIndex() == 0));
-  gSettings->setIncludeEnglishPrevWin(ui->btnIncludeEnglishPrevWin->isChecked());
+  gSettings->setIncludeEnglishPrevWin(m_includeEnglish->isChecked());
 
-  // Fixed Keyboard Layout Group.
-  gSettings->setShowPrevWinFixed(ui->btnSuggestionFixed->isChecked());
-  gSettings->setAutoVowelFormFixed(ui->btnAutoVowel->isChecked());
-  gSettings->setAutoChandraPosFixed(ui->btnAutoChandra->isChecked());
-  gSettings->setOldReph(ui->btnOldReph->isChecked());
-  gSettings->setTraditionalKarFixed(ui->btnKarJoining->isChecked());
-  gSettings->setNumberPadFixed(ui->btnNumberpad->isChecked());
+  /* Fixed keyboard layout group. */
+  gSettings->setShowPrevWinFixed(m_suggestionFixed->isChecked());
+  gSettings->setAutoVowelFormFixed(m_autoVowel->isChecked());
+  gSettings->setAutoChandraPosFixed(m_autoChandra->isChecked());
+  gSettings->setOldReph(m_oldReph->isChecked());
+  gSettings->setTraditionalKarFixed(m_karJoining->isChecked());
+  gSettings->setNumberPadFixed(m_numberpad->isChecked());
 
-  gSettings->setUpdateCheck(ui->btnCheckUpdate->isChecked());
+  gSettings->setUpdateCheck(m_updateCheck->isChecked());
 
   int tIndex = ui->cmbThemeMode->currentIndex();
   QString mode = (tIndex == 1) ? "dark" : (tIndex == 2 ? "light" : "auto");
   gSettings->setThemeMode(mode);
   ThemeManager::instance().setModeString(mode);
-}
 
-void SettingsDialog::on_buttonBox_rejected() {
-  SettingsDialog::close();
+  close();
 }

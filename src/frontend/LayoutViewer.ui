@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>948</width>
-    <height>618</height>
+    <height>660</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,173 +16,192 @@
   <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="outerLayout">
    <property name="spacing">
-    <number>10</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="headerFrame">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>58</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>58</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+    <widget class="QFrame" name="root">
+     <layout class="QVBoxLayout" name="rootLayout">
       <property name="spacing">
        <number>12</number>
       </property>
       <property name="leftMargin">
-       <number>14</number>
+       <number>16</number>
       </property>
       <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="rightMargin">
        <number>14</number>
       </property>
+      <property name="rightMargin">
+       <number>16</number>
+      </property>
       <property name="bottomMargin">
-       <number>6</number>
+       <number>16</number>
       </property>
       <item>
-       <widget class="QLabel" name="lblHeaderIcon">
-        <property name="minimumSize">
-         <size>
-          <width>40</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>40</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="images.qrc">:/images/MatraKi.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="headerTitleLayout">
+       <layout class="QHBoxLayout" name="headerLayout">
         <property name="spacing">
-         <number>1</number>
+         <number>12</number>
         </property>
         <item>
-         <widget class="QLabel" name="lblHeaderTitle">
+         <widget class="QLabel" name="logoSlot">
+          <property name="minimumSize">
+           <size>
+            <width>34</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>34</width>
+            <height>34</height>
+           </size>
+          </property>
           <property name="text">
-           <string>MatraKi Layout Viewer</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblHeaderSub">
+         <layout class="QVBoxLayout" name="headerTitleLayout">
+          <property name="spacing">
+           <number>1</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblHeaderTitle">
+            <property name="text">
+             <string>MatraKi Layout Viewer</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblHeaderSub">
+            <property name="text">
+             <string>Interactive Keyboard Map &amp; AI Smart Shortcuts Reference</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="viewNormal">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>Interactive Keyboard Map &amp; AI Smart Shortcuts Reference</string>
+           <string>Phonetic KeyMap</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="viewAltGr">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>AI Smart Shortcuts</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="buttonAboutLayout">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>About this Layout</string>
+          </property>
+          <property name="text">
+           <string>Layout Info</string>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
+       <widget class="QFrame" name="imageCard">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="viewNormal">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>⌨️ Phonetic KeyMap</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="viewAltGr">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>✨ AI Smart Shortcuts</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
-        </property>
-        <property name="autoExclusive">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="buttonAboutLayout">
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="toolTip">
-         <string>About this Layout</string>
-        </property>
-        <property name="text">
-         <string>ⓘ Layout Info</string>
-        </property>
+        <layout class="QVBoxLayout" name="imageCardLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>14</number>
+         </property>
+         <property name="topMargin">
+          <number>14</number>
+         </property>
+         <property name="rightMargin">
+          <number>14</number>
+         </property>
+         <property name="bottomMargin">
+          <number>14</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelImage">
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelImage">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
     </widget>
    </item>
   </layout>

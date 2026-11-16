@@ -18,10 +18,13 @@
  */
 
 #include <QCloseEvent>
+#include <QShowEvent>
 #include <zstd.h>
 #include "LayoutViewer.h"
 #include "Settings.h"
-#include "AboutFile.h"
+#include "AboutLayoutDialog.h"
+#include "MatraKiIcons.h"
+#include "MatraKiLogo.h"
 #include "base.hpp"
 #include "ui_LayoutViewer.h"
 #include "ThemeManager.h"
@@ -31,8 +34,9 @@ LayoutViewer::LayoutViewer(QWidget *parent) :
     ui(new Ui::LayoutViewer) {
   ui->setupUi(this);
   this->setWindowIcon(QIcon(":/images/MatraKi.png"));
-  aboutDialog = new AboutFile(this);
+  aboutDialog = new AboutLayoutDialog(this);
   ui->labelImage->setAlignment(Qt::AlignCenter);
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
   this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
   QPoint savedPos = gSettings->getLayoutViewerWindowPosition();
   if (savedPos != QPoint(0, 0)) {
@@ -49,7 +53,15 @@ LayoutViewer::~LayoutViewer() {
 }
 
 void LayoutViewer::applyTheme() {
+  const MatraKiPalette p = ThemeManager::instance().palette();
+
   setStyleSheet(ThemeManager::instance().layoutViewerStyle());
+
+  ui->logoSlot->setPixmap(MatraKiLogo::render(34, p.brand, p.danger));
+  ui->viewNormal->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Keyboard, p.accent, 16)));
+  ui->viewAltGr->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Sparkles, p.accent, 16)));
+  ui->buttonAboutLayout->setObjectName("primary");
+  ui->buttonAboutLayout->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Info, p.onBrand, 16)));
 }
 
 void LayoutViewer::showEvent(QShowEvent *event) {
@@ -92,11 +104,11 @@ void LayoutViewer::refreshLayoutViewer() {
   }
 
   // This refreshes Layout Info Dialog
-  aboutDialog->setDialogType(AboutLayout);
+  aboutDialog->refresh();
 }
 
 void LayoutViewer::showLayoutInfoDialog() {
-  aboutDialog->setDialogType(AboutLayout);
+  aboutDialog->refresh();
   aboutDialog->show();
 }
 

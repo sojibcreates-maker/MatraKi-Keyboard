@@ -8,7 +8,7 @@
   <meta name="keywords" content="MatraKi, মাত্রা-কী, Bangla Keyboard, Bengali Keyboard, Avro Keyboard for Linux, Avro Phonetic, Bangla Typing Software, Fcitx5 Bangla, IBus Bangla, Ubuntu Bangla Keyboard, Deepin Bangla Keyboard, Debian Bangla Keyboard, Arch Linux Bangla Keyboard, Fedora Bangla Keyboard, Open Source Bangla IME, Md Sojib Hossain" />
   <meta name="author" content="Md Sojib Hossain" />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#030712" />
+  <meta name="theme-color" content="#08110E" />
   <link rel="canonical" href="https://sojibcreates-maker.github.io/MatraKi-Keyboard/" />
   <link rel="icon" type="image/png" href="logo.png" />
 
@@ -58,21 +58,21 @@
 
   <style>
     :root {
-      --bg-space: #030712;
-      --bg-surface: rgba(15, 23, 42, 0.78);
-      --bg-surface-elevated: rgba(22, 34, 61, 0.85);
-      --bg-card: rgba(13, 21, 38, 0.76);
-      --border-subtle: rgba(56, 189, 248, 0.18);
-      --border-bright: #38bdf8;
+      --bg-space: #08110E;
+      --bg-surface: rgba(22, 33, 28, 0.78);
+      --bg-surface-elevated: rgba(29, 44, 38, 0.85);
+      --bg-card: rgba(18, 28, 24, 0.76);
+      --border-subtle: rgba(95, 208, 166, 0.18);
+      --border-bright: #5FD0A6;
       --border-glass: rgba(255, 255, 255, 0.08);
-      --primary: #0ea5e9;
-      --primary-dark: #1d4ed8;
-      --accent-rose: #f43f5e;
-      --accent-emerald: #10b981;
-      --accent-purple: #a855f7;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
+      --primary: #1B9E72;
+      --primary-dark: #0B5D45;
+      --accent-rose: #F42A41;
+      --accent-emerald: #5FD0A6;
+      --accent-purple: #2DD4BF;
+      --text-main: #E6EFEA;
+      --text-muted: #8FA399;
+      --text-dim: #6B7C73;
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -103,10 +103,10 @@
       font-family: var(--font-ui);
       line-height: 1.65;
       background-image:
-        radial-gradient(circle at 10% 12%, rgba(29, 78, 216, 0.24) 0%, transparent 45%),
-        radial-gradient(circle at 88% 20%, rgba(14, 165, 233, 0.20) 0%, transparent 40%),
-        radial-gradient(circle at 50% 65%, rgba(168, 85, 247, 0.10) 0%, transparent 50%),
-        radial-gradient(circle at 20% 85%, rgba(244, 63, 94, 0.08) 0%, transparent 40%);
+        radial-gradient(circle at 10% 12%, rgba(11, 93, 69, 0.24) 0%, transparent 45%),
+        radial-gradient(circle at 88% 20%, rgba(27, 158, 114, 0.20) 0%, transparent 40%),
+        radial-gradient(circle at 50% 65%, rgba(45, 212, 191, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 20% 85%, rgba(244, 42, 65, 0.08) 0%, transparent 40%);
       background-attachment: fixed;
     }
 
@@ -137,8 +137,8 @@
     .navbar {
       position: sticky; top: 0; z-index: 1000;
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      background: rgba(3, 7, 18, 0.85);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.16);
+      background: rgba(8, 17, 14, 0.85);
+      border-bottom: 1px solid rgba(95, 208, 166, 0.16);
       width: 100%;
     }
     .nav-inner {
@@ -151,20 +151,20 @@
     }
     .brand img {
       width: 40px; height: 40px; border-radius: 11px;
-      box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
-      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 20px rgba(27, 158, 114, 0.4);
+      border: 1px solid rgba(95, 208, 166, 0.4);
     }
     .brand-badge {
       font-size: 0.7rem; font-weight: 800; padding: 2px 8px;
-      border-radius: 999px; background: rgba(16, 185, 129, 0.16);
-      color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45);
+      border-radius: 999px; background: rgba(95, 208, 166, 0.16);
+      color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.45);
     }
 
     .nav-links {
       display: flex; align-items: center; gap: 22px;
-      font-size: 0.92rem; font-weight: 600; color: #cbd5e1;
+      font-size: 0.92rem; font-weight: 600; color: #B9CBC2;
     }
-    .nav-links a:hover { color: #38bdf8; }
+    .nav-links a:hover { color: #5FD0A6; }
 
     .nav-actions { display: flex; align-items: center; gap: 10px; }
 
@@ -177,32 +177,32 @@
       text-align: center;
     }
     .btn-primary {
-      background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
-      color: #fff; border-color: #38bdf8;
-      box-shadow: 0 4px 18px rgba(14, 165, 233, 0.4);
+      background: linear-gradient(135deg, #0B5D45 0%, #1B9E72 100%);
+      color: #fff; border-color: #5FD0A6;
+      box-shadow: 0 4px 18px rgba(27, 158, 114, 0.4);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(14, 165, 233, 0.6);
-      border-color: #7dd3fc;
+      box-shadow: 0 8px 24px rgba(27, 158, 114, 0.6);
+      border-color: #A7E8CF;
     }
     .btn-donate {
-      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(244, 63, 94, 0.3));
-      color: #fda4af; border-color: rgba(244, 63, 94, 0.55);
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.25), rgba(244, 42, 65, 0.3));
+      color: #fda4af; border-color: rgba(244, 42, 65, 0.55);
     }
     .btn-donate:hover {
-      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      background: linear-gradient(135deg, #D91B33, #F42A41);
       color: #fff; transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5);
+      box-shadow: 0 6px 20px rgba(244, 42, 65, 0.5);
     }
     .btn-outline {
-      background: rgba(19, 28, 49, 0.7); color: #e2e8f0;
-      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(19, 28, 49, 0.7); color: #D3E0D9;
+      border-color: rgba(95, 208, 166, 0.3);
       backdrop-filter: blur(8px);
     }
     .btn-outline:hover {
-      border-color: #38bdf8; color: #fff;
-      background: rgba(29, 78, 216, 0.3); transform: translateY(-2px);
+      border-color: #5FD0A6; color: #fff;
+      background: rgba(11, 93, 69, 0.3); transform: translateY(-2px);
     }
     .btn-sm { padding: 7px 14px; font-size: 0.82rem; border-radius: 9px; }
 
@@ -211,11 +211,11 @@
       display: none;
       flex-direction: column; justify-content: center; align-items: center;
       gap: 5px; width: 42px; height: 42px; border-radius: 10px;
-      background: rgba(19, 28, 49, 0.85); border: 1px solid rgba(56, 189, 248, 0.3);
-      color: #38bdf8; cursor: pointer; transition: all 0.2s ease;
+      background: rgba(19, 28, 49, 0.85); border: 1px solid rgba(95, 208, 166, 0.3);
+      color: #5FD0A6; cursor: pointer; transition: all 0.2s ease;
     }
     .mobile-menu-btn span {
-      display: block; width: 22px; height: 2px; background: #38bdf8;
+      display: block; width: 22px; height: 2px; background: #5FD0A6;
       border-radius: 2px; transition: all 0.25s ease;
     }
     .mobile-menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -225,19 +225,19 @@
     /* Mobile Navigation Drawer */
     .mobile-nav-drawer {
       display: none; position: fixed; top: 72px; left: 0; right: 0; bottom: 0;
-      background: rgba(3, 7, 18, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      background: rgba(8, 17, 14, 0.96); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
       z-index: 999; padding: 20px 16px; overflow-y: auto;
-      flex-direction: column; gap: 12px; border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+      flex-direction: column; gap: 12px; border-bottom: 1px solid rgba(95, 208, 166, 0.25);
     }
     .mobile-nav-drawer.open { display: flex; }
     .mobile-nav-link {
       font-size: 1.05rem; font-weight: 700; color: #f1f5f9;
       padding: 12px 16px; border-radius: 12px;
-      background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.15);
+      background: rgba(22, 33, 28, 0.6); border: 1px solid rgba(95, 208, 166, 0.15);
       display: flex; align-items: center; justify-content: space-between;
     }
     .mobile-nav-link:active {
-      background: rgba(29, 78, 216, 0.3); border-color: #38bdf8; color: #38bdf8;
+      background: rgba(11, 93, 69, 0.3); border-color: #5FD0A6; color: #5FD0A6;
     }
     .mobile-nav-actions {
       display: flex; flex-direction: column; gap: 10px; margin-top: 10px;
@@ -251,9 +251,9 @@
     .hero-pill {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 6px 16px; border-radius: 999px;
-      background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.38);
-      color: #38bdf8; font-size: clamp(0.76rem, 2vw, 0.88rem); font-weight: 700;
-      margin-bottom: 20px; box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+      background: rgba(27, 158, 114, 0.12); border: 1px solid rgba(95, 208, 166, 0.38);
+      color: #5FD0A6; font-size: clamp(0.76rem, 2vw, 0.88rem); font-weight: 700;
+      margin-bottom: 20px; box-shadow: 0 0 20px rgba(27, 158, 114, 0.2);
       max-width: 100%; text-overflow: ellipsis;
     }
     .hero h1 {
@@ -262,7 +262,7 @@
       margin-bottom: 18px; word-wrap: break-word;
     }
     .gradient-text {
-      background: linear-gradient(90deg, #38bdf8 0%, #818cf8 40%, #fb7185 100%);
+      background: linear-gradient(90deg, #5FD0A6 0%, #7DD8C3 40%, #FF6B7E 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       display: inline-block;
     }
@@ -277,8 +277,8 @@
     }
     .os-detect-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.76rem; font-weight: 800; color: #34d399;
-      background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35);
+      font-size: 0.76rem; font-weight: 800; color: #5FD0A6;
+      background: rgba(95, 208, 166, 0.15); border: 1px solid rgba(95, 208, 166, 0.35);
       padding: 2px 8px; border-radius: 6px; margin-left: 6px;
     }
 
@@ -295,12 +295,12 @@
       transition: all 0.22s ease;
     }
     .stat-card:hover {
-      border-color: #38bdf8; transform: translateY(-3px);
-      box-shadow: 0 12px 30px -10px rgba(14, 165, 233, 0.3);
+      border-color: #5FD0A6; transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(27, 158, 114, 0.3);
     }
     .stat-num {
       font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 900;
-      color: #38bdf8; line-height: 1.1; letter-spacing: -0.02em;
+      color: #5FD0A6; line-height: 1.1; letter-spacing: -0.02em;
     }
     .stat-label {
       font-size: 0.84rem; color: var(--text-muted); margin-top: 5px; font-weight: 600;
@@ -312,9 +312,9 @@
     .section-tag {
       display: inline-block; font-size: 0.78rem; font-weight: 800;
       text-transform: uppercase; letter-spacing: 0.09em;
-      color: #38bdf8; margin-bottom: 10px;
+      color: #5FD0A6; margin-bottom: 10px;
       padding: 3px 12px; border-radius: 999px;
-      background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(27, 158, 114, 0.12); border: 1px solid rgba(95, 208, 166, 0.3);
     }
     .section-title {
       font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 800;
@@ -330,9 +330,9 @@
        ========================================================================= */
     .demo-box {
       background: linear-gradient(180deg, rgba(14, 22, 40, 0.96), rgba(8, 12, 22, 0.98));
-      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      border: 1.5px solid rgba(95, 208, 166, 0.45);
       border-radius: var(--radius-xl); padding: clamp(14px, 3vw, 26px);
-      box-shadow: 0 32px 80px -15px rgba(0, 0, 0, 0.85), 0 0 50px rgba(14, 165, 233, 0.16);
+      box-shadow: 0 32px 80px -15px rgba(0, 0, 0, 0.85), 0 0 50px rgba(27, 158, 114, 0.16);
       width: 100%; max-width: 1080px; margin: 0 auto;
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       overflow: hidden;
@@ -340,7 +340,7 @@
 
     .studio-topbar {
       display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-      gap: 10px; background: rgba(11, 19, 36, 0.92); border: 1px solid rgba(56, 189, 248, 0.35);
+      gap: 10px; background: rgba(11, 19, 36, 0.92); border: 1px solid rgba(95, 208, 166, 0.35);
       border-radius: var(--radius-md); padding: 10px 14px; margin-bottom: 14px; width: 100%;
     }
     .topbar-left, .topbar-right {
@@ -348,44 +348,44 @@
     }
     .tb-brand {
       display: inline-flex; align-items: center; gap: 8px;
-      font-weight: 800; font-size: 0.92rem; color: #f8fafc;
-      padding-right: 10px; border-right: 1px solid rgba(56, 189, 248, 0.25);
+      font-weight: 800; font-size: 0.92rem; color: #E6EFEA;
+      padding-right: 10px; border-right: 1px solid rgba(95, 208, 166, 0.25);
     }
     .tb-brand img { width: 24px; height: 24px; border-radius: 6px; }
     .tb-btn {
       padding: 7px 12px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
-      background: #16223b; color: #e2e8f0; border: 1px solid rgba(56, 189, 248, 0.3);
+      background: #1B2C25; color: #D3E0D9; border: 1px solid rgba(95, 208, 166, 0.3);
       cursor: pointer; transition: all 0.16s ease; display: inline-flex; align-items: center; gap: 6px;
       user-select: none; white-space: nowrap;
     }
-    .tb-btn:hover { background: #1e3a8a; border-color: #38bdf8; color: #fff; }
+    .tb-btn:hover { background: #1e3a8a; border-color: #5FD0A6; color: #fff; }
     .tb-btn.mode-bn {
-      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-      color: #fff; border-color: #38bdf8;
-      box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
+      background: linear-gradient(135deg, #0B5D45, #1B9E72);
+      color: #fff; border-color: #5FD0A6;
+      box-shadow: 0 0 16px rgba(27, 158, 114, 0.4);
     }
     .tb-btn.mode-en {
-      background: #334155; color: #f8fafc; border-color: #64748b;
+      background: #2E4239; color: #E6EFEA; border-color: #6B7C73;
     }
     .tb-select {
       padding: 7px 11px; border-radius: 9px; font-size: 0.82rem; font-weight: 700;
-      background: #16223b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);
+      background: #1B2C25; color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.35);
       outline: none; cursor: pointer; max-width: 100%;
     }
 
     .trainer-drawer {
       display: none; background: rgba(13, 23, 42, 0.92);
-      border: 1px dashed rgba(56, 189, 248, 0.5);
+      border: 1px dashed rgba(95, 208, 166, 0.5);
       border-radius: var(--radius-md); padding: 12px 16px; margin-bottom: 14px;
       align-items: center; flex-wrap: wrap; gap: 8px; width: 100%;
     }
     .trainer-drawer.open { display: flex; }
     .trainer-inp {
       padding: 8px 12px; border-radius: 8px; background: #060a14;
-      border: 1px solid rgba(56, 189, 248, 0.35); color: #fff; font-size: 0.86rem;
+      border: 1px solid rgba(95, 208, 166, 0.35); color: #fff; font-size: 0.86rem;
       outline: none; flex: 1; min-width: 120px;
     }
-    .trainer-inp:focus { border-color: #38bdf8; box-shadow: 0 0 10px rgba(14, 165, 233, 0.3); }
+    .trainer-inp:focus { border-color: #5FD0A6; box-shadow: 0 0 10px rgba(27, 158, 114, 0.3); }
 
     /* Touch Horizontal Swipe Chips Container */
     .demo-cat-tabs {
@@ -397,12 +397,12 @@
     .demo-cat-tabs::-webkit-scrollbar { display: none; }
     .cat-tab {
       font-size: 0.78rem; font-weight: 700; padding: 6px 12px;
-      border-radius: 999px; background: #111c33; color: #94a3b8;
-      border: 1px solid rgba(56, 189, 248, 0.2); cursor: pointer;
+      border-radius: 999px; background: #111c33; color: #8FA399;
+      border: 1px solid rgba(95, 208, 166, 0.2); cursor: pointer;
       transition: all 0.16s ease; white-space: nowrap; flex-shrink: 0;
     }
     .cat-tab.active, .cat-tab:hover {
-      background: rgba(14, 165, 233, 0.25); color: #38bdf8; border-color: #38bdf8;
+      background: rgba(27, 158, 114, 0.25); color: #5FD0A6; border-color: #5FD0A6;
     }
 
     .demo-chips {
@@ -411,52 +411,52 @@
     .demo-chip {
       font-size: 0.8rem; font-weight: 600; padding: 5px 11px;
       border-radius: 8px; background: rgba(26, 38, 64, 0.88);
-      border: 1px solid rgba(56, 189, 248, 0.28); color: #e2e8f0;
+      border: 1px solid rgba(95, 208, 166, 0.28); color: #D3E0D9;
       cursor: pointer; transition: all 0.15s ease;
     }
     .demo-chip:hover {
-      background: #1d4ed8; border-color: #38bdf8; color: #fff;
+      background: #0B5D45; border-color: #5FD0A6; color: #fff;
     }
 
     /* Pre-edit Strip */
     .preedit-strip {
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
       gap: 8px; margin-bottom: 12px; padding: 9px 14px;
-      background: rgba(13, 22, 41, 0.88); border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(13, 22, 41, 0.88); border: 1px solid rgba(95, 208, 166, 0.3);
       border-radius: var(--radius-md); width: 100%;
     }
     .preedit-buffer {
       display: inline-flex; align-items: center; gap: 7px; flex-wrap: wrap;
-      font-size: 0.9rem; color: #cbd5e1; max-width: 100%;
+      font-size: 0.9rem; color: #B9CBC2; max-width: 100%;
     }
     .preedit-pill {
-      padding: 3px 9px; border-radius: 6px; background: rgba(14, 165, 233, 0.2);
-      border: 1px solid #38bdf8; color: #38bdf8; font-weight: 800; font-family: var(--font-mono);
+      padding: 3px 9px; border-radius: 6px; background: rgba(27, 158, 114, 0.2);
+      border: 1px solid #5FD0A6; color: #5FD0A6; font-weight: 800; font-family: var(--font-mono);
       font-size: 0.92rem; word-break: break-all;
     }
     .preedit-help {
-      font-size: 0.74rem; color: #94a3b8; display: inline-block; margin-left: 4px;
+      font-size: 0.74rem; color: #8FA399; display: inline-block; margin-left: 4px;
     }
-    .editor-stats { font-size: 0.76rem; color: #94a3b8; font-weight: 600; }
+    .editor-stats { font-size: 0.76rem; color: #8FA399; font-weight: 600; }
 
     /* Floating Candidate Bar */
     .candidate-bar {
       display: flex; flex-wrap: wrap; gap: 7px;
-      background: rgba(11, 19, 36, 0.95); border: 1.5px solid rgba(56, 189, 248, 0.42);
+      background: rgba(11, 19, 36, 0.95); border: 1.5px solid rgba(95, 208, 166, 0.42);
       border-radius: var(--radius-md); padding: 9px 12px; min-height: 52px; align-items: center;
       margin-bottom: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); width: 100%;
     }
     .cand-item {
       padding: 6px 12px; border-radius: 9px; font-size: 0.95rem; font-weight: 600;
-      background: #16223b; color: #e2e8f0; border: 1px solid rgba(56, 189, 248, 0.22);
+      background: #1B2C25; color: #D3E0D9; border: 1px solid rgba(95, 208, 166, 0.22);
       cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
       transition: all 0.14s ease; user-select: none;
     }
-    .cand-item:hover { border-color: #38bdf8; background: #1e3a8a; }
+    .cand-item:hover { border-color: #5FD0A6; background: #1e3a8a; }
     .cand-item.active {
-      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-      color: #fff; border-color: #7dd3fc;
-      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.45);
+      background: linear-gradient(135deg, #0B5D45, #1B9E72);
+      color: #fff; border-color: #A7E8CF;
+      box-shadow: 0 4px 14px rgba(27, 158, 114, 0.45);
     }
     .cand-num {
       font-size: 0.7rem; font-weight: 800; padding: 1px 5px; border-radius: 4px;
@@ -464,27 +464,27 @@
     }
     .cand-badge {
       font-size: 0.66rem; font-weight: 800; padding: 2px 5px; border-radius: 4px;
-      background: rgba(15, 23, 42, 0.7); color: #7dd3fc; letter-spacing: 0.02em;
+      background: rgba(22, 33, 28, 0.7); color: #A7E8CF; letter-spacing: 0.02em;
     }
 
     /* Text Editor Textarea */
     .editor-wrap { position: relative; margin-bottom: 12px; width: 100%; }
     .demo-textarea {
       width: 100%; min-height: 135px; padding: 16px 18px; border-radius: var(--radius-md);
-      background: rgba(6, 11, 22, 0.94); border: 1.5px solid #38bdf8;
-      color: #f8fafc; font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.7;
+      background: rgba(6, 11, 22, 0.94); border: 1.5px solid #5FD0A6;
+      color: #E6EFEA; font-size: clamp(1.05rem, 2vw, 1.2rem); line-height: 1.7;
       font-family: var(--font-bn); outline: none; resize: vertical;
       box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.7);
       transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box;
     }
     .demo-textarea:focus {
-      border-color: #7dd3fc;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25), inset 0 2px 14px rgba(0, 0, 0, 0.7);
+      border-color: #A7E8CF;
+      box-shadow: 0 0 0 3px rgba(95, 208, 166, 0.25), inset 0 2px 14px rgba(0, 0, 0, 0.7);
     }
 
     /* On-Screen Virtual Keyboard (100% Fluid & Touch Friendly) */
     .vkbd-wrap {
-      background: rgba(8, 13, 26, 0.95); border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(8, 13, 26, 0.95); border: 1px solid rgba(95, 208, 166, 0.3);
       border-radius: var(--radius-md); padding: 10px; margin-top: 6px; user-select: none;
       width: 100%; max-width: 100%; box-sizing: border-box;
     }
@@ -496,18 +496,18 @@
     .vkbd-row:last-child { margin-bottom: 0; }
     .vkbd-key {
       flex: 1; min-width: 0; max-width: 66px; height: 44px;
-      background: #131e36; border: 1px solid rgba(56, 189, 248, 0.22);
-      border-radius: 7px; color: #f8fafc; cursor: pointer;
+      background: #131e36; border: 1px solid rgba(95, 208, 166, 0.22);
+      border-radius: 7px; color: #E6EFEA; cursor: pointer;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       transition: all 0.1s ease; position: relative; padding: 2px;
     }
     .vkbd-key:hover, .vkbd-key.pressed {
-      background: #1d4ed8; border-color: #38bdf8; transform: translateY(-1px);
+      background: #0B5D45; border-color: #5FD0A6; transform: translateY(-1px);
     }
     .vkbd-key.wide { flex: 1.5; max-width: 95px; font-size: 0.76rem; font-weight: 700; }
-    .vkbd-key.space { flex: 4.5; max-width: 320px; font-size: 0.8rem; font-weight: 700; color: #38bdf8; }
-    .vkbd-en { font-size: 0.66rem; color: #94a3b8; line-height: 1; }
-    .vkbd-bn { font-size: 0.94rem; font-weight: 700; color: #38bdf8; line-height: 1.15; }
+    .vkbd-key.space { flex: 4.5; max-width: 320px; font-size: 0.8rem; font-weight: 700; color: #5FD0A6; }
+    .vkbd-en { font-size: 0.66rem; color: #8FA399; line-height: 1; }
+    .vkbd-bn { font-size: 0.94rem; font-weight: 700; color: #5FD0A6; line-height: 1.15; }
     .vkbd-key:hover .vkbd-bn, .vkbd-key.pressed .vkbd-bn { color: #fff; }
 
     /* =========================================================================
@@ -533,27 +533,27 @@
       position: relative; overflow: hidden; backdrop-filter: blur(14px);
     }
     .dl-card:hover {
-      border-color: #38bdf8; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(14, 165, 233, 0.35);
+      border-color: #5FD0A6; transform: translateY(-3px);
+      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.35);
     }
     .dl-card.featured {
-      border: 1.5px solid #38bdf8;
-      background: linear-gradient(165deg, rgba(23, 37, 84, 0.55) 0%, rgba(13, 21, 38, 0.9) 100%);
+      border: 1.5px solid #5FD0A6;
+      background: linear-gradient(165deg, rgba(23, 37, 84, 0.55) 0%, rgba(18, 28, 24, 0.9) 100%);
     }
     .dl-card.os-detected {
-      border-color: #34d399;
-      box-shadow: 0 0 35px rgba(16, 185, 129, 0.25);
+      border-color: #5FD0A6;
+      box-shadow: 0 0 35px rgba(95, 208, 166, 0.25);
     }
     .dl-card.os-detected::after {
       content: "🔥 Match for Your Device"; position: absolute; top: 12px; right: 14px;
-      font-size: 0.68rem; font-weight: 800; background: rgba(16, 185, 129, 0.2);
-      color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45);
+      font-size: 0.68rem; font-weight: 800; background: rgba(95, 208, 166, 0.2);
+      color: #5FD0A6; border: 1px solid rgba(95, 208, 166, 0.45);
       padding: 2px 8px; border-radius: 999px;
     }
     .dl-os-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
     .dl-icon {
       width: 48px; height: 48px; border-radius: 12px;
-      background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(27, 158, 114, 0.15); border: 1px solid rgba(95, 208, 166, 0.35);
       display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
       flex-shrink: 0;
     }
@@ -563,12 +563,12 @@
     .dl-btn {
       display: flex; align-items: center; justify-content: space-between;
       padding: 11px 14px; border-radius: 10px;
-      background: #131c31; border: 1px solid rgba(56, 189, 248, 0.28);
-      font-size: 0.9rem; font-weight: 700; color: #f8fafc;
+      background: #131c31; border: 1px solid rgba(95, 208, 166, 0.28);
+      font-size: 0.9rem; font-weight: 700; color: #E6EFEA;
       transition: all 0.16s ease;
     }
-    .dl-btn:hover { background: #1d4ed8; border-color: #38bdf8; color: #fff; }
-    .dl-meta { font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
+    .dl-btn:hover { background: #0B5D45; border-color: #5FD0A6; color: #fff; }
+    .dl-meta { font-size: 0.75rem; color: #8FA399; font-weight: 600; }
 
     /* Installation Steps Tabs */
     .process-tabs {
@@ -577,12 +577,12 @@
     }
     .tab-btn {
       padding: 9px 18px; border-radius: 10px; font-weight: 700; font-size: 0.9rem;
-      background: #111c33; color: #94a3b8; border: 1px solid rgba(56, 189, 248, 0.2);
+      background: #111c33; color: #8FA399; border: 1px solid rgba(95, 208, 166, 0.2);
       cursor: pointer; transition: all 0.18s ease; white-space: nowrap;
     }
     .tab-btn.active, .tab-btn:hover {
-      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-      color: #fff; border-color: #38bdf8;
+      background: linear-gradient(135deg, #0B5D45, #1B9E72);
+      color: #fff; border-color: #5FD0A6;
     }
     .tab-pane { display: none; width: 100%; max-width: 900px; margin: 0 auto; }
     .tab-pane.active { display: block; animation: fadeIn 0.2s ease forwards; }
@@ -598,22 +598,22 @@
     .step-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
     .step-num {
       width: 30px; height: 30px; border-radius: 50%;
-      background: #0ea5e9; color: #060b16; font-weight: 900; font-size: 0.9rem;
+      background: #1B9E72; color: #0A1210; font-weight: 900; font-size: 0.9rem;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .step-title { font-weight: 800; font-size: 1.04rem; }
     .code-wrap {
-      position: relative; background: #050914; border: 1px solid rgba(56, 189, 248, 0.28);
+      position: relative; background: #050914; border: 1px solid rgba(95, 208, 166, 0.28);
       border-radius: 10px; padding: 12px 14px; overflow-x: auto; margin-top: 8px; width: 100%;
     }
-    .code-wrap pre { color: #38bdf8; font-size: 0.86rem; line-height: 1.6; }
+    .code-wrap pre { color: #5FD0A6; font-size: 0.86rem; line-height: 1.6; }
     .copy-btn {
       position: absolute; top: 8px; right: 8px;
-      background: #1e293b; color: #cbd5e1; border: 1px solid rgba(56, 189, 248, 0.35);
+      background: #22332C; color: #B9CBC2; border: 1px solid rgba(95, 208, 166, 0.35);
       border-radius: 6px; padding: 4px 10px; font-size: 0.74rem; font-weight: 700;
       cursor: pointer;
     }
-    .copy-btn:hover { background: #0ea5e9; color: #060b16; }
+    .copy-btn:hover { background: #1B9E72; color: #0A1210; }
 
     /* Features Grid */
     .feat-grid {
@@ -627,16 +627,16 @@
       backdrop-filter: blur(14px); transition: all 0.22s ease;
     }
     .feat-card:hover {
-      border-color: #38bdf8; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(14, 165, 233, 0.28);
+      border-color: #5FD0A6; transform: translateY(-3px);
+      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.28);
     }
     .feat-icon {
       width: 48px; height: 48px; border-radius: 12px;
-      background: rgba(14, 165, 233, 0.14); border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(27, 158, 114, 0.14); border: 1px solid rgba(95, 208, 166, 0.35);
       display: flex; align-items: center; justify-content: center;
       font-size: 1.7rem; margin-bottom: 14px;
     }
-    .feat-title { font-size: 1.16rem; font-weight: 800; margin-bottom: 8px; color: #f8fafc; }
+    .feat-title { font-size: 1.16rem; font-weight: 800; margin-bottom: 8px; color: #E6EFEA; }
     .feat-desc { color: var(--text-muted); font-size: 0.94rem; line-height: 1.68; }
 
     /* Screenshots Gallery */
@@ -651,29 +651,29 @@
       backdrop-filter: blur(12px); cursor: pointer; transition: all 0.2s ease;
     }
     .shot-card:hover {
-      border-color: #38bdf8; transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(14, 165, 233, 0.22);
+      border-color: #5FD0A6; transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(27, 158, 114, 0.22);
     }
     .shot-card img {
       width: 100%; height: auto; border-radius: 10px;
-      border: 1px solid rgba(56, 189, 248, 0.22); margin-bottom: 10px;
+      border: 1px solid rgba(95, 208, 166, 0.22); margin-bottom: 10px;
     }
-    .shot-caption { font-weight: 700; font-size: 0.92rem; color: #cbd5e1; }
+    .shot-caption { font-weight: 700; font-size: 0.92rem; color: #B9CBC2; }
 
     /* Lightbox Modal */
     .lightbox-modal {
       display: none; position: fixed; inset: 0; z-index: 2000;
-      background: rgba(3, 7, 18, 0.92); backdrop-filter: blur(20px);
+      background: rgba(8, 17, 14, 0.92); backdrop-filter: blur(20px);
       align-items: center; justify-content: center; padding: 16px;
     }
     .lightbox-modal.open { display: flex; animation: fadeIn 0.2s ease; }
     .lightbox-img {
       max-width: 95vw; max-height: 88vh; border-radius: 12px;
-      border: 1.5px solid #38bdf8; box-shadow: 0 0 50px rgba(14, 165, 233, 0.45);
+      border: 1.5px solid #5FD0A6; box-shadow: 0 0 50px rgba(27, 158, 114, 0.45);
     }
     .lightbox-close {
       position: absolute; top: 16px; right: 20px;
-      background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(56, 189, 248, 0.4);
+      background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(95, 208, 166, 0.4);
       color: #fff; width: 40px; height: 40px; border-radius: 50%;
       font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
     }
@@ -686,11 +686,11 @@
       width: 100%; max-width: 100%;
     }
     table { width: 100%; border-collapse: collapse; text-align: left; min-width: 580px; }
-    th, td { padding: 14px 18px; border-bottom: 1px solid rgba(56, 189, 248, 0.14); font-size: 0.92rem; }
-    th { background: rgba(19, 28, 49, 0.95); color: #38bdf8; font-weight: 800; font-size: 0.95rem; }
+    th, td { padding: 14px 18px; border-bottom: 1px solid rgba(95, 208, 166, 0.14); font-size: 0.92rem; }
+    th { background: rgba(19, 28, 49, 0.95); color: #5FD0A6; font-weight: 800; font-size: 0.95rem; }
     tr:last-child td { border-bottom: none; }
-    .yes { color: #34d399; font-weight: 700; }
-    .no { color: #64748b; }
+    .yes { color: #5FD0A6; font-weight: 700; }
+    .no { color: #6B7C73; }
 
     /* FAQ */
     .faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; width: 100%; }
@@ -699,7 +699,7 @@
       border-radius: var(--radius-md); padding: 16px 20px; transition: all 0.2s ease; width: 100%;
     }
     details.faq-item[open] {
-      border-color: #38bdf8; background: rgba(18, 29, 52, 0.85);
+      border-color: #5FD0A6; background: rgba(18, 29, 52, 0.85);
     }
     details.faq-item summary {
       font-weight: 800; font-size: 1.02rem; cursor: pointer; list-style: none;
@@ -710,19 +710,19 @@
 
     /* Footer */
     footer {
-      border-top: 1px solid rgba(56, 189, 248, 0.2);
+      border-top: 1px solid rgba(95, 208, 166, 0.2);
       padding: 50px 0 36px; margin-top: 50px;
-      background: rgba(3, 7, 18, 0.96); width: 100%;
+      background: rgba(8, 17, 14, 0.96); width: 100%;
     }
 
     /* Back to Top */
     .back-to-top {
       position: fixed; bottom: 20px; right: 20px; z-index: 99;
       width: 44px; height: 44px; border-radius: 50%;
-      background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
-      border: 1.5px solid #7dd3fc; color: #fff; font-size: 1.1rem;
+      background: linear-gradient(135deg, #0B5D45, #1B9E72);
+      border: 1.5px solid #A7E8CF; color: #fff; font-size: 1.1rem;
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer; box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+      cursor: pointer; box-shadow: 0 6px 20px rgba(27, 158, 114, 0.4);
       transition: all 0.2s ease; opacity: 0; pointer-events: none;
     }
     .back-to-top.visible { opacity: 1; pointer-events: auto; }
@@ -745,7 +745,7 @@
       }
       .tb-brand {
         grid-column: 1 / -1; border-right: none; padding-bottom: 6px;
-        border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+        border-bottom: 1px solid rgba(95, 208, 166, 0.2);
       }
       #btnModeToggle { width: 100%; justify-content: center; }
       #layoutSelect { width: 100%; }
@@ -796,13 +796,13 @@
     }
     .tpl-filter-btn {
       padding: 9px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 700;
-      background: var(--bg-card); color: #cbd5e1; border: 1px solid var(--border-subtle);
+      background: var(--bg-card); color: #B9CBC2; border: 1px solid var(--border-subtle);
       cursor: pointer; transition: all 0.2s ease;
     }
     .tpl-filter-btn:hover, .tpl-filter-btn.active {
-      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-      color: #ffffff; border-color: #38bdf8;
-      box-shadow: 0 4px 16px rgba(14, 165, 233, 0.35);
+      background: linear-gradient(135deg, #1B9E72 0%, #1B9E72 100%);
+      color: #ffffff; border-color: #5FD0A6;
+      box-shadow: 0 4px 16px rgba(27, 158, 114, 0.35);
     }
     .tpl-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
@@ -815,8 +815,8 @@
       backdrop-filter: blur(14px); transition: all 0.22s ease;
     }
     .tpl-card:hover {
-      border-color: #38bdf8; transform: translateY(-3px);
-      box-shadow: 0 16px 40px -10px rgba(14, 165, 233, 0.3);
+      border-color: #5FD0A6; transform: translateY(-3px);
+      box-shadow: 0 16px 40px -10px rgba(27, 158, 114, 0.3);
     }
     .tpl-header {
       display: flex; align-items: flex-start; justify-content: space-between;
@@ -826,26 +826,26 @@
       display: flex; flex-wrap: wrap; gap: 6px;
     }
     .tpl-code-badge {
-      background: rgba(14, 165, 233, 0.16); color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 6px;
+      background: rgba(27, 158, 114, 0.16); color: #5FD0A6;
+      border: 1px solid rgba(95, 208, 166, 0.35); border-radius: 6px;
       font-family: monospace; font-size: 0.8rem; font-weight: 700;
       padding: 3px 8px;
     }
     .tpl-lang-badge {
-      background: rgba(168, 85, 247, 0.16); color: #c084fc;
+      background: rgba(45, 212, 191, 0.16); color: #c084fc;
       border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 6px;
       font-size: 0.75rem; font-weight: 700; padding: 3px 8px;
     }
     .tpl-title {
-      font-size: 1.12rem; font-weight: 800; color: #f8fafc; margin-bottom: 6px;
+      font-size: 1.12rem; font-weight: 800; color: #E6EFEA; margin-bottom: 6px;
     }
     .tpl-desc {
-      font-size: 0.85rem; color: #94a3b8; line-height: 1.5; margin-bottom: 14px;
+      font-size: 0.85rem; color: #8FA399; line-height: 1.5; margin-bottom: 14px;
     }
     .tpl-preview-box {
       background: rgba(4, 7, 15, 0.75); border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 8px; padding: 14px; font-size: 0.82rem; line-height: 1.55;
-      color: #e2e8f0; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      color: #D3E0D9; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       white-space: pre-wrap; word-break: break-word; max-height: 190px;
       overflow-y: auto; margin-bottom: 16px; scrollbar-width: thin;
     }
@@ -858,18 +858,18 @@
       cursor: pointer; transition: all 0.2s ease; border: none;
     }
     .tpl-btn-copy {
-      background: rgba(14, 165, 233, 0.15); color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(27, 158, 114, 0.15); color: #5FD0A6;
+      border: 1px solid rgba(95, 208, 166, 0.35);
     }
     .tpl-btn-copy:hover {
-      background: #0ea5e9; color: #060b16; border-color: #0ea5e9;
+      background: #1B9E72; color: #0A1210; border-color: #1B9E72;
     }
     .tpl-btn-try {
       background: rgba(34, 197, 94, 0.15); color: #4ade80;
       border: 1px solid rgba(74, 222, 128, 0.35);
     }
     .tpl-btn-try:hover {
-      background: #22c55e; color: #060b16; border-color: #22c55e;
+      background: #22c55e; color: #0A1210; border-color: #22c55e;
     }
   </style>
 </head>
@@ -1003,7 +1003,7 @@
             <button type="button" class="tb-btn" onclick="toggleTrainerDrawer()">
               📚 + Train Word
             </button>
-            <button type="button" class="tb-btn" onclick="toggleHarperPanel()" id="btnHarperToggle" style="background: linear-gradient(135deg, #4338ca, #6366f1); color: #fff; border-color: #818cf8;" title="Automattic Harper Grammar &amp; Spell Checker">
+            <button type="button" class="tb-btn" onclick="toggleHarperPanel()" id="btnHarperToggle" style="background: linear-gradient(135deg, #4338ca, #2DD4BF); color: #fff; border-color: #7DD8C3;" title="Automattic Harper Grammar &amp; Spell Checker">
               🧠 Harper Grammar
             </button>
           </div>
@@ -1016,11 +1016,11 @@
 
         <!-- Live Custom Dictionary Trainer Drawer -->
         <div class="trainer-drawer" id="trainerDrawer">
-          <span style="font-size:0.84rem; font-weight:700; color:#38bdf8;">📚 Train Custom Word Live:</span>
+          <span style="font-size:0.84rem; font-weight:700; color:#5FD0A6;">📚 Train Custom Word Live:</span>
           <input type="text" id="trainPhonetic" class="trainer-inp" placeholder="Phonetic (e.g. sojib)" />
           <input type="text" id="trainBangla" class="trainer-inp" placeholder="Bangla (e.g. সজীব)" />
           <button type="button" class="tb-btn mode-bn" onclick="saveTrainedWord()">✓ Add to AI Dictionary</button>
-          <span id="trainStatus" style="font-size:0.8rem; color:#34d399; font-weight:700;"></span>
+          <span id="trainStatus" style="font-size:0.8rem; color:#5FD0A6; font-weight:700;"></span>
         </div>
 
         <!-- Categorized 1-Click Feature Test Tabs (Horizontal Touch Swipe) -->
@@ -1045,8 +1045,8 @@
           <div class="preedit-buffer">
             <span>Active Buffer:</span>
             <span class="preedit-pill" id="preeditRaw">bhalobashi</span>
-            <span style="color:#64748b;">➔</span>
-            <span id="preeditPreview" style="color:#38bdf8; font-weight:700; font-size:1.02rem;">ভালোবাসি</span>
+            <span style="color:#6B7C73;">➔</span>
+            <span id="preeditPreview" style="color:#5FD0A6; font-weight:700; font-size:1.02rem;">ভালোবাসি</span>
             <span class="preedit-help">(Space/Enter = Commit, Tab = Next Word/Cycle, 1-9 = Pick, Double-Space = ।)</span>
           </div>
           <div class="editor-stats" id="editorStats">Words: 2 | Chars: 11 | Dict: 19,974+ keys</div>
@@ -1061,23 +1061,23 @@
         </div>
 
         <!-- Automattic Harper™ Grammar & Spell Inspection Panel -->
-        <div class="harper-panel" id="harperPanel" style="display:none; margin-bottom: 14px; background: rgba(15, 23, 42, 0.95); border: 1.5px solid #6366f1; border-radius: var(--radius-md); padding: 16px 18px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.25);">
+        <div class="harper-panel" id="harperPanel" style="display:none; margin-bottom: 14px; background: rgba(22, 33, 28, 0.95); border: 1.5px solid #2DD4BF; border-radius: var(--radius-md); padding: 16px 18px; box-shadow: 0 10px 30px rgba(45, 212, 191, 0.25);">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
             <div style="display:flex; align-items:center; gap:10px;">
               <span style="font-size:1.4rem;">🧠</span>
               <div>
                 <div style="font-weight:800; font-size:1.05rem; color:#c7d2fe;">Automattic Harper™ Grammar &amp; Spell Checker</div>
-                <div style="font-size:0.78rem; color:#94a3b8;">High-speed grammar, spelling, and style analysis powered by Automattic Harper (v3.1.0)</div>
+                <div style="font-size:0.78rem; color:#8FA399;">High-speed grammar, spelling, and style analysis powered by Automattic Harper (v3.1.0)</div>
               </div>
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="tb-btn" onclick="testHarperSample()" style="background:#1e1b4b; border-color:#818cf8; color:#c7d2fe; font-size:0.8rem;">⚡ Test Sample Errors</button>
+              <button type="button" class="tb-btn" onclick="testHarperSample()" style="background:#1e1b4b; border-color:#7DD8C3; color:#c7d2fe; font-size:0.8rem;">⚡ Test Sample Errors</button>
               <button type="button" class="tb-btn" onclick="runHarperGrammarCheck()" style="background:#4338ca; border-color:#a5b4fc; color:#fff; font-size:0.8rem;">🔄 Re-check</button>
               <button type="button" class="tb-btn" onclick="fixAllHarperIssues()" id="btnFixAllHarper" style="display:none; background:linear-gradient(135deg, #16a34a, #059669); border-color:#4ade80; color:#fff; font-size:0.8rem; font-weight:800;">✨ Fix All Issues</button>
-              <button type="button" class="tb-btn" onclick="toggleHarperPanel()" style="background:transparent; border-color:#475569; color:#94a3b8; font-size:0.8rem;">✕ Close</button>
+              <button type="button" class="tb-btn" onclick="toggleHarperPanel()" style="background:transparent; border-color:#5A6C64; color:#8FA399; font-size:0.8rem;">✕ Close</button>
             </div>
           </div>
-          <div id="harperStatus" style="font-size:0.88rem; font-weight:600; color:#cbd5e1; margin-bottom:12px;"></div>
+          <div id="harperStatus" style="font-size:0.88rem; font-weight:600; color:#B9CBC2; margin-bottom:12px;"></div>
           <div id="harperIssuesList" style="display:flex; flex-direction:column; gap:8px;"></div>
         </div>
 
@@ -1109,7 +1109,7 @@
                 <div class="dl-sub">Native .deb Package (Fcitx5 &amp; Qt5 GUI)</div>
               </div>
             </div>
-            <p style="font-size:0.9rem; color:#cbd5e1;">Recommended for Ubuntu, Debian, Deepin Linux, Linux Mint, Pop!_OS, Zorin OS, and Kali Linux.</p>
+            <p style="font-size:0.9rem; color:#B9CBC2;">Recommended for Ubuntu, Debian, Deepin Linux, Linux Mint, Pop!_OS, Zorin OS, and Kali Linux.</p>
           </div>
           <div class="dl-links">
             <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb" class="dl-btn">
@@ -1133,7 +1133,7 @@
                 <div class="dl-sub">Run Anywhere — No Installation Required</div>
               </div>
             </div>
-            <p style="font-size:0.9rem; color:#cbd5e1;">Single-file executable for any Linux distribution. Just mark executable (<code>chmod +x</code>) and run immediately.</p>
+            <p style="font-size:0.9rem; color:#B9CBC2;">Single-file executable for any Linux distribution. Just mark executable (<code>chmod +x</code>) and run immediately.</p>
           </div>
           <div class="dl-links">
             <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage" class="dl-btn">
@@ -1157,7 +1157,7 @@
                 <div class="dl-sub">Native RPM Package (.rpm)</div>
               </div>
             </div>
-            <p style="font-size:0.9rem; color:#cbd5e1;">Built for Fedora Workstation, Red Hat Enterprise Linux, CentOS Stream, AlmaLinux, Rocky, and openSUSE.</p>
+            <p style="font-size:0.9rem; color:#B9CBC2;">Built for Fedora Workstation, Red Hat Enterprise Linux, CentOS Stream, AlmaLinux, Rocky, and openSUSE.</p>
           </div>
           <div class="dl-links">
             <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm" class="dl-btn">
@@ -1177,7 +1177,7 @@
                 <div class="dl-sub">Tarballs (`.tar.gz`) &amp; ELF Binaries</div>
               </div>
             </div>
-            <p style="font-size:0.9rem; color:#cbd5e1;">Pre-compiled Linux binary tarballs (64-bit &amp; 32-bit), standalone executable, and full GPLv3 source tarball.</p>
+            <p style="font-size:0.9rem; color:#B9CBC2;">Pre-compiled Linux binary tarballs (64-bit &amp; 32-bit), standalone executable, and full GPLv3 source tarball.</p>
           </div>
           <div class="dl-links">
             <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz" class="dl-btn">
@@ -1203,7 +1203,7 @@
   </section>
 
   <!-- Complete Step-by-Step Installation & Setup Guide -->
-  <section id="install" style="background: rgba(11, 17, 32, 0.65);">
+  <section id="install" style="background: rgba(12, 19, 16, 0.65);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">Complete Setup Process</span>
@@ -1226,7 +1226,7 @@
             <div class="step-num">1</div>
             <div class="step-title">Download the Official <code>.deb</code> Package</div>
           </div>
-          <p style="color:#94a3b8; font-size:0.93rem;">Run this command in your terminal (or download directly from the Download section above):</p>
+          <p style="color:#8FA399; font-size:0.93rem;">Run this command in your terminal (or download directly from the Download section above):</p>
           <div class="code-wrap">
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb</pre>
@@ -1238,7 +1238,7 @@
             <div class="step-num">2</div>
             <div class="step-title">Install the Package via APT</div>
           </div>
-          <p style="color:#94a3b8; font-size:0.93rem;">APT will automatically install <code>fcitx5</code> and required Qt5 libraries alongside MatraKi:</p>
+          <p style="color:#8FA399; font-size:0.93rem;">APT will automatically install <code>fcitx5</code> and required Qt5 libraries alongside MatraKi:</p>
           <div class="code-wrap">
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <pre>sudo apt update &amp;&amp; sudo apt install -y ./matraki-keyboard_1.1.0_amd64.deb</pre>
@@ -1250,7 +1250,7 @@
             <div class="step-num">3</div>
             <div class="step-title">Start MatraKi &amp; Toggle Bangla Typing</div>
           </div>
-          <p style="color:#94a3b8; font-size:0.93rem;">Launch <strong>MatraKi</strong> from your Application Launcher (or run <code>/usr/share/matraki-keyboard/matraki-gui</code>). Press <strong><code>Ctrl + Space</code></strong> in any app to switch between English and Bangla!</p>
+          <p style="color:#8FA399; font-size:0.93rem;">Launch <strong>MatraKi</strong> from your Application Launcher (or run <code>/usr/share/matraki-keyboard/matraki-gui</code>). Press <strong><code>Ctrl + Space</code></strong> in any app to switch between English and Bangla!</p>
         </div>
       </div>
 
@@ -1292,7 +1292,7 @@ sudo rpm -Uvh https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/do
             <div class="step-num">1</div>
             <div class="step-title">Download, Extract &amp; Run Portable Binary</div>
           </div>
-          <p style="color:#94a3b8; font-size:0.93rem;">Works on Arch Linux, Manjaro, EndeavourOS, Gentoo, NixOS, or any Linux without root installation:</p>
+          <p style="color:#8FA399; font-size:0.93rem;">Works on Arch Linux, Manjaro, EndeavourOS, Gentoo, NixOS, or any Linux without root installation:</p>
           <div class="code-wrap">
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <pre>wget https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-linux-x86_64.tar.gz
@@ -1310,7 +1310,7 @@ cd MatraKi-Keyboard-1.1.0-linux-x86_64
             <div class="step-num">1</div>
             <div class="step-title">Clone &amp; Run the Automated <code>install.sh</code> Script</div>
           </div>
-          <p style="color:#94a3b8; font-size:0.93rem;">Works on standard Linux distributions as well as immutable desktops like Deepin Linux:</p>
+          <p style="color:#8FA399; font-size:0.93rem;">Works on standard Linux distributions as well as immutable desktops like Deepin Linux:</p>
           <div class="code-wrap">
             <button class="copy-btn" onclick="copyCode(this)">Copy</button>
             <pre>git clone https://github.com/sojibcreates-maker/MatraKi-Keyboard.git
@@ -1723,8 +1723,8 @@ Sincerely,
           <div class="feat-title">In-Keyboard Calculator &amp; Unit Converter</div>
           <p class="feat-desc">Type <code>=500*15%</code> for instant math results in Bangla digits and words, or convert units on the fly: <code>=10km</code>, <code>=5kg</code>, <code>=100c</code>, <code>=5ft</code>, <code>=1bigha</code>, <code>=5katha</code>.</p>
         </div>
-        <div class="feat-card" style="border-color: rgba(99, 102, 241, 0.45); background: linear-gradient(165deg, rgba(30, 27, 75, 0.45) 0%, rgba(13, 21, 38, 0.9) 100%);">
-          <div class="feat-icon" style="background: rgba(99, 102, 241, 0.2); border-color: #818cf8;">🧠</div>
+        <div class="feat-card" style="border-color: rgba(45, 212, 191, 0.45); background: linear-gradient(165deg, rgba(30, 27, 75, 0.45) 0%, rgba(18, 28, 24, 0.9) 100%);">
+          <div class="feat-icon" style="background: rgba(45, 212, 191, 0.2); border-color: #7DD8C3;">🧠</div>
           <div class="feat-title" style="color: #a5b4fc;">Automattic Harper™ Grammar &amp; Spell Checker</div>
           <p class="feat-desc">Integrated with Automattic's high-speed Rust grammar engine (<code>harper-cli</code> &amp; <code>harper-ls</code>). Flags indefinite articles (<em>a vs an</em>), repeated words, spelling, spacing, and open compounds with 1-click auto-fix in the Live Studio and global system CLI.</p>
         </div>
@@ -1743,7 +1743,7 @@ Sincerely,
   </section>
 
   <!-- Screenshots Gallery with Lightbox -->
-  <section id="screenshots" style="background: rgba(11, 17, 32, 0.65);">
+  <section id="screenshots" style="background: rgba(12, 19, 16, 0.65);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">Modern Minimalist Dark Tech &amp; Light Classic UI Showcase</span>
@@ -1901,7 +1901,7 @@ Sincerely,
   </section>
 
   <!-- Human-Friendly SEO FAQ -->
-  <section id="faq" style="background: rgba(11, 17, 32, 0.65);">
+  <section id="faq" style="background: rgba(12, 19, 16, 0.65);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag">Got Questions?</span>
@@ -1927,7 +1927,7 @@ Sincerely,
         </details>
         <details class="faq-item">
           <summary><span>5. Is MatraKi completely free and open-source?</span><span>＋</span></summary>
-          <p>Yes! MatraKi is 100% free and open-source software licensed under the <strong>GNU General Public License v3.0 (GPL-3.0)</strong>. You can inspect the code, contribute, or support the developer via <a href="https://www.supportkori.com/sojib" style="color:#fb7185; font-weight:700;">SupportKori</a>.</p>
+          <p>Yes! MatraKi is 100% free and open-source software licensed under the <strong>GNU General Public License v3.0 (GPL-3.0)</strong>. You can inspect the code, contribute, or support the developer via <a href="https://www.supportkori.com/sojib" style="color:#FF6B7E; font-weight:700;">SupportKori</a>.</p>
         </details>
       </div>
     </div>
@@ -1936,9 +1936,9 @@ Sincerely,
   <!-- Developer & Donation Footer -->
   <footer>
     <div class="container" style="text-align: center;">
-      <img src="logo.png" alt="MatraKi Logo" style="width:58px; height:58px; border-radius:14px; margin-bottom:14px; box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);" />
+      <img src="logo.png" alt="MatraKi Logo" style="width:58px; height:58px; border-radius:14px; margin-bottom:14px; box-shadow: 0 0 20px rgba(27, 158, 114, 0.4);" />
       <h3 style="font-size:1.4rem; font-weight:800; margin-bottom:6px;">MatraKi (মাত্রা-কী) — Type Smarter. Write Better.</h3>
-      <p style="color:#94a3b8; font-size:0.95rem; margin-bottom:22px;">
+      <p style="color:#8FA399; font-size:0.95rem; margin-bottom:22px;">
         Developed with passion for Bangla Computing by <strong style="color:#fff;">Md Sojib Hossain</strong>
       </p>
       <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:28px;">
@@ -1946,8 +1946,8 @@ Sincerely,
         <a href="https://facebook.com/hossain.sojibs" target="_blank" rel="noopener" class="btn btn-outline">👨‍💻 Developer on Facebook</a>
         <a href="https://www.supportkori.com/sojib" target="_blank" rel="noopener" class="btn btn-donate">💖 Support &amp; Donate (SupportKori)</a>
       </div>
-      <p style="color:#64748b; font-size:0.84rem;">
-        © 2026 Md Sojib Hossain. Open-Source Software released under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" style="color:#94a3b8; text-decoration:underline;">GNU General Public License v3.0</a>.
+      <p style="color:#6B7C73; font-size:0.84rem;">
+        © 2026 Md Sojib Hossain. Open-Source Software released under the <a href="https://www.gnu.org/licenses/gpl-3.0.html" style="color:#8FA399; text-decoration:underline;">GNU General Public License v3.0</a>.
       </p>
     </div>
   </footer>
@@ -2032,7 +2032,7 @@ Sincerely,
       if (btnEl) btnEl.classList.add("active");
       const bar = document.getElementById("demoChipsBar");
       const list = CHIP_CATEGORIES[cat] || CHIP_CATEGORIES.highlights;
-      bar.innerHTML = `<span style="font-size:0.78rem; color:#94a3b8; font-weight:700;">1-Click Test:</span>` +
+      bar.innerHTML = `<span style="font-size:0.78rem; color:#8FA399; font-weight:700;">1-Click Test:</span>` +
         list.map(item => `<button type="button" class="demo-chip" onclick="setDemo('${item.replace(/'/g, "\\'")}')">${item}</button>`).join("");
     }
 
@@ -2113,7 +2113,7 @@ Sincerely,
       const b = (document.getElementById("trainBangla").value || "").trim();
       const st = document.getElementById("trainStatus");
       if (!p || !b) {
-        st.style.color = "#fb7185";
+        st.style.color = "#FF6B7E";
         st.innerText = "Please enter both Phonetic & Bangla!";
         return;
       }
@@ -2125,7 +2125,7 @@ Sincerely,
         saved[p] = b;
         localStorage.setItem("matraki_custom_words", JSON.stringify(saved));
       } catch (e) {}
-      st.style.color = "#34d399";
+      st.style.color = "#5FD0A6";
       st.innerText = `✓ Trained: ${p} ➔ ${b}`;
       document.getElementById("trainPhonetic").value = "";
       document.getElementById("trainBangla").value = "";
@@ -2176,7 +2176,7 @@ Sincerely,
         preRaw.innerText = "(ENG Mode)";
         prePrev.innerText = "Direct English typing active (Press Ctrl+Space for বাংলা)";
         currentCandidates = [];
-        candBox.innerHTML = `<span style="color:#94a3b8; font-size:0.9rem;">English Mode active. Click <strong>🟢 বাংলা (AI)</strong> or press <code>Ctrl+Space</code> to switch back to Bangla AI mode.</span>`;
+        candBox.innerHTML = `<span style="color:#8FA399; font-size:0.9rem;">English Mode active. Click <strong>🟢 বাংলা (AI)</strong> or press <code>Ctrl+Space</code> to switch back to Bangla AI mode.</span>`;
         updateEditorStats();
         return;
       }
@@ -2199,7 +2199,7 @@ Sincerely,
       }
 
       if (!currentCandidates.length) {
-        candBox.innerHTML = `<span style="color:#94a3b8; font-size:0.9rem;">Start typing in the editor below or click any feature chip above to see live AI candidates...</span>`;
+        candBox.innerHTML = `<span style="color:#8FA399; font-size:0.9rem;">Start typing in the editor below or click any feature chip above to see live AI candidates...</span>`;
       } else {
         candBox.innerHTML = currentCandidates.slice(0, 9).map((c, idx) => {
           const activeCls = idx === selectedCandIdx ? "active" : "";
@@ -2725,7 +2725,7 @@ Sincerely,
       if (!toast) {
         toast = document.createElement("div");
         toast.id = "tplToast";
-        toast.style.cssText = "position:fixed; bottom:28px; right:28px; background:linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff; font-weight:700; font-size:0.9rem; padding:12px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(14,165,233,0.5); z-index:99999; transition:all 0.3s ease; opacity:0; transform:translateY(20px);";
+        toast.style.cssText = "position:fixed; bottom:28px; right:28px; background:linear-gradient(135deg, #1B9E72, #1B9E72); color:#fff; font-weight:700; font-size:0.9rem; padding:12px 24px; border-radius:999px; box-shadow:0 10px 30px rgba(27, 158, 114,0.5); z-index:99999; transition:all 0.3s ease; opacity:0; transform:translateY(20px);";
         document.body.appendChild(toast);
       }
       toast.innerText = msg;
@@ -2784,28 +2784,28 @@ Sincerely,
 
       list.innerHTML = "";
       if (currentHarperLints.length === 0) {
-        status.innerHTML = `<span style="color:#34d399; font-weight:800;">✅ No grammar or spelling issues detected!</span> Your text looks clean according to Automattic Harper rules.`;
+        status.innerHTML = `<span style="color:#5FD0A6; font-weight:800;">✅ No grammar or spelling issues detected!</span> Your text looks clean according to Automattic Harper rules.`;
         if (btnFixAll) btnFixAll.style.display = "none";
         return;
       }
 
-      status.innerHTML = `<span style="color:#f43f5e; font-weight:800;">⚠️ Automattic Harper found ${currentHarperLints.length} issue(s)</span> in your text:`;
+      status.innerHTML = `<span style="color:#F42A41; font-weight:800;">⚠️ Automattic Harper found ${currentHarperLints.length} issue(s)</span> in your text:`;
       if (btnFixAll) btnFixAll.style.display = "inline-flex";
 
       currentHarperLints.forEach((lint, index) => {
         const item = document.createElement("div");
-        item.style.cssText = "background:rgba(30, 41, 59, 0.75); border:1px solid rgba(99, 102, 241, 0.35); border-radius:9px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
+        item.style.cssText = "background:rgba(30, 41, 59, 0.75); border:1px solid rgba(45, 212, 191, 0.35); border-radius:9px; padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;";
         
         item.innerHTML = `
           <div style="flex:1; min-width:240px;">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-              <span style="background:rgba(239, 68, 68, 0.2); color:#f87171; border:1px solid rgba(239, 68, 68, 0.4); border-radius:5px; font-size:0.75rem; font-weight:800; padding:2px 6px;">${escapeHarperHtml(lint.rule)}</span>
-              <span style="color:#cbd5e1; font-size:0.86rem; font-weight:600;"><span style="text-decoration:line-through; color:#f87171;">"${escapeHarperHtml(lint.matchedText)}"</span> ➔ <b style="color:#34d399;">"${escapeHarperHtml(lint.suggestion)}"</b></span>
+              <span style="background:rgba(239, 68, 68, 0.2); color:#FF6B7E; border:1px solid rgba(239, 68, 68, 0.4); border-radius:5px; font-size:0.75rem; font-weight:800; padding:2px 6px;">${escapeHarperHtml(lint.rule)}</span>
+              <span style="color:#B9CBC2; font-size:0.86rem; font-weight:600;"><span style="text-decoration:line-through; color:#FF6B7E;">"${escapeHarperHtml(lint.matchedText)}"</span> ➔ <b style="color:#5FD0A6;">"${escapeHarperHtml(lint.suggestion)}"</b></span>
             </div>
-            <div style="color:#94a3b8; font-size:0.82rem;">${escapeHarperHtml(lint.message)}</div>
+            <div style="color:#8FA399; font-size:0.82rem;">${escapeHarperHtml(lint.message)}</div>
           </div>
           <div>
-            <button type="button" class="tb-btn" onclick="applySingleHarperFix(${index})" style="background:linear-gradient(135deg, #2563eb, #0ea5e9); color:#fff; border-color:#38bdf8; font-size:0.8rem; padding:6px 12px;">⚡ Fix "${escapeHarperHtml(lint.suggestion)}"</button>
+            <button type="button" class="tb-btn" onclick="applySingleHarperFix(${index})" style="background:linear-gradient(135deg, #1B9E72, #1B9E72); color:#fff; border-color:#5FD0A6; font-size:0.8rem; padding:6px 12px;">⚡ Fix "${escapeHarperHtml(lint.suggestion)}"</button>
           </div>
         `;
         list.appendChild(item);

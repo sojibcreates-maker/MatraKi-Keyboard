@@ -45,9 +45,9 @@ protected:
 
 private slots:
 
-  void on_buttonBox_accepted();
+  void on_btnSave_clicked();
 
-  void on_buttonBox_rejected();
+  void on_btnCancel_clicked();
 
   void on_btnUpdate_clicked();
 

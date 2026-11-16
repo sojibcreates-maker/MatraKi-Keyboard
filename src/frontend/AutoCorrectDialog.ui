@@ -6,103 +6,326 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
-    <height>560</height>
+    <width>640</width>
+    <height>660</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>520</width>
+    <width>560</width>
     <height>560</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MatraKi - Auto-Correct Dictionary</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="outerLayout">
    <property name="spacing">
-    <number>10</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>16</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>16</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="headerFrame">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>60</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>60</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="headerLayout">
+    <widget class="QFrame" name="root">
+     <layout class="QVBoxLayout" name="rootLayout">
       <property name="spacing">
-       <number>12</number>
+       <number>14</number>
       </property>
       <property name="leftMargin">
-       <number>14</number>
+       <number>20</number>
       </property>
       <property name="topMargin">
-       <number>6</number>
+       <number>18</number>
       </property>
       <property name="rightMargin">
-       <number>14</number>
+       <number>20</number>
       </property>
       <property name="bottomMargin">
-       <number>6</number>
+       <number>18</number>
       </property>
       <item>
-       <widget class="QLabel" name="lblHeaderIcon">
-        <property name="minimumSize">
-         <size>
-          <width>42</width>
-          <height>42</height>
-         </size>
+       <layout class="QHBoxLayout" name="headerLayout">
+        <property name="spacing">
+         <number>12</number>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>42</width>
-          <height>42</height>
-         </size>
+        <item>
+         <widget class="QLabel" name="logoSlot">
+          <property name="minimumSize">
+           <size>
+            <width>34</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>34</width>
+            <height>34</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="headerTextLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblHeaderTitle">
+            <property name="text">
+             <string>Auto-Correct &amp; Smart Dictionary</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblHeaderSub">
+            <property name="text">
+             <string>নিজের পছন্দের ফনেটিক রিপ্লেসমেন্ট যোগ করুন বা প্রশিক্ষিত অভিধান দেখুন</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="headerSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="entryCard">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="pixmap">
-         <pixmap resource="images.qrc">:/images/MatraKi.png</pixmap>
+        <layout class="QVBoxLayout" name="entryCardLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <property name="leftMargin">
+          <number>14</number>
+         </property>
+         <property name="topMargin">
+          <number>14</number>
+         </property>
+         <property name="rightMargin">
+          <number>14</number>
+         </property>
+         <property name="bottomMargin">
+          <number>14</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="lblEntryTitle">
+           <property name="text">
+            <string>নতুন রিপ্লেসমেন্ট যোগ করুন</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Replace (Phonetic Input)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>With (Target Output)</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QLineEdit" name="txtReplace">
+             <property name="placeholderText">
+              <string>e.g. bishwobidyaloy</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="txtWith">
+             <property name="placeholderText">
+              <string>e.g. বিশ্ববিদ্যালয়</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="previewLayout">
+           <property name="spacing">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="lblPreviewR">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>34</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblPreviewW">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>34</height>
+              </size>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="spacing">
+            <number>8</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="btnClear">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>Clear Fields</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>35</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnUpdate">
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="text">
+              <string>+ Add / Update Entry</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="txtSearch">
+        <property name="placeholderText">
+         <string>🔍 ২০,৫৩৫+ প্রশিক্ষিত শব্দের মধ্যে খুঁজুন (ইংরেজি ফনেটিক বা বাংলা)…</string>
         </property>
-        <property name="scaledContents">
+        <property name="clearButtonEnabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="headerTextLayout">
+       <widget class="QTreeWidget" name="autoCorrect">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string notr="true">1</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblEntries">
+        <property name="text">
+         <string>Total Trained Dictionary Entries: 0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="footerLayout">
         <property name="spacing">
-         <number>2</number>
+         <number>10</number>
         </property>
         <item>
-         <widget class="QLabel" name="lblHeaderTitle">
+         <spacer name="footerSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCancel">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>Auto-Correct &amp; Smart Dictionary</string>
+           <string>Cancel</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblHeaderSub">
+         <widget class="QPushButton" name="btnSave">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>Add custom phonetic replacements or browse trained dictionary entries</string>
+           <string>Save Changes</string>
           </property>
          </widget>
         </item>
@@ -111,179 +334,10 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Replace (Phonetic Input):</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>With (Target Output):</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLineEdit" name="txtReplace">
-       <property name="placeholderText">
-        <string>e.g. bishwobidyaloy</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtWith">
-       <property name="placeholderText">
-        <string>e.g. বিশ্ববিদ্যালয়</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Live Phonetic Preview</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="lblPreviewR">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>28</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="lblPreviewW">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>28</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QPushButton" name="btnClear">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Clear Fields</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>35</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnUpdate">
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>+ Add / Update Entry</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="txtSearch">
-     <property name="placeholderText">
-      <string>🔍 Instant Search across 20,535+ trained words (English phonetic or Bangla)...</string>
-     </property>
-     <property name="clearButtonEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTreeWidget" name="autoCorrect">
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text">
-       <string notr="true">1</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblEntries">
-     <property name="text">
-      <string>Total Trained Dictionary Entries: 0</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>AutoCorrectDialog</receiver>
-   <slot>accept()</slot>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>AutoCorrectDialog</receiver>
-   <slot>reject()</slot>
-  </connection>
- </connections>
+ <connections/>
 </ui>

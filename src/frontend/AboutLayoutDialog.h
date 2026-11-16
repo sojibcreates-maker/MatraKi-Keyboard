@@ -1,6 +1,8 @@
 /*
- *  MatraKi
+ *  MatraKi Keyboard
+ *  About current keyboard layout — Emerald Design System
  *  Copyright (C) 2016 Muhammad Mominul Huque <mominul2082@gmail.com>
+ *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,41 +18,42 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ABOUTFILE_H
-#define ABOUTFILE_H
+#ifndef ABOUTLAYOUTDIALOG_H
+#define ABOUTLAYOUTDIALOG_H
 
 #include <QDialog>
-#include "Layout.h"
 
 namespace Ui {
-class AboutFile;
+class AboutLayoutDialog;
 }
 
-enum DialogType {
-  AboutLayout
-};
-
-class AboutFile : public QDialog {
-Q_OBJECT
+/**
+ * AboutLayoutDialog shows the details of the keyboard layout that is
+ * currently active: name, version, engine statistics, maintainer and the
+ * long form description.
+ */
+class AboutLayoutDialog : public QDialog {
+  Q_OBJECT
 
 public:
-  explicit AboutFile(QWidget *parent = nullptr);
+  explicit AboutLayoutDialog(QWidget *parent = nullptr);
+  ~AboutLayoutDialog() override;
 
-  ~AboutFile() override;
+  /* Reload the information from the active layout. */
+  void refresh();
 
-  void setDialogType(DialogType type);
-
-public slots:
-  void applyTheme();
+protected:
+  void showEvent(QShowEvent *event) override;
 
 private slots:
-
-  void on_buttonOK_clicked();
+  void on_btnClose_clicked();
+  void on_btnCloseIcon_clicked();
 
 private:
-  Ui::AboutFile *ui;
+  Ui::AboutLayoutDialog *ui;
 
+  void applyTheme();
   void loadLayoutInfo();
 };
 
-#endif // ABOUTFILE_H
+#endif // ABOUTLAYOUTDIALOG_H

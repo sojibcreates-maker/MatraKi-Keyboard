@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>164</width>
-    <height>36</height>
+    <width>250</width>
+    <height>48</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>164</width>
-    <height>36</height>
+    <width>250</width>
+    <height>48</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>164</width>
-    <height>36</height>
+    <width>250</width>
+    <height>48</height>
    </size>
   </property>
   <property name="cursor">
@@ -35,77 +35,156 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
-     <number>3</number>
+     <number>2</number>
     </property>
     <property name="leftMargin">
-     <number>6</number>
+     <number>10</number>
     </property>
     <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
      <number>6</number>
     </property>
+    <property name="rightMargin">
+     <number>10</number>
+    </property>
     <property name="bottomMargin">
-     <number>3</number>
+     <number>6</number>
     </property>
     <item>
      <widget class="QPushButton" name="buttonIcon">
       <property name="minimumSize">
        <size>
-        <width>28</width>
-        <height>28</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>28</width>
-        <height>28</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="toolTip">
-       <string>MatraKi (Drag to move / Click for menu)</string>
-      </property>
-      <property name="icon">
-       <iconset resource="images.qrc">
-        <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
+       <string>MatraKi (ড্র্যাগ করে সরান / মেনু খুলতে ক্লিক করুন)</string>
       </property>
       <property name="iconSize">
        <size>
-        <width>24</width>
-        <height>24</height>
+        <width>34</width>
+        <height>34</height>
        </size>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="separator1">
+      <property name="minimumSize">
+       <size>
+        <width>17</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>17</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QHBoxLayout" name="separator1Layout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <spacer name="separator1SpacerLeft">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>8</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFrame" name="separator1Line">
+         <property name="minimumSize">
+          <size>
+           <width>1</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="separator1SpacerRight">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>8</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="buttonSetLayout">
       <property name="minimumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>40</width>
+        <height>36</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>40</width>
+        <height>36</height>
        </size>
       </property>
       <property name="toolTip">
-       <string>Change Layout</string>
-      </property>
-      <property name="icon">
-       <iconset resource="images.qrc">
-        <normaloff>:/images/outline_keyboard_hide_black_24dp.png</normaloff>:/images/outline_keyboard_hide_black_24dp.png</iconset>
+       <string>কীবোর্ড লেআউট পরিবর্তন করুন</string>
       </property>
       <property name="iconSize">
        <size>
-        <width>20</width>
+        <width>30</width>
         <height>20</height>
        </size>
       </property>
       <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
        <bool>true</bool>
       </property>
      </widget>
@@ -114,28 +193,27 @@
      <widget class="QPushButton" name="buttonViewLayout">
       <property name="minimumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="toolTip">
-       <string>View Current Layout</string>
-      </property>
-      <property name="icon">
-       <iconset resource="images.qrc">
-        <normaloff>:/images/outline_keyboard_black_24dp.png</normaloff>:/images/outline_keyboard_black_24dp.png</iconset>
+       <string>বর্তমান কীবোর্ড লেআউট দেখুন</string>
       </property>
       <property name="iconSize">
        <size>
         <width>20</width>
         <height>20</height>
        </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -143,22 +221,18 @@
      <widget class="QPushButton" name="buttonSettings">
       <property name="minimumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="toolTip">
-       <string>Settings</string>
-      </property>
-      <property name="icon">
-       <iconset resource="images.qrc">
-        <normaloff>:/images/outline_settings_black_24dp.png</normaloff>:/images/outline_settings_black_24dp.png</iconset>
+       <string>সেটিংস</string>
       </property>
       <property name="iconSize">
        <size>
@@ -166,34 +240,117 @@
         <height>20</height>
        </size>
       </property>
+      <property name="flat">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="separator2">
+      <property name="minimumSize">
+       <size>
+        <width>17</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>17</width>
+        <height>22</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <layout class="QHBoxLayout" name="separator2Layout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>8</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>8</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <spacer name="separator2SpacerLeft">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>8</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QFrame" name="separator2Line">
+         <property name="minimumSize">
+          <size>
+           <width>1</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>1</width>
+           <height>22</height>
+          </size>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="separator2SpacerRight">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>8</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="buttonShutdown">
       <property name="minimumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>26</width>
-        <height>26</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="toolTip">
-       <string>Quit MatraKi</string>
-      </property>
-      <property name="icon">
-       <iconset resource="images.qrc">
-        <normaloff>:/images/outline_close_black_24dp.png</normaloff>:/images/outline_close_black_24dp.png</iconset>
+       <string>মাত্রা-কী বন্ধ করুন</string>
       </property>
       <property name="iconSize">
        <size>
         <width>18</width>
         <height>18</height>
        </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

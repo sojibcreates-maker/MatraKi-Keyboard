@@ -1,5 +1,6 @@
 /*
  *  MatraKi Keyboard
+ *  About — Emerald Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -11,15 +12,15 @@
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <QDesktopServices>
+#include <QShowEvent>
 #include <QUrl>
+
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
+#include "MatraKiLogo.h"
 #include "ThemeManager.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
@@ -27,9 +28,12 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog) {
   ui->setupUi(this);
 
-  this->setFixedSize(this->width(), this->height());
+  this->setAttribute(Qt::WA_TranslucentBackground, true);
+  this->setWindowIcon(QIcon(":/images/MatraKi.png"));
 
-  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, &AboutDialog::applyTheme);
+  connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, [this](bool) {
+    applyTheme();
+  });
   applyTheme();
 }
 
@@ -43,110 +47,95 @@ void AboutDialog::showEvent(QShowEvent *event) {
 }
 
 void AboutDialog::applyTheme() {
-  setStyleSheet(ThemeManager::instance().aboutDialogStyle());
-  bool dark = ThemeManager::instance().isDark();
+  const MatraKiPalette p = ThemeManager::instance().palette();
 
-  if (dark) {
-    ui->labelTitle->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:19pt; font-weight:800; color:#ffffff;\">MatraKi</span>"
-      "<span style=\"font-size:12.5pt; font-weight:700; color:#38bdf8;\">  •  AI Smart Bangla Keyboard</span>"
-      "</p></body></html>"
-    );
-    ui->labelTagline->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:10.5pt; font-weight:700; color:#f43f5e;\">Type Smarter. Write Better.</span>"
-      "<span style=\"font-size:9.5pt; color:#cbd5e1;\"> — Next-Gen Phonetic &amp; Fixed Layout Input Suite</span>"
-      "</p></body></html>"
-    );
-    ui->labelVer->setText(
-      "<html><head/><body><p style=\"margin:2px 0 0 0;\">"
-      "<span style=\"color:#34d399; font-size:9pt; font-weight:700;\">✨ v1.1.0 (AI Smart Edition)  •  15,580+ Trained Words  •  Harper AI Grammar  •  Light &amp; Dark Mode</span>"
-      "</p></body></html>"
-    );
-    ui->labelDesc->setText(
-      "<html><head/><body>"
-      "<p style=\"margin:0 0 6px 0;\"><span style=\"font-size:9.2pt; color:#e2e8f0;\"><b style=\"color:#38bdf8;\">MatraKi</b> is an advanced, high-performance Bangla input method engineered for Linux desktops. Combining a blazingly fast Rust phonetic core with Harper AI grammar checking and an intelligent C++ language layer, MatraKi makes writing Bengali faster, smarter, and completely effortless.</span></p>"
-      "<p style=\"margin:4px 0 2px 0;\"><span style=\"font-size:9.5pt; font-weight:700; color:#38bdf8;\">🧠 AI Phonetic &amp; Language Intelligence:</span></p>"
-      "<p style=\"margin:0 0 6px 8px;\"><span style=\"font-size:8.8pt; color:#cbd5e1;\">"
-      "• <b style=\"color:#f8fafc;\">Massive Vocabulary &amp; Suffix Engine:</b> Pre-trained with <b style=\"color:#34d399;\">15,580+</b> Bengali words, <b style=\"color:#34d399;\">20,535</b> auto-correct patterns, and smart agglutinative suffix stemming (<i>-গুলো, -দের, -টা, -টি, -কে, -তে</i>).<br/>"
-      "• <b style=\"color:#f8fafc;\">Harper AI Grammar &amp; Spell Check:</b> Built-in automattic/harper integration for real-time contextual grammar verification, Nattvabidhi, and Shattvabidhi accuracy.<br/>"
-      "• <b style=\"color:#f8fafc;\">Context-Aware Predictions:</b> Follow-up bigram suggestions right after Space and concordant verb endings (<i>আমি করব, তুমি করবে, আপনি করবেন</i>)."
-      "</span></p>"
-      "<p style=\"margin:4px 0 2px 0;\"><span style=\"font-size:9.5pt; font-weight:700; color:#f43f5e;\">⚡ Smart Productivity &amp; Instant Conversions:</span></p>"
-      "<p style=\"margin:0 0 2px 8px;\"><span style=\"font-size:8.8pt; color:#cbd5e1;\">"
-      "• <b style=\"color:#f8fafc;\">Live Calculator &amp; Unit Converter (<span style=\"color:#34d399;\">=</span>):</b> Math (<code style=\"color:#38bdf8;\">=500*15%</code>, <code style=\"color:#38bdf8;\">=2^10</code>) and units (<code style=\"color:#38bdf8;\">=10km</code>, <code style=\"color:#38bdf8;\">=5kg</code>, <code style=\"color:#38bdf8;\">=100c</code>, <code style=\"color:#38bdf8;\">=98.6f</code>, <code style=\"color:#38bdf8;\">=1bigha</code>).<br/>"
-      "• <b style=\"color:#f8fafc;\">Instant Chat &amp; Email Templates (<span style=\"color:#fde047;\">!</span>):</b> Greetings (<code style=\"color:#fde047;\">!salam</code>, <code style=\"color:#fde047;\">!shuvo</code>) and templates (<code style=\"color:#fde047;\">!jobbn</code>, <code style=\"color:#fde047;\">!joben</code>, <code style=\"color:#fde047;\">!cvbn</code>, <code style=\"color:#fde047;\">!cven</code>).<br/>"
-      "• <b style=\"color:#f8fafc;\">Smart Dates, Currency &amp; Emojis:</b> <code style=\"color:#fb7185;\">1la</code>, <code style=\"color:#fb7185;\">21she</code>, <code style=\"color:#fb7185;\">500tk</code>, <code style=\"color:#fb7185;\">@today</code>, <code style=\"color:#fb7185;\">:smile</code>."
-      "</span></p>"
-      "</body></html>"
-    );
-    ui->lblShortcuts->setText(
-      "<html><head/><body><p align=\"center\" style=\"margin:0;\">"
-      "<span style=\"font-size:8.5pt; color:#94a3b8;\">⌨️ <b style=\"color:#38bdf8;\">Shortcuts:</b>  "
-      "<b style=\"color:#f8fafc;\">Ctrl+Space</b> Toggle Bangla/English  •  "
-      "<b style=\"color:#f8fafc;\">Double Space</b> Dari (। )  •  "
-      "<b style=\"color:#f8fafc;\">Tab / Arrows</b> Select  •  "
-      "<b style=\"color:#f8fafc;\">1–9</b> Pick Snippet</span>"
-      "</p></body></html>"
-    );
-    ui->lblDeveloper->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:9.5pt; color:#94a3b8;\">👨‍💻 Developer: </span>"
-      "<span style=\"font-size:10pt; font-weight:700; color:#ffffff;\">Md Sojib Hossain</span>"
-      "</p></body></html>"
-    );
-  } else {
-    ui->labelTitle->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:19pt; font-weight:800; color:#0f172a;\">MatraKi</span>"
-      "<span style=\"font-size:12.5pt; font-weight:700; color:#0284c7;\">  •  AI Smart Bangla Keyboard</span>"
-      "</p></body></html>"
-    );
-    ui->labelTagline->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:10.5pt; font-weight:700; color:#e11d48;\">Type Smarter. Write Better.</span>"
-      "<span style=\"font-size:9.5pt; color:#475569;\"> — Next-Gen Phonetic &amp; Fixed Layout Input Suite</span>"
-      "</p></body></html>"
-    );
-    ui->labelVer->setText(
-      "<html><head/><body><p style=\"margin:2px 0 0 0;\">"
-      "<span style=\"color:#059669; font-size:9pt; font-weight:700;\">✨ v1.1.0 (AI Smart Edition)  •  15,580+ Trained Words  •  Harper AI Grammar  •  Light &amp; Dark Mode</span>"
-      "</p></body></html>"
-    );
-    ui->labelDesc->setText(
-      "<html><head/><body>"
-      "<p style=\"margin:0 0 6px 0;\"><span style=\"font-size:9.2pt; color:#334155;\"><b style=\"color:#0284c7;\">MatraKi</b> is an advanced, high-performance Bangla input method engineered for Linux desktops. Combining a blazingly fast Rust phonetic core with Harper AI grammar checking and an intelligent C++ language layer, MatraKi makes writing Bengali faster, smarter, and completely effortless.</span></p>"
-      "<p style=\"margin:4px 0 2px 0;\"><span style=\"font-size:9.5pt; font-weight:700; color:#0284c7;\">🧠 AI Phonetic &amp; Language Intelligence:</span></p>"
-      "<p style=\"margin:0 0 6px 8px;\"><span style=\"font-size:8.8pt; color:#475569;\">"
-      "• <b style=\"color:#0f172a;\">Massive Vocabulary &amp; Suffix Engine:</b> Pre-trained with <b style=\"color:#059669;\">15,580+</b> Bengali words, <b style=\"color:#059669;\">20,535</b> auto-correct patterns, and smart agglutinative suffix stemming (<i>-গুলো, -দের, -টা, -টি, -কে, -তে</i>).<br/>"
-      "• <b style=\"color:#0f172a;\">Harper AI Grammar &amp; Spell Check:</b> Built-in automattic/harper integration for real-time contextual grammar verification, Nattvabidhi, and Shattvabidhi accuracy.<br/>"
-      "• <b style=\"color:#0f172a;\">Context-Aware Predictions:</b> Follow-up bigram suggestions right after Space and concordant verb endings (<i>আমি করব, তুমি করবে, আপনি করবেন</i>)."
-      "</span></p>"
-      "<p style=\"margin:4px 0 2px 0;\"><span style=\"font-size:9.5pt; font-weight:700; color:#e11d48;\">⚡ Smart Productivity &amp; Instant Conversions:</span></p>"
-      "<p style=\"margin:0 0 2px 8px;\"><span style=\"font-size:8.8pt; color:#475569;\">"
-      "• <b style=\"color:#0f172a;\">Live Calculator &amp; Unit Converter (<span style=\"color:#059669;\">=</span>):</b> Math (<code style=\"color:#0284c7;\">=500*15%</code>, <code style=\"color:#0284c7;\">=2^10</code>) and units (<code style=\"color:#0284c7;\">=10km</code>, <code style=\"color:#0284c7;\">=5kg</code>, <code style=\"color:#0284c7;\">=100c</code>, <code style=\"color:#0284c7;\">=98.6f</code>, <code style=\"color:#0284c7;\">=1bigha</code>).<br/>"
-      "• <b style=\"color:#0f172a;\">Instant Chat &amp; Email Templates (<span style=\"color:#d97706;\">!</span>):</b> Greetings (<code style=\"color:#d97706;\">!salam</code>, <code style=\"color:#d97706;\">!shuvo</code>) and templates (<code style=\"color:#d97706;\">!jobbn</code>, <code style=\"color:#d97706;\">!joben</code>, <code style=\"color:#d97706;\">!cvbn</code>, <code style=\"color:#d97706;\">!cven</code>).<br/>"
-      "• <b style=\"color:#0f172a;\">Smart Dates, Currency &amp; Emojis:</b> <code style=\"color:#e11d48;\">1la</code>, <code style=\"color:#e11d48;\">21she</code>, <code style=\"color:#e11d48;\">500tk</code>, <code style=\"color:#e11d48;\">@today</code>, <code style=\"color:#e11d48;\">:smile</code>."
-      "</span></p>"
-      "</body></html>"
-    );
-    ui->lblShortcuts->setText(
-      "<html><head/><body><p align=\"center\" style=\"margin:0;\">"
-      "<span style=\"font-size:8.5pt; color:#64748b;\">⌨️ <b style=\"color:#0284c7;\">Shortcuts:</b>  "
-      "<b style=\"color:#0f172a;\">Ctrl+Space</b> Toggle Bangla/English  •  "
-      "<b style=\"color:#0f172a;\">Double Space</b> Dari (। )  •  "
-      "<b style=\"color:#0f172a;\">Tab / Arrows</b> Select  •  "
-      "<b style=\"color:#0f172a;\">1–9</b> Pick Snippet</span>"
-      "</p></body></html>"
-    );
-    ui->lblDeveloper->setText(
-      "<html><head/><body><p style=\"margin:0;\">"
-      "<span style=\"font-size:9.5pt; color:#64748b;\">👨‍💻 Developer: </span>"
-      "<span style=\"font-size:10pt; font-weight:700; color:#0f172a;\">Md Sojib Hossain</span>"
-      "</p></body></html>"
-    );
-  }
+  setStyleSheet(ThemeManager::instance().aboutDialogStyle());
+
+  ui->logoSlot->setPixmap(MatraKiLogo::render(58, p.brand, p.danger));
+
+  /* ---- Title block ---- */
+  ui->labelTitle->setText(
+      QStringLiteral("<span style=\"font-size:21px; font-weight:700; color:%1;\">MatraKi</span>")
+          .arg(p.text));
+  ui->labelTagline->setText(
+      QStringLiteral("<span style=\"font-size:13px; font-weight:600; color:%1;\">AI Smart Bangla Keyboard</span>")
+          .arg(p.accent));
+  ui->labelVer->setText(
+      QStringLiteral("<span style=\"font-size:11px; color:%1;\">"
+                     "✨ v1.1.0 (AI Smart Edition) &nbsp;•&nbsp; 38,000+ Trained Words &nbsp;•&nbsp; "
+                     "Harper AI Grammar &nbsp;•&nbsp; Light &amp; Dark Mode</span>")
+          .arg(p.textMuted));
+
+  /* ---- Feature list ---- */
+  ui->labelDesc->setText(
+      QStringLiteral(
+          "<div style=\"margin:0 0 8px 0;\"><span style=\"font-size:12px; color:%2;\">"
+          "<b style=\"color:%1;\">MatraKi</b> একটি উন্নত, অত্যন্ত দ্রুত বাংলা ইনপুট মেথড — "
+          "লিনাক্স ডেস্কটপের জন্য তৈরি। দ্রুত রাস্ট ফনেটিক ইঞ্জিন, হার্পার AI ব্যাকরণ যাচাই এবং "
+          "বুদ্ধিমান C++ ভাষা স্তরের সমন্বয়ে বাংলা লেখা হয় দ্রুত, সহজ ও নির্ভুল।</span></div>"
+          "<div style=\"margin:6px 0 2px 0;\"><span style=\"font-size:12px; font-weight:700; color:%1;\">"
+          "🧠 AI ফনেটিক ও ভাষা বুদ্ধিমত্তা:</span></div>"
+          "<div style=\"margin:0 0 6px 10px;\"><span style=\"font-size:11px; color:%2;\">"
+          "• <b style=\"color:%3;\">বিশাল শব্দভাণ্ডার ও সাফিক্স ইঞ্জিন:</b> "
+          "<b style=\"color:%1;\">38,000+</b> প্রশিক্ষিত বাংলা শব্দ, <b style=\"color:%1;\">20,535</b> "
+          "অটো-কারেক্ট প্যাটার্ন এবং স্মার্ট সাফিক্স স্টেমিং "
+          "(<i>-গুলো, -দের, -টা, -টি, -কে, -তে</i>)।<br/>"
+          "• <b style=\"color:%3;\">হার্পার AI ব্যাকরণ ও বানান যাচাই:</b> রিয়েল-টাইম কনটেক্সচুয়াল "
+          "ব্যাকরণ যাচাই, নত্ত্ববিদ্ধি ও শত্ত্ববিদ্ধি সঠিকতা।<br/>"
+          "• <b style=\"color:%3;\">কনটেক্স্ট-অ্যাওয়ার প্রিডিকশন:</b> স্পেস চাপার পরেই প্রাকৃতিক "
+          "পরবর্তী শব্দ সাজেস্ট করে এবং কর্তা-সম্মত ক্রিয়ার রূপ বাছাই করে "
+          "(<i>আমি করব, তুমি করবে, আপনি করবেন</i>)।</span></div>"
+          "<div style=\"margin:6px 0 2px 0;\"><span style=\"font-size:12px; font-weight:700; color:%4;\">"
+          "⚡ স্মার্ট প্রোডাক্টিভিটি ও তাৎক্ষণিক রূপান্তর:</span></div>"
+          "<div style=\"margin:0 0 2px 10px;\"><span style=\"font-size:11px; color:%2;\">"
+          "• <b style=\"color:%3;\">লাইভ ক্যালকুলেটর ও ইউনিট কনভার্টার (<span style=\"color:%1;\">=</span>):</b> "
+          "গণিত (<code style=\"color:%1;\">=500*15%</code>, <code style=\"color:%1;\">=2^10</code>) ও "
+          "একক (<code style=\"color:%1;\">=10km</code>, <code style=\"color:%1;\">=5kg</code>, "
+          "<code style=\"color:%1;\">=100c</code>, <code style=\"color:%1;\">=1bigha</code>)।<br/>"
+          "• <b style=\"color:%3;\">ইনস্ট্যান্ট চ্যাট ও ইমেইল টেমপ্লেট (<span style=\"color:%4;\">!</span>):</b> "
+          "অভিবাদন (<code style=\"color:%4;\">!salam</code>, <code style=\"color:%4;\">!shuvo</code>) ও "
+          "টেমপ্লেট (<code style=\"color:%4;\">!jobbn</code>, <code style=\"color:%4;\">!cvbn</code>)।<br/>"
+          "• <b style=\"color:%3;\">স্মার্ট তারিখ, কারেন্সি ও ইমোজি:</b> "
+          "<code style=\"color:%4;\">1la</code>, <code style=\"color:%4;\">21she</code>, "
+          "<code style=\"color:%4;\">500tk</code>, <code style=\"color:%4;\">@today</code>, "
+          "<code style=\"color:%4;\">:smile</code>।</span></div>")
+          .arg(p.accent, p.textMuted, p.text, p.danger));
+
+  /* ---- Shortcuts ---- */
+  ui->lblShortcuts->setText(
+      QStringLiteral("<div align=\"center\">"
+                     "<span style=\"font-size:11px; color:%1;\">⌨️ <b style=\"color:%2;\">শর্টকাট:</b> &nbsp; "
+                     "<b style=\"color:%2;\">Ctrl+Space</b> বাংলা/ইংরেজি &nbsp;•&nbsp; "
+                     "<b style=\"color:%2;\">Double Space</b> দাড়ি (। ) &nbsp;•&nbsp; "
+                     "<b style=\"color:%2;\">Tab / Arrows</b> সিলেক্ট &nbsp;•&nbsp; "
+                     "<b style=\"color:%2;\">1–9</b> স্নিপেট</span></div>")
+          .arg(p.textMuted, p.accent));
+
+  /* ---- Developer ---- */
+  ui->lblDeveloper->setText(
+      QStringLiteral("<span style=\"font-size:12px; color:%1;\">👨‍💻 ডেভেলপার: </span>"
+                     "<span style=\"font-size:12px; font-weight:700; color:%2;\">Md Sojib Hossain</span>")
+          .arg(p.textMuted, p.text));
+  ui->lblFacebook->setText(
+      QStringLiteral("<a href=\"https://facebook.com/hossain.sojibs\">"
+                     "<span style=\"font-size:12px; font-weight:600; color:%1; text-decoration:none;\">"
+                     "🌐 ফেসবুক: facebook.com/hossain.sojibs</span></a>")
+          .arg(p.accent));
+
+  /* ---- Donation ---- */
+  ui->lblDonation->setText(
+      QStringLiteral("<a href=\"https://www.supportkori.com/sojib\">"
+                     "<span style=\"font-size:12px; font-weight:700; color:%1; text-decoration:none;\">"
+                     "💖 মাত্রা-কী-কে সহায়তা করুন: supportkori.com/sojib (ক্লিক করে অনুবাদিতে টাকা পাঠান)</span></a>")
+          .arg(p.danger));
+
+  /* ---- Licence ---- */
+  ui->lblLicense->setText(
+      QStringLiteral("<span style=\"font-size:11px; color:%1;\">ওপেন-সোর্স সফটওয়্যার — "
+                     "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">"
+                     "<span style=\"color:%2; text-decoration:underline;\">GNU General Public License v3.0</span></a>"
+                     " &nbsp;•&nbsp; বাংলা কম্পিউটিংয়ের প্রেমে তৈরি।</span>")
+          .arg(p.textMuted, p.accent));
 }
 
 void AboutDialog::on_lblFacebook_linkActivated(const QString &link) {

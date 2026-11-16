@@ -8,8 +8,14 @@ add_subdirectory(3rdParty)
 
 set(SRC_GUI TopBar.cpp
         ThemeManager.cpp
+        MatraKiIcons.cpp
+        MatraKiLogo.cpp
+        MatraKiMenu.cpp
+        MatraKiToggle.cpp
+        MatraKiUpdater.cpp
         AboutDialog.cpp
-        AboutFile.cpp
+        AboutLayoutDialog.cpp
+        HarperDialog.cpp
         LayoutViewer.cpp
         SettingsDialog.cpp
         AutoCorrectDialog.cpp

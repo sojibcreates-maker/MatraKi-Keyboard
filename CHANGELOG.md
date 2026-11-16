@@ -1,5 +1,17 @@
 # Change Log
 
+## [Unreleased] — Emerald Design System
+* **Complete Interface Redesign**: Every surface of the desktop application now follows a single, hand-drawn "Emerald" design language — the floating toolbar, the logo menu, the layout picker, the settings page, the About page, the "About current layout" dialog, the layout viewer, the auto-correct dictionary and the Harper grammar dialog.
+* **Vector Icon Set**: All icons are now drawn as resolution independent vector art (`MatraKiIcons`) instead of raster PNGs, so they stay crisp on every display and always follow the active theme colour.
+* **Brand Mark**: A new vector brand mark (`MatraKiLogo`) — the rounded green tile with the Bengali "ম" and the signature red status dot — is used in the toolbar, in every dialog header and on the official website.
+* **Emerald Menus**: The logo menu and the layout picker were rebuilt with custom rows that support a leading icon, a trailing caption ("Live keyboard") and an inline switch for the Harper grammar engine.
+* **Real Switch Controls**: All on/off options in the settings page now use pill switches instead of ON/OFF text buttons, and the page is grouped into emerald cards with a scrollable body.
+* **About Layout Dialog**: Rebuilt to show the layout name and version chip, engine statistics (trained words / auto-correct entries), maintainer and description in a single, clean card.
+* **Shared Update Checker**: The GitHub / updates.json check was extracted into `MatraKiUpdater` and is now available from both the logo menu and the settings page, restyled with the new dialog language.
+* **Adaptive Theme**: Light and Dark modes were re-tuned to the new palette, with a redesigned rounded, translucent window frame for every dialog.
+* **Website Re-skin**: The official download centre and live studio now use the same Emerald palette as the application.
+* **Developer Preview**: `MATRAKI_UI_SHOTS=/some/dir ./matraki-gui` renders every window of the interface to PNG for quick visual review.
+
 ## [1.1.0] - 2026-11-15 (Adaptive Theme & Harper AI Edition)
 * **Complete UI Redesign & Tech Aesthetic**: Full redesign across TopBar, SettingsDialog, AboutDialog, LayoutViewer, AutoCorrectDialog, and contextual menus with a modern, professional, minimalist classic tech theme.
 * **Adaptive Dark & Light Modes**: Added automatic computer OS theme detection (supporting FreeDesktop Portal, GNOME, Deepin, KDE, and Qt palettes) alongside manual options (`Auto (System Detect)`, `Dark Tech Mode`, `Light Classic Mode`) with instant live theme switching and contrast-adapted dual icons.

@@ -1,6 +1,7 @@
 /*
  *  MatraKi
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
+ *  Copyright (C) 2026 Md Sojib Hossain — Emerald Design System
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -29,7 +30,9 @@ class QActionGroup;
 
 class QAction;
 
-class QMenu;
+class MatraKiMenu;
+
+class MatraKiToggle;
 
 class QSystemTrayIcon;
 
@@ -42,6 +45,8 @@ class AboutFile;
 class SettingsDialog;
 
 class AutoCorrectDialog;
+
+class HarperDialog;
 
 class QSimpleUpdater;
 
@@ -65,8 +70,6 @@ protected:
   void mouseReleaseEvent(QMouseEvent *event) override;
 
 private slots:
-
-  void layoutMenuLayouts_clicked();
 
   void layoutMenuInstall_clicked();
 
@@ -106,17 +109,12 @@ private:
   AboutDialog *aboutDialog;
   LayoutViewer *layoutViewer;
   SettingsDialog *settingsDialog;
+  HarperDialog *harperDialog;
 
   /* Layout Popup Menu */
-  QMenu *layoutMenu;
-  enum {
-    MaxLayoutFiles = 10
-  };
-  QAction *layoutMenuLayouts[MaxLayoutFiles];
-  QActionGroup *layoutMenuLayoutsGroup;
-  QAction *layoutMenuInstall;
+  MatraKiMenu *layoutMenu;
   /* Icon Button Popup Menu */
-  QMenu *iconMenu;
+  MatraKiMenu *iconMenu;
   QAction *iconMenuOnTray;
   QAction *iconMenuLayout;
   QAction *iconMenuAbout;
@@ -124,6 +122,7 @@ private:
   QAction *iconMenuWebsite;
   QAction *iconMenuDonate;
   QAction *iconMenuUpdate;
+  MatraKiToggle *harperToggle;
 
   /* Tray Popup Menu */
   QMenu *trayMenu;
@@ -136,11 +135,13 @@ private:
   void SetupTrayIcon();
 
   void checkForUpdate(bool silent = false);
-  void showUpdateDialog(bool updateAvailable, const QString &latestVer, const QString &releaseTitle, const QString &changelog, const QString &releaseUrl, bool silent);
 
   void RefreshLayouts();
 
   void DataMigration();
+
+  /* Re-tint every icon of the toolbar and of the logo menu. */
+  void refreshMenuIcons();
 };
 
 #endif // TOPBAR_H

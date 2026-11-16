@@ -1,6 +1,8 @@
 /*
- *  MatraKi
- *  Copyright (C) 2016 Muhammad Mominul Huque <mominul2082@gmail.com>
+ *  MatraKi Keyboard
+ *  Settings — Emerald Design System
+ *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
+ *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,20 +23,27 @@
 
 #include <QDialog>
 
+class MatraKiToggle;
+
+class AutoCorrectDialog;
+
 namespace Ui {
 class SettingsDialog;
 }
 
-class AutoCorrectDialog;
-
+/**
+ * Settings hosts every configurable option of the MatraKi engine, grouped
+ * into three emerald cards: phonetic & AI typing, general interface and the
+ * fixed keyboard layout behaviour.
+ */
 class SettingsDialog : public QDialog {
-Q_OBJECT
+  Q_OBJECT
 
 public:
   explicit SettingsDialog(QWidget *parent = nullptr);
-
   ~SettingsDialog() override;
 
+  /* Re-read every value from the persistent settings store. */
   void updateSettings();
 
 public slots:
@@ -44,18 +53,31 @@ protected:
   void showEvent(QShowEvent *event) override;
 
 private slots:
-
-  void on_buttonBox_accepted();
-
-  void on_buttonBox_rejected();
-
   void handleThemeModeChanged(int index);
+  void saveSettings();
 
 private:
   Ui::SettingsDialog *ui;
   AutoCorrectDialog *autoCorrectDialog;
 
-  void implementSignals();
+  MatraKiToggle *m_suggestionPhonetic = nullptr;
+  MatraKiToggle *m_includeEnglish = nullptr;
+  MatraKiToggle *m_enterClose = nullptr;
+  MatraKiToggle *m_updateCheck = nullptr;
+  MatraKiToggle *m_suggestionFixed = nullptr;
+  MatraKiToggle *m_autoVowel = nullptr;
+  MatraKiToggle *m_autoChandra = nullptr;
+  MatraKiToggle *m_oldReph = nullptr;
+  MatraKiToggle *m_karJoining = nullptr;
+  MatraKiToggle *m_numberpad = nullptr;
+
+  /* Build the switch widgets and drop them into their placeholders. */
+  void buildToggles();
+
+  /* Attach a switch to a placeholder slot from the designer file. */
+  MatraKiToggle *installToggle(QWidget *slot, bool checked);
+
+  void syncToggle(MatraKiToggle *toggle, bool value);
 };
 
 #endif // SETTINGSDIALOG_H

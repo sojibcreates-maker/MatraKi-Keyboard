@@ -6,460 +6,1085 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
-    <height>490</height>
+    <width>960</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>880</width>
-    <height>490</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>840</width>
+    <height>520</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MatraKi - Settings</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="outerLayout">
    <property name="spacing">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>16</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>16</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>14</number>
+    <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="headerFrame">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>68</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>68</height>
-      </size>
-     </property>
-     <layout class="QHBoxLayout" name="headerLayout">
+    <widget class="QFrame" name="root">
+     <layout class="QVBoxLayout" name="rootLayout">
       <property name="spacing">
        <number>14</number>
       </property>
       <property name="leftMargin">
-       <number>16</number>
+       <number>20</number>
       </property>
       <property name="topMargin">
-       <number>8</number>
+       <number>18</number>
       </property>
       <property name="rightMargin">
-       <number>16</number>
+       <number>20</number>
       </property>
       <property name="bottomMargin">
-       <number>8</number>
+       <number>18</number>
       </property>
       <item>
-       <widget class="QLabel" name="lblHeaderIcon">
-        <property name="minimumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
+       <layout class="QHBoxLayout" name="headerLayout">
+        <property name="spacing">
+         <number>14</number>
         </property>
-        <property name="maximumSize">
-         <size>
-          <width>48</width>
-          <height>48</height>
-         </size>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="images.qrc">:/images/MatraKi.png</pixmap>
-        </property>
-        <property name="scaledContents">
+        <item>
+         <widget class="QLabel" name="logoSlot">
+          <property name="minimumSize">
+           <size>
+            <width>44</width>
+            <height>44</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>44</width>
+            <height>44</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="headerTextLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblHeaderTitle">
+            <property name="text">
+             <string>MatraKi Settings</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblHeaderSub">
+            <property name="text">
+             <string>Type Smarter. Write Better. — Configure your AI Smart Bangla Input Engine</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="headerSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblBadge">
+          <property name="text">
+           <string>✨ v1.1.0 • Harper AI Edition • 38,000+ Words</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
          <bool>true</bool>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <layout class="QHBoxLayout" name="columnsLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="leftColumn">
+            <property name="spacing">
+             <number>14</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="cardPhonetic">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <layout class="QVBoxLayout" name="cardPhoneticLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>16</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>16</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="sectionPhoneticHeader">
+                 <property name="spacing">
+                  <number>9</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="iconPhonetic">
+                   <property name="minimumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblSectionPhonetic">
+                   <property name="text">
+                    <string>Phonetic &amp; AI Smart Typing</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0">
+                 <property name="verticalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>14</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string>Show Smart Suggestions &amp; Preview</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QWidget" name="toggleSlotSuggestion" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotSuggestionLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>Include English Words in Suggestions</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QWidget" name="toggleSlotEnglish" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotEnglishLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_11">
+                   <property name="text">
+                    <string>Auto-Correct &amp; Smart Dictionary</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QPushButton" name="btnACUpdate">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>Open Dictionary</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="cardGeneral">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <layout class="QVBoxLayout" name="cardGeneralLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>16</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>16</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="sectionGeneralHeader">
+                 <property name="spacing">
+                  <number>9</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="iconGeneral">
+                   <property name="minimumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblSectionGeneral">
+                   <property name="text">
+                    <string>General &amp; Interface</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout" columnstretch="1,0">
+                 <property name="verticalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>14</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_3">
+                   <property name="text">
+                    <string>Candidate Window Orientation</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="cmbOrientation">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>Enter Key Only Closes Preview Window</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QWidget" name="toggleSlotEnterClose" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotEnterCloseLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>Automatically Check for Updates</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QWidget" name="toggleSlotUpdateCheck" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotUpdateCheckLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_theme">
+                   <property name="text">
+                    <string>Appearance Theme Mode</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QComboBox" name="cmbThemeMode">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_detected">
+                   <property name="text">
+                    <string>Detected Computer Mode</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QLabel" name="lblThemeDetected">
+                   <property name="text">
+                    <string>Auto: Dark Mode</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="leftColumnSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="rightColumn">
+            <property name="spacing">
+             <number>14</number>
+            </property>
+            <item>
+             <widget class="QFrame" name="cardFixed">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <layout class="QVBoxLayout" name="cardFixedLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>16</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>16</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="sectionFixedHeader">
+                 <property name="spacing">
+                  <number>9</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="iconFixed">
+                   <property name="minimumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblSectionFixed">
+                   <property name="text">
+                    <string>Fixed Keyboard Layout (Probhat / National)</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,0">
+                 <property name="verticalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>14</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Show Suggestions in Fixed Layout</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QWidget" name="toggleSlotSuggestionFixed" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotSuggestionFixedLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>Automatic Vowel Forming</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QWidget" name="toggleSlotAutoVowel" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotAutoVowelLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>Auto-Fix Chandrabindu Position</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QWidget" name="toggleSlotAutoChandra" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotAutoChandraLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="label_8">
+                   <property name="text">
+                    <string>Old Style Reph Formation</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QWidget" name="toggleSlotOldReph" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotOldRephLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <widget class="QLabel" name="label_9">
+                   <property name="text">
+                    <string>Traditional Kar Joining</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <widget class="QWidget" name="toggleSlotKarJoining" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotKarJoiningLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item row="5" column="0">
+                  <widget class="QLabel" name="label_10">
+                   <property name="text">
+                    <string>Bengali Digits in NumberPad</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QWidget" name="toggleSlotNumberpad" native="true">
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>38</width>
+                     <height>22</height>
+                    </size>
+                   </property>
+                   <layout class="QHBoxLayout" name="toggleSlotNumberpadLayout">
+                    <property name="spacing">
+                     <number>0</number>
+                    </property>
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="cardSupport">
+              <property name="frameShape">
+               <enum>QFrame::NoFrame</enum>
+              </property>
+              <layout class="QVBoxLayout" name="cardSupportLayout">
+               <property name="spacing">
+                <number>0</number>
+               </property>
+               <property name="leftMargin">
+                <number>16</number>
+               </property>
+               <property name="topMargin">
+                <number>14</number>
+               </property>
+               <property name="rightMargin">
+                <number>16</number>
+               </property>
+               <property name="bottomMargin">
+                <number>14</number>
+               </property>
+               <item>
+                <layout class="QHBoxLayout" name="sectionSupportHeader">
+                 <property name="spacing">
+                  <number>9</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="iconSupport">
+                   <property name="minimumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>18</width>
+                     <height>18</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="lblSectionSupport">
+                   <property name="text">
+                    <string>About &amp; Support</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QGridLayout" name="gridLayout_4" columnstretch="1,0">
+                 <property name="verticalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="horizontalSpacing">
+                  <number>12</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>14</number>
+                 </property>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="labelVersion">
+                   <property name="text">
+                    <string>Installed Version</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QLabel" name="lblVersion">
+                   <property name="text">
+                    <string>v1.1.0</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="labelEngine">
+                   <property name="text">
+                    <string>AI Engine Vocabulary</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QLabel" name="lblVocabulary">
+                   <property name="text">
+                    <string>38,000+ trained words</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="labelWebsite">
+                   <property name="text">
+                    <string>Official Website</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="2" column="1">
+                  <widget class="QPushButton" name="btnWebsite">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>Open Website</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="0">
+                  <widget class="QLabel" name="labelUpdates">
+                   <property name="text">
+                    <string>Software Updates</string>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="3" column="1">
+                  <widget class="QPushButton" name="btnCheckUpdates">
+                   <property name="cursor">
+                    <cursorShape>PointingHandCursor</cursorShape>
+                   </property>
+                   <property name="text">
+                    <string>Check Now</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="rightColumnSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="headerTextLayout">
+       <layout class="QHBoxLayout" name="footerLayout">
         <property name="spacing">
-         <number>2</number>
+         <number>10</number>
         </property>
         <item>
-         <widget class="QLabel" name="lblHeaderTitle">
+         <spacer name="footerSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCancel">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>MatraKi Settings</string>
+           <string>Cancel</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="lblHeaderSub">
+         <widget class="QPushButton" name="btnSave">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>Type Smarter. Write Better. — Configure your AI Smart Bangla Input Engine</string>
+           <string>Save Settings</string>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <spacer name="headerSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="lblBadge">
-        <property name="text">
-         <string>✨ v1.1.0 • Harper AI Edition • 38,000+ Words</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
       </item>
      </layout>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>14</number>
-     </property>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>12</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="PhoneticLayout">
-         <property name="title">
-          <string>⚡ Phonetic &amp; AI Smart Typing</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,0">
-          <property name="verticalSpacing">
-           <number>12</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Show Smart Suggestions &amp; Preview:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="btnSuggestionPhonetic">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>OFF</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="text">
-             <string>Include English Words in Suggestions:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="btnIncludeEnglishPrevWin">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>OFF</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>Auto-Correct &amp; Smart Dictionary:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="btnACUpdate">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>📚 Dictionary</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>🎨 General &amp; Interface</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout" columnstretch="1,0">
-          <property name="verticalSpacing">
-           <number>12</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Candidate Window Orientation:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="cmbOrientation">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Enter Key Only Closes Preview Window:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="btnEnterClosePW">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>OFF</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>Automatically Check for Updates:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="btnCheckUpdate">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string>OFF</string>
-            </property>
-            <property name="checkable">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_theme">
-            <property name="text">
-             <string>Appearance Theme Mode:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="cmbThemeMode">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="label_detected">
-            <property name="text">
-             <string>Detected Computer Mode:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="lblThemeDetected">
-            <property name="text">
-             <string>Auto: Dark Mode</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="FixedLayout">
-       <property name="title">
-        <string>⌨️ Fixed Keyboard Layout (Probhat / National)</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_3" columnstretch="1,0">
-        <property name="verticalSpacing">
-         <number>12</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_12">
-          <property name="text">
-           <string>Show Suggestions in Fixed Layout:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="btnSuggestionFixed">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="text">
-           <string>Automatic Vowel Forming:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="btnAutoVowel">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Auto-Fix Chandrabindu Position:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="btnAutoChandra">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>Old Style Reph Formation:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="btnOldReph">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Traditional Kar Joining:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="btnKarJoining">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Bengali Digits in NumberPad:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QPushButton" name="btnNumberpad">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>OFF</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
     </widget>
    </item>
   </layout>
@@ -467,18 +1092,5 @@
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>SettingsDialog</receiver>
-   <slot>accept()</slot>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>SettingsDialog</receiver>
-   <slot>reject()</slot>
-  </connection>
- </connections>
+ <connections/>
 </ui>

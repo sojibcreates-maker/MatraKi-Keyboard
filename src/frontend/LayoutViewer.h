@@ -28,7 +28,7 @@ class LayoutViewer;
 
 class QImage;
 
-class AboutFile;
+class AboutLayoutDialog;
 
 class LayoutViewer : public QDialog {
 Q_OBJECT
@@ -60,7 +60,7 @@ private slots:
 private:
   Ui::LayoutViewer *ui;
 
-  AboutFile *aboutDialog;
+  AboutLayoutDialog *aboutDialog;
   QImage image;
   LayoutDesc desc;
   QByteArray image0, image1;
