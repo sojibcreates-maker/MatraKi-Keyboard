@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDir>
+#include <QFontDatabase>
 #include <QPainter>
 #include <QPixmap>
 #include <QTimer>
@@ -141,6 +142,14 @@ int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
   app.setApplicationName("MatraKi");
   app.setApplicationVersion(PROJECT_VERSION);
+
+  /* Load Tiro Bangla font family into Qt application */
+  QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/TiroBangla-Regular.ttf"));
+  QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/TiroBangla-Italic.ttf"));
+
+  QFont defaultFont(QStringLiteral("Tiro Bangla"), 10);
+  defaultFont.setStyleHint(QFont::SansSerif);
+  app.setFont(defaultFont);
 
   /* The developer preview runs independently of an already running
      instance, so it is handled before the single instance guard. */

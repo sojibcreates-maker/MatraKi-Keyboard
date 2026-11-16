@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  About — Emerald Design System
+ *  About Dialog — Emerald Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -14,26 +14,42 @@
  *  GNU General Public License for more details.
  */
 
+#include "AboutDialog.h"
+#include "ui_AboutDialog.h"
+
 #include <QDesktopServices>
 #include <QShowEvent>
 #include <QUrl>
 
-#include "AboutDialog.h"
-#include "ui_AboutDialog.h"
+#include "MatraKiIcons.h"
 #include "MatraKiLogo.h"
 #include "ThemeManager.h"
+
+static const QString LICENSE_URL =
+    QStringLiteral("https://www.gnu.org/licenses/gpl-3.0.html");
+static const QString DONATE_URL =
+    QStringLiteral("https://www.supportkori.com/sojib");
+static const QString FACEBOOK_URL =
+    QStringLiteral("https://facebook.com/hossain.sojibs");
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog) {
   ui->setupUi(this);
 
-  this->setAttribute(Qt::WA_TranslucentBackground, true);
-  this->setWindowIcon(QIcon(":/images/MatraKi.png"));
+  setAttribute(Qt::WA_TranslucentBackground, true);
+  setWindowIcon(QIcon(":/images/MatraKi.png"));
+  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
+                 Qt::WindowStaysOnTopHint);
+
+  ui->btnClose->setObjectName("btnClose");
+  ui->btnLicense->setObjectName("btnLicense");
+  ui->btnDonate->setObjectName("btnDonate");
 
   connect(&ThemeManager::instance(), &ThemeManager::themeChanged, this, [this](bool) {
     applyTheme();
   });
+
   applyTheme();
 }
 
@@ -51,101 +67,80 @@ void AboutDialog::applyTheme() {
 
   setStyleSheet(ThemeManager::instance().aboutDialogStyle());
 
-  ui->logoSlot->setPixmap(MatraKiLogo::render(58, p.brand, p.danger));
+  ui->logoSm->setPixmap(MatraKiLogo::render(28, p.brand, p.danger));
+  ui->heroLogo->setPixmap(MatraKiLogo::render(44, p.brand, p.danger));
+  ui->btnClose->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, p.icon, 18)));
 
-  /* ---- Title block ---- */
-  ui->labelTitle->setText(
-      QStringLiteral("<span style=\"font-size:21px; font-weight:700; color:%1;\">MatraKi</span>")
-          .arg(p.text));
-  ui->labelTagline->setText(
-      QStringLiteral("<span style=\"font-size:13px; font-weight:600; color:%1;\">AI Smart Bangla Keyboard</span>")
-          .arg(p.accent));
-  ui->labelVer->setText(
-      QStringLiteral("<span style=\"font-size:11px; color:%1;\">"
-                     "✨ v1.1.0 (AI Smart Edition) &nbsp;•&nbsp; 38,000+ Trained Words &nbsp;•&nbsp; "
-                     "Harper AI Grammar &nbsp;•&nbsp; Light &amp; Dark Mode</span>")
-          .arg(p.textMuted));
+  const QString kbdStyle = QStringLiteral(
+      "font-family:ui-monospace,Consolas,monospace; font-size:11.5px; "
+      "background:%1; border:1px solid %2; border-radius:5px; padding:1.5px 7px; color:%3;")
+      .arg(p.surfaceAlt, p.border, p.accent);
 
-  /* ---- Feature list ---- */
-  ui->labelDesc->setText(
+  const QString greenHead = p.accent;
+  const QString boldGreen = p.accent;
+
+  /* Tagline */
+  ui->lblTagline->setText(
+      QStringLiteral("<span style=\"color:%1;\"><b style=\"color:%2;\">Type Smarter. Write Better.</b> "
+                     "— Next-gen phonetic &amp; fixed-layout input suite for Linux</span>")
+          .arg(p.textMuted, boldGreen));
+
+  /* Section 1: AI Phonetic & Language Intelligence */
+  ui->sec1Body->setText(
       QStringLiteral(
-          "<div style=\"margin:0 0 8px 0;\"><span style=\"font-size:12px; color:%2;\">"
-          "<b style=\"color:%1;\">MatraKi</b> একটি উন্নত, অত্যন্ত দ্রুত বাংলা ইনপুট মেথড — "
-          "লিনাক্স ডেস্কটপের জন্য তৈরি। দ্রুত রাস্ট ফনেটিক ইঞ্জিন, হার্পার AI ব্যাকরণ যাচাই এবং "
-          "বুদ্ধিমান C++ ভাষা স্তরের সমন্বয়ে বাংলা লেখা হয় দ্রুত, সহজ ও নির্ভুল।</span></div>"
-          "<div style=\"margin:6px 0 2px 0;\"><span style=\"font-size:12px; font-weight:700; color:%1;\">"
-          "🧠 AI ফনেটিক ও ভাষা বুদ্ধিমত্তা:</span></div>"
-          "<div style=\"margin:0 0 6px 10px;\"><span style=\"font-size:11px; color:%2;\">"
-          "• <b style=\"color:%3;\">বিশাল শব্দভাণ্ডার ও সাফিক্স ইঞ্জিন:</b> "
-          "<b style=\"color:%1;\">38,000+</b> প্রশিক্ষিত বাংলা শব্দ, <b style=\"color:%1;\">20,535</b> "
-          "অটো-কারেক্ট প্যাটার্ন এবং স্মার্ট সাফিক্স স্টেমিং "
-          "(<i>-গুলো, -দের, -টা, -টি, -কে, -তে</i>)।<br/>"
-          "• <b style=\"color:%3;\">হার্পার AI ব্যাকরণ ও বানান যাচাই:</b> রিয়েল-টাইম কনটেক্সচুয়াল "
-          "ব্যাকরণ যাচাই, নত্ত্ববিদ্ধি ও শত্ত্ববিদ্ধি সঠিকতা।<br/>"
-          "• <b style=\"color:%3;\">কনটেক্স্ট-অ্যাওয়ার প্রিডিকশন:</b> স্পেস চাপার পরেই প্রাকৃতিক "
-          "পরবর্তী শব্দ সাজেস্ট করে এবং কর্তা-সম্মত ক্রিয়ার রূপ বাছাই করে "
-          "(<i>আমি করব, তুমি করবে, আপনি করবেন</i>)।</span></div>"
-          "<div style=\"margin:6px 0 2px 0;\"><span style=\"font-size:12px; font-weight:700; color:%4;\">"
-          "⚡ স্মার্ট প্রোডাক্টিভিটি ও তাৎক্ষণিক রূপান্তর:</span></div>"
-          "<div style=\"margin:0 0 2px 10px;\"><span style=\"font-size:11px; color:%2;\">"
-          "• <b style=\"color:%3;\">লাইভ ক্যালকুলেটর ও ইউনিট কনভার্টার (<span style=\"color:%1;\">=</span>):</b> "
-          "গণিত (<code style=\"color:%1;\">=500*15%</code>, <code style=\"color:%1;\">=2^10</code>) ও "
-          "একক (<code style=\"color:%1;\">=10km</code>, <code style=\"color:%1;\">=5kg</code>, "
-          "<code style=\"color:%1;\">=100c</code>, <code style=\"color:%1;\">=1bigha</code>)।<br/>"
-          "• <b style=\"color:%3;\">ইনস্ট্যান্ট চ্যাট ও ইমেইল টেমপ্লেট (<span style=\"color:%4;\">!</span>):</b> "
-          "অভিবাদন (<code style=\"color:%4;\">!salam</code>, <code style=\"color:%4;\">!shuvo</code>) ও "
-          "টেমপ্লেট (<code style=\"color:%4;\">!jobbn</code>, <code style=\"color:%4;\">!cvbn</code>)।<br/>"
-          "• <b style=\"color:%3;\">স্মার্ট তারিখ, কারেন্সি ও ইমোজি:</b> "
-          "<code style=\"color:%4;\">1la</code>, <code style=\"color:%4;\">21she</code>, "
-          "<code style=\"color:%4;\">500tk</code>, <code style=\"color:%4;\">@today</code>, "
-          "<code style=\"color:%4;\">:smile</code>।</span></div>")
-          .arg(p.accent, p.textMuted, p.text, p.danger));
+          "<div style=\"font-size:13px; line-height:1.65; color:%1;\">"
+          "<p style=\"margin-bottom:8px;\">• <b>Massive trained vocabulary</b> — high-frequency Bangla words with smart agglutinative suffix stemming ("
+          "<span style=\"%2\">করেছি</span> <span style=\"%2\">যাবে</span> <span style=\"%2\">করবে</span>).</p>"
+          "<p style=\"margin-bottom:8px;\">• <b>Context-aware next-word prediction</b> — natural follow-ups right after pressing Space, ranked by subject pronoun concordance ("
+          "<span style=\"%2\">আমি করছি</span>, <span style=\"%2\">তুমি করছ</span>).</p>"
+          "<p>• <b>Bangla Academy spelling &amp; grammar engine</b> — auto-corrects common Nattabidhi, Shattabidhi and vowel-length errors.</p>"
+          "</div>")
+          .arg(p.text, kbdStyle));
 
-  /* ---- Shortcuts ---- */
+  /* Section 2: Smart Productivity Tools */
+  ui->sec2Body->setText(
+      QStringLiteral(
+          "<div style=\"font-size:13px; line-height:1.65; color:%1;\">"
+          "<p style=\"margin-bottom:8px;\">• <b>Live calculator &amp; unit converter</b> — evaluate math inline and convert units instantly ("
+          "<span style=\"%2\">=10km_→_km</span>).</p>"
+          "<p style=\"margin-bottom:8px;\">• <b>Instant chat &amp; Islamic snippets</b> — type <span style=\"%2\">islam</span>, "
+          "<span style=\"%2\">bsmillah</span>, <span style=\"%2\">in1</span>, <span style=\"%2\">i1shuvo</span> with smart prefix matching.</p>"
+          "<p>• <b>Smart dates, ordinals, currency &amp; emojis</b> — <span style=\"%2\">1la</span>, <span style=\"%2\">21she</span>, "
+          "<span style=\"%2\">500tk</span>, <span style=\"%2\">@today</span>, <span style=\"%2\">:smile</span>.</p>"
+          "</div>")
+          .arg(p.text, kbdStyle));
+
+  /* Shortcut bar */
   ui->lblShortcuts->setText(
-      QStringLiteral("<div align=\"center\">"
-                     "<span style=\"font-size:11px; color:%1;\">⌨️ <b style=\"color:%2;\">শর্টকাট:</b> &nbsp; "
-                     "<b style=\"color:%2;\">Ctrl+Space</b> বাংলা/ইংরেজি &nbsp;•&nbsp; "
-                     "<b style=\"color:%2;\">Double Space</b> দাড়ি (। ) &nbsp;•&nbsp; "
-                     "<b style=\"color:%2;\">Tab / Arrows</b> সিলেক্ট &nbsp;•&nbsp; "
-                     "<b style=\"color:%2;\">1–9</b> স্নিপেট</span></div>")
-          .arg(p.textMuted, p.accent));
+      QStringLiteral(
+          "<div style=\"font-size:12px; color:%1;\">"
+          "<b style=\"color:%2;\">Shortcuts:</b> &nbsp; "
+          "<span style=\"%3\">Ctrl+Space</span> Toggle Bangla/English &nbsp;·&nbsp; "
+          "<b style=\"color:%2;\">Double Space</b> দাঁড়ি (।) &nbsp;·&nbsp; "
+          "<span style=\"%3\">Tab</span>/<span style=\"%3\">Arrows</span> Select &nbsp;·&nbsp; "
+          "<span style=\"%3\">1–9</span> Pick snippet"
+          "</div>")
+          .arg(p.textMuted, p.text, kbdStyle));
 
-  /* ---- Developer ---- */
-  ui->lblDeveloper->setText(
-      QStringLiteral("<span style=\"font-size:12px; color:%1;\">👨‍💻 ডেভেলপার: </span>"
-                     "<span style=\"font-size:12px; font-weight:700; color:%2;\">Md Sojib Hossain</span>")
+  /* Dev bar */
+  ui->lblDev->setText(
+      QStringLiteral("<span style=\"font-size:12.5px; color:%1;\">Developer&nbsp; <b style=\"color:%2;\">Md Sojib Hossain</b></span>")
           .arg(p.textMuted, p.text));
+
   ui->lblFacebook->setText(
-      QStringLiteral("<a href=\"https://facebook.com/hossain.sojibs\">"
-                     "<span style=\"font-size:12px; font-weight:600; color:%1; text-decoration:none;\">"
-                     "🌐 ফেসবুক: facebook.com/hossain.sojibs</span></a>")
-          .arg(p.accent));
-
-  /* ---- Donation ---- */
-  ui->lblDonation->setText(
-      QStringLiteral("<a href=\"https://www.supportkori.com/sojib\">"
-                     "<span style=\"font-size:12px; font-weight:700; color:%1; text-decoration:none;\">"
-                     "💖 মাত্রা-কী-কে সহায়তা করুন: supportkori.com/sojib (ক্লিক করে অনুবাদিতে টাকা পাঠান)</span></a>")
-          .arg(p.danger));
-
-  /* ---- Licence ---- */
-  ui->lblLicense->setText(
-      QStringLiteral("<span style=\"font-size:11px; color:%1;\">ওপেন-সোর্স সফটওয়্যার — "
-                     "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">"
-                     "<span style=\"color:%2; text-decoration:underline;\">GNU General Public License v3.0</span></a>"
-                     " &nbsp;•&nbsp; বাংলা কম্পিউটিংয়ের প্রেমে তৈরি।</span>")
-          .arg(p.textMuted, p.accent));
+      QStringLiteral("<span style=\"font-size:12.5px; color:%1;\">Facebook: "
+                     "<a style=\"color:%2; font-weight:600; text-decoration:underline;\" href=\"%3\">facebook.com/hossain.sojibs</a></span>")
+          .arg(p.textMuted, p.accent, FACEBOOK_URL));
 }
 
-void AboutDialog::on_lblFacebook_linkActivated(const QString &link) {
-  QDesktopServices::openUrl(QUrl(link));
+void AboutDialog::on_btnClose_clicked() {
+  close();
 }
 
-void AboutDialog::on_lblDonation_linkActivated(const QString &link) {
-  QDesktopServices::openUrl(QUrl(link));
+void AboutDialog::on_btnLicense_clicked() {
+  QDesktopServices::openUrl(QUrl(LICENSE_URL));
 }
 
-void AboutDialog::on_lblLicense_linkActivated(const QString &link) {
-  QDesktopServices::openUrl(QUrl(link));
+void AboutDialog::on_btnDonate_clicked() {
+  QDesktopServices::openUrl(QUrl(DONATE_URL));
 }

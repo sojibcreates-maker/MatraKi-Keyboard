@@ -218,13 +218,13 @@ MatraKiPalette ThemeManager::palette() const {
 }
 
 QString ThemeManager::fontStack() {
-  return QStringLiteral("'Noto Sans', 'Noto Sans Bengali', 'Segoe UI', 'Hind Siliguri', "
-                       "'Nirmala UI', 'DejaVu Sans', sans-serif");
+  return QStringLiteral("'Tiro Bangla', 'Noto Sans Bengali', 'Segoe UI', 'Hind Siliguri', "
+                       "'Noto Sans', 'Nirmala UI', 'DejaVu Sans', sans-serif");
 }
 
 QString ThemeManager::bengaliFontStack() {
-  return QStringLiteral("'Noto Sans Bengali', 'Hind Siliguri', 'Nirmala UI', "
-                       "'Noto Sans', 'DejaVu Sans', sans-serif");
+  return QStringLiteral("'Tiro Bangla', 'Noto Sans Bengali', 'Hind Siliguri', 'Kalpurush', "
+                       "'SolaimanLipi', 'Nirmala UI', sans-serif");
 }
 
 /* ------------------------------------------------------------------ */
@@ -899,7 +899,6 @@ QString ThemeManager::aboutDialogStyle() const {
       .put("brandHover", p.brandHover)
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
-      .put("dangerSoft", p.dangerSoft)
       .put("font", fontStack());
 
   return t.format(QStringLiteral(R"(
@@ -911,70 +910,171 @@ QDialog#AboutDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 24px;
 }
-QFrame#frameHeader, QFrame#frameFeatures, QFrame#frameDev {
+QFrame#headerBar {
+    border-bottom: 1px solid [@borderSoft];
+}
+QLabel#lblTitle {
+    color: [@text];
+    font-size: 15px;
+    font-weight: 600;
+}
+QLabel#lblDot {
+    color: [@muted];
+    font-size: 15px;
+}
+QLabel#lblSub {
+    color: [@muted];
+    font-size: 15px;
+    font-weight: 500;
+}
+QPushButton {
+    color: [@muted];
+    background-color: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    outline: none;
+}
+QPushButton:hover {
+    color: [@text];
+    background-color: [@surfaceAlt];
+}
+QPushButton#btnClose, QPushButton#iconOnly {
+    color: [@muted];
+    background-color: transparent;
+    border: none;
+    border-radius: 14px;
+    padding: 0px;
+}
+QPushButton#btnClose:hover, QPushButton#iconOnly:hover {
+    color: [@text];
+    background-color: [@surfaceAlt];
+}
+QScrollArea, QScrollArea#scrollArea {
+    background-color: transparent;
+    border: none;
+}
+QScrollArea > QWidget > QWidget {
+    background: transparent;
+}
+QWidget#scrollWidget {
+    background-color: transparent;
+}
+QFrame#heroCard {
+    background-color: [@surface];
+    border: 1px solid [@border];
+    border-radius: 18px;
+}
+QLabel#lblAppName {
+    color: [@text];
+    font-size: 19px;
+    font-weight: 700;
+}
+QLabel#lblBadge {
+    color: [@accent];
+    background-color: [@accentSoft];
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-weight: 700;
+}
+QLabel#lblTagline {
+    font-size: 12.5px;
+    line-height: 1.4;
+}
+QFrame#statCard1, QFrame#statCard2, QFrame#statCard3 {
+    background-color: [@bg];
+    border: 1px solid [@border];
+    border-radius: 12px;
+}
+QLabel#statVal1, QLabel#statVal2, QLabel#statVal3 {
+    color: [@text];
+    font-size: 15px;
+    font-weight: 700;
+}
+QLabel#statCap1, QLabel#statCap2, QLabel#statCap3 {
+    color: [@muted];
+    font-size: 11px;
+}
+QFrame#sec1, QFrame#sec2 {
+    border-top: 1px solid [@borderSoft];
+}
+QLabel#sec1Title, QLabel#sec2Title {
+    color: [@accent];
+    font-size: 13px;
+    font-weight: 700;
+}
+QLabel#sec1Body, QLabel#sec2Body {
+    color: [@text];
+    font-size: 13px;
+    line-height: 1.65;
+}
+QFrame#shortcutBar {
     background-color: [@surface];
     border: 1px solid [@border];
     border-radius: 14px;
 }
-QFrame#frameShortcuts {
-    background-color: [@accentSoft];
-    border: 1px solid [@border];
-    border-radius: 14px;
+QFrame#devBar {
+    border-top: 1px solid [@borderSoft];
 }
-QFrame#frameDonation {
-    background-color: [@dangerSoft];
-    border: 1px solid [@danger];
-    border-radius: 14px;
+QLabel#lblDev {
+    color: [@muted];
+    font-size: 12.5px;
 }
-QLabel { color: [@text]; font-size: 13px; }
-QLabel#title {
-    color: [@text];
-    font-size: 21px;
-    font-weight: 700;
+QFrame#footerBar {
+    border-top: 1px solid [@borderSoft];
 }
-QLabel#subtitle {
-    color: [@accent];
+QLabel#lblSupport {
+    color: [@muted];
+    font-size: 12.5px;
+}
+QPushButton#btnLicense, QPushButton#ghost {
+    color: [@muted];
+    background-color: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 20px;
     font-size: 13px;
     font-weight: 600;
-}
-QLabel#tagline { color: [@danger]; font-size: 12px; font-weight: 700; }
-QLabel#muted { color: [@muted]; font-size: 12px; }
-QLabel#link { color: [@accent]; font-size: 12px; font-weight: 600; }
-QPushButton {
-    color: [@text];
-    background-color: [@surfaceAlt];
-    border: 1px solid [@border];
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
     outline: none;
 }
-QPushButton:hover { border-color: [@accent]; color: [@accent]; }
-QPushButton#primary {
+QPushButton#btnLicense:hover, QPushButton#ghost:hover {
+    color: [@text];
+    background-color: [@surfaceAlt];
+}
+QPushButton#btnDonate, QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
-    padding: 10px 22px;
+    border-radius: 999px;
+    padding: 9px 22px;
     font-size: 13px;
     font-weight: 600;
+    outline: none;
 }
-QPushButton#primary:hover { background-color: [@brandHover]; border-color: [@brandHover]; }
-QScrollArea { background: transparent; border: none; }
-QScrollBar:vertical { background: transparent; width: 10px; margin: 2px; }
-QScrollBar::handle:vertical { background: [@border]; border-radius: 5px; min-height: 28px; }
-QScrollBar::handle:vertical:hover { background: [@icon]; }
-QScrollBar::add-line, QScrollBar::sub-line { height: 0px; width: 0px; }
-QToolTip {
-    color: [@text];
-    background-color: [@surface];
-    border: 1px solid [@border];
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 11px;
+QPushButton#btnDonate:hover, QPushButton#primary:hover {
+    background-color: [@brandHover];
+    border-color: [@brandHover];
+}
+QScrollBar:vertical {
+    background: transparent;
+    width: 8px;
+    margin: 4px 2px;
+}
+QScrollBar::handle:vertical {
+    background: [@border];
+    border-radius: 4px;
+    min-height: 24px;
+}
+QScrollBar::handle:vertical:hover {
+    background: [@icon];
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
 }
 )"));
 }
@@ -1366,7 +1466,7 @@ QDialog#UpdateDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 20px;
+    border-radius: 24px;
 }
 QFrame#headerBar {
     border-bottom: 1px solid [@borderSoft];
@@ -1374,7 +1474,7 @@ QFrame#headerBar {
 QFrame#updateCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 18px;
 }
 QLabel#lblTitle {
     color: [@text];

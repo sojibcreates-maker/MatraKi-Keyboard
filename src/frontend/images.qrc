@@ -8,5 +8,7 @@
         <file>images/avro_keymap_light.png</file>
         <file>images/avro_smart_guide_dark.png</file>
         <file>images/avro_smart_guide_light.png</file>
+        <file>fonts/TiroBangla-Regular.ttf</file>
+        <file>fonts/TiroBangla-Italic.ttf</file>
     </qresource>
 </RCC>

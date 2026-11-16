@@ -1,5 +1,6 @@
 /*
  *  MatraKi Keyboard
+ *  About Dialog Header — Emerald Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -11,9 +12,6 @@
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef ABOUTDIALOG_H
@@ -26,11 +24,10 @@ class AboutDialog;
 }
 
 class AboutDialog : public QDialog {
-Q_OBJECT
+  Q_OBJECT
 
 public:
   explicit AboutDialog(QWidget *parent = nullptr);
-
   ~AboutDialog() override;
 
 public slots:
@@ -40,9 +37,9 @@ protected:
   void showEvent(QShowEvent *event) override;
 
 private slots:
-  void on_lblFacebook_linkActivated(const QString &link);
-  void on_lblDonation_linkActivated(const QString &link);
-  void on_lblLicense_linkActivated(const QString &link);
+  void on_btnClose_clicked();
+  void on_btnLicense_clicked();
+  void on_btnDonate_clicked();
 
 private:
   Ui::AboutDialog *ui;
