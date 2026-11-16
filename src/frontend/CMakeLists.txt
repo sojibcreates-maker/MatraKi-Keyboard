@@ -13,6 +13,7 @@ set(SRC_GUI TopBar.cpp
         MatraKiMenu.cpp
         MatraKiToggle.cpp
         MatraKiUpdater.cpp
+        UpdateDialog.cpp
         AboutDialog.cpp
         AboutLayoutDialog.cpp
         HarperDialog.cpp

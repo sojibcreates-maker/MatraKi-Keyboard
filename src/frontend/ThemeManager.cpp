@@ -1340,11 +1340,110 @@ QString ThemeManager::messageBoxStyle() const {
 
 QString ThemeManager::updateDialogStyle() const {
   const MatraKiPalette p = palette();
-  return QStringLiteral(
-      "QDialog { background-color: %1; color: %2; font-family: %6; }"
-      "QLabel { color: %2; font-size: 13px; }"
-      "QPushButton { color: %2; background-color: %3; border: 1px solid %4; border-radius: 10px; "
-      "padding: 9px 18px; font-size: 13px; font-weight: 500; }"
-      "QPushButton:hover { color: %5; border-color: %5; }")
-      .arg(p.surface, p.text, p.surfaceAlt, p.border, p.accent, fontStack());
+  Tokens t;
+  t.put("bg", p.bg)
+      .put("surface", p.surface)
+      .put("surfaceAlt", p.surfaceAlt)
+      .put("border", p.border)
+      .put("borderSoft", p.borderSoft)
+      .put("text", p.text)
+      .put("muted", p.textMuted)
+      .put("icon", p.icon)
+      .put("accent", p.accent)
+      .put("accentSoft", p.accentSoft)
+      .put("brand", p.brand)
+      .put("brandHover", p.brandHover)
+      .put("onBrand", p.onBrand)
+      .put("danger", p.danger)
+      .put("font", fontStack());
+
+  return t.format(QStringLiteral(R"(
+QDialog#UpdateDialog {
+    background-color: transparent;
+    color: [@text];
+    font-family: [@font];
+}
+QFrame#root {
+    background-color: [@bg];
+    border: 1px solid [@border];
+    border-radius: 20px;
+}
+QFrame#headerBar {
+    border-bottom: 1px solid [@borderSoft];
+}
+QFrame#updateCard {
+    background-color: [@surface];
+    border: 1px solid [@border];
+    border-radius: 16px;
+}
+QLabel#lblTitle {
+    color: [@text];
+    font-size: 15px;
+    font-weight: 600;
+}
+QLabel#lblDot {
+    color: [@muted];
+    font-size: 15px;
+}
+QLabel#lblSub {
+    color: [@muted];
+    font-size: 13.5px;
+    font-weight: 500;
+}
+QLabel#lblHeadline {
+    color: [@text];
+    font-size: 15px;
+    font-weight: 700;
+}
+QLabel#lblVersionLine {
+    color: [@muted];
+    font-size: 12px;
+}
+QLabel#lblHighlightsTitle {
+    color: [@brand];
+    font-size: 12px;
+    font-weight: 700;
+}
+QLabel#lblHighlightsBody {
+    color: [@text];
+    font-size: 12px;
+    line-height: 1.55;
+}
+QPushButton {
+    color: [@muted];
+    background-color: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 12.5px;
+    font-weight: 600;
+    outline: none;
+}
+QPushButton:hover {
+    color: [@text];
+    background-color: [@surfaceAlt];
+}
+QPushButton#primary {
+    color: [@onBrand];
+    background-color: [@brand];
+    border: 1px solid [@brand];
+    border-radius: 999px;
+    padding: 8px 22px;
+    font-size: 13px;
+    font-weight: 600;
+}
+QPushButton#primary:hover {
+    background-color: [@brandHover];
+    border-color: [@brandHover];
+}
+QPushButton#iconOnly {
+    background-color: transparent;
+    border: none;
+    border-radius: 999px;
+    padding: 0px;
+}
+QPushButton#iconOnly:hover {
+    background-color: [@surfaceAlt];
+}
+)"));
 }

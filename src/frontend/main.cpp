@@ -32,6 +32,7 @@
 #include "AutoCorrectDialog.h"
 #include "HarperDialog.h"
 #include "LayoutViewer.h"
+#include "UpdateDialog.h"
 #include "Layout.h"
 #include "Settings.h"
 #include "MatraKiIcons.h"
@@ -112,6 +113,8 @@ void renderUiPreviews(const QString &dirPath) {
     AutoCorrectDialog autoCorrect;
     HarperDialog harper;
     LayoutViewer viewer;
+    UpdateDialog updateDlg;
+    updateDlg.setUpdateInfo(false, QStringLiteral(PROJECT_VERSION), QString(), QString(), QString());
 
     shots << Shot{"about", &about};
     shots << Shot{"about-layout", &aboutLayout};
@@ -119,6 +122,7 @@ void renderUiPreviews(const QString &dirPath) {
     shots << Shot{"autocorrect", &autoCorrect};
     shots << Shot{"harper", &harper};
     shots << Shot{"layout-viewer", &viewer};
+    shots << Shot{"update", &updateDlg};
 
     for (const Shot &shot : shots) {
       shot.widget->show();

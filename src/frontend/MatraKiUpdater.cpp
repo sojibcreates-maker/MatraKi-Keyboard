@@ -15,15 +15,14 @@
  */
 
 #include "MatraKiUpdater.h"
+#include "UpdateDialog.h"
 
 #include <QDesktopServices>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QMessageBox>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QPushButton>
 #include <QUrl>
 
 #include "ThemeManager.h"
@@ -123,61 +122,7 @@ void MatraKiUpdater::showDialog(QWidget *parent, bool updateAvailable, const QSt
                                  const QString &releaseUrl, bool silent) {
   if (!updateAvailable && silent) return;
 
-  const MatraKiPalette p = ThemeManager::instance().palette();
-
-  QMessageBox msgBox(parent);
-  msgBox.setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
-                        Qt::WindowStaysOnTopHint);
-  msgBox.setWindowTitle(updateAvailable ? "MatraKi — নতুন আপডেট পাওয়া গেছে!" : "MatraKi — সফটওয়্যার আপডেট");
-  msgBox.setWindowIcon(QIcon(":/images/MatraKi.png"));
-  msgBox.setIcon(QMessageBox::Information);
-  msgBox.setTextFormat(Qt::RichText);
-
-  if (updateAvailable) {
-    msgBox.setText(QString(
-        "<div style='font-size:15px; font-weight:700; color:%1;'>নতুন আপডেট পাওয়া গেছে! (v%2)</div>"
-        "<div style='font-size:12px; color:%3;'>বর্তমান: <b>v%4</b> &nbsp;•&nbsp; সর্বশেষ: "
-        "<b style='color:%1;'>v%2 (%5)</b></div>")
-        .arg(p.accent, latestVer, p.textMuted, QStringLiteral(PROJECT_VERSION), releaseTitle));
-
-    QString summary = changelog.trimmed();
-    if (summary.length() > 360) summary = summary.left(360) + "...";
-    msgBox.setInformativeText(QString(
-        "<div style='font-size:12px; font-weight:700; color:%3;'>রিলিজ হাইলাইট:</div>"
-        "<div style='font-size:12px; color:%3;'>%1</div>"
-        "<div style='font-size:12px; color:%3;'>ডাউনলোড করতে অফিসিয়াল ওয়েব পেজ বা GitHub Releases "
-        "ব্যবহার করুন।</div>")
-        .arg(summary.toHtmlEscaped().replace("\n", "<br/>"), "", p.textMuted));
-  } else {
-    msgBox.setText(QString(
-        "<div style='font-size:14px; font-weight:700; color:%1;'>MatraKi v%2 — AI Smart Edition "
-        "সর্বশেষ সংস্করণ!</div>")
-        .arg(p.accent, QStringLiteral(PROJECT_VERSION)));
-    msgBox.setInformativeText(
-        QString("<div style='font-size:12px; color:%3;'>আপনি মাত্রা-কী কীবোর্ডের সর্বশেষ সংস্করণ "
-                "ব্যবহার করছেন।</div>"
-                "<div style='font-size:12px; color:%3;'>• <b>38,000+</b> প্রি-ট্রেনড শব্দ ও অটো-কারেক্ট নিয়ম<br/>"
-                "• <b>স্মার্ট সাফিক্স স্টেমার</b>, নেক্স্ট-ওয়ার্ড AI, লাইভ ম্যাথ (<code>=</code>) ও ১০০+ "
-                "স্নিপেট (<code>!</code>)<br/>"
-                "• ওয়েবসাইট: <a style='color:%1;' "
-                "href='https://sojibcreates-maker.github.io/MatraKi-Keyboard/'>"
-                "sojibcreates-maker.github.io/MatraKi-Keyboard</a></div>")
-        .arg(p.accent, QStringLiteral(PROJECT_VERSION), p.textMuted));
-  }
-
-  QPushButton *btnWeb = msgBox.addButton(
-      updateAvailable ? "ওয়েব পেজ থেকে ডাউনলোড" : "অফিসিয়াল ওয়েব পেজ",
-      QMessageBox::AcceptRole);
-  QPushButton *btnGitHub = msgBox.addButton("GitHub Releases", QMessageBox::ActionRole);
-  msgBox.addButton(updateAvailable ? "পরে" : "বন্ধ করুন", QMessageBox::RejectRole);
-
-  btnWeb->setObjectName("primary");
-  msgBox.setStyleSheet(ThemeManager::instance().updateDialogStyle());
-
-  msgBox.exec();
-  if (msgBox.clickedButton() == btnWeb) {
-    QDesktopServices::openUrl(QUrl(UPDATE_PAGE_URL));
-  } else if (msgBox.clickedButton() == btnGitHub) {
-    QDesktopServices::openUrl(QUrl(releaseUrl.isEmpty() ? GITHUB_RELEASES_URL : releaseUrl));
-  }
+  UpdateDialog dlg(parent);
+  dlg.setUpdateInfo(updateAvailable, latestVer, releaseTitle, changelog, releaseUrl);
+  dlg.exec();
 }
