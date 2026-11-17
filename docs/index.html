@@ -435,6 +435,7 @@
 </section>
 
 <section id="download" class="band">
+  <span id="downloads"></span>
   <div class="wrap">
     <div class="sec-head">
       <span class="kick">Download v1.1.0</span>
@@ -513,6 +514,8 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
   </div>
 </footer>
 
+<script src="matraki-data.js"></script>
+<script src="matraki-live-engine.js"></script>
 <script>
   function setThemeShot(mode) {
     const isDark = (mode === 'dark');
@@ -528,7 +531,7 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     document.getElementById('imgTopBar').src = 'screenshots/topbar' + suffix;
   }
 
-  // Interactive Live Studio Converter
+  // Interactive Live Studio Converter powered by MatraKiLiveEngine
   const liveInput = document.getElementById('liveInput');
   const liveOutput = document.getElementById('liveOutput');
 
@@ -545,23 +548,52 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
   };
 
   liveInput.addEventListener('input', function() {
-    const val = this.value.trim().toLowerCase();
+    const rawVal = this.value;
+    const val = rawVal.trim();
     if (!val) {
       liveOutput.textContent = '...';
       return;
     }
-    if (phoneticMap[val]) {
-      liveOutput.textContent = phoneticMap[val];
-    } else if (val.startsWith('=')) {
+
+    if (window.MatraKiLiveEngine) {
+      // Check instant tools (=math, =unit, !snippet, @date)
+      if (val.startsWith('=') || val.startsWith('!') || val.startsWith('@') || val.startsWith(':')) {
+        const cands = window.MatraKiLiveEngine.getSmartCandidates(val);
+        if (cands && cands.length > 0) {
+          liveOutput.textContent = cands[0].commitText || cands[0].display;
+          return;
+        }
+      }
+
+      // Convert full sentence / phrases word-by-word
+      const words = rawVal.split(/(\s+)/);
+      const converted = words.map(w => {
+        if (/^\s+$/.test(w)) return w;
+        if (w.startsWith('=') || w.startsWith('!') || w.startsWith('@')) {
+          const c = window.MatraKiLiveEngine.getSmartCandidates(w);
+          return (c && c.length > 0) ? (c[0].commitText || c[0].display) : w;
+        }
+        return window.MatraKiLiveEngine.avroPhoneticConvert(w);
+      }).join('');
+
+      liveOutput.textContent = converted;
+      return;
+    }
+
+    // Static fallback
+    const lower = val.toLowerCase();
+    if (phoneticMap[lower]) {
+      liveOutput.textContent = phoneticMap[lower];
+    } else if (lower.startsWith('=')) {
       try {
-        const expr = val.substring(1).replace(/%/g, '/100');
+        const expr = lower.substring(1).replace(/%/g, '/100');
         const res = Function('"use strict";return (' + expr + ')')();
         liveOutput.textContent = '= ' + res.toLocaleString('bn-BD');
       } catch(e) {
         liveOutput.textContent = 'হিসাব করা হচ্ছে...';
       }
     } else {
-      liveOutput.textContent = phoneticMap[val] || val;
+      liveOutput.textContent = phoneticMap[lower] || val;
     }
   });
 

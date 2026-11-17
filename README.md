@@ -7,7 +7,7 @@
 
 <div align="center">
 
-<img src="data/128.png" alt="MatraKi Logo — AI Smart Bangla Keyboard" width="120" height="120" />
+<img src="docs/logo.png" alt="MatraKi Logo — AI Smart Bangla Keyboard" width="120" height="120" />
 
 # MatraKi (মাত্রা-কী)
 ### **Type Smarter. Write Better.**
@@ -58,23 +58,19 @@ Built with a lightning-fast Rust phonetic engine (`riti`), high-performance zero
 
 ---
 
-## 🖼️ User Interface Preview
+## 🖼️ User Interface Preview (Emerald Design System)
 
-| Instant Productivity Templates (Email, Job, CV) | Harper Grammar & Concordance Engine |
+| Redesigned About & AI Engine Status | Software Update & GitHub Sync |
 | :---: | :---: |
-| ![Templates Hub](docs/screenshots/templates_hub.png) | ![Harper Grammar Engine](docs/screenshots/harper_grammar.png) |
+| ![About Dialog](docs/screenshots/about_dark.png) | ![Update Dialog](docs/screenshots/update_dark.png) |
 
-| Live Math Calculator & 16 Unit Converters | AI Smart Settings & Live Status |
+| AI Smart Settings & Appearance Theming | Harper Contextual Grammar Engine |
 | :---: | :---: |
-| ![Calculator and Converter](docs/screenshots/calculator_converter.png) | ![Settings Dialog](docs/screenshots/settings.png) |
+| ![Settings Dialog](docs/screenshots/settings_dark.png) | ![Harper Grammar Engine](docs/screenshots/harper_dark.png) |
 
-| Linux Desktop Workspace Integration | System Tray Quick Actions & Switcher |
+| Theme-Adaptive Layout Viewer | Floating Toolbar & Menu |
 | :---: | :---: |
-| ![Desktop Workspace](docs/screenshots/desktop_workspace.png) | ![Tray Menu](docs/screenshots/tray_menu.png) |
-
-| Avro Phonetic Dark KeyMap | Interactive Multi-Layout Viewer |
-| :---: | :---: |
-| ![Avro KeyMap Modern](docs/screenshots/avro_keymap.png) | ![Layout Viewer](docs/screenshots/layout_viewer.png) |
+| ![Layout Viewer](docs/screenshots/layout_dark.png) | ![Tray Menu](docs/screenshots/menu_dark.png) |
 
 ---
 
