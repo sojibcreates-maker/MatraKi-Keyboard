@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>340</height>
+    <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>480</width>
-    <height>330</height>
+    <height>360</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>560</width>
-    <height>400</height>
+    <height>460</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -233,14 +233,14 @@
               <item>
                <widget class="QLabel" name="lblHeadline">
                 <property name="text">
-                 <string>সর্বশেষ সংস্করণ ইনস্টল আছে · v1.1.0</string>
+                 <string>সর্বশেষ সংস্করণ ইনস্টল আছে · v1.2.0</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QLabel" name="lblVersionLine">
                 <property name="text">
-                 <string>ইনস্টলকৃত: v1.1.0 — Harper AI Edition (সর্বশেষ সংস্করণ)</string>
+                 <string>ইনস্টলকৃত: v1.2.0 — Onyx AI Edition (সর্বশেষ সংস্করণ)</string>
                 </property>
                </widget>
               </item>
@@ -254,7 +254,7 @@
               <item>
                <widget class="QLabel" name="lblHighlightsBody">
                 <property name="text">
-                 <string>• 38,000+ প্রি-ট্রেনড শব্দ ও অটো-কারেক্ট নিয়ম
+                 <string>• ৩৮,৫৯২+ অভিধান এন্ট্রি ও অটো-কারেক্ট নিয়ম
 • স্মার্ট সাফিক্স স্টেমার, নেক্সট-ওয়ার্ড AI ও লাইভ ম্যাথ (=)
 • ১০০+ রেডি স্নিপেট (!salam, !bismillah, ইমেইল ও সিভি)</string>
                 </property>
@@ -264,6 +264,62 @@
                </widget>
               </item>
              </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="progressCard">
+           <property name="visible">
+            <bool>false</bool>
+           </property>
+           <layout class="QVBoxLayout" name="progressLayout">
+            <property name="spacing">
+             <number>8</number>
+            </property>
+            <property name="leftMargin">
+             <number>16</number>
+            </property>
+            <property name="topMargin">
+             <number>12</number>
+            </property>
+            <property name="rightMargin">
+             <number>16</number>
+            </property>
+            <property name="bottomMargin">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="lblProgress">
+              <property name="text">
+               <string>ডাউনলোড হচ্ছে…</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QProgressBar" name="progressBar">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>8</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>8</height>
+               </size>
+              </property>
+              <property name="value">
+               <number>0</number>
+              </property>
+              <property name="textVisible">
+               <bool>false</bool>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>

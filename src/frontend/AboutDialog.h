@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  About Dialog Header — Emerald Design System
+ *  About Dialog Header — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify

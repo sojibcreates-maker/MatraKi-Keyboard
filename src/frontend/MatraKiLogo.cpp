@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Brand Mark — Emerald Design System
+ *  Brand Mark — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,7 @@
 
 #include <QApplication>
 #include <QFontMetricsF>
+#include <QLinearGradient>
 #include <QPainter>
 #include <QPainterPath>
 
@@ -84,8 +85,9 @@ QPixmap MatraKiLogo::render(int size, const QColor &brand, const QColor &dot,
   const int extra = (ringWidth > 0) ? (ringWidth * 2 + 4) : 0;
   const int side = size + extra;
 
-  QPixmap pm(side, side);
-  pm.setDevicePixelRatio(qApp->devicePixelRatio() > 1.0 ? qApp->devicePixelRatio() : 1.0);
+  const qreal dpr = qApp->devicePixelRatio() > 1.0 ? qApp->devicePixelRatio() : 1.0;
+  QPixmap pm(qRound(side * dpr), qRound(side * dpr));
+  pm.setDevicePixelRatio(dpr);
   pm.fill(Qt::transparent);
 
   QPainter p(&pm);
@@ -104,7 +106,7 @@ void MatraKiLogo::paint(QPainter &p, const QRectF &box, const QColor &brand, con
   p.setRenderHint(QPainter::TextAntialiasing, true);
 
   const qreal s = box.width();
-  const qreal radius = s * 0.30;
+  const qreal radius = s * 0.28;
 
   if (ringWidth > 0 && ring.isValid()) {
     p.setPen(QPen(ring, ringWidth));
@@ -113,50 +115,60 @@ void MatraKiLogo::paint(QPainter &p, const QRectF &box, const QColor &brand, con
                       radius + ringWidth, radius + ringWidth);
   }
 
-  QPixmap master(QStringLiteral(":/images/MatraKi.png"));
-  if (!master.isNull()) {
-    p.drawPixmap(box.toRect(), master.scaled(box.size().toSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    return;
-  }
+  /* The mark is drawn as a miniature keycap: an anodised tile with a
+     brushed top face, an ivory cap and the Bengali "ম" cut into it.
+     Using the live palette keeps it in step with both themes. */
+  QLinearGradient tile(box.topLeft(), box.bottomLeft());
+  tile.setColorAt(0.0, brand.lighter(114));
+  tile.setColorAt(1.0, brand.darker(116));
 
-  /* Fallback: keycap vector drawing matching official brand icon */
-  /* 1. Rounded green tile */
-  p.setPen(Qt::NoPen);
-  p.setBrush(brand);
+  p.setPen(QPen(brand.darker(150), qMax(1.0, s * 0.02)));
+  p.setBrush(tile);
   p.drawRoundedRect(box, radius, radius);
 
-  /* 2. Key dimensions */
-  const qreal kw = s * 0.63;
-  const qreal kh = s * 0.59;
+  /* Key dimensions. */
+  const qreal kw = s * 0.60;
+  const qreal kh = s * 0.56;
   const qreal kx = box.left() + (s - kw) * 0.5;
-  const qreal ky = box.top() + s * 0.18;
-  const qreal kr = s * 0.16;
+  const qreal ky = box.top() + s * 0.21;
+  const qreal kr = s * 0.13;
 
-  /* 3. Mint shadow key */
-  p.setBrush(QColor(184, 213, 201));
-  p.drawRoundedRect(QRectF(kx, ky + s * 0.05, kw, kh), kr, kr);
+  /* Underside of the cap — the classic keyboard depth cue. */
+  p.setPen(Qt::NoPen);
+  p.setBrush(brand.darker(185));
+  p.drawRoundedRect(QRectF(kx, ky + s * 0.055, kw, kh), kr, kr);
 
-  /* 4. White keycap surface */
-  p.setBrush(Qt::white);
+  /* Ivory cap face with a very soft vertical sheen. */
+  QLinearGradient cap(QPointF(kx, ky), QPointF(kx, ky + kh));
+  cap.setColorAt(0.0, QColor("#FFFDF7"));
+  cap.setColorAt(1.0, QColor("#E9E2D3"));
+  p.setBrush(cap);
+  p.setPen(QPen(QColor(0, 0, 0, 26), qMax(1.0, s * 0.012)));
   p.drawRoundedRect(QRectF(kx, ky, kw, kh), kr, kr);
 
-  /* 5. Bengali "ম" mark in brand green */
+  /* Top-edge highlight. */
+  p.setPen(QPen(QColor(255, 255, 255, 190), qMax(1.0, s * 0.018)));
+  p.drawLine(QPointF(kx + kr, ky + s * 0.018),
+             QPointF(kx + kw - kr, ky + s * 0.018));
+
+  /* Bengali "ম" legend. */
   QFont font;
-  font.setStyleHint(QFont::SansSerif);
-  font.setFamilies({QStringLiteral("Noto Sans Bengali"), QStringLiteral("Hind Siliguri"),
+  font.setStyleHint(QFont::Serif);
+  font.setFamilies({QStringLiteral("Tiro Bangla"), QStringLiteral("Noto Serif Bengali"),
+                    QStringLiteral("Noto Sans Bengali"), QStringLiteral("Hind Siliguri"),
                     QStringLiteral("SolaimanLipi"), QStringLiteral("Kalpurush"),
-                    QStringLiteral("Nirmala UI"), QStringLiteral("Segoe UI")});
-  font.setPixelSize(qMax(8, qRound(s * 0.34)));
+                    QStringLiteral("Nirmala UI")});
+  font.setPixelSize(qMax(8, qRound(s * 0.36)));
   font.setBold(true);
   p.setFont(font);
-  p.setPen(brand);
-  p.drawText(QRectF(kx, ky, kw, kh), Qt::AlignCenter, QStringLiteral("ম"));
+  p.setPen(brand.darker(108));
+  p.drawText(QRectF(kx, ky - s * 0.01, kw, kh), Qt::AlignCenter, QStringLiteral("ম"));
 
-  /* 6. Signature red status dot on keycap */
-  const qreal dotR = s * 0.035;
+  /* Signature dot, like the status lamp on a mechanical keyboard. */
+  const qreal dotR = s * 0.036;
   p.setBrush(dot);
-  p.setPen(Qt::NoPen);
-  p.drawEllipse(QPointF(kx + kw - s * 0.10, ky + s * 0.10), dotR, dotR);
+  p.setPen(QPen(QColor(255, 255, 255, 110), qMax(1.0, s * 0.012)));
+  p.drawEllipse(QPointF(kx + kw - s * 0.085, ky + s * 0.095), dotR, dotR);
 }
 
 void MatraKiLogo::paintEvent(QPaintEvent *event) {

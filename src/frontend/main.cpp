@@ -1,7 +1,7 @@
 /*
  *  MatraKi Keyboard
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
- *  Copyright (C) 2026 Md Sojib Hossain — Emerald Design System
+ *  Copyright (C) 2026 Md Sojib Hossain — Onyx Design System
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -86,8 +86,8 @@ void renderUiPreviews(const QString &dirPath) {
                   QStringLiteral("লাইভ কীবোর্ড"));
       MatraKiToggle *toggle = new MatraKiToggle(&menu);
       toggle->setChecked(true);
-      toggle->setOnColor(p.brand);
-      toggle->setOffColor(p.dark ? QColor("#2E4038") : QColor("#CBD7D1"));
+      toggle->setOnColor(p.accent);
+      toggle->setOffColor(p.dark ? QColor("#2C3033") : QColor("#D6CFC0"));
       menu.addToggleRow(QStringLiteral("হার্পার ব্যাকরণ ও বানান যাচাই"),
                         MatraKiIcons::pixmap(MatraKiIcons::SpellCheck, p.icon, 18), toggle);
       menu.addSeparatorRow();
@@ -147,8 +147,13 @@ int main(int argc, char *argv[]) {
   QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/TiroBangla-Regular.ttf"));
   QFontDatabase::addApplicationFont(QStringLiteral(":/fonts/TiroBangla-Italic.ttf"));
 
-  QFont defaultFont(QStringLiteral("Tiro Bangla"), 10);
+  /* Crisp grotesque for the interface, with a Bengali companion face.
+     Display titles switch to the bundled Tiro serif through QSS. */
+  QFont defaultFont;
+  defaultFont.setFamilies({QStringLiteral("Inter"), QStringLiteral("Noto Sans Bengali"),
+                           QStringLiteral("Hind Siliguri"), QStringLiteral("Tiro Bangla")});
   defaultFont.setStyleHint(QFont::SansSerif);
+  defaultFont.setPixelSize(13);
   app.setFont(defaultFont);
 
   /* The developer preview runs independently of an already running

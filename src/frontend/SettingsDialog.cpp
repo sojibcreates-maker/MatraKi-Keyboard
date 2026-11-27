@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Settings — Emerald Design System
+ *  Settings — Onyx Design System
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
  *  Copyright (C) 2026 Md Sojib Hossain
  *
@@ -18,6 +18,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QCloseEvent>
 #include <QComboBox>
 #include <QDesktopServices>
 #include <QEvent>
@@ -36,6 +37,7 @@
 #include "MatraKiLogo.h"
 #include "MatraKiToggle.h"
 #include "MatraKiUpdater.h"
+#include "MatraKiWindowChrome.h"
 #include "ThemeManager.h"
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
@@ -45,8 +47,8 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
   setAttribute(Qt::WA_TranslucentBackground, true);
   setWindowIcon(QIcon(":/images/MatraKi.png"));
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
-                 Qt::WindowStaysOnTopHint);
+  makeOnyxDialog(this);
+  ui->btnCloseIcon->setObjectName("iconOnly");
 
   ui->gridLayout->setColumnStretch(0, 1);
   ui->gridLayout_2->setColumnStretch(0, 1);
@@ -73,14 +75,17 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
   ui->cmbOrientation->insertItems(0, {"Horizontal", "Vertical"});
   ui->cmbThemeMode->insertItems(0, {
     "Auto (System Detect)",
-    "Dark Emerald Mode",
-    "Light Emerald Mode"
+    "Dark Onyx",
+    "Light Paper"
   });
 
   buildToggles();
 
   connect(ui->btnSave, &QPushButton::clicked, this, &SettingsDialog::saveSettings);
   connect(ui->btnCancel, &QPushButton::clicked, this, [this]() {
+    /* The appearance switch previews live; cancelling must put the
+       previously saved mode back. */
+    ThemeManager::instance().setModeString(gSettings->getThemeMode());
     updateSettings();
     close();
   });
@@ -142,6 +147,7 @@ void SettingsDialog::applyTheme() {
 
   this->setStyleSheet(ThemeManager::instance().settingsDialogStyle());
 
+  ui->btnCloseIcon->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, p.icon, 16)));
   ui->logoSlot->setPixmap(MatraKiLogo::render(44, p.brand, p.danger));
   ui->iconPhonetic->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Sparkles, p.accent, 18));
   ui->iconGeneral->setPixmap(MatraKiIcons::pixmap(MatraKiIcons::Settings, p.accent, 18));
@@ -157,12 +163,12 @@ void SettingsDialog::applyTheme() {
 
   const QList<MatraKiToggle *> toggles = findChildren<MatraKiToggle *>();
   for (MatraKiToggle *toggle : toggles) {
-    toggle->setOnColor(p.brand);
-    toggle->setOffColor(p.dark ? QColor("#2E4038") : QColor("#CBD7D1"));
+    toggle->setOnColor(p.accent);
+    toggle->setOffColor(p.dark ? p.border : p.keyBorder);
     toggle->setFocusColor(p.accent);
   }
 
-  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+  ui->lblThemeDetected->setText("System: " + ThemeManager::instance().detectedModeName());
 
   auto refreshCombo = [&p](QComboBox *cb) {
     if (!cb) return;
@@ -195,6 +201,19 @@ void SettingsDialog::showEvent(QShowEvent *event) {
   applyTheme();
 }
 
+void SettingsDialog::reject() {
+  ThemeManager::instance().setModeString(gSettings->getThemeMode());
+  QDialog::reject();
+}
+
+void SettingsDialog::closeEvent(QCloseEvent *event) {
+  /* The appearance preview is applied immediately, but only Save commits
+     it. Closing with the window button therefore rolls back to the saved
+     mode — exactly like Cancel. */
+  ThemeManager::instance().setModeString(gSettings->getThemeMode());
+  QDialog::closeEvent(event);
+}
+
 bool SettingsDialog::eventFilter(QObject *watched, QEvent *event) {
   if (event->type() == QEvent::Show) {
     const MatraKiPalette p = ThemeManager::instance().palette();
@@ -218,7 +237,7 @@ void SettingsDialog::handleThemeModeChanged(int index) {
   if (index == 1) mode = "dark";
   else if (index == 2) mode = "light";
   ThemeManager::instance().setModeString(mode);
-  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+  ui->lblThemeDetected->setText("System: " + ThemeManager::instance().detectedModeName());
   applyTheme();
 }
 
@@ -254,7 +273,7 @@ void SettingsDialog::updateSettings() {
   else ui->cmbThemeMode->setCurrentIndex(0);
   ui->cmbThemeMode->blockSignals(false);
 
-  ui->lblThemeDetected->setText("Detected: " + ThemeManager::instance().detectedModeName());
+  ui->lblThemeDetected->setText("System: " + ThemeManager::instance().detectedModeName());
   applyTheme();
 }
 
@@ -280,5 +299,9 @@ void SettingsDialog::saveSettings() {
   gSettings->setThemeMode(mode);
   ThemeManager::instance().setModeString(mode);
 
+  close();
+}
+
+void SettingsDialog::on_btnCloseIcon_clicked() {
   close();
 }

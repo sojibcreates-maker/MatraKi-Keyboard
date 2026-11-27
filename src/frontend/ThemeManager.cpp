@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard — Next-Gen AI Smart Bangla Keyboard
- *  Theme Manager: Emerald Design System, Light / Dark & System Detection
+ *  Theme Manager: Onyx Design System, Light / Dark & System Detection
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -179,52 +179,76 @@ MatraKiPalette ThemeManager::palette() const {
   p.dark = isDark();
 
   if (p.dark) {
-    p.bg = QStringLiteral("#0C1310");
-    p.surface = QStringLiteral("#16211C");
-    p.surfaceAlt = QStringLiteral("#1D2C26");
-    p.border = QStringLiteral("#2E4038");
-    p.borderSoft = QStringLiteral("#243229");
-    p.text = QStringLiteral("#E6EFEA");
-    p.textMuted = QStringLiteral("#8FA399");
-    p.icon = QStringLiteral("#B4C5BC");
-    p.accent = QStringLiteral("#5FD0A6");
-    p.accentSoft = QStringLiteral("#1F3A2F");
-    p.brand = QStringLiteral("#17835F");
-    p.brandHover = QStringLiteral("#1B9670");
-    p.onBrand = QStringLiteral("#FFFFFF");
-    p.danger = QStringLiteral("#F42A41");
-    p.dangerSoft = QStringLiteral("#2A1A1B");
-    p.shadow = QStringLiteral("rgba(0, 0, 0, 0.45)");
+    /* Onyx — warm ivory type on graphite, brass hardware. */
+    p.bg = QStringLiteral("#0A0B0C");
+    p.surface = QStringLiteral("#121416");
+    p.surfaceAlt = QStringLiteral("#191C1F");
+    p.border = QStringLiteral("#2C3033");
+    p.borderSoft = QStringLiteral("#212528");
+    p.text = QStringLiteral("#F2EEE6");
+    p.textMuted = QStringLiteral("#96988F");
+    p.icon = QStringLiteral("#BDBCB2");
+    p.accent = QStringLiteral("#D2B372");
+    p.accentSoft = QStringLiteral("#282216");
+    p.brand = QStringLiteral("#C9A961");
+    p.brandHover = QStringLiteral("#DCC288");
+    p.onBrand = QStringLiteral("#15130E");
+    p.danger = QStringLiteral("#D96A55");
+    p.dangerSoft = QStringLiteral("#2B1A16");
+    p.shadow = QStringLiteral("rgba(0, 0, 0, 0.58)");
+
+    p.keyBg = QStringLiteral("#1B1E20");
+    p.keyBorder = QStringLiteral("#383C3F");
+    p.keyText = QStringLiteral("#F3EFE6");
+    p.keyMuted = QStringLiteral("#A3A69F");
+    p.keyAccent = QStringLiteral("#D8BC80");
+    p.keyShadow = QStringLiteral("#070809");
+    p.keyHighlight = QStringLiteral("#2F3336");
   } else {
-    p.bg = QStringLiteral("#DCE5E0");
-    p.surface = QStringLiteral("#FFFFFF");
-    p.surfaceAlt = QStringLiteral("#F0F5F2");
-    p.border = QStringLiteral("#CBD7D1");
-    p.borderSoft = QStringLiteral("#DDE6E1");
-    p.text = QStringLiteral("#17231E");
-    p.textMuted = QStringLiteral("#6B7C73");
-    p.icon = QStringLiteral("#4A5A52");
-    p.accent = QStringLiteral("#0B5D45");
-    p.accentSoft = QStringLiteral("#E3F1EB");
-    p.brand = QStringLiteral("#0B5D45");
-    p.brandHover = QStringLiteral("#084A37");
-    p.onBrand = QStringLiteral("#FFFFFF");
-    p.danger = QStringLiteral("#F42A41");
-    p.dangerSoft = QStringLiteral("#FCE7E8");
-    p.shadow = QStringLiteral("rgba(11, 26, 20, 0.16)");
+    /* Paper — ink type on warm stone, aged-brass hardware. */
+    p.bg = QStringLiteral("#EDE9E0");
+    p.surface = QStringLiteral("#FAF8F3");
+    p.surfaceAlt = QStringLiteral("#F1EDE4");
+    p.border = QStringLiteral("#D8D1C2");
+    p.borderSoft = QStringLiteral("#E6E0D5");
+    p.text = QStringLiteral("#1A1A18");
+    p.textMuted = QStringLiteral("#6E6A60");
+    p.icon = QStringLiteral("#4C4B45");
+    p.accent = QStringLiteral("#8A6A2F");
+    p.accentSoft = QStringLiteral("#EFE6D1");
+    p.brand = QStringLiteral("#202124");
+    p.brandHover = QStringLiteral("#34363A");
+    p.onBrand = QStringLiteral("#FAF7F0");
+    p.danger = QStringLiteral("#A8452F");
+    p.dangerSoft = QStringLiteral("#F3E3DD");
+    p.shadow = QStringLiteral("rgba(40, 34, 22, 0.16)");
+
+    p.keyBg = QStringLiteral("#FBF9F4");
+    p.keyBorder = QStringLiteral("#D6CFC0");
+    p.keyText = QStringLiteral("#1B1B19");
+    p.keyMuted = QStringLiteral("#7A756A");
+    p.keyAccent = QStringLiteral("#8A6A2F");
+    p.keyShadow = QStringLiteral("#CFC6B6");
+    p.keyHighlight = QStringLiteral("#FFFFFF");
   }
 
   return p;
 }
 
 QString ThemeManager::fontStack() {
-  return QStringLiteral("'Tiro Bangla', 'Noto Sans Bengali', 'Segoe UI', 'Hind Siliguri', "
-                       "'Noto Sans', 'Nirmala UI', 'DejaVu Sans', sans-serif");
+  return QStringLiteral("'Inter', 'SF Pro Text', 'Segoe UI', 'Noto Sans', "
+                       "'Noto Sans Bengali', 'Hind Siliguri', 'Nirmala UI', "
+                       "'DejaVu Sans', sans-serif");
+}
+
+QString ThemeManager::displayFontStack() {
+  return QStringLiteral("'Tiro Bangla', 'Noto Serif Bengali', Georgia, "
+                       "'Times New Roman', 'Noto Sans Bengali', serif");
 }
 
 QString ThemeManager::bengaliFontStack() {
-  return QStringLiteral("'Tiro Bangla', 'Noto Sans Bengali', 'Hind Siliguri', 'Kalpurush', "
-                       "'SolaimanLipi', 'Nirmala UI', sans-serif");
+  return QStringLiteral("'Tiro Bangla', 'Noto Serif Bengali', 'Noto Sans Bengali', "
+                       "'Hind Siliguri', 'Kalpurush', 'SolaimanLipi', 'Nirmala UI', sans-serif");
 }
 
 /* ------------------------------------------------------------------ */
@@ -250,28 +274,29 @@ QString ThemeManager::cardStyle() const {
       .put("danger", p.danger)
       .put("dangerSoft", p.dangerSoft)
       .put("font", fontStack())
+      .put("display", displayFontStack())
       .put("bengali", bengaliFontStack());
 
   return t.format(QStringLiteral(R"(
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#card {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QFrame#cardFlat {
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QFrame#tile {
     background-color: [@surfaceAlt];
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QFrame#divider {
     background-color: [@borderSoft];
@@ -287,15 +312,16 @@ QFrame#headerBar {
 QFrame#accentBar {
     background-color: [@accentSoft];
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 QLabel {
     color: [@text];
     font-family: [@font];
     font-size: 13px;
 }
-QLabel#title {
+QLabel#title, QLabel#lblHeaderTitle {
     color: [@text];
+    font-family: [@display];
     font-size: 20px;
     font-weight: 600;
 }
@@ -333,7 +359,7 @@ QLabel#chip {
 QLabel#badge {
     color: [@accent];
     background-color: [@accentSoft];
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 5px 12px;
     font-size: 11px;
     font-weight: 600;
@@ -348,7 +374,7 @@ QPushButton {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
@@ -370,7 +396,7 @@ QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 22px;
     font-size: 13px;
     font-weight: 600;
@@ -387,7 +413,7 @@ QPushButton#ghost {
     color: [@muted];
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 18px;
     font-size: 13px;
     font-weight: 500;
@@ -400,7 +426,7 @@ QPushButton#segment {
     color: [@muted];
     background-color: transparent;
     border: 1px solid [@border];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 7px 16px;
     font-size: 12px;
     font-weight: 600;
@@ -418,7 +444,7 @@ QPushButton#danger {
     color: [@danger];
     background-color: [@dangerSoft];
     border: 1px solid [@danger];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
@@ -431,7 +457,7 @@ QLineEdit, QPlainTextEdit, QTextEdit, QSpinBox, QDoubleSpinBox {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 12px;
     font-size: 13px;
     selection-background-color: [@accent];
@@ -448,7 +474,7 @@ QComboBox {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 12px;
     font-size: 13px;
     outline: none;
@@ -481,7 +507,7 @@ QTreeWidget, QTreeView, QListWidget, QTableWidget {
     color: [@text];
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
     alternate-background-color: [@surfaceAlt];
     font-size: 12px;
     selection-background-color: [@accentSoft];
@@ -555,42 +581,64 @@ QString ThemeManager::inputStyle() const {
 
 QString ThemeManager::topBarStyle() const {
   const MatraKiPalette p = palette();
+
+  /* A whisper of vertical light gives the floating bar the milled,
+     anodised look of a premium keyboard chassis. */
+  const QString top = p.dark ? QStringLiteral("#1B1D1F") : QStringLiteral("#FEFCF8");
+  const QString bottom = p.dark ? QStringLiteral("#0E1011") : QStringLiteral("#F2EEE5");
+
   return QStringLiteral(
       "#centralwidget {"
-      "    background-color: %1;"
-      "    border: 1px solid %2;"
-      "    border-radius: 24px;"
+      "    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,"
+      "                                stop:0 %1, stop:1 %2);"
+      "    border: 1px solid %3;"
+      "    border-top: 1px solid %4;"
+      "    border-radius: 18px;"
+      "}"
+      "QLabel#lblBrand {"
+      "    color: %5;"
+      "    font-family: 'Tiro Bangla', 'Noto Serif Bengali', Georgia, serif;"
+      "    font-size: 14px;"
+      "    font-weight: 600;"
+      "    background: transparent;"
+      "}"
+      "QLabel#lblBrandSub {"
+      "    color: %6;"
+      "    font-size: 9px;"
+      "    background: transparent;"
       "}"
       "QPushButton {"
       "    background-color: transparent;"
       "    border: none;"
-      "    border-radius: 999px;"
+      "    border-radius: 8px;"
       "    padding: 0px;"
+      "    outline: none;"
       "}"
       "QPushButton:hover {"
-      "    background-color: %3;"
+      "    background-color: %7;"
       "}"
       "QPushButton:pressed {"
-      "    background-color: %3;"
+      "    background-color: %8;"
       "}"
       "QPushButton:checked {"
-      "    background-color: %3;"
+      "    background-color: %7;"
       "}"
       "#buttonShutdown:hover {"
-      "    background-color: %4;"
+      "    background-color: %9;"
       "}"
       "#buttonIcon:focus {"
-      "    background-color: %3;"
+      "    background-color: %7;"
       "}"
       "QToolTip {"
       "    color: %5;"
-      "    background-color: %6;"
-      "    border: 1px solid %2;"
-      "    border-radius: 8px;"
+      "    background-color: %10;"
+      "    border: 1px solid %3;"
+      "    border-radius: 6px;"
       "    padding: 6px 10px;"
       "    font-size: 11px;"
       "}")
-      .arg(p.surface, p.border, p.accentSoft, p.danger, p.text, p.surfaceAlt);
+      .arg(top, bottom, p.border, p.keyHighlight, p.text, p.textMuted,
+           p.accentSoft, p.surfaceAlt, p.dangerSoft, p.surface);
 }
 
 /* ------------------------------------------------------------------ */
@@ -604,7 +652,7 @@ QString ThemeManager::popupMenuStyle() const {
       "    background-color: %1;"
       "    color: %2;"
       "    border: 1px solid %3;"
-      "    border-radius: 14px;"
+      "    border-radius: 12px;"
       "    padding: 6px;"
       "}"
       "QMenu::item {"
@@ -654,7 +702,8 @@ QString ThemeManager::settingsDialogStyle() const {
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
       .put("dangerSoft", p.dangerSoft)
-      .put("font", fontStack());
+      .put("font", fontStack())
+      .put("display", displayFontStack());
 
   return t.format(QStringLiteral(R"(
 QDialog#SettingsDialog {
@@ -665,25 +714,26 @@ QDialog#SettingsDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#card, QFrame#cardPhonetic, QFrame#cardGeneral, QFrame#cardFixed, QFrame#cardSupport {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QFrame#tile {
     background-color: [@surfaceAlt];
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QLabel { color: [@text]; font-size: 13px; }
-QLabel#title {
+QLabel#title, QLabel#lblHeaderTitle {
     color: [@text];
+    font-family: [@display];
     font-size: 19px;
     font-weight: 600;
 }
-QLabel#subtitle { color: [@muted]; font-size: 12px; }
+QLabel#subtitle, QLabel#lblHeaderSub { color: [@muted]; font-size: 12px; }
 QLabel#fieldLabel { color: [@muted]; font-size: 11px; font-weight: 600; }
 QLabel#sectionTitle,
 QLabel#lblSectionPhonetic,
@@ -698,7 +748,7 @@ QLabel#sectionCaption { color: [@muted]; font-size: 11px; }
 QLabel#badge {
     color: [@accent];
     background-color: [@accentSoft];
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 5px 12px;
     font-size: 11px;
     font-weight: 600;
@@ -708,18 +758,25 @@ QPushButton {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
     outline: none;
 }
 QPushButton:hover { border-color: [@accent]; color: [@accent]; }
+QPushButton#iconOnly {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0px;
+}
+QPushButton#iconOnly:hover { background-color: [@accentSoft]; }
 QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 24px;
     font-size: 13px;
     font-weight: 600;
@@ -729,7 +786,7 @@ QPushButton#ghost {
     color: [@muted];
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 20px;
     font-size: 13px;
     font-weight: 500;
@@ -739,7 +796,7 @@ QComboBox {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 12px;
     font-size: 13px;
     outline: none;
@@ -806,7 +863,8 @@ QString ThemeManager::aboutLayoutDialogStyle() const {
       .put("brandHover", p.brandHover)
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
-      .put("font", fontStack());
+      .put("font", fontStack())
+      .put("display", displayFontStack());
 
   return t.format(QStringLiteral(R"(
 QDialog#AboutLayoutDialog {
@@ -817,7 +875,7 @@ QDialog#AboutLayoutDialog {
 QFrame#root {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#headerBar {
     background-color: transparent;
@@ -827,22 +885,28 @@ QFrame#headerBar {
 QFrame#tile, QFrame#statTileOne, QFrame#statTileTwo {
     background-color: [@surfaceAlt];
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QFrame#divider, QFrame#dividerOne, QFrame#dividerTwo {
     background-color: [@borderSoft];
     border: none;
 }
 QLabel { color: [@text]; font-size: 13px; }
-QLabel#dialogTitle { color: [@text]; font-size: 14px; font-weight: 600; }
+QLabel#dialogTitle, QLabel#lblDialogTitle {
+    color: [@text];
+    font-family: [@display];
+    font-size: 15px;
+    font-weight: 600;
+}
 QLabel#fieldLabel,
 QLabel#lblNameCaption,
 QLabel#lblAuthorCaption,
 QLabel#lblDescriptionCaption { color: [@muted]; font-size: 12px; }
-QLabel#layoutName {
+QLabel#lblLayoutName {
     color: [@text];
+    font-family: [@display];
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 600;
 }
 QLabel#chip {
     color: [@accent];
@@ -856,6 +920,7 @@ QLabel#statValue,
 QLabel#lblStatOneValue,
 QLabel#lblStatTwoValue {
     color: [@text];
+    font-family: [@display];
     font-size: 20px;
     font-weight: 500;
 }
@@ -867,7 +932,7 @@ QPushButton {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
@@ -878,7 +943,7 @@ QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 24px;
     font-size: 13px;
     font-weight: 500;
@@ -887,7 +952,7 @@ QPushButton#primary:hover { background-color: [@brandHover]; border-color: [@bra
 QPushButton#iconOnly {
     background-color: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 4px;
 }
 QPushButton#iconOnly:hover { background-color: [@accentSoft]; }
@@ -923,7 +988,8 @@ QString ThemeManager::aboutDialogStyle() const {
       .put("brandHover", p.brandHover)
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
-      .put("font", fontStack());
+      .put("font", fontStack())
+      .put("display", displayFontStack());
 
   return t.format(QStringLiteral(R"(
 QDialog#AboutDialog {
@@ -934,7 +1000,7 @@ QDialog#AboutDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 24px;
+    border-radius: 18px;
 }
 QFrame#headerBar {
     border-bottom: 1px solid [@borderSoft];
@@ -957,7 +1023,7 @@ QPushButton {
     color: [@muted];
     background-color: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 8px 18px;
     font-size: 13px;
     font-weight: 600;
@@ -971,7 +1037,7 @@ QPushButton#btnClose, QPushButton#iconOnly {
     color: [@muted];
     background-color: transparent;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 0px;
 }
 QPushButton#btnClose:hover, QPushButton#iconOnly:hover {
@@ -991,17 +1057,18 @@ QWidget#scrollWidget {
 QFrame#heroCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 18px;
+    border-radius: 16px;
 }
 QLabel#lblAppName {
     color: [@text];
+    font-family: [@display];
     font-size: 19px;
     font-weight: 700;
 }
 QLabel#lblBadge {
     color: [@accent];
     background-color: [@accentSoft];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 3px 10px;
     font-size: 11px;
     font-weight: 700;
@@ -1013,7 +1080,7 @@ QLabel#lblTagline {
 QFrame#statCard1, QFrame#statCard2, QFrame#statCard3 {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QLabel#statVal1, QLabel#statVal2, QLabel#statVal3 {
     color: [@text];
@@ -1040,7 +1107,7 @@ QLabel#sec1Body, QLabel#sec2Body {
 QFrame#shortcutBar {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QFrame#devBar {
     border-top: 1px solid [@borderSoft];
@@ -1060,7 +1127,7 @@ QPushButton#btnLicense, QPushButton#ghost {
     color: [@muted];
     background-color: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 9px 20px;
     font-size: 13px;
     font-weight: 600;
@@ -1074,7 +1141,7 @@ QPushButton#btnDonate, QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 9px 22px;
     font-size: 13px;
     font-weight: 600;
@@ -1124,7 +1191,8 @@ QString ThemeManager::layoutViewerStyle() const {
       .put("brandHover", p.brandHover)
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
-      .put("font", fontStack());
+      .put("font", fontStack())
+      .put("display", displayFontStack());
 
   return t.format(QStringLiteral(R"(
 QDialog#LayoutViewer {
@@ -1135,24 +1203,25 @@ QDialog#LayoutViewer {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#card, QFrame#imageCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QLabel { color: [@text]; font-size: 13px; }
-QLabel#title {
+QLabel#title, QLabel#lblHeaderTitle {
     color: [@text];
-    font-size: 16px;
+    font-family: [@display];
+    font-size: 17px;
     font-weight: 600;
 }
-QLabel#subtitle { color: [@muted]; font-size: 12px; }
+QLabel#subtitle, QLabel#lblHeaderSub { color: [@muted]; font-size: 12px; }
 QLabel#chip {
     color: [@accent];
     background-color: [@accentSoft];
-    border-radius: 11px;
+    border-radius: 4px;
     padding: 3px 10px;
     font-size: 11px;
     font-weight: 600;
@@ -1161,13 +1230,20 @@ QPushButton {
     color: [@muted];
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 7px 16px;
     font-size: 12px;
     font-weight: 600;
     outline: none;
 }
 QPushButton:hover { color: [@accent]; border-color: [@accent]; }
+QPushButton#iconOnly {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0px;
+}
+QPushButton#iconOnly:hover { background-color: [@accentSoft]; }
 QPushButton:checked {
     color: [@accent];
     background-color: [@accentSoft];
@@ -1178,7 +1254,7 @@ QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 7px 16px;
     font-size: 12px;
     font-weight: 600;
@@ -1217,6 +1293,7 @@ QString ThemeManager::autoCorrectDialogStyle() const {
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
       .put("font", fontStack())
+      .put("display", displayFontStack())
       .put("mono", QStringLiteral("'SF Mono', 'DejaVu Sans Mono', 'Menlo', 'Consolas', monospace"));
 
   return t.format(QStringLiteral(R"(
@@ -1228,25 +1305,26 @@ QDialog#AutoCorrectDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#card, QFrame#entryCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QFrame#tile {
     background-color: [@surfaceAlt];
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QLabel { color: [@text]; font-size: 13px; }
-QLabel#title {
+QLabel#title, QLabel#lblHeaderTitle {
     color: [@text];
+    font-family: [@display];
     font-size: 17px;
     font-weight: 600;
 }
-QLabel#subtitle { color: [@muted]; font-size: 12px; }
+QLabel#subtitle, QLabel#lblHeaderSub { color: [@muted]; font-size: 12px; }
 QLabel#fieldLabel { color: [@muted]; font-size: 11px; font-weight: 600; }
 QLabel#label, QLabel#label_2 { color: [@muted]; font-size: 11px; font-weight: 600; }
 QLabel#lblEntryTitle {
@@ -1257,7 +1335,7 @@ QLabel#lblEntryTitle {
 QLabel#preview, QLabel#lblPreviewR, QLabel#lblPreviewW {
     color: [@text];
     background-color: [@surfaceAlt];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 12px;
     font-size: 14px;
 }
@@ -1266,7 +1344,7 @@ QLineEdit {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 12px;
     font-size: 13px;
     outline: none;
@@ -1277,7 +1355,7 @@ QTreeWidget {
     color: [@text];
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
     alternate-background-color: [@surfaceAlt];
     font-size: 12px;
     selection-background-color: [@accentSoft];
@@ -1297,18 +1375,25 @@ QPushButton {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 8px 16px;
     font-size: 13px;
     font-weight: 500;
     outline: none;
 }
 QPushButton:hover { border-color: [@accent]; color: [@accent]; }
+QPushButton#iconOnly {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0px;
+}
+QPushButton#iconOnly:hover { background-color: [@accentSoft]; }
 QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 20px;
     font-size: 13px;
     font-weight: 600;
@@ -1318,7 +1403,7 @@ QPushButton#ghost {
     color: [@muted];
     background-color: transparent;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 18px;
     font-size: 13px;
 }
@@ -1361,6 +1446,7 @@ QString ThemeManager::harperDialogStyle() const {
       .put("danger", p.danger)
       .put("dangerSoft", p.dangerSoft)
       .put("font", fontStack())
+      .put("display", displayFontStack())
       .put("mono", QStringLiteral("'SF Mono', 'DejaVu Sans Mono', 'Menlo', 'Consolas', monospace"));
 
   return t.format(QStringLiteral(R"(
@@ -1372,25 +1458,26 @@ QDialog#HarperDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 16px;
+    border-radius: 14px;
 }
 QFrame#card, QFrame#inputCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 14px;
+    border-radius: 12px;
 }
 QFrame#codeBlock {
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
 }
 QLabel { color: [@text]; font-size: 13px; }
-QLabel#title {
+QLabel#title, QLabel#lblHeaderTitle {
     color: [@text];
+    font-family: [@display];
     font-size: 17px;
     font-weight: 600;
 }
-QLabel#subtitle { color: [@muted]; font-size: 12px; }
+QLabel#subtitle, QLabel#lblHeaderSub { color: [@muted]; font-size: 12px; }
 QLabel#sectionTitle {
     color: [@accent];
     font-size: 12px;
@@ -1400,7 +1487,7 @@ QTextEdit {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 10px;
     font-size: 13px;
     selection-background-color: [@accent];
@@ -1415,18 +1502,25 @@ QPushButton {
     color: [@text];
     background-color: [@surfaceAlt];
     border: 1px solid [@border];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 16px;
     font-size: 13px;
     font-weight: 500;
     outline: none;
 }
 QPushButton:hover { border-color: [@accent]; color: [@accent]; }
+QPushButton#iconOnly {
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 0px;
+}
+QPushButton#iconOnly:hover { background-color: [@accentSoft]; }
 QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 9px 20px;
     font-size: 13px;
     font-weight: 600;
@@ -1479,7 +1573,8 @@ QString ThemeManager::updateDialogStyle() const {
       .put("brandHover", p.brandHover)
       .put("onBrand", p.onBrand)
       .put("danger", p.danger)
-      .put("font", fontStack());
+      .put("font", fontStack())
+      .put("display", displayFontStack());
 
   return t.format(QStringLiteral(R"(
 QDialog#UpdateDialog {
@@ -1490,7 +1585,7 @@ QDialog#UpdateDialog {
 QFrame#root {
     background-color: [@bg];
     border: 1px solid [@border];
-    border-radius: 24px;
+    border-radius: 18px;
 }
 QFrame#headerBar {
     border-bottom: 1px solid [@borderSoft];
@@ -1498,7 +1593,31 @@ QFrame#headerBar {
 QFrame#updateCard {
     background-color: [@surface];
     border: 1px solid [@border];
-    border-radius: 18px;
+    border-radius: 16px;
+}
+QFrame#progressCard {
+    background-color: [@surface];
+    border: 1px solid [@border];
+    border-radius: 12px;
+}
+QLabel#lblProgress {
+    color: [@muted];
+    font-size: 12px;
+    font-weight: 500;
+}
+QLabel#lblProgress[error="true"] {
+    color: [@danger];
+}
+QProgressBar#progressBar {
+    background-color: [@surfaceAlt];
+    border: 1px solid [@borderSoft];
+    border-radius: 4px;
+    min-height: 8px;
+    max-height: 8px;
+}
+QProgressBar#progressBar::chunk {
+    background-color: [@accent];
+    border-radius: 3px;
 }
 QLabel#lblTitle {
     color: [@text];
@@ -1537,7 +1656,7 @@ QPushButton {
     color: [@muted];
     background-color: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 8px 18px;
     font-size: 12.5px;
     font-weight: 600;
@@ -1551,7 +1670,7 @@ QPushButton#primary {
     color: [@onBrand];
     background-color: [@brand];
     border: 1px solid [@brand];
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 8px 22px;
     font-size: 13px;
     font-weight: 600;
@@ -1563,7 +1682,7 @@ QPushButton#primary:hover {
 QPushButton#iconOnly {
     background-color: transparent;
     border: none;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 0px;
 }
 QPushButton#iconOnly:hover {

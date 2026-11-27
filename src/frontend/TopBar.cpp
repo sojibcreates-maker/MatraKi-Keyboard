@@ -1,7 +1,7 @@
 /*
  *  MatraKi
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
- *  Copyright (C) 2026 Md Sojib Hossain — Emerald Design System
+ *  Copyright (C) 2026 Md Sojib Hossain — Onyx Design System
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -183,14 +183,14 @@ void TopBar::applyTheme() {
   this->setStyleSheet(ThemeManager::instance().topBarStyle());
 
   /* Brand mark on the leading button. */
-  ui->buttonIcon->setIcon(QIcon(MatraKiLogo::render(34, p.brand, p.danger)));
+  ui->buttonIcon->setIcon(QIcon(MatraKiLogo::render(36, p.brand, p.danger)));
 
   /* Toolbar icons. */
   const QColor iconColor = p.icon;
-  ui->buttonSettings->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Settings, iconColor, 20)));
-  ui->buttonViewLayout->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::KeyboardShow, iconColor, 20)));
+  ui->buttonSettings->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Settings, iconColor, 22)));
+  ui->buttonViewLayout->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::KeyboardShow, iconColor, 22)));
   ui->buttonSetLayout->setIcon(QIcon(MatraKiIcons::combined(
-      {{MatraKiIcons::Keyboard, 18}, {MatraKiIcons::ChevronDown, 11}}, iconColor, 2)));
+      {{MatraKiIcons::Keyboard, 20}, {MatraKiIcons::ChevronDown, 12}}, iconColor, 2)));
   ui->buttonShutdown->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, iconColor, 18)));
 
   /* Hairlines between the toolbar groups. */
@@ -205,8 +205,8 @@ void TopBar::applyTheme() {
     iconMenu->setStyleSheet(ThemeManager::instance().iconMenuStyle());
   }
   if (harperToggle) {
-    harperToggle->setOnColor(p.brand);
-    harperToggle->setOffColor(p.dark ? QColor("#2E4038") : QColor("#CBD7D1"));
+    harperToggle->setOnColor(p.accent);
+    harperToggle->setOffColor(p.dark ? p.border : p.keyBorder);
     harperToggle->setFocusColor(p.accent);
   }
 
@@ -444,26 +444,37 @@ void TopBar::mouseReleaseEvent(QMouseEvent *event) {
 bool TopBar::eventFilter(QObject *object, QEvent *event) {
   if (object == ui->buttonIcon) {
     if (event->type() == QEvent::MouseButtonPress) {
-      canMoveTopbar = true;
-      positionChanged = false; // reset
-      QMouseEvent *e = (QMouseEvent *) event;
-      pressedMouseX = e->x();
-      pressedMouseY = e->y();
-      event->accept();
+      QMouseEvent *e = static_cast<QMouseEvent *>(event);
+      if (e->button() == Qt::LeftButton) {
+        canMoveTopbar = true;
+        positionChanged = false; // reset
+        dragStartGlobal = e->globalPos();
+        dragWindowStart = pos();
+        return true;
+      }
     } else if (event->type() == QEvent::MouseMove) {
       if (canMoveTopbar) {
-        QMouseEvent *e = (QMouseEvent *) event;
-        ui->buttonIcon->setCursor(Qt::ClosedHandCursor);
-        move(e->globalX() - pressedMouseX, e->globalY() - pressedMouseY);
-        positionChanged = true;
+        QMouseEvent *e = static_cast<QMouseEvent *>(event);
+        const QPoint delta = e->globalPos() - dragStartGlobal;
+        if (!positionChanged && delta.manhattanLength() > 3) {
+          positionChanged = true;
+          ui->buttonIcon->setCursor(Qt::ClosedHandCursor);
+        }
+        if (positionChanged) {
+          move(dragWindowStart + delta);
+        }
+        return true;
       }
     } else if (event->type() == QEvent::MouseButtonRelease) {
-      canMoveTopbar = false;
-      ui->buttonIcon->setCursor(Qt::ArrowCursor);
-      event->accept();
-      /* A click (as opposed to a drag) opens the logo menu. */
-      if (!positionChanged) {
-        on_buttonIcon_clicked();
+      QMouseEvent *e = static_cast<QMouseEvent *>(event);
+      if (e->button() == Qt::LeftButton) {
+        canMoveTopbar = false;
+        ui->buttonIcon->setCursor(Qt::ArrowCursor);
+        /* A click (as opposed to a drag) opens the logo menu. */
+        if (!positionChanged) {
+          on_buttonIcon_clicked();
+        }
+        return true;
       }
     }
   }
@@ -477,6 +488,7 @@ void TopBar::on_buttonSetLayout_clicked() {
 }
 
 void TopBar::on_buttonShutdown_clicked() {
+  gSettings->setTopBarWindowPosition(this->pos());
   QApplication::exit();
 }
 

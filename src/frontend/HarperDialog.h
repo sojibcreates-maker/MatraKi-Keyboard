@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Harper Grammar & Spell Checker dialog — Emerald Design System
+ *  Harper Grammar & Spell Checker dialog — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -46,6 +46,8 @@ signals:
   void harperEnabledChanged(bool enabled);
 
 private slots:
+
+  void on_btnCloseIcon_clicked();
   void runCheck();
   void loadSample();
   void openWebStudio();

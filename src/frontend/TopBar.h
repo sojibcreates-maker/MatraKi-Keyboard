@@ -1,7 +1,7 @@
 /*
  *  MatraKi
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
- *  Copyright (C) 2026 Md Sojib Hossain — Emerald Design System
+ *  Copyright (C) 2026 Md Sojib Hossain — Onyx Design System
  *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -102,6 +102,8 @@ private:
   bool canMoveTopbar = false;
   bool positionChanged = false;
   int pressedMouseX, pressedMouseY;
+  QPoint dragStartGlobal;
+  QPoint dragWindowStart;
   QSystemTrayIcon *tray;
   QSimpleUpdater *updater;
 

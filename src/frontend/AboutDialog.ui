@@ -261,7 +261,7 @@
                  <item>
                   <widget class="QLabel" name="lblBadge">
                    <property name="text">
-                    <string>v1.1.0 · AI Edition</string>
+                    <string>v1.2.0 · Onyx AI Edition</string>
                    </property>
                   </widget>
                  </item>
@@ -351,14 +351,14 @@
                     <item>
                      <widget class="QLabel" name="statVal2">
                       <property name="text">
-                       <string>20,535</string>
+                       <string>38,592</string>
                       </property>
                      </widget>
                     </item>
                     <item>
                      <widget class="QLabel" name="statCap2">
                       <property name="text">
-                       <string>Auto-correct rules</string>
+                       <string>Auto-correct entries</string>
                       </property>
                      </widget>
                     </item>

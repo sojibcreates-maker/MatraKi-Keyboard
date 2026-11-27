@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Settings — Emerald Design System
+ *  Settings — Onyx Design System
  *  Copyright (C) 2016-2018 Muhammad Mominul Huque <mominul2082@gmail.com>
  *  Copyright (C) 2026 Md Sojib Hossain
  *
@@ -33,7 +33,7 @@ class SettingsDialog;
 
 /**
  * Settings hosts every configurable option of the MatraKi engine, grouped
- * into three emerald cards: phonetic & AI typing, general interface and the
+ * into three onyx cards: phonetic & AI typing, general interface and the
  * fixed keyboard layout behaviour.
  */
 class SettingsDialog : public QDialog {
@@ -46,14 +46,20 @@ public:
   /* Re-read every value from the persistent settings store. */
   void updateSettings();
 
+  /* Cancel live appearance previews when the dialog is dismissed. */
+  void reject() override;
+
 public slots:
   void applyTheme();
 
 protected:
   void showEvent(QShowEvent *event) override;
+  void closeEvent(QCloseEvent *event) override;
   bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
+
+  void on_btnCloseIcon_clicked();
   void handleThemeModeChanged(int index);
   void saveSettings();
 

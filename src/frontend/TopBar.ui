@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>250</width>
-    <height>48</height>
+    <width>384</width>
+    <height>56</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>250</width>
-    <height>48</height>
+    <width>384</width>
+    <height>56</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>250</width>
-    <height>48</height>
+    <width>384</width>
+    <height>56</height>
    </size>
   </property>
   <property name="cursor">
@@ -35,32 +35,32 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
-     <number>2</number>
+     <number>4</number>
     </property>
     <property name="leftMargin">
-     <number>10</number>
+     <number>12</number>
     </property>
     <property name="topMargin">
-     <number>6</number>
+     <number>8</number>
     </property>
     <property name="rightMargin">
-     <number>10</number>
+     <number>12</number>
     </property>
     <property name="bottomMargin">
-     <number>6</number>
+     <number>8</number>
     </property>
     <item>
      <widget class="QPushButton" name="buttonIcon">
       <property name="minimumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>40</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>40</width>
+        <height>40</height>
        </size>
       </property>
       <property name="toolTip">
@@ -68,14 +68,59 @@
       </property>
       <property name="iconSize">
        <size>
-        <width>34</width>
-        <height>34</height>
+        <width>36</width>
+        <height>36</height>
        </size>
       </property>
       <property name="flat">
        <bool>true</bool>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="brandTextLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="lblBrand">
+        <property name="minimumSize">
+         <size>
+          <width>84</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>MatraKi</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblBrandSub">
+        <property name="minimumSize">
+         <size>
+          <width>84</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>বাংলা কীবোর্ড</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <widget class="QFrame" name="separator1">
@@ -162,14 +207,14 @@
      <widget class="QPushButton" name="buttonSetLayout">
       <property name="minimumSize">
        <size>
-        <width>40</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>40</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="toolTip">
@@ -193,14 +238,14 @@
      <widget class="QPushButton" name="buttonViewLayout">
       <property name="minimumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="toolTip">
@@ -221,14 +266,14 @@
      <widget class="QPushButton" name="buttonSettings">
       <property name="minimumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="toolTip">
@@ -330,14 +375,14 @@
      <widget class="QPushButton" name="buttonShutdown">
       <property name="minimumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>36</width>
-        <height>36</height>
+        <width>46</width>
+        <height>40</height>
        </size>
       </property>
       <property name="toolTip">

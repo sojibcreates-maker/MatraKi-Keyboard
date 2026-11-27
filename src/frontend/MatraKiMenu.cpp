@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Emerald Menu — icon rows, trailing meta and inline switches
+ *  Onyx Menu — icon rows, trailing meta and inline switches
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify

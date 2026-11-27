@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  About current keyboard layout — Emerald Design System
+ *  About current keyboard layout — Onyx Design System
  *  Copyright (C) 2016 Muhammad Mominul Huque <mominul2082@gmail.com>
  *  Copyright (C) 2026 Md Sojib Hossain
  *

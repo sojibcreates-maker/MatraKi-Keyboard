@@ -20,9 +20,11 @@ jobs:
           TAG_NAME: ${{ github.event.release.tag_name }}
           REL_NAME: ${{ github.event.release.name }}
           REL_URL: ${{ github.event.release.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
           python3 - << 'EOF'
-          import json, os, re
+          import json, os, re, urllib.request
 
           path = "docs/updates.json"
           with open(path, "r", encoding="utf-8") as f:
@@ -33,15 +35,56 @@ jobs:
           title = os.environ.get("REL_NAME", "").strip() or f"MatraKi v{ver}"
           rel_url = os.environ.get("REL_URL", "").strip() or "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/latest"
 
+          # Read the published asset list so the in-app updater can download
+          # the right package directly instead of opening a browser.
+          assets = {}
+          body = ""
+          repo = os.environ.get("REPO", "")
+          token = os.environ.get("GH_TOKEN", "")
+          if repo and token and tag:
+              api = f"https://api.github.com/repos/{repo}/releases/tags/{tag}"
+              req = urllib.request.Request(api, headers={
+                  "Authorization": f"Bearer {token}",
+                  "Accept": "application/vnd.github+json",
+                  "User-Agent": "MatraKi-Update-Feed",
+              })
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as response:
+                      release = json.load(response)
+                  assets = {a.get("name", ""): a.get("browser_download_url", "")
+                            for a in release.get("assets", [])}
+                  body = (release.get("body") or "").strip()
+              except Exception as exc:
+                  print(f"warning: could not read release assets: {exc}")
+
+          def pick(suffix, arch):
+              for name, url in assets.items():
+                  low = name.lower()
+                  if low.endswith(suffix.lower()) and arch in low:
+                      return url
+              return ""
+
+          deb = pick(".deb", "amd64") or pick(".deb", "x86_64")
+          rpm = pick(".rpm", "x86_64")
+          appimage = pick(".appimage", "x86_64")
+
           data["latest_version"] = ver
           data["release_title"] = title
           data["github_release_url"] = rel_url
-          for k in ("linux", "windows", "osx"):
-              if k in data.get("updates", {}):
-                  data["updates"][k]["latest-version"] = ver
-                  data["updates"][k]["download-url"] = rel_url
+          if body:
+              data["changelog"] = body[:1200]
+          linux = data.setdefault("updates", {}).setdefault("linux", {})
+          linux["latest-version"] = ver
+          linux["download-url"] = deb or rel_url
+          linux["appimage-url"] = appimage
+          linux["rpm-url"] = rpm
+          linux["open-url"] = "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads"
 
           with open(path, "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          # Keep the repository-root feed in sync for packagers that read it.
+          with open("UPDATES.json", "w", encoding="utf-8") as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
           EOF
 
@@ -49,5 +92,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/updates.json
-          git diff --cached --quiet || (git commit -m "chore(release): auto-update docs/updates.json for new release" && git push origin main)
+          git add docs/updates.json UPDATES.json
+          git diff --cached --quiet || (git commit -m "chore(release): auto-update update feeds for new release" && git push origin main)

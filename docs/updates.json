@@ -1,18 +1,18 @@
 {
-  "latest_version": "1.1.0",
-  "release_title": "MatraKi v1.1.0 — Harper AI Edition (Linux)",
+  "latest_version": "1.2.0",
+  "release_title": "MatraKi v1.2.0 — Onyx Design System (Linux)",
   "website_url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/",
   "download_page_url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
-  "github_release_url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.1.0",
-  "changelog": "Harper AI Linux Edition: Integrated Harper Grammar Engine, 38,000+ Deep Learning Words, Instant Email, Job Application & CV Templates, Live Math Calculator & 16 Unit Converters, 100% Linux Native Packaging.",
+  "github_release_url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/tag/v1.2.0",
+  "changelog": "Onyx Design System Edition: Complete modern interface redesign across all windows & dialogs, resolution-independent vector icons (MatraKiIcons), refined brand mark (MatraKiLogo), frameless edge-to-edge window chrome, one-click in-app updater with live progress & auto-restart, updated keycap artwork, and adaptive theme support.",
   "updates": {
     "linux": {
       "open-url": "https://sojibcreates-maker.github.io/MatraKi-Keyboard/#downloads",
-      "latest-version": "1.1.0",
-      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard_1.1.0_amd64.deb",
-      "appimage-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/MatraKi-Keyboard-1.1.0-x86_64.AppImage",
-      "rpm-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.1.0/matraki-keyboard-1.1.0-1.x86_64.rpm",
-      "changelog": "MatraKi v1.1.0 (Harper AI Edition) - Integrated Harper Grammar engine, 38,000+ words, professional templates hub, live math & unit converters"
+      "latest-version": "1.2.0",
+      "download-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.2.0/matraki-keyboard_1.2.0_amd64.deb",
+      "appimage-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.2.0/MatraKi-Keyboard-1.2.0-x86_64.AppImage",
+      "rpm-url": "https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases/download/v1.2.0/matraki-keyboard-1.2.0-1.x86_64.rpm",
+      "changelog": "MatraKi v1.2.0 (Onyx Design System) - Edge-to-edge frameless UI, vector icon engine, in-app updater, brand new keycap aesthetics & adaptive theme"
     }
   }
 }

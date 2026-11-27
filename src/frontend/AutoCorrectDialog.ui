@@ -111,6 +111,28 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QPushButton" name="btnCloseIcon">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -184,6 +206,13 @@
           </layout>
          </item>
          <item>
+          <widget class="QLabel" name="fieldLabel">
+           <property name="text">
+            <string>Live preview</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <layout class="QHBoxLayout" name="previewLayout">
            <property name="spacing">
             <number>12</number>
@@ -197,7 +226,7 @@
               </size>
              </property>
              <property name="text">
-              <string/>
+              <string>—</string>
              </property>
             </widget>
            </item>
@@ -210,7 +239,7 @@
               </size>
              </property>
              <property name="text">
-              <string/>
+              <string>—</string>
              </property>
             </widget>
            </item>
@@ -262,7 +291,7 @@
       <item>
        <widget class="QLineEdit" name="txtSearch">
         <property name="placeholderText">
-         <string>🔍 ২০,৫৩৫+ প্রশিক্ষিত শব্দের মধ্যে খুঁজুন (ইংরেজি ফনেটিক বা বাংলা)…</string>
+         <string>প্রশিক্ষিত শব্দের মধ্যে খুঁজুন (ইংরেজি ফনেটিক বা বাংলা)…</string>
         </property>
         <property name="clearButtonEnabled">
          <bool>true</bool>

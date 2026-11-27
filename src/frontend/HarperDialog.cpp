@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Harper Grammar & Spell Checker dialog — Emerald Design System
+ *  Harper Grammar & Spell Checker dialog — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@
 
 #include "MatraKiIcons.h"
 #include "MatraKiLogo.h"
+#include "MatraKiWindowChrome.h"
 #include "ThemeManager.h"
 #include "ui_HarperDialog.h"
 
@@ -40,10 +41,13 @@ HarperDialog::HarperDialog(QWidget *parent) :
 
   setAttribute(Qt::WA_TranslucentBackground, true);
   setWindowIcon(QIcon(":/images/MatraKi.png"));
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
-                 Qt::WindowStaysOnTopHint);
+  makeOnyxDialog(this);
+  ui->btnCloseIcon->setObjectName("iconOnly");
 
   ui->btnCheck->setObjectName("primary");
+  ui->txtOutput->setObjectName("output");
+  ui->txtOutput->setLineWrapMode(QTextEdit::WidgetWidth);
+  ui->txtOutput->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   connect(ui->btnCheck, &QPushButton::clicked, this, &HarperDialog::runCheck);
   connect(ui->btnSample, &QPushButton::clicked, this, &HarperDialog::loadSample);
@@ -65,6 +69,7 @@ void HarperDialog::applyTheme() {
   const MatraKiPalette p = ThemeManager::instance().palette();
   setStyleSheet(ThemeManager::instance().harperDialogStyle());
 
+  ui->btnCloseIcon->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, p.icon, 16)));
   ui->logoSlot->setPixmap(MatraKiLogo::render(34, p.brand, p.danger));
 
   ui->btnCheck->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::SpellCheck, p.onBrand, 18)));
@@ -136,11 +141,15 @@ void HarperDialog::runCheck() {
   if (proc.exitCode() == 0 && !combined.contains(QStringLiteral("Advice:"))) {
     ui->txtOutput->setHtml(
         QStringLiteral("<p style='color:%1; font-weight:600; font-size:13px;'>"
-                       "✅ কোনো ব্যাকরণ বা বানান ভুল পাওয়া যায়নি!</p>"
+                       "✓ কোনো ব্যাকরণ বা বানান ভুল পাওয়া যায়নি!</p>"
                        "<p style='color:%2;'>আপনার লেখাটি সম্পূর্ণ সঠিক এবং সব হার্পার নিয়ম "
                        "পাস করেছে।</p>")
             .arg(p.accent, p.textMuted));
   } else {
     ui->txtOutput->setPlainText(combined);
   }
+}
+
+void HarperDialog::on_btnCloseIcon_clicked() {
+  close();
 }

@@ -1,15 +1,19 @@
 # Change Log
 
-## [Unreleased] — Emerald Design System
-* **Complete Interface Redesign**: Every surface of the desktop application now follows a single, hand-drawn "Emerald" design language — the floating toolbar, the logo menu, the layout picker, the settings page, the About page, the "About current layout" dialog, the layout viewer, the auto-correct dictionary and the Harper grammar dialog.
+## [1.2.0] - 2026-11-27 — Onyx Design System
+* **Complete Interface Redesign**: Every surface of the desktop application now follows a single, hand-drawn "Onyx" design language — the floating toolbar, the logo menu, the layout picker, the settings page, the About page, the "About current layout" dialog, the layout viewer, the auto-correct dictionary and the Harper grammar dialog.
 * **Vector Icon Set**: All icons are now drawn as resolution independent vector art (`MatraKiIcons`) instead of raster PNGs, so they stay crisp on every display and always follow the active theme colour.
-* **Brand Mark**: A new vector brand mark (`MatraKiLogo`) — the rounded green tile with the Bengali "ম" and the signature red status dot — is used in the toolbar, in every dialog header and on the official website.
-* **Emerald Menus**: The logo menu and the layout picker were rebuilt with custom rows that support a leading icon, a trailing caption ("Live keyboard") and an inline switch for the Harper grammar engine.
-* **Real Switch Controls**: All on/off options in the settings page now use pill switches instead of ON/OFF text buttons, and the page is grouped into emerald cards with a scrollable body.
+* **Brand Mark**: A new vector brand mark (`MatraKiLogo`) — the rounded brass tile with the ivory keycap and the Bengali "ম" and the signature red status dot — is used in the toolbar, in every dialog header and on the official website.
+* **Onyx Menus**: The logo menu and the layout picker were rebuilt with custom rows that support a leading icon, a trailing caption ("Live keyboard") and an inline switch for the Harper grammar engine.
+* **Real Switch Controls**: All on/off options in the settings page now use pill switches instead of ON/OFF text buttons, and the page is grouped into onyx cards with a scrollable body.
 * **About Layout Dialog**: Rebuilt to show the layout name and version chip, engine statistics (trained words / auto-correct entries), maintainer and description in a single, clean card.
-* **Shared Update Checker**: The GitHub / updates.json check was extracted into `MatraKiUpdater` and is now available from both the logo menu and the settings page, restyled with the new dialog language.
+* **Shared Update Checker**: The GitHub / updates.json check was extracted into `MatraKiUpdater` and is now available from both the logo menu and the settings page. It detects the way MatraKi was installed and downloads the correct asset.
+* **One-Click In-App Updates**: The update dialog now downloads the new release itself, shows live progress, installs it and restarts MatraKi — no browser hop required. AppImages replace themselves, portable/user-local installs receive the new binary and missing AI data files, and system `.deb`/`.rpm` installs use `pkexec` once. Release notes are de-Markdowned and an offline/failed check gets a clear retry state.
+* **Release Feed**: The release workflow now publishes direct `.deb` / `.rpm` / `.AppImage` asset URLs in `updates.json` (and the root `UPDATES.json`) for every release, so the fallback path can update too.
 * **Adaptive Theme**: Light and Dark modes were re-tuned to the new palette, with a redesigned rounded, translucent window frame for every dialog.
-* **Website Re-skin**: The official download centre and live studio now use the same Emerald palette as the application.
+* **Frameless Dialog Chrome**: Dialogs now hide the native title bar so the Onyx surface runs edge to edge; each header carries its own close button and the top strip doubles as a drag handle.
+* **Keycap Artwork**: The layout charts and the application icon were regenerated in the same ivory/brass keycap style, with dark and light variants.
+* **Website Re-skin**: The official download centre and live studio now use the same Onyx palette as the application.
 * **Developer Preview**: `MATRAKI_UI_SHOTS=/some/dir ./matraki-gui` renders every window of the interface to PNG for quick visual review.
 
 ## [1.1.0] - 2026-11-15 (Adaptive Theme & Harper AI Edition)

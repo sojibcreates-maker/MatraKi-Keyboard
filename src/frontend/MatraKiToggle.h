@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Switch Control — Emerald Design System
+ *  Switch Control — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -55,9 +55,9 @@ private:
   bool m_checked = false;
   int m_trackW = 38;
   int m_trackH = 22;
-  QColor m_on = QColor("#17835F");
-  QColor m_off = QColor("#2E4038");
-  QColor m_focus = QColor("#5FD0A6");
+  QColor m_on = QColor("#C9A961");
+  QColor m_off = QColor("#2C3033");
+  QColor m_focus = QColor("#D2B372");
 };
 
 #endif // MATRAKITOGGLE_H

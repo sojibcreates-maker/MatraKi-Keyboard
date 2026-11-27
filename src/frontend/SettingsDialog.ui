@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>960</width>
-    <height>700</height>
+    <height>664</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -114,7 +114,29 @@
         <item>
          <widget class="QLabel" name="lblBadge">
           <property name="text">
-           <string>✨ v1.1.0 • Harper AI Edition • 38,000+ Words</string>
+           <string>✦ v1.2.0 • Onyx AI Edition • 38,592 Entries</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnCloseIcon">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
@@ -953,7 +975,7 @@
                  <item row="0" column="1">
                   <widget class="QLabel" name="lblVersion">
                    <property name="text">
-                    <string>v1.1.0</string>
+                    <string>v1.2.0</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -973,7 +995,7 @@
                  <item row="1" column="1">
                   <widget class="QLabel" name="lblVocabulary">
                    <property name="text">
-                    <string>38,000+ trained words</string>
+                    <string>38,592 auto-correct entries</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  About Dialog — Emerald Design System
+ *  About Dialog — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 
 #include "MatraKiIcons.h"
 #include "MatraKiLogo.h"
+#include "MatraKiWindowChrome.h"
 #include "ThemeManager.h"
 
 static const QString LICENSE_URL =
@@ -39,8 +40,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
   setAttribute(Qt::WA_TranslucentBackground, true);
   setWindowIcon(QIcon(":/images/MatraKi.png"));
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
-                 Qt::WindowStaysOnTopHint);
+  makeOnyxDialog(this);
 
   ui->btnClose->setObjectName("btnClose");
   ui->btnLicense->setObjectName("btnLicense");

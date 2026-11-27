@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Update checker — Emerald Design System
+ *  Update checker — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -17,14 +17,27 @@
 #ifndef MATRAKIUPDATER_H
 #define MATRAKIUPDATER_H
 
+#include <QList>
 #include <QString>
 
 class QWidget;
 
+/** One downloadable file attached to a GitHub release. */
+struct MatraKiReleaseAsset {
+  QString name;
+  QString url;
+  qint64 size = 0;
+
+  bool isValid() const { return !url.isEmpty(); }
+};
+
+using MatraKiReleaseAssets = QList<MatraKiReleaseAsset>;
+
 /**
  * MatraKiUpdater checks GitHub Releases first and falls back to the
- * official updates.json feed, then presents the result with the emerald
- * dialog styling.
+ * official updates.json feed, then presents the result with the Onyx
+ * dialog styling. The dialog can download the matching package itself
+ * and install it without leaving the app.
  */
 class MatraKiUpdater {
 public:
@@ -38,7 +51,8 @@ public:
 private:
   static void showDialog(QWidget *parent, bool updateAvailable, const QString &latestVer,
                           const QString &releaseTitle, const QString &changelog,
-                          const QString &releaseUrl, bool silent);
+                          const QString &releaseUrl, const MatraKiReleaseAssets &assets,
+                          bool silent, bool checkFailed = false);
 };
 
 #endif // MATRAKIUPDATER_H

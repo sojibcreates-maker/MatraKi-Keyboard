@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  About current keyboard layout — Emerald Design System
+ *  About current keyboard layout — Onyx Design System
  *  Copyright (C) 2016 Muhammad Mominul Huque <mominul2082@gmail.com>
  *  Copyright (C) 2026 Md Sojib Hossain
  *
@@ -26,6 +26,7 @@
 #include "Layout.h"
 #include "MatraKiIcons.h"
 #include "MatraKiLogo.h"
+#include "MatraKiWindowChrome.h"
 #include "ThemeManager.h"
 
 AboutLayoutDialog::AboutLayoutDialog(QWidget *parent) :
@@ -35,8 +36,7 @@ AboutLayoutDialog::AboutLayoutDialog(QWidget *parent) :
 
   setAttribute(Qt::WA_TranslucentBackground, true);
   setWindowIcon(QIcon(":/images/MatraKi.png"));
-  setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
-                 Qt::WindowStaysOnTopHint);
+  makeOnyxDialog(this);
 
   ui->btnCloseIcon->setObjectName("iconOnly");
 
@@ -78,14 +78,14 @@ void AboutLayoutDialog::loadLayoutInfo() {
   ui->lblVersionChip->setText(QStringLiteral("Version %1").arg(desc.ver));
 
   if (desc.name == "Avro Phonetic") {
-    ui->lblStatOneValue->setText(QStringLiteral("13,560+"));
+    ui->lblStatOneValue->setText(QStringLiteral("15,580+"));
     ui->lblStatOneCaption->setText(QStringLiteral("Trained words"));
-    ui->lblStatTwoValue->setText(QStringLiteral("18,559"));
+    ui->lblStatTwoValue->setText(QStringLiteral("38,592"));
     ui->lblStatTwoCaption->setText(QStringLiteral("Auto-correct entries"));
     ui->lblAuthor->setText(QStringLiteral("MatraKi AI Edition / Mehdi Hasan"));
     ui->lblDescription->setText(
-        QStringLiteral("MatraKi Enhanced Avro Phonetic Engine — powered by 13,560+ trained "
-                       "words, 18,559 auto-correct entries, context-aware next-word predictions, "
+        QStringLiteral("MatraKi Enhanced Avro Phonetic Engine — powered by 15,580+ trained "
+                       "words, 38,592 auto-correct entries, context-aware next-word predictions, "
                        "Bangla Academy spelling rules, live math/unit converter (=) and instant "
                        "chat snippets (!)."));
   } else {

@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard — Next-Gen AI Smart Bangla Keyboard
- *  Theme Manager: Emerald Design System, Light / Dark & System Detection
+ *  Theme Manager: Onyx Design System, Light / Dark & System Detection
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ struct MatraKiPalette {
   QString text;        /* primary text                        */
   QString textMuted;   /* secondary text                      */
   QString icon;        /* icon tint                           */
-  QString accent;      /* accent green (text & icons)         */
+  QString accent;      /* brass accent (text & icons)         */
   QString accentSoft;  /* selected / hovered row background   */
   QString brand;       /* primary fill (logo, buttons)        */
   QString brandHover;  /* primary fill hover                  */
@@ -50,6 +50,16 @@ struct MatraKiPalette {
   QString danger;      /* destructive accent                  */
   QString dangerSoft;  /* destructive background              */
   QString shadow;      /* drop shadow colour                  */
+
+  /* Keycap surfaces — the physical-keyboard language used by the
+     layout charts, the brand mark and the preview tiles. */
+  QString keyBg;       /* keycap top face                     */
+  QString keyBorder;   /* keycap rim                          */
+  QString keyText;     /* Bangla / primary legend             */
+  QString keyMuted;    /* secondary legend                    */
+  QString keyAccent;   /* brass legend                        */
+  QString keyShadow;   /* keycap underside (depth)            */
+  QString keyHighlight;/* top-edge highlight                  */
 };
 
 class ThemeManager : public QObject {
@@ -58,8 +68,8 @@ class ThemeManager : public QObject {
 public:
   enum class Mode {
     Auto,  /* Detect from OS */
-    Dark,  /* Force Dark Emerald */
-    Light  /* Force Light Emerald */
+    Dark,  /* Force Dark Onyx */
+    Light  /* Force Light Paper */
   };
 
   static ThemeManager &instance();
@@ -76,11 +86,13 @@ public:
   /* Active colour contract. */
   MatraKiPalette palette() const;
 
-  /* Font stack shared by every window. */
+  /* Font stacks shared by every window. Body copy is set in a clean
+     grotesque, while display titles use the classic Tiro serif. */
   static QString fontStack();
+  static QString displayFontStack();
   static QString bengaliFontStack();
 
-  /* Stylesheets — Emerald Design System. */
+  /* Stylesheets — Onyx Design System. */
   QString topBarStyle() const;
   QString settingsDialogStyle() const;
   QString aboutDialogStyle() const;

@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Emerald Menu — icon rows, trailing meta and inline switches
+ *  Onyx Menu — icon rows, trailing meta and inline switches
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 class MatraKiToggle;
 
 /**
- * A single row of the Emerald menu.
+ * A single row of the Onyx menu.
  *
  * The row paints itself: icon on the left, label in the middle and an
  * optional trailing element (muted caption or a switch) on the right.
@@ -67,7 +67,7 @@ private:
 };
 
 /**
- * MatraKiMenu builds the Emerald popup menus used by the floating toolbar.
+ * MatraKiMenu builds the Onyx popup menus used by the floating toolbar.
  */
 class MatraKiMenu : public QMenu {
   Q_OBJECT

@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Vector Icon Set — Emerald Design System
+ *  Vector Icon Set — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify

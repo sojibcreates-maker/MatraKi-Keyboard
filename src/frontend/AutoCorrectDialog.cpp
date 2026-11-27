@@ -17,6 +17,9 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QCloseEvent>
+#include <QHeaderView>
+#include <QLocale>
 #include <QTreeWidget>
 #include <QPushButton>
 #include <QShowEvent>
@@ -25,7 +28,14 @@
 #include "ui_AutoCorrectDialog.h"
 #include "MatraKiIcons.h"
 #include "MatraKiLogo.h"
+#include "MatraKiWindowChrome.h"
 #include "ThemeManager.h"
+
+namespace {
+QString numberLabel(int value) {
+  return QLocale(QLocale::English, QLocale::UnitedStates).toString(value);
+}
+}
 
 AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
     QDialog(parent),
@@ -33,7 +43,8 @@ AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
   ui->setupUi(this);
   this->setWindowIcon(QIcon(":/images/MatraKi.png"));
   this->setAttribute(Qt::WA_TranslucentBackground, true);
-  this->setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+  makeOnyxDialog(this);
+  ui->btnCloseIcon->setObjectName("iconOnly");
 
   ui->btnUpdate->setObjectName("primary");
   ui->btnCancel->setObjectName("ghost");
@@ -47,6 +58,8 @@ AutoCorrectDialog::AutoCorrectDialog(QWidget *parent) :
 
   ui->autoCorrect->setColumnCount(2);
   ui->autoCorrect->setHeaderLabels({"Replace (Phonetic Pattern)", "With (Bangla Output)"});
+  ui->autoCorrect->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  ui->autoCorrect->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 
   ui->btnClear->setEnabled(false);
   ui->btnUpdate->setEnabled(false);
@@ -61,6 +74,7 @@ void AutoCorrectDialog::applyTheme() {
 
   setStyleSheet(ThemeManager::instance().autoCorrectDialogStyle());
 
+  ui->btnCloseIcon->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Close, p.icon, 16)));
   ui->logoSlot->setPixmap(MatraKiLogo::render(34, p.brand, p.danger));
   ui->btnUpdate->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Plus, p.onBrand, 16)));
   ui->btnClear->setIcon(QIcon(MatraKiIcons::pixmap(MatraKiIcons::Trash, p.text, 16)));
@@ -133,7 +147,7 @@ void AutoCorrectDialog::loadEntries() {
 
   ui->autoCorrect->sortItems(0, Qt::SortOrder::AscendingOrder);
   ui->autoCorrect->setUpdatesEnabled(true);
-  ui->lblEntries->setText("Total Trained Dictionary Entries: " + QString::number(items));
+  ui->lblEntries->setText("Total Trained Dictionary Entries: " + numberLabel(items));
 }
 
 void AutoCorrectDialog::addEntryInViewer(QString replace, QString with) {
@@ -152,11 +166,37 @@ void AutoCorrectDialog::on_btnSave_clicked() {
   QJsonDocument json(usrDict);
   saveFile.write(json.toJson());
   saveFile.close();
+  dirty_ = false;
+  ui->txtReplace->clear();
+  ui->txtWith->clear();
   close();
 }
 
 void AutoCorrectDialog::on_btnCancel_clicked() {
+  revertUnsavedEdits();
   close();
+}
+
+void AutoCorrectDialog::revertUnsavedEdits() {
+  if (!dirty_) return;
+  dirty_ = false;
+  ui->txtSearch->clear();
+  ui->txtReplace->clear();
+  ui->txtWith->clear();
+  loadData();
+  loadEntries();
+  updateEntryButtons();
+}
+
+void AutoCorrectDialog::reject() {
+  revertUnsavedEdits();
+  QDialog::reject();
+}
+
+void AutoCorrectDialog::closeEvent(QCloseEvent *event) {
+  /* Closing with the window close button behaves exactly like Cancel. */
+  revertUnsavedEdits();
+  QDialog::closeEvent(event);
 }
 
 void AutoCorrectDialog::on_btnUpdate_clicked() {
@@ -165,6 +205,7 @@ void AutoCorrectDialog::on_btnUpdate_clicked() {
   if (key.isEmpty() || val.isEmpty()) return;
 
   usrDict.insert(key, val);
+  dirty_ = true;
   const QSignalBlocker blocker(ui->autoCorrect);
   ui->autoCorrect->setUpdatesEnabled(false);
   QList<QTreeWidgetItem *> matches = ui->autoCorrect->findItems(key, Qt::MatchExactly, 0);
@@ -180,7 +221,7 @@ void AutoCorrectDialog::on_btnUpdate_clicked() {
     ui->autoCorrect->setCurrentItem(item);
   }
   ui->autoCorrect->setUpdatesEnabled(true);
-  ui->lblEntries->setText("Total Trained Dictionary Entries: " + QString::number(ui->autoCorrect->topLevelItemCount()));
+  ui->lblEntries->setText("Total Trained Dictionary Entries: " + numberLabel(ui->autoCorrect->topLevelItemCount()));
 }
 
 void AutoCorrectDialog::on_txtSearch_textChanged(const QString &arg1) {
@@ -199,9 +240,9 @@ void AutoCorrectDialog::on_txtSearch_textChanged(const QString &arg1) {
   }
   ui->autoCorrect->setUpdatesEnabled(true);
   if (q.isEmpty()) {
-    ui->lblEntries->setText("Total Trained Dictionary Entries: " + QString::number(total));
+    ui->lblEntries->setText("Total Trained Dictionary Entries: " + numberLabel(total));
   } else {
-    ui->lblEntries->setText("Matching Entries: " + QString::number(visible) + " / " + QString::number(total));
+    ui->lblEntries->setText("Matching Entries: " + numberLabel(visible) + " / " + numberLabel(total));
   }
 }
 
@@ -210,35 +251,28 @@ void AutoCorrectDialog::on_btnClear_clicked() {
   ui->txtWith->setText("");
 }
 
+void AutoCorrectDialog::updateEntryButtons() {
+  const bool hasReplace = !ui->txtReplace->text().isEmpty();
+  const bool hasWith = !ui->txtWith->text().isEmpty();
+  ui->btnClear->setEnabled(hasReplace || hasWith);
+  ui->btnUpdate->setEnabled(hasReplace && hasWith);
+}
+
 void AutoCorrectDialog::on_txtReplace_textChanged(const QString &arg1) {
-  if (arg1 != "") {
-    ui->lblPreviewR->setText(phonetic.convert(arg1));
-    if (!ui->btnClear->isEnabled()) {
-      ui->btnClear->setEnabled(true);
-    }
-    ui->btnUpdate->setEnabled(ui->txtWith->text() != "");
-  } else {
-    ui->lblPreviewR->setText("");
-    ui->btnClear->setEnabled(false);
-    ui->btnUpdate->setEnabled(false);
-  }
+  ui->lblPreviewR->setText(arg1.isEmpty() ? QStringLiteral("—")
+                                          : phonetic.convert(arg1));
+  updateEntryButtons();
 }
 
 void AutoCorrectDialog::on_txtWith_textChanged(const QString &arg1) {
-  if (arg1 != "") {
-    if (ui->txtReplace->text() == arg1) {
-      ui->lblPreviewW->setText(arg1);
-    } else {
-      ui->lblPreviewW->setText(phonetic.convert(arg1));
-    }
-    if (!ui->btnClear->isEnabled())
-      ui->btnClear->setEnabled(true);
-    ui->btnUpdate->setEnabled(ui->txtReplace->text() != "");
+  if (arg1.isEmpty()) {
+    ui->lblPreviewW->setText(QStringLiteral("—"));
+  } else if (ui->txtReplace->text() == arg1) {
+    ui->lblPreviewW->setText(arg1);
   } else {
-    ui->lblPreviewW->setText("");
-    ui->btnClear->setEnabled(false);
-    ui->btnUpdate->setEnabled(false);
+    ui->lblPreviewW->setText(phonetic.convert(arg1));
   }
+  updateEntryButtons();
 }
 
 void AutoCorrectDialog::on_autoCorrect_currentItemChanged(QTreeWidgetItem *current, QTreeWidgetItem *previous) {
@@ -246,4 +280,8 @@ void AutoCorrectDialog::on_autoCorrect_currentItemChanged(QTreeWidgetItem *curre
   if (!current) return;
   ui->txtReplace->setText(current->text(0));
   ui->txtWith->setText(current->text(1));
+}
+
+void AutoCorrectDialog::on_btnCloseIcon_clicked() {
+  close();
 }

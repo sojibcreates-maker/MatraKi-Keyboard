@@ -37,13 +37,19 @@ public:
 
   ~AutoCorrectDialog() override;
 
+  /* Esc / the window close button discard unsaved edits. */
+  void reject() override;
+
 public slots:
   void applyTheme();
 
 protected:
   void showEvent(QShowEvent *event) override;
+  void closeEvent(QCloseEvent *event) override;
 
 private slots:
+
+  void on_btnCloseIcon_clicked();
 
   void on_btnSave_clicked();
 
@@ -69,6 +75,7 @@ private:
   QJsonObject dict;
   QJsonObject usrDict;
   bool entriesLoaded_ = false;
+  bool dirty_ = false;
 
   void loadData();
   /* Get AutoCorrect entries */
@@ -76,6 +83,12 @@ private:
   void loadEntries();
 
   void addEntryInViewer(QString replace, QString with);
+
+  /* Keep Clear / Add buttons consistent when either field changes. */
+  void updateEntryButtons();
+
+  /* Discard in-memory dictionary edits that were never saved. */
+  void revertUnsavedEdits();
 };
 
 #endif // AUTOCORRECTDIALOG_H

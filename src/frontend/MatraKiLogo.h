@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Brand Mark — Emerald Design System
+ *  Brand Mark — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify

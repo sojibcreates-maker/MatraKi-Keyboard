@@ -51,6 +51,8 @@ protected:
 
 private slots:
 
+  void on_btnCloseIcon_clicked();
+
   void on_buttonAboutLayout_clicked();
 
   void on_viewNormal_clicked();
@@ -66,6 +68,9 @@ private:
   QByteArray image0, image1;
 
   QByteArray decodeAndDecompress(QByteArray &data);
+
+  /* Show a chart, shrinking it only when it would not fit the screen. */
+  void setChart(const QPixmap &source);
 };
 
 #endif // LAYOUTVIEWER_H

@@ -1,6 +1,6 @@
 /*
  *  MatraKi Keyboard
- *  Update checker — Emerald Design System
+ *  Update checker — Onyx Design System
  *  Copyright (C) 2026 Md Sojib Hossain
  *
  *  This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,7 @@
 #include "UpdateDialog.h"
 
 #include <QDesktopServices>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -53,6 +54,58 @@ bool MatraKiUpdater::isRemoteVersionNewer(const QString &remoteVer, const QStrin
   return false;
 }
 
+/* GitHub returns the release assets in a JSON array. Keep every file that
+   looks like a Linux package or a standalone executable; the dialog picks
+   the right one for this installation. */
+static MatraKiReleaseAssets parseGithubAssets(const QJsonArray &array) {
+  MatraKiReleaseAssets assets;
+  for (const QJsonValue &value : array) {
+    if (!value.isObject()) continue;
+    const QJsonObject obj = value.toObject();
+    const QString name = obj.value("name").toString().trimmed();
+    const QString url = obj.value("browser_download_url").toString().trimmed();
+    if (name.isEmpty() || url.isEmpty()) continue;
+    if (!url.startsWith("https://", Qt::CaseInsensitive)) continue;
+
+    MatraKiReleaseAsset asset;
+    asset.name = name;
+    asset.url = url;
+    asset.size = static_cast<qint64>(obj.value("size").toDouble(0));
+    assets.append(asset);
+  }
+  return assets;
+}
+
+/* The website feed is the fallback when GitHub's API is rate-limited. It
+   carries direct package URLs, which is all the downloader needs. */
+static MatraKiReleaseAssets parseFeedAssets(const QJsonObject &root) {
+  MatraKiReleaseAssets assets;
+  const QJsonObject linuxFeed = root.value("updates").toObject()
+                                    .value("linux").toObject();
+
+  auto add = [&assets](const QString &url) {
+    const QString trimmed = url.trimmed();
+    if (!trimmed.startsWith("https://", Qt::CaseInsensitive)) return;
+    /* Old feeds used a release page here instead of a direct package. */
+    if (!(trimmed.endsWith(".deb", Qt::CaseInsensitive) ||
+          trimmed.endsWith(".rpm", Qt::CaseInsensitive) ||
+          trimmed.endsWith(".AppImage", Qt::CaseInsensitive) ||
+          trimmed.endsWith(".tar.gz", Qt::CaseInsensitive))) {
+      return;
+    }
+    MatraKiReleaseAsset asset;
+    asset.name = QUrl(trimmed).fileName();
+    if (asset.name.isEmpty()) asset.name = QStringLiteral("matraki-update");
+    asset.url = trimmed;
+    assets.append(asset);
+  };
+
+  add(linuxFeed.value("download-url").toString());
+  add(linuxFeed.value("appimage-url").toString());
+  add(linuxFeed.value("rpm-url").toString());
+  return assets;
+}
+
 void MatraKiUpdater::check(QWidget *parent, bool silent) {
   QNetworkAccessManager *nam = new QNetworkAccessManager(parent);
 
@@ -73,9 +126,11 @@ void MatraKiUpdater::check(QWidget *parent, bool silent) {
         QString title = obj.value("name").toString("MatraKi Release").trimmed();
         QString body = obj.value("body").toString().trimmed();
         QString htmlUrl = obj.value("html_url").toString(GITHUB_RELEASES_URL).trimmed();
+        const MatraKiReleaseAssets assets =
+            parseGithubAssets(obj.value("assets").toArray());
         if (!tag.isEmpty()) {
           showDialog(parent, isRemoteVersionNewer(tag, QStringLiteral(PROJECT_VERSION)), tag,
-                     title, body, htmlUrl, silent);
+                     title, body, htmlUrl, assets, silent);
           nam->deleteLater();
           return;
         }
@@ -102,27 +157,31 @@ void MatraKiUpdater::check(QWidget *parent, bool silent) {
           QString title = obj.value("release_title").toString("MatraKi Release");
           QString changelog = obj.value("changelog").toString();
           QString relUrl = obj.value("github_release_url").toString(GITHUB_RELEASES_URL);
+          const MatraKiReleaseAssets assets = parseFeedAssets(obj);
           if (!latestVer.isEmpty()) {
             showDialog(parent, isRemoteVersionNewer(latestVer, QStringLiteral(PROJECT_VERSION)),
-                       latestVer, title, changelog, relUrl, silent);
+                       latestVer, title, changelog, relUrl, assets, silent);
             return;
           }
         }
       }
       /* Offline or unreachable — only report when the user asked for it. */
       showDialog(parent, false, QStringLiteral(PROJECT_VERSION),
-                 QStringLiteral("MatraKi v%1 — Harper AI Edition").arg(QStringLiteral(PROJECT_VERSION)),
-                 QString(), GITHUB_RELEASES_URL, silent);
+                 QStringLiteral("MatraKi v%1 — Onyx AI Edition").arg(QStringLiteral(PROJECT_VERSION)),
+                 QString(), GITHUB_RELEASES_URL, MatraKiReleaseAssets(), silent, true);
     });
   });
 }
 
 void MatraKiUpdater::showDialog(QWidget *parent, bool updateAvailable, const QString &latestVer,
                                  const QString &releaseTitle, const QString &changelog,
-                                 const QString &releaseUrl, bool silent) {
+                                 const QString &releaseUrl, const MatraKiReleaseAssets &assets,
+                                 bool silent, bool checkFailed) {
   if (!updateAvailable && silent) return;
+  if (checkFailed && silent) return;
 
   UpdateDialog dlg(parent);
-  dlg.setUpdateInfo(updateAvailable, latestVer, releaseTitle, changelog, releaseUrl);
+  dlg.setUpdateInfo(updateAvailable, latestVer, releaseTitle, changelog, releaseUrl,
+                    assets, checkFailed);
   dlg.exec();
 }
