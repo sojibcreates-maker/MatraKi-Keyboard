@@ -751,6 +751,29 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     liveInput.dispatchEvent(new Event('input'));
   }
 
+  function splitPunct(token) {
+    const m = token.match(/^([("'\u2018\u201C]*)(.*?)([?!,;:.।"'\u2019\u201D]*)$/);
+    if (!m) return { lead: '', core: token, trail: '' };
+    return { lead: m[1] || '', core: m[2] || '', trail: m[3] || '' };
+  }
+
+  function convertWordToken(w, prevCore) {
+    if (!w || /^\s+$/.test(w)) return { text: w, core: '' };
+    if (w.startsWith('=') || w.startsWith('!') || w.startsWith('@') || w.startsWith(':')) {
+      const c = window.MatraKiLiveEngine.getSmartCandidates(w, prevCore);
+      const out = (c && c.length > 0) ? (c[0].commitText || c[0].display) : w;
+      return { text: out, core: out };
+    }
+    const { lead, core, trail } = splitPunct(w);
+    if (!core) return { text: w, core: '' };
+    const cands = window.MatraKiLiveEngine.getSmartCandidates(core, prevCore);
+    const converted = (cands && cands.length > 0 && cands[0].commitText)
+      ? cands[0].commitText
+      : window.MatraKiLiveEngine.avroPhoneticConvert(core);
+    const fixedTrail = trail.replace(/\./g, '।');
+    return { text: lead + converted + fixedTrail, core: converted };
+  }
+
   function renderCandidates(rawVal) {
     if (!liveCands) return;
     const trimmed = rawVal.trim();
@@ -760,8 +783,9 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     }
     const parts = trimmed.split(/\s+/);
     const lastWord = parts[parts.length - 1];
-    const prevWord = parts.length > 1 ? parts[parts.length - 2] : '';
-    const query = (trimmed.startsWith('=') || trimmed.startsWith('!') || trimmed.startsWith('@')) ? trimmed : lastWord;
+    const prevWord = parts.length > 1 ? splitPunct(parts[parts.length - 2]).core : '';
+    const isCommand = (trimmed.startsWith('=') || trimmed.startsWith('!') || trimmed.startsWith('@'));
+    const query = isCommand ? trimmed : (splitPunct(lastWord).core || lastWord);
     const cands = window.MatraKiLiveEngine.getSmartCandidates(query, prevWord) || [];
     liveCands.innerHTML = '';
     cands.slice(0, 5).forEach((c, idx) => {
@@ -773,10 +797,11 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
       chip.addEventListener('click', () => {
         stopAutoDemo();
         const text = c.commitText || c.display;
-        if (trimmed.startsWith('=') || trimmed.startsWith('!') || trimmed.startsWith('@')) {
+        if (isCommand) {
           liveOutput.textContent = text;
         } else {
-          parts[parts.length - 1] = text;
+          const { lead, trail } = splitPunct(lastWord);
+          parts[parts.length - 1] = lead + text + trail.replace(/\./g, '।');
           liveInput.value = parts.join(' ') + ' ';
           liveInput.dispatchEvent(new Event('input'));
         }
@@ -806,13 +831,12 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
       }
 
       const words = rawVal.split(/(\s+)/);
+      let prevCore = '';
       const converted = words.map(w => {
         if (/^\s+$/.test(w)) return w;
-        if (w.startsWith('=') || w.startsWith('!') || w.startsWith('@')) {
-          const c = window.MatraKiLiveEngine.getSmartCandidates(w);
-          return (c && c.length > 0) ? (c[0].commitText || c[0].display) : w;
-        }
-        return window.MatraKiLiveEngine.avroPhoneticConvert(w);
+        const res = convertWordToken(w, prevCore);
+        if (res.core) prevCore = res.core;
+        return res.text;
       }).join('');
 
       liveOutput.textContent = converted;
