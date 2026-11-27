@@ -93,6 +93,43 @@
   .studio-tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
   .st-tag{background:var(--stage); border:1px solid var(--dl-border); border-radius:8px; padding:4px 10px; font-size:12px; color:var(--mut); cursor:pointer; font-family:var(--mono); transition:.15s}
   .st-tag:hover{border-color:var(--brand); color:var(--accent)}
+  .demo-btn{background:var(--dl-alt); border:1px solid var(--dl-border); color:var(--accent); border-radius:999px; padding:5px 14px; font-size:12px; font-weight:700; cursor:pointer; font-family:inherit; transition:.15s; display:inline-flex; align-items:center; gap:6px}
+  .demo-btn:hover{border-color:var(--brand); background:var(--accent-soft)}
+
+  /* ── Live Candidates & Onyx Virtual Keyboard ── */
+  .kb-cands{display:flex; gap:8px; flex-wrap:wrap; align-items:center; min-height:34px; margin-top:12px}
+  .kb-cand{background:var(--dl-alt); border:1px solid var(--dl-border); color:var(--txt); border-radius:999px; padding:4px 13px; font-size:13.5px; cursor:pointer; transition:.15s; display:inline-flex; align-items:center; gap:6px}
+  .kb-cand:first-child{background:var(--accent-soft); border-color:rgba(201,169,97,.5); color:var(--accent); font-weight:700}
+  .kb-cand:hover{border-color:var(--brand); transform:translateY(-1px)}
+  .kb-cand .num{font-family:var(--mono); font-size:11px; color:var(--mut)}
+
+  .kb-chassis{margin-top:16px; background:#090A0B; border:1px solid var(--dl-border); border-radius:18px; padding:14px; box-shadow:inset 0 2px 10px rgba(0,0,0,.6); user-select:none}
+  .kb-rows{display:flex; flex-direction:column; gap:7px}
+  .kb-row{display:flex; gap:6px; justify-content:center}
+  .kb-key{position:relative; flex:1 1 0; min-width:34px; height:48px; background:linear-gradient(180deg, #212427 0%, #17191B 100%);
+    border:1px solid #35393D; border-bottom:3px solid #060708; border-radius:9px; color:#F3EFE6;
+    cursor:pointer; display:flex; flex-direction:column; justify-content:space-between; padding:4px 7px;
+    transition:transform .08s ease, background .08s ease, border-color .08s ease, box-shadow .08s ease;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06); font-family:inherit}
+  .kb-key:hover{border-color:#5A5342; background:linear-gradient(180deg, #272B2F 0%, #1C1F22 100%)}
+  .kb-key .en{font-family:var(--mono); font-size:10px; font-weight:600; color:#96988F; line-height:1; text-align:left}
+  .kb-key .bn{font-family:var(--sans); font-size:14.5px; font-weight:600; color:#F3EFE6; line-height:1.1; text-align:right; align-self:flex-end}
+  .kb-key.fn{flex:1.45 1 0; background:linear-gradient(180deg, #191C1F 0%, #121416 100%); align-items:center; justify-content:center}
+  .kb-key.fn .en{font-size:11px; color:#BDBCB2; text-align:center}
+  .kb-key.wide{flex:1.85 1 0}
+  .kb-key.space{flex:5.2 1 0; align-items:center; justify-content:center}
+  .kb-key.space .bn{align-self:center; font-size:12.5px; color:var(--accent); letter-spacing:.02em}
+  .kb-key.pressed, .kb-key.shift-on{background:linear-gradient(180deg, #D8BC80 0%, #C9A961 100%) !important;
+    border-color:#E7D2A2 !important; border-bottom-color:#7E652B !important; transform:translateY(2px);
+    box-shadow:0 0 18px rgba(201,169,97,.42), inset 0 1px 0 rgba(255,255,255,.45)}
+  .kb-key.pressed .en, .kb-key.pressed .bn,
+  .kb-key.shift-on .en, .kb-key.shift-on .bn{color:#15130E !important; font-weight:700}
+  @media(max-width:720px){
+    .kb-chassis{padding:8px; overflow-x:auto}
+    .kb-rows{min-width:600px}
+    .kb-key{height:42px; padding:3px 5px}
+    .kb-key .bn{font-size:13px}
+  }
 
   /* ── Screenshots Gallery ── */
   .shots-sec{padding:84px 0; background:var(--paper)}
@@ -247,13 +284,21 @@
           <span class="studio-pill"><span class="studio-dot"></span> বাংলা ফনেটিক (AI Mode)</span>
           <span style="color:var(--mut); font-size:13px">Harper ব্যাকরণ সক্রিয়</span>
         </div>
-        <div style="color:var(--mut); font-size:12.5px">
-          শর্টকাট: <code style="color:var(--accent); font-family:var(--mono)">Space</code> রূপান্তর · <code style="color:var(--accent); font-family:var(--mono)">=</code> ক্যালকুলেটর · <code style="color:var(--accent); font-family:var(--mono)">!</code> স্নিপেট
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+          <span style="color:var(--mut); font-size:12.5px">
+            শর্টকাট: <code style="color:var(--accent); font-family:var(--mono)">Space</code> · <code style="color:var(--accent); font-family:var(--mono)">=</code> · <code style="color:var(--accent); font-family:var(--mono)">!</code>
+          </span>
+          <button id="demoToggleBtn" class="demo-btn" type="button" onclick="toggleAutoDemo()">⏸ অটো টাইপিং চলছে</button>
         </div>
       </div>
-      <textarea id="liveInput" class="studio-input" placeholder="Type here... (e.g. ami banglay gan gai, =500*15%, !salam, @today)"></textarea>
+      <textarea id="liveInput" class="studio-input" placeholder="এখানে লিখুন অথবা নিচের কীবোর্ডে ক্লিক করুন... (যেমন: ami banglay gan gai, =500*15%, !salam, @today)"></textarea>
       <div class="studio-output-label">✦ লাইভ রূপান্তর ও AI ব্যাকরণ প্রিভিউ:</div>
-      <div id="liveOutput" class="studio-output">আমি বাংলায় গান গাই</div>
+      <div id="liveOutput" class="studio-output">...</div>
+      <div id="liveCands" class="kb-cands" aria-live="polite"></div>
+
+      <!-- ── Onyx Interactive Live Keyboard ── -->
+      <div id="liveKeyboard" class="kb-chassis" aria-label="Interactive Bangla Phonetic Keyboard"></div>
+
       <div class="studio-tags">
         <span class="st-tag" onclick="testSnippet('ami banglay gan gai')">ami banglay gan gai</span>
         <span class="st-tag" onclick="testSnippet('shuvo sokal kemon achen?')">shuvo sokal</span>
@@ -540,9 +585,12 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     document.getElementById('imgTopBar').src = 'screenshots/topbar' + suffix;
   }
 
-  // Interactive Live Studio Converter powered by MatraKiLiveEngine
+  // Interactive Live Studio Converter + Onyx Virtual Keyboard
   const liveInput = document.getElementById('liveInput');
   const liveOutput = document.getElementById('liveOutput');
+  const liveCands = document.getElementById('liveCands');
+  const liveKeyboardEl = document.getElementById('liveKeyboard');
+  const demoToggleBtn = document.getElementById('demoToggleBtn');
 
   const phoneticMap = {
     'ami banglay gan gai': 'আমি বাংলায় গান গাই',
@@ -556,16 +604,199 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     '@today': new Date().toLocaleDateString('bn-BD', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
   };
 
+  const KB_ROWS = [
+    [
+      { k: '`', s: '~', bn: '`' }, { k: '1', s: '!', bn: '১' }, { k: '2', s: '@', bn: '২' },
+      { k: '3', s: '#', bn: '৩' }, { k: '4', s: '$', bn: '৪' }, { k: '5', s: '%', bn: '৫' },
+      { k: '6', s: '^', bn: '৬' }, { k: '7', s: '&', bn: '৭' }, { k: '8', s: '*', bn: '৮' },
+      { k: '9', s: '(', bn: '৯' }, { k: '0', s: ')', bn: '০' }, { k: '-', s: '_', bn: '-' },
+      { k: '=', s: '+', bn: '=' }, { k: 'Backspace', label: '⌫ Back', cls: 'fn wide' }
+    ],
+    [
+      { k: 'q', s: 'Q', bn: 'ক্ব', sbn: 'ঙ' }, { k: 'w', s: 'W', bn: 'ও', sbn: 'ঊ' },
+      { k: 'e', s: 'E', bn: 'এ', sbn: 'ঐ' }, { k: 'r', s: 'R', bn: 'র', sbn: 'ঋ' },
+      { k: 't', s: 'T', bn: 'ত', sbn: 'ট' }, { k: 'y', s: 'Y', bn: 'য়', sbn: 'য' },
+      { k: 'u', s: 'U', bn: 'উ', sbn: 'ঊ' }, { k: 'i', s: 'I', bn: 'ই', sbn: 'ঈ' },
+      { k: 'o', s: 'O', bn: 'অ', sbn: 'ও' }, { k: 'p', s: 'P', bn: 'প', sbn: 'ফ' },
+      { k: '[', s: '{', bn: '[' }, { k: ']', s: '}', bn: ']' }
+    ],
+    [
+      { k: 'a', s: 'A', bn: 'আ', sbn: 'া' }, { k: 's', s: 'S', bn: 'স', sbn: 'শ' },
+      { k: 'd', s: 'D', bn: 'দ', sbn: 'ড' }, { k: 'f', s: 'F', bn: 'ফ', sbn: 'ফ' },
+      { k: 'g', s: 'G', bn: 'গ', sbn: 'ঘ' }, { k: 'h', s: 'H', bn: 'হ', sbn: 'ঃ' },
+      { k: 'j', s: 'J', bn: 'জ', sbn: 'ঝ' }, { k: 'k', s: 'K', bn: 'ক', sbn: 'খ' },
+      { k: 'l', s: 'L', bn: 'ল', sbn: 'ল' }, { k: ';', s: ':', bn: ';' },
+      { k: "'", s: '"', bn: "'" }, { k: 'Enter', label: '↵ Enter', cls: 'fn wide' }
+    ],
+    [
+      { k: 'Shift', label: '⇧ Shift', cls: 'fn wide', id: 'shiftL' },
+      { k: 'z', s: 'Z', bn: 'য', sbn: 'ঝ' }, { k: 'x', s: 'X', bn: 'ক্স', sbn: 'ক্ষ' },
+      { k: 'c', s: 'C', bn: 'চ', sbn: 'ছ' }, { k: 'v', s: 'V', bn: 'ভ', sbn: 'ভ' },
+      { k: 'b', s: 'B', bn: 'ব', sbn: 'ভ' }, { k: 'n', s: 'N', bn: 'ন', sbn: 'ণ' },
+      { k: 'm', s: 'M', bn: 'ম', sbn: 'ম' }, { k: ',', s: '<', bn: ',' },
+      { k: '.', s: '>', bn: '।' }, { k: '/', s: '?', bn: '/' },
+      { k: 'Shift', label: '⇧ Shift', cls: 'fn wide', id: 'shiftR' }
+    ],
+    [
+      { k: '!', label: '! স্নিপেট', cls: 'fn' },
+      { k: '@', label: '@ তারিখ', cls: 'fn' },
+      { k: ' ', label: 'Space · মাত্রা-কী বাংলা ফনেটিক', cls: 'space' },
+      { k: '=', label: '= হিসাব', cls: 'fn' },
+      { k: 'Clear', label: '✕ Clear', cls: 'fn' }
+    ]
+  ];
+
+  let isShift = false;
+  const keyElements = new Map();
+
+  function renderKeyboard() {
+    keyElements.clear();
+    const wrap = document.createElement('div');
+    wrap.className = 'kb-rows';
+    KB_ROWS.forEach(row => {
+      const rowEl = document.createElement('div');
+      rowEl.className = 'kb-row';
+      row.forEach(def => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'kb-key' + (def.cls ? ' ' + def.cls : '');
+        if (def.k === 'Shift' && isShift) btn.classList.add('shift-on');
+        btn.dataset.key = def.k;
+        if (def.s) btn.dataset.shift = def.s;
+
+        if (def.cls && def.cls.includes('space')) {
+          btn.innerHTML = `<span class="bn">${def.label}</span>`;
+        } else if (def.cls && def.cls.includes('fn')) {
+          btn.innerHTML = `<span class="en">${def.label}</span>`;
+        } else {
+          const topLbl = isShift && def.s ? def.s : def.k.toUpperCase();
+          const bnLbl = isShift && def.sbn ? def.sbn : (def.bn || '');
+          btn.innerHTML = `<span class="en">${topLbl}</span><span class="bn">${bnLbl}</span>`;
+        }
+
+        btn.addEventListener('click', () => {
+          stopAutoDemo();
+          handleVirtualKey(def);
+        });
+
+        rowEl.appendChild(btn);
+        const mapKey = def.k.toLowerCase();
+        if (!keyElements.has(mapKey)) keyElements.set(mapKey, []);
+        keyElements.get(mapKey).push(btn);
+        if (def.s) {
+          const sk = def.s.toLowerCase();
+          if (!keyElements.has(sk)) keyElements.set(sk, []);
+          keyElements.get(sk).push(btn);
+        }
+      });
+      wrap.appendChild(rowEl);
+    });
+    liveKeyboardEl.innerHTML = '';
+    liveKeyboardEl.appendChild(wrap);
+  }
+
+  function updateShiftLabels() {
+    renderKeyboard();
+  }
+
+  function flashKey(ch, withShift) {
+    if (!ch) return;
+    const lookup = ch === ' ' ? ' ' : ch.toLowerCase();
+    const btns = keyElements.get(lookup);
+    if (btns) {
+      btns.forEach(b => {
+        b.classList.add('pressed');
+        setTimeout(() => b.classList.remove('pressed'), 140);
+      });
+    }
+    if (withShift) {
+      const shifts = keyElements.get('shift');
+      if (shifts) {
+        shifts.forEach(s => {
+          s.classList.add('pressed');
+          setTimeout(() => s.classList.remove('pressed'), 140);
+        });
+      }
+    }
+  }
+
+  function handleVirtualKey(def) {
+    flashKey(def.k, false);
+    if (def.k === 'Shift') {
+      isShift = !isShift;
+      updateShiftLabels();
+      return;
+    }
+    if (def.k === 'Clear') {
+      liveInput.value = '';
+      liveInput.dispatchEvent(new Event('input'));
+      return;
+    }
+    if (def.k === 'Backspace') {
+      liveInput.value = liveInput.value.slice(0, -1);
+      liveInput.dispatchEvent(new Event('input'));
+      return;
+    }
+    if (def.k === 'Enter') {
+      liveInput.value += '\n';
+      liveInput.dispatchEvent(new Event('input'));
+      return;
+    }
+    const ch = (isShift && def.s) ? def.s : def.k;
+    liveInput.value += ch;
+    if (isShift) {
+      isShift = false;
+      updateShiftLabels();
+    }
+    liveInput.dispatchEvent(new Event('input'));
+  }
+
+  function renderCandidates(rawVal) {
+    if (!liveCands) return;
+    const trimmed = rawVal.trim();
+    if (!trimmed || !window.MatraKiLiveEngine) {
+      liveCands.innerHTML = '';
+      return;
+    }
+    const parts = trimmed.split(/\s+/);
+    const lastWord = parts[parts.length - 1];
+    const prevWord = parts.length > 1 ? parts[parts.length - 2] : '';
+    const query = (trimmed.startsWith('=') || trimmed.startsWith('!') || trimmed.startsWith('@')) ? trimmed : lastWord;
+    const cands = window.MatraKiLiveEngine.getSmartCandidates(query, prevWord) || [];
+    liveCands.innerHTML = '';
+    cands.slice(0, 5).forEach((c, idx) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'kb-cand';
+      const label = c.display || c.commitText || '';
+      chip.innerHTML = `<span class="num">${idx + 1}</span><span>${label}</span>`;
+      chip.addEventListener('click', () => {
+        stopAutoDemo();
+        const text = c.commitText || c.display;
+        if (trimmed.startsWith('=') || trimmed.startsWith('!') || trimmed.startsWith('@')) {
+          liveOutput.textContent = text;
+        } else {
+          parts[parts.length - 1] = text;
+          liveInput.value = parts.join(' ') + ' ';
+          liveInput.dispatchEvent(new Event('input'));
+        }
+      });
+      liveCands.appendChild(chip);
+    });
+  }
+
   liveInput.addEventListener('input', function() {
     const rawVal = this.value;
     const val = rawVal.trim();
     if (!val) {
       liveOutput.textContent = '...';
+      if (liveCands) liveCands.innerHTML = '';
       return;
     }
 
+    renderCandidates(rawVal);
+
     if (window.MatraKiLiveEngine) {
-      // Check instant tools (=math, =unit, !snippet, @date)
       if (val.startsWith('=') || val.startsWith('!') || val.startsWith('@') || val.startsWith(':')) {
         const cands = window.MatraKiLiveEngine.getSmartCandidates(val);
         if (cands && cands.length > 0) {
@@ -574,7 +805,6 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
         }
       }
 
-      // Convert full sentence / phrases word-by-word
       const words = rawVal.split(/(\s+)/);
       const converted = words.map(w => {
         if (/^\s+$/.test(w)) return w;
@@ -589,7 +819,6 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
       return;
     }
 
-    // Static fallback
     const lower = val.toLowerCase();
     if (phoneticMap[lower]) {
       liveOutput.textContent = phoneticMap[lower];
@@ -606,9 +835,89 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
     }
   });
 
+  liveInput.addEventListener('keydown', (e) => {
+    stopAutoDemo();
+    flashKey(e.key, e.shiftKey);
+  });
+  liveInput.addEventListener('focus', () => stopAutoDemo());
+
   function testSnippet(text) {
+    stopAutoDemo();
     liveInput.value = text;
     liveInput.dispatchEvent(new Event('input'));
+  }
+
+  /* ── Automatic First-Visit Live Typing Demo ── */
+  const DEMO_PHRASES = [
+    'ami banglay gan gai',
+    '=500*15%',
+    '!salam',
+    'shuvo sokal kemon achen?'
+  ];
+  const SHIFTED_CHARS = new Set(['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '{', '}', ':', '"', '<', '>', '?', '~']);
+  let demoRunning = false;
+  let demoTimer = null;
+  let phraseIdx = 0;
+  let charIdx = 0;
+
+  function updateDemoBtn() {
+    if (!demoToggleBtn) return;
+    demoToggleBtn.textContent = demoRunning ? '⏸ অটো টাইপিং চলছে' : '▶ অটো ডেমো চালান';
+  }
+
+  function stopAutoDemo() {
+    if (!demoRunning) return;
+    demoRunning = false;
+    if (demoTimer) {
+      clearTimeout(demoTimer);
+      demoTimer = null;
+    }
+    updateDemoBtn();
+  }
+
+  function stepAutoDemo() {
+    if (!demoRunning) return;
+    const phrase = DEMO_PHRASES[phraseIdx];
+    if (charIdx < phrase.length) {
+      const ch = phrase[charIdx];
+      const needsShift = SHIFTED_CHARS.has(ch) || (ch >= 'A' && ch <= 'Z');
+      flashKey(ch, needsShift);
+      liveInput.value += ch;
+      liveInput.dispatchEvent(new Event('input'));
+      charIdx++;
+      const delay = ch === ' ' ? 170 : (85 + Math.floor(Math.random() * 55));
+      demoTimer = setTimeout(stepAutoDemo, delay);
+    } else {
+      demoTimer = setTimeout(() => {
+        if (!demoRunning) return;
+        phraseIdx = (phraseIdx + 1) % DEMO_PHRASES.length;
+        charIdx = 0;
+        liveInput.value = '';
+        liveInput.dispatchEvent(new Event('input'));
+        demoTimer = setTimeout(stepAutoDemo, 320);
+      }, 2100);
+    }
+  }
+
+  function startAutoDemo() {
+    if (demoRunning) return;
+    demoRunning = true;
+    phraseIdx = 0;
+    charIdx = 0;
+    liveInput.value = '';
+    updateDemoBtn();
+    demoTimer = setTimeout(stepAutoDemo, 450);
+  }
+
+  function toggleAutoDemo() {
+    if (demoRunning) stopAutoDemo();
+    else startAutoDemo();
+  }
+
+  renderKeyboard();
+  window.addEventListener('DOMContentLoaded', startAutoDemo);
+  if (document.readyState === 'interactive' || document.readyState === 'complete') {
+    startAutoDemo();
   }
 </script>
 
