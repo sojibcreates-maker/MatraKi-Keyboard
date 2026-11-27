@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MatraKi (মাত্রা-কী) v1.2.0 — AI Smart Bangla Keyboard for Linux</title>
-<meta name="description" content="MatraKi — Next-generation AI-powered Bangla phonetic keyboard for Linux. 38,000+ trained words, Harper grammar engine, live math calculator & unit converter. Free & open source.">
+<meta name="description" content="MatraKi — Next-generation AI-powered Bangla phonetic keyboard for Linux. 38,592+ trained words, Harper grammar engine, live math calculator & unit converter. Free & open source.">
 <link rel="icon" type="image/png" href="logo.png">
 
 <!-- Google Fonts: Tiro Bangla, Plus Jakarta Sans, JetBrains Mono -->
@@ -15,168 +15,175 @@
 <style>
   :root{
     color-scheme: light;
-    --g900:#06331F; --g800:#084229; --g700:#0A5C3E; --g600:#0C6B48; --g500:#12805A;
-    --g300:#5FBF92; --g200:#7FC7A6;
-    --mint:#E3EBE6; --mint2:#EDF3EF; --red:#EF3E4A;
-    --stage:#070B08; --dl-bg:#0E1510; --dl-card:#132019; --dl-border:#223129;
-    --txt:#E8EFEA; --mut:#8FA69A;
+    /* Dark Onyx */
+    --stage:#0A0B0C; --dl-bg:#0E1012; --dl-card:#121416; --dl-alt:#191C1F; --dl-border:#2C3033;
+    --txt:#F2EEE6; --mut:#96988F;
+    --brand:#C9A961; --brand-hover:#DCC288; --on-brand:#15130E;
+    --accent:#D2B372; --accent-soft:#282216;
+    /* Light Paper */
+    --paper:#EDE9E0; --paper-card:#FAF8F3; --paper-alt:#F1EDE4; --paper-border:#D8D1C2;
+    --paper-txt:#1A1A18; --paper-mut:#6E6A60; --paper-accent:#8A6A2F; --paper-accent-soft:#EFE6D1;
+    --red:#D96A55;
     --sans:"Tiro Bangla", "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
     --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--sans); background:#F4F7F5; color:#12261B; line-height:1.6}
+  body{font-family:var(--sans); background:var(--paper); color:var(--paper-txt); line-height:1.6}
 
   .wrap{width:min(1120px,100%); margin:0 auto; padding:0 24px}
   .btn{display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer;
-    font-family:inherit; font-size:15px; font-weight:600; border-radius:999px;
+    font-family:inherit; font-size:15px; font-weight:700; border-radius:999px;
     padding:14px 28px; text-decoration:none; transition:.18s}
-  .btn-primary{background:var(--g700); color:#fff}
-  .btn-primary:hover{background:var(--g600); transform:translateY(-2px); box-shadow:0 8px 24px rgba(10,92,62,.3)}
-  .btn-ghost{background:transparent; color:#fff; border:1px solid #2A3B31}
-  .btn-ghost:hover{background:#132019; border-color:var(--g500)}
-  .btn-mint{background:#fff; color:var(--g700)}
-  .btn-mint:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(10,60,40,.18)}
+  .btn-primary{background:var(--brand); color:var(--on-brand)}
+  .btn-primary:hover{background:var(--brand-hover); transform:translateY(-2px); box-shadow:0 8px 24px rgba(201,169,97,.28)}
+  .btn-ghost{background:transparent; color:var(--txt); border:1px solid var(--dl-border)}
+  .btn-ghost:hover{background:var(--dl-alt); border-color:var(--brand)}
+  .btn-mint{background:var(--paper-card); color:var(--paper-txt); border:1px solid var(--paper-border)}
+  .btn-mint:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.22)}
 
   /* ── nav ── */
-  nav{position:sticky; top:0; z-index:50; background:rgba(7,11,8,.88); backdrop-filter:blur(12px);
+  nav{position:sticky; top:0; z-index:50; background:rgba(10,11,12,.90); backdrop-filter:blur(12px);
     border-bottom:1px solid var(--dl-border)}
   .nav-in{display:flex; align-items:center; gap:28px; height:64px}
-  .brand{display:flex; align-items:center; gap:12px; color:#fff; font-weight:700; font-size:18px;
+  .brand{display:flex; align-items:center; gap:12px; color:var(--txt); font-weight:700; font-size:18px;
     text-decoration:none}
   .brand img{width:36px; height:36px; border-radius:10px; object-fit:cover; display:block}
-  .brand-badge{background:var(--g800); color:var(--g200); border:1px solid var(--g600); font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:2px}
+  .brand-badge{background:var(--accent-soft); color:var(--accent); border:1px solid rgba(201,169,97,.35); font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:2px}
   .nav-links{display:flex; gap:22px; margin-left:auto; align-items:center}
   .nav-links a{color:var(--mut); text-decoration:none; font-size:14px; font-weight:500; transition:color .15s}
-  .nav-links a:hover{color:#fff}
-  .nav-cta{background:var(--g700); color:#fff !important; padding:9px 20px; border-radius:999px}
-  .nav-cta:hover{background:var(--g600)}
+  .nav-links a:hover{color:var(--txt)}
+  .nav-cta{background:var(--brand); color:var(--on-brand) !important; font-weight:700 !important; padding:9px 20px; border-radius:999px}
+  .nav-cta:hover{background:var(--brand-hover)}
   @media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
 
   /* ── hero ── */
   .hero{background:var(--stage); color:var(--txt); padding:96px 0 80px; position:relative; overflow:hidden}
   .hero::before{content:""; position:absolute; inset:-40% -20% auto; height:80%;
-    background:radial-gradient(600px 300px at 50% 0%, rgba(18,128,90,.28), transparent 70%); pointer-events:none}
+    background:radial-gradient(620px 320px at 50% 0%, rgba(201,169,97,.22), transparent 70%); pointer-events:none}
   .hero .wrap{position:relative; text-align:center; display:flex; flex-direction:column; align-items:center; gap:24px}
-  .hero-logo{width:88px; height:88px; border-radius:24px; box-shadow:0 12px 36px rgba(10,92,62,.45); display:block}
-  .hero h1{font-size:clamp(34px,6vw,56px); font-weight:800; letter-spacing:-.02em; color:#fff}
-  .hero h1 .bn{color:var(--g300)}
-  .hero .tag{font-size:clamp(16px,2.5vw,21px); color:var(--g200); font-weight:600}
+  .hero-logo{width:92px; height:92px; border-radius:24px; box-shadow:0 16px 40px rgba(0,0,0,.65), 0 0 0 1px rgba(201,169,97,.25); display:block}
+  .hero h1{font-size:clamp(34px,6vw,56px); font-weight:800; letter-spacing:-.02em; color:var(--txt)}
+  .hero h1 .bn{color:var(--accent)}
+  .hero .tag{font-size:clamp(16px,2.5vw,21px); color:var(--brand); font-weight:600}
   .hero p.sub{max-width:680px; color:var(--mut); font-size:16px; line-height:1.7}
   .hero .cta{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:6px}
   .hero .ver{font-size:13px; color:var(--mut)}
-  .hero .ver b{color:var(--g300)}
+  .hero .ver b{color:var(--accent)}
 
   /* stats strip */
   .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;
     width:100%; margin-top:24px}
   .stat{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:18px;
     padding:20px 22px; text-align:left}
-  .stat b{font-size:26px; color:#fff; display:block; letter-spacing:-.01em}
+  .stat b{font-size:26px; color:var(--accent); display:block; letter-spacing:-.01em}
   .stat span{font-size:12.5px; color:var(--mut)}
 
   /* ── Interactive Web Studio ── */
   .studio-sec{background:var(--dl-bg); border-top:1px solid var(--dl-border); border-bottom:1px solid var(--dl-border); padding:64px 0}
-  .studio-card{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:24px; padding:24px; max-width:920px; margin:0 auto; box-shadow:0 24px 64px rgba(0,0,0,.4)}
+  .studio-card{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:24px; padding:24px; max-width:920px; margin:0 auto; box-shadow:0 24px 64px rgba(0,0,0,.45)}
   .studio-bar{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; padding-bottom:16px; border-bottom:1px solid var(--dl-border); margin-bottom:18px}
   .studio-bar .left{display:flex; align-items:center; gap:10px}
-  .studio-pill{display:inline-flex; align-items:center; gap:8px; background:var(--g700); color:#fff; border-radius:999px; padding:6px 16px; font-size:13px; font-weight:700}
-  .studio-input{width:100%; min-height:110px; background:#070B08; border:1px solid var(--dl-border); border-radius:14px; color:#fff; font-family:var(--sans); font-size:18px; padding:16px; outline:none; resize:vertical; line-height:1.6}
-  .studio-input:focus{border-color:var(--g300)}
-  .studio-output-label{font-size:12.5px; font-weight:700; color:var(--g300); margin:14px 0 6px; display:flex; align-items:center; gap:8px}
-  .studio-output{min-height:70px; background:#0F1712; border:1px solid var(--dl-border); border-radius:14px; color:#E8EFEA; font-family:var(--sans); font-size:20px; padding:16px; line-height:1.6}
+  .studio-pill{display:inline-flex; align-items:center; gap:8px; background:var(--accent-soft); color:var(--accent); border:1px solid rgba(201,169,97,.35); border-radius:999px; padding:6px 16px; font-size:13px; font-weight:700}
+  .studio-dot{width:8px; height:8px; border-radius:50%; background:var(--red); display:inline-block}
+  .studio-input{width:100%; min-height:110px; background:var(--stage); border:1px solid var(--dl-border); border-radius:14px; color:var(--txt); font-family:var(--sans); font-size:18px; padding:16px; outline:none; resize:vertical; line-height:1.6}
+  .studio-input:focus{border-color:var(--brand)}
+  .studio-output-label{font-size:12.5px; font-weight:700; color:var(--accent); margin:14px 0 6px; display:flex; align-items:center; gap:8px}
+  .studio-output{min-height:70px; background:var(--dl-alt); border:1px solid var(--dl-border); border-radius:14px; color:var(--txt); font-family:var(--sans); font-size:20px; padding:16px; line-height:1.6}
   .studio-tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
-  .st-tag{background:#070B08; border:1px solid var(--dl-border); border-radius:8px; padding:4px 10px; font-size:12px; color:var(--mut); cursor:pointer; font-family:var(--mono)}
-  .st-tag:hover{border-color:var(--g500); color:var(--g200)}
+  .st-tag{background:var(--stage); border:1px solid var(--dl-border); border-radius:8px; padding:4px 10px; font-size:12px; color:var(--mut); cursor:pointer; font-family:var(--mono); transition:.15s}
+  .st-tag:hover{border-color:var(--brand); color:var(--accent)}
 
   /* ── Screenshots Gallery ── */
-  .shots-sec{padding:84px 0; background:#EAEFEA}
+  .shots-sec{padding:84px 0; background:var(--paper)}
   .shots-switch{display:flex; justify-content:center; gap:8px; margin-bottom:32px}
-  .switch-btn{background:#fff; border:1px solid #D0DDD4; color:#5A6E62; padding:9px 24px; border-radius:999px; font-size:13.5px; font-weight:700; cursor:pointer; transition:.15s}
-  .switch-btn.active{background:var(--g700); color:#fff; border-color:var(--g700)}
+  .switch-btn{background:var(--paper-card); border:1px solid var(--paper-border); color:var(--paper-mut); padding:9px 24px; border-radius:999px; font-size:13.5px; font-weight:700; cursor:pointer; transition:.15s}
+  .switch-btn.active{background:var(--paper-txt); color:var(--paper-card); border-color:var(--paper-txt)}
   .shots-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px}
-  .shot-card{background:#fff; border-radius:20px; overflow:hidden; border:1px solid #DCE6DF; box-shadow:0 8px 24px rgba(10,60,40,.08); transition:.2s}
-  .shot-card:hover{transform:translateY(-4px); box-shadow:0 18px 48px rgba(10,60,40,.15)}
-  .shot-card img{width:100%; height:auto; display:block; background:#070B08}
+  .shot-card{background:var(--paper-card); border-radius:20px; overflow:hidden; border:1px solid var(--paper-border); box-shadow:0 8px 24px rgba(26,26,24,.06); transition:.2s; display:flex; flex-direction:column}
+  .shot-card:hover{transform:translateY(-4px); box-shadow:0 18px 48px rgba(26,26,24,.12); border-color:var(--paper-accent)}
+  .shot-frame{background:var(--stage); padding:14px; display:flex; align-items:center; justify-content:center; min-height:220px; border-bottom:1px solid var(--paper-border); transition:background .2s}
+  .shots-sec.light-preview .shot-frame{background:var(--paper-alt)}
+  .shot-card img{max-width:100%; max-height:360px; width:auto; height:auto; display:block; border-radius:8px}
   .shot-card .cap{padding:16px 20px}
-  .shot-card h4{font-size:15px; font-weight:700; margin-bottom:4px}
-  .shot-card p{font-size:13px; color:#5A6E62}
+  .shot-card h4{font-size:15px; font-weight:700; margin-bottom:4px; color:var(--paper-txt)}
+  .shot-card p{font-size:13px; color:var(--paper-mut)}
 
   section{padding:84px 0}
   .sec-head{text-align:center; max-width:640px; margin:0 auto 48px}
   .sec-head .kick{font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--g500); display:block; margin-bottom:10px}
+    color:var(--paper-accent); display:block; margin-bottom:10px}
   .sec-head h2{font-size:clamp(26px,4vw,38px); font-weight:800; letter-spacing:-.02em}
-  .sec-head p{color:#5A6E62; margin-top:12px; font-size:15.5px}
+  .sec-head p{color:var(--paper-mut); margin-top:12px; font-size:15.5px}
 
   /* feature cards */
   .fgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:18px}
-  .fcard{background:#fff; border:1px solid #E4EDE7; border-radius:20px; padding:26px;
-    transition:.2s; box-shadow:0 2px 10px rgba(10,60,40,.04)}
-  .fcard:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(10,60,40,.12); border-color:var(--g200)}
-  .fic{width:46px; height:46px; border-radius:14px; background:var(--mint); color:var(--g700);
-    display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px}
-  .fcard h3{font-size:16.5px; font-weight:700; margin-bottom:8px}
-  .fcard p{font-size:13.5px; color:#5A6E62}
+  .fcard{background:var(--paper-card); border:1px solid var(--paper-border); border-radius:20px; padding:26px;
+    transition:.2s; box-shadow:0 2px 10px rgba(26,26,24,.04)}
+  .fcard:hover{transform:translateY(-4px); box-shadow:0 18px 40px rgba(26,26,24,.10); border-color:var(--paper-accent)}
+  .fic{width:46px; height:46px; border-radius:14px; background:var(--paper-accent-soft); color:var(--paper-accent);
+    display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px; border:1px solid var(--paper-border)}
+  .fcard h3{font-size:16.5px; font-weight:700; margin-bottom:8px; color:var(--paper-txt)}
+  .fcard p{font-size:13.5px; color:var(--paper-mut)}
 
-  /* dark band: shortcuts */
+  /* dark band: shortcuts & downloads */
   .band{background:var(--stage); color:var(--txt)}
-  .band .sec-head h2{color:#fff}
+  .band .sec-head h2{color:var(--txt)}
   .band .sec-head p{color:var(--mut)}
-  .band .sec-head .kick{color:var(--g300)}
+  .band .sec-head .kick{color:var(--accent)}
   .cheat{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:12px}
   .cheat .row{display:flex; align-items:center; gap:14px; background:var(--dl-card);
     border:1px solid var(--dl-border); border-radius:14px; padding:14px 18px}
-  .kbd{font-family:var(--mono); font-size:13px; font-weight:700; color:var(--g200);
-    background:#0A110C; border:1px solid var(--dl-border); border-radius:8px;
+  .kbd{font-family:var(--mono); font-size:13px; font-weight:700; color:var(--accent);
+    background:var(--dl-alt); border:1px solid var(--dl-border); border-radius:8px;
     padding:5px 12px; white-space:nowrap}
   .cheat .row .d{font-size:13.5px; color:var(--mut)}
   .cheat .row .d b{color:var(--txt); display:block; font-size:14px}
 
   /* comparison table */
-  .tbl-wrap{overflow-x:auto; border-radius:20px; border:1px solid #E4EDE7; background:#fff;
-    box-shadow:0 4px 18px rgba(10,60,40,.06)}
+  .tbl-wrap{overflow-x:auto; border-radius:20px; border:1px solid var(--paper-border); background:var(--paper-card);
+    box-shadow:0 4px 18px rgba(26,26,24,.05)}
   table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px}
-  th{background:var(--mint2); text-align:left; padding:14px 18px; font-size:12px;
-    text-transform:uppercase; letter-spacing:.06em; color:var(--g700)}
-  td{padding:13px 18px; border-top:1px solid #EAF1EC}
-  td.ok{color:var(--g600); font-weight:700; white-space:nowrap}
+  th{background:var(--paper-alt); text-align:left; padding:14px 18px; font-size:12px;
+    text-transform:uppercase; letter-spacing:.06em; color:var(--paper-accent)}
+  td{padding:13px 18px; border-top:1px solid var(--paper-border)}
+  td.ok{color:var(--paper-accent); font-weight:700; white-space:nowrap}
   td.no{color:#B04A4A; white-space:nowrap}
-  tr.hl td{background:#F2F8F4}
-  tr.hl td:first-child{font-weight:700; color:var(--g700)}
+  tr.hl td{background:#F5F1E7}
+  tr.hl td:first-child{font-weight:700; color:var(--paper-txt)}
 
   /* download */
   .dl-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px}
   .dl{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:18px;
     padding:22px; color:var(--txt); text-decoration:none; display:flex; flex-direction:column;
     gap:6px; transition:.18s}
-  .dl:hover{border-color:var(--g500); transform:translateY(-3px)}
-  .dl .fmt{font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--g300);
+  .dl:hover{border-color:var(--brand); transform:translateY(-3px)}
+  .dl .fmt{font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--accent);
     text-transform:uppercase}
   .dl .name{font-weight:700; font-size:15px}
   .dl .os{font-size:12.5px; color:var(--mut)}
-  .install{background:#0A110C; border:1px solid var(--dl-border); border-radius:16px;
-    padding:18px 20px; font-family:var(--mono); font-size:13px; color:#C9DAD0;
+  .install{background:var(--dl-card); border:1px solid var(--dl-border); border-radius:16px;
+    padding:18px 20px; font-family:var(--mono); font-size:13px; color:#DDD7CB;
     overflow-x:auto; margin-top:14px}
-  .install .cm{color:var(--g300)}
+  .install .cm{color:var(--accent)}
 
   /* faq */
   .faq{max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:12px}
-  details{background:#fff; border:1px solid #E4EDE7; border-radius:16px; padding:18px 22px}
-  details[open]{border-color:var(--g200)}
+  details{background:var(--paper-card); border:1px solid var(--paper-border); border-radius:16px; padding:18px 22px}
+  details[open]{border-color:var(--paper-accent)}
   summary{cursor:pointer; font-weight:700; font-size:15px; list-style:none; display:flex;
-    justify-content:space-between; align-items:center; gap:12px}
-  summary::after{content:"+"; color:var(--g500); font-size:20px; font-weight:400}
+    justify-content:space-between; align-items:center; gap:12px; color:var(--paper-txt)}
+  summary::after{content:"+"; color:var(--paper-accent); font-size:20px; font-weight:400}
   details[open] summary::after{content:"–"}
-  details p{margin-top:12px; color:#5A6E62; font-size:14px}
-  details code{font-family:var(--mono); font-size:12.5px; background:var(--mint2);
-    color:var(--g700); border-radius:6px; padding:2px 7px}
+  details p{margin-top:12px; color:var(--paper-mut); font-size:14px}
+  details code{font-family:var(--mono); font-size:12.5px; background:var(--paper-accent-soft);
+    color:var(--paper-accent); border-radius:6px; padding:2px 7px}
 
   /* footer */
-  footer{background:var(--stage); color:var(--mut); padding:56px 0 40px}
+  footer{background:var(--stage); color:var(--mut); padding:56px 0 40px; border-top:1px solid var(--dl-border)}
   .foot-in{display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start}
-  .foot-in .brand{color:#fff}
-  footer a{color:var(--g300); text-decoration:none}
+  .foot-in .brand{color:var(--txt)}
+  footer a{color:var(--accent); text-decoration:none}
   footer a:hover{text-decoration:underline}
   .foot-links{display:flex; gap:20px; flex-wrap:wrap; font-size:14px}
   .copyright{margin-top:32px; padding-top:24px; border-top:1px solid var(--dl-border);
@@ -218,7 +225,7 @@
     </div>
     <div class="ver">Latest release <b>v1.2.0 — Onyx Design System</b> · GPL-3.0 · Free &amp; open source</div>
     <div class="stats">
-      <div class="stat"><b>20,535+</b><span>Trained words &amp; typo rules</span></div>
+      <div class="stat"><b>38,592+</b><span>Trained words &amp; typo rules</span></div>
       <div class="stat"><b>225,000+</b><span>Inflected words via stemmer</span></div>
       <div class="stat"><b>1,021</b><span>Regular verb conjugations</span></div>
       <div class="stat"><b>130+</b><span>Bigram prediction contexts</span></div>
@@ -230,18 +237,18 @@
 <section id="studio" class="studio-sec">
   <div class="wrap">
     <div class="sec-head" style="margin-bottom:28px">
-      <span class="kick" style="color:var(--g300)">Interactive Web Studio</span>
-      <h2 style="color:#fff">Try MatraKi in your browser</h2>
+      <span class="kick" style="color:var(--accent)">Interactive Web Studio</span>
+      <h2 style="color:var(--txt)">Try MatraKi in your browser</h2>
       <p style="color:var(--mut)">Type phonetic English below to see live AI suggestions, Harper grammar engine, and instant conversions in action.</p>
     </div>
     <div class="studio-card">
       <div class="studio-bar">
         <div class="left">
-          <span class="studio-pill">🟢 বাংলা ফনেটিক (AI Mode)</span>
+          <span class="studio-pill"><span class="studio-dot"></span> বাংলা ফনেটিক (AI Mode)</span>
           <span style="color:var(--mut); font-size:13px">Harper ব্যাকরণ সক্রিয়</span>
         </div>
         <div style="color:var(--mut); font-size:12.5px">
-          শর্টকাট: <code style="color:var(--g300); font-family:var(--mono)">Space</code> রূপান্তর · <code style="color:var(--g300); font-family:var(--mono)">=</code> ক্যালকুলেটর · <code style="color:var(--g300); font-family:var(--mono)">!</code> স্নিপেট
+          শর্টকাট: <code style="color:var(--accent); font-family:var(--mono)">Space</code> রূপান্তর · <code style="color:var(--accent); font-family:var(--mono)">=</code> ক্যালকুলেটর · <code style="color:var(--accent); font-family:var(--mono)">!</code> স্নিপেট
         </div>
       </div>
       <textarea id="liveInput" class="studio-input" placeholder="Type here... (e.g. ami banglay gan gai, =500*15%, !salam, @today)"></textarea>
@@ -274,45 +281,45 @@
 
     <div class="shots-grid">
       <div class="shot-card">
-        <img id="imgAbout" src="screenshots/about_dark.png" alt="MatraKi About Dialog">
+        <div class="shot-frame"><img id="imgAbout" src="screenshots/about_dark.png" alt="MatraKi About Dialog"></div>
         <div class="cap">
           <h4>About Dialog</h4>
           <p>Tiro Bangla typography, AI vocabulary statistics, and shortcut summary card.</p>
         </div>
       </div>
       <div class="shot-card">
-        <img id="imgUpdate" src="screenshots/update_dark.png" alt="MatraKi Update Dialog">
+        <div class="shot-frame"><img id="imgUpdate" src="screenshots/update_dark.png" alt="MatraKi Update Dialog"></div>
         <div class="cap">
           <h4>Software Update</h4>
-          <p>Brass pill buttons, release highlights, and a built-in downloader that installs the new version and restarts MatraKi automatically.</p>
+          <p>Brass pill buttons, release highlights, and a built-in one-click downloader with auto-restart.</p>
         </div>
       </div>
       <div class="shot-card">
-        <img id="imgSettings" src="screenshots/settings_dark.png" alt="MatraKi Settings Dialog">
+        <div class="shot-frame"><img id="imgSettings" src="screenshots/settings_dark.png" alt="MatraKi Settings Dialog"></div>
         <div class="cap">
           <h4>Preferences &amp; Engine Tuning</h4>
-          <p>Dark/Light mode selector, candidate orientation, and AI toggle controls.</p>
+          <p>Dark Onyx / Light Paper selector, candidate orientation, and pill toggle controls.</p>
         </div>
       </div>
       <div class="shot-card">
-        <img id="imgLayout" src="screenshots/layout_dark.png" alt="MatraKi Layout Viewer">
+        <div class="shot-frame"><img id="imgLayout" src="screenshots/layout_dark.png" alt="MatraKi Layout Viewer"></div>
         <div class="cap">
-          <h4>Interactive Layout Viewer</h4>
-          <p>Theme-adaptive Avro phonetic keymap and smart shortcuts cheat sheet.</p>
+          <h4>About Current Layout</h4>
+          <p>Layout version chip, trained vocabulary stats, and maintainer card.</p>
         </div>
       </div>
       <div class="shot-card">
-        <img id="imgHarper" src="screenshots/harper_dark.png" alt="MatraKi Harper Dialog">
+        <div class="shot-frame"><img id="imgHarper" src="screenshots/harper_dark.png" alt="MatraKi Harper Dialog"></div>
         <div class="cap">
           <h4>Harper AI Grammar Engine</h4>
           <p>Real-time contextual spelling and grammar verification diagnostics.</p>
         </div>
       </div>
       <div class="shot-card">
-        <img id="imgTopBar" src="screenshots/topbar_dark.png" alt="MatraKi Floating TopBar">
+        <div class="shot-frame"><img id="imgTopBar" src="screenshots/topbar_dark.png" alt="MatraKi Floating TopBar"></div>
         <div class="cap">
           <h4>Floating Pill Toolbar</h4>
-          <p>Frameless, draggable, theme-aware toolbar with instant layout switcher.</p>
+          <p>Frameless, draggable, theme-aware toolbar with instant layout switcher and vector icons.</p>
         </div>
       </div>
     </div>
@@ -329,7 +336,7 @@
     </div>
     <div class="fgrid">
       <div class="fcard"><div class="fic">🧠</div><h3>AI Language Intelligence</h3>
-        <p>20,535+ pre-trained words with smart agglutinative suffix stemming — automatically recognizes 225,000+ inflected forms like -গুলো, -দের, -টা, -কে.</p></div>
+        <p>38,592+ pre-trained words with smart agglutinative suffix stemming — automatically recognizes 225,000+ inflected forms like -গুলো, -দের, -টা, -কে.</p></div>
       <div class="fcard"><div class="fic">🔮</div><h3>Next-Word Prediction</h3>
         <p>Context-aware prediction with 130+ conversational bigram contexts. Press Tab to accept natural follow-up words as you type.</p></div>
       <div class="fcard"><div class="fic">👤</div><h3>Subject-Verb Concordance</h3>
@@ -486,7 +493,7 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
       <details><summary>Does MatraKi work on Wayland?</summary>
         <p>Yes! MatraKi uses the native Fcitx5 input method protocol with first-class support on GNOME, KDE Plasma, Deepin, Hyprland and Sway — as well as X11.</p></details>
       <details><summary>Can I add my own words and shortcuts?</summary>
-        <p>Absolutely. Open Settings → <b>Dictionary</b> to search 20,535+ entries and add custom phonetic patterns with live preview. Custom snippets go in <code>~/.local/share/matraki-keyboard/snippets.json</code>.</p></details>
+        <p>Absolutely. Open Settings → <b>Dictionary</b> to search 38,592+ entries and add custom phonetic patterns with live preview. Custom snippets go in <code>~/.local/share/matraki-keyboard/snippets.json</code>.</p></details>
       <details><summary>Which keyboard layouts are supported?</summary>
         <p>Avro Phonetic (AI Enhanced), Probhat, National (Jatiya), Munir Optima, Borno, and Avro Easy.</p></details>
     </div>
@@ -503,7 +510,7 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
       <div class="foot-links">
         <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard">GitHub</a>
         <a href="https://github.com/sojibcreates-maker/MatraKi-Keyboard/releases">Releases</a>
-        <a href="https://www.supportkori.com/sojib" style="color:#EF3E4A; font-weight:700">💖 Support &amp; Donate</a>
+        <a href="https://www.supportkori.com/sojib" style="color:#D96A55; font-weight:700">💖 Support &amp; Donate</a>
         <a href="https://facebook.com/hossain.sojibs">Facebook</a>
       </div>
     </div>
@@ -519,6 +526,8 @@ cd MatraKi-Keyboard &amp;&amp; chmod +x install.sh &amp;&amp; ./install.sh</div>
 <script>
   function setThemeShot(mode) {
     const isDark = (mode === 'dark');
+    const sec = document.getElementById('screenshots');
+    if (sec) sec.classList.toggle('light-preview', !isDark);
     document.querySelectorAll('.switch-btn').forEach(btn => {
       btn.classList.toggle('active', btn.textContent.toLowerCase().includes(mode));
     });
